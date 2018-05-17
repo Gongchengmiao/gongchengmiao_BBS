@@ -1,0 +1,14 @@
+bin
+include
+lib
+*.db
+.idea
+*.json
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
+*.sqlite
+*.sqlite3
