@@ -25,8 +25,30 @@ class common_member(models.Model):
 class common_member_action_log(models.Model):
     id = models.IntegerField(max_length=256, primary_key=True)
     uid = models.ForeignKey(common_member, on_delete=models.CASCADE(), to_field=common_member.uid, db_constraint=True)
-    action = models.IntegerField(max_length=5)
-    dateline = models.TimeField()
+    action = models.IntegerField(max_length=5) #动作, 具体以后再定义
+    dateline = models.TimeField() #操作时间
 
     def __str__(self):
         return self.uid, self.action, self.dateline
+#用户统计表
+class common_member_count(models.Model):
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE(), to_field=common_member.uid, db_constraint=True)
+    posts = models.IntegerField(max_length=12) #帖子数
+    threads = models.IntegerField(max_length=12) #主题数
+    digestposts = models.IntegerField(max_length=10) #精华数
+    doings = models.IntegerField(max_length=10) #记录数
+    blogs = models.IntegerField(max_length=10) #日志数
+    albums = models.IntegerField(max_length=10) #相册数
+    sharings = models.IntegerField(max_length=14) #分享数
+    attachsize = models.IntegerField(max_length=15) #上传附件占用的空间
+    views = models.IntegerField(max_length=15) #空间查看数
+    oltime = models.IntegerField(max_length=12) #在线时间
+    todayattachs = models.IntegerField(max_length=12) #当天上传附件数
+    todayattachsize = models.IntegerField(max_length=15) #当天上传附件容量
+    blacklist = models.IntegerField(max_length=12) #黑名单
+
+    def __str__(self):
+        return self.uid()
+
+
+
