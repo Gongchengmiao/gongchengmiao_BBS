@@ -104,8 +104,17 @@ class common_member_star(models.Model):
     spid = models.ForeignKey(forum_school_info, on_delete=models.CASCADE,
                              to_field=forum_school_info.pid, db_constraint=True)
 
+    def __str__(self):
+        if self.is_school_info:
+            return self.uid, self.spid
+        else:
+            return self.uid, self.pid
+
+
 
 # 用户关心版块
 class common_member_star(models.Model):
     uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     section_id = models.ForeignKey(Forum_forum, on_delete=models.CASCADE, db_constraint=True)
+    def __str__(self):
+        return self.uid, Forum_forum.objects.get(fid=self.section_id)
