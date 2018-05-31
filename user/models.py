@@ -102,5 +102,5 @@ class common_member_star(models.Model):
     pid = models.ForeignKey(forum_post, on_delete=models.CASCADE, to_field=forum_post.pid, db_constraint=True)
     spid = models.ForeignKey(forum_school_info, on_delete=models.CASCADE,
                              to_field=forum_school_info.pid, db_constraint=True)
-    
+
 
