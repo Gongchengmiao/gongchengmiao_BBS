@@ -27,7 +27,7 @@ class common_member(models.Model):
 # 用户操作日志表
 class common_member_action_log(models.Model):
     id = models.IntegerField(max_length=256, primary_key=True)
-    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     action = models.IntegerField(max_length=5)  # 动作, 具体以后再定义
     dateline = models.TimeField()  # 操作时间
 
@@ -37,7 +37,7 @@ class common_member_action_log(models.Model):
 
 # 用户统计表
 class common_member_count(models.Model):
-    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     posts = models.IntegerField(max_length=12)  # 帖子数
     threads = models.IntegerField(max_length=12)  # 主题数
     digestposts = models.IntegerField(max_length=10)  # 精华数
@@ -59,11 +59,9 @@ class common_member_count(models.Model):
 # 用户惩罚操作表
 class member_crime(models.Model):
     cid = models.IntegerField(max_length=12, primary_key=True)  # 自增id
-    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
-    operatorid = models.ForeignKey(common_member, on_delete=models.CASCADE,
-                                   to_field=common_member.uid, db_constraint=True)  # 进行惩罚操作的用户id
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     action = models.ForeignKey(common_member_action_log, on_delete=models.CASCADE,
-                               to_field=common_member_action_log.action, db_constraint=True)  # 惩罚行为
+                               db_constraint=True)  # 惩罚行为
     reason = models.TextField()  # 惩罚理由
     dateline = models.TimeField()  # 惩罚操作时间
 
@@ -81,7 +79,7 @@ class common_member_field_forum(models.Model):
         (TEACHER, 'teacher'),
     )
 
-    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     groupterms = models.CharField(max_length=2, choices=groupterms_choice, default=STUDENT)  # 公共用户组
 
     def __str__(self):
@@ -90,17 +88,17 @@ class common_member_field_forum(models.Model):
 
 # 用户家园字段表
 class common_member_field_home(models.Model):
-    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     spacename = models.CharField(max_length=256)
     domain = models.CharField(max_length=15)  # 空间绑定二级域名 home
 
 
 # 用户收藏表
 class common_member_star(models.Model):
-    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, on_delete=models.CASCADE, to_field=forum_post.pid, db_constraint=True)
+    pid = models.ForeignKey(forum_post, on_delete=models.CASCADE, db_constraint=True)
     spid = models.ForeignKey(forum_school_info, on_delete=models.CASCADE,
-                             to_field=forum_school_info.pid, db_constraint=True)
+                             db_constraint=True)
 
 
