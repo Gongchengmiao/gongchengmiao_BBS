@@ -5,15 +5,15 @@ from django.db import models
 
 
 class Forum_forum(models.Model):
-    fid = models.IntegerField(primary_key=True) # 论坛id
-    fup = models.IntegerField(default=None, null=True) # 上级论坛id
+    fid = models.IntegerField(primary_key=True)  # 版块id
+    fup = models.IntegerField(default=None, null=True)  # 上级版块id
     types_choices = (
         ('g', 'group'),
         ('f', 'forum'),
         ('s', 'sub')
     )
-    types = models.CharField(max_length=1, choices=types_choices) # 论坛类型
-    name = models.CharField(max_length=50) # 论坛名
+    types = models.CharField(max_length=1, choices=types_choices)  # 版块类型
+    name = models.CharField(max_length=50)  # 版块名
     status = models.BooleanField(default=False)
     displayorder_choices = (
         ('tim', 'time'),
@@ -23,7 +23,7 @@ class Forum_forum(models.Model):
     displayorder = models.CharField(max_length=3, choices=displayorder_choices)
     styleid = models.IntegerField(default=0)
     threads = models.IntegerField(default=0)
-    posts = models.IntegerField(default=0) # 帖子数量
+    posts = models.IntegerField(default=0)  # 帖子数量
     todayposts = models.IntegerField(default=0)
     # 外键 lastpostid = models.ForeignKey('Article', null=True, on_delete=models.CASCADE)
     allowEmoijs = models.BooleanField(default=True)

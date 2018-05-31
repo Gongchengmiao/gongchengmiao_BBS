@@ -1,5 +1,6 @@
 from django.db import models
 from article.models import forum_post, forum_school_info
+from section.models import Forum_forum
 
 
 # 用户主表
@@ -104,3 +105,7 @@ class common_member_star(models.Model):
                              to_field=forum_school_info.pid, db_constraint=True)
 
 
+# 用户关心版块
+class common_member_star(models.Model):
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
+    section_id = models.ForeignKey(Forum_forum, on_delete=models.CASCADE, to_field=Forum_forum.fid, db_constraint=True)
