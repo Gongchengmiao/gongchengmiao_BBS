@@ -1,4 +1,5 @@
 from django.db import models
+from article.models import forum_post, forum_school_info
 
 
 # 用户主表
@@ -94,6 +95,12 @@ class common_member_field_home(models.Model):
     domain = models.CharField(max_length=15)  # 空间绑定二级域名 home
 
 
-
-
+# 用户收藏表
+class common_member_star(models.Model):
+    uid = models.ForeignKey(common_member, on_delete=models.CASCADE, to_field=common_member.uid, db_constraint=True)
+    is_school_info = models.BooleanField(default=False)
+    pid = models.ForeignKey(forum_post, on_delete=models.CASCADE, to_field=forum_post.pid, db_constraint=True)
+    spid = models.ForeignKey(forum_school_info, on_delete=models.CASCADE,
+                             to_field=forum_school_info.pid, db_constraint=True)
+    
 
