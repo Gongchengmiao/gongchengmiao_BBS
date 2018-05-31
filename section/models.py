@@ -25,7 +25,7 @@ class Forum_forum(models.Model):
     threads = models.IntegerField(default=0)
     posts = models.IntegerField(default=0) # 帖子数量
     todayposts = models.IntegerField(default=0)
-    # 外键 lastpostid = models.ForeignKey('Article', null=True, on_delete=models.CASCADE)
+    lastpostid = models.ForeignKey('article.forum_post', null=True, on_delete=models.CASCADE)
     allowEmoijs = models.BooleanField(default=True)
     allowHtml = models.BooleanField(default=True)
     allowImgcode = models.BooleanField(default=True)
@@ -45,17 +45,17 @@ class Forum_forum(models.Model):
 class Forum_attachemnt(models.Model):
     aid = models.IntegerField(primary_key=True)  # 附件id
     tid = models.IntegerField(default=0)
-    # 外键 pid = models.ForeignKey('Article', null=False, on_delete=models.CASCADE)
-    # 外键 uid = models.ForeignKey('UserId', null=False, on_delete= models.CASCADE)
-    uploadTime = models.DateTimeField(auto_now_add=True)  # 上传时间
+    pid = models.ForeignKey('article.forum_post',null=True, on_delete=models.CASCADE)
+    uid = models.ForeignKey('user.common_member', null=True, on_delete= models.CASCADE)
+    # uploadTime = models.DateTimeField(auto_now_add=True)  # 上传时间
     # Automatically set the field to now when the object is first created.
     # If you want to be able to modify this field, set the following instead of auto_now_add=True:
     #  For DateField: default=date.today - from datetime.date.today()
     #  For DateTimeField: default=timezone.now - from django.utils.timezone.now()
-    file = models.FileField(upload_to='attachment/%Y/%m/%d/')  # 具体路径之后设置
-    remote = models.BooleanField(default=False)   # 是否远程存储
-    description = models.CharField(max_length=200)  # 附件描述
-    readperm = models.IntegerField()  # 读取权限
+    # file = models.FileField(upload_to='attachment/%Y/%m/%d/')  # 具体路径之后设置
+    # remote = models.BooleanField(default=False)   # 是否远程存储
+    # description = models.CharField(max_length=200)  # 附件描述
+    # readperm = models.IntegerField()  # 读取权限
     # 考虑改成外键
 
     def __str__(self):
@@ -68,9 +68,10 @@ class Forum_attachemnt(models.Model):
 
 class Forum_admin(models.Model):
     #未定义外键
-    admin = models.ForeignKey('UseId', on_delete=models.CASCADE)
-    forum = models.ForeignKey(Forum_forum, on_delete=models.CASCADE)
-    Authorization = models.ForeignKey('Grant', on_delete=models.CASCADE)
+    pass
+    #admin = models.ForeignKey('UseId', on_delete=models.CASCADE)
+    #forum = models.ForeignKey(Forum_forum, on_delete=models.CASCADE)
+    # Authorization = models.ForeignKey('Grant', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.admin)+'-'+str(self.forum)
