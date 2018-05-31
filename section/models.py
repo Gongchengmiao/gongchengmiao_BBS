@@ -42,35 +42,35 @@ class Forum_forum(models.Model):
         return self.name
 
 
-class Forum_attachemnt(models.Model):
-    aid = models.IntegerField(primary_key=True)  # 附件id
-    tid = models.IntegerField(default=0)
-    # 外键 pid = models.ForeignKey('Article', null=False, on_delete=models.CASCADE)
-    # 外键 uid = models.ForeignKey('UserId', null=False, on_delete= models.CASCADE)
-    uploadTime = models.DateTimeField(auto_now_add=True)  # 上传时间
-    # Automatically set the field to now when the object is first created.
-    # If you want to be able to modify this field, set the following instead of auto_now_add=True:
-    #  For DateField: default=date.today - from datetime.date.today()
-    #  For DateTimeField: default=timezone.now - from django.utils.timezone.now()
-    file = models.FileField(upload_to='attachment/%Y/%m/%d/')  # 具体路径之后设置
-    remote = models.BooleanField(default=False)   # 是否远程存储
-    description = models.CharField(max_length=200)  # 附件描述
-    readperm = models.IntegerField()  # 读取权限
-    # 考虑改成外键
+# class Forum_attachemnt(models.Model):
+#     aid = models.IntegerField(primary_key=True)  # 附件id
+#     tid = models.IntegerField(default=0)
+#     # 外键 pid = models.ForeignKey('Article', null=False, on_delete=models.CASCADE)
+#     # 外键 uid = models.ForeignKey('UserId', null=False, on_delete= models.CASCADE)
+#     uploadTime = models.DateTimeField(auto_now_add=True)  # 上传时间
+#     # Automatically set the field to now when the object is first created.
+#     # If you want to be able to modify this field, set the following instead of auto_now_add=True:
+#     #  For DateField: default=date.today - from datetime.date.today()
+#     #  For DateTimeField: default=timezone.now - from django.utils.timezone.now()
+#     file = models.FileField(upload_to='attachment/%Y/%m/%d/')  # 具体路径之后设置
+#     remote = models.BooleanField(default=False)   # 是否远程存储
+#     description = models.CharField(max_length=200)  # 附件描述
+#     readperm = models.IntegerField()  # 读取权限
+#     # 考虑改成外键
+#
+#     def __str__(self):
+#         return self.file.name
+#
+#     class Meta:
+#         verbose_name = 'attachment'
+#         verbose_name_plural = 'attachments'
 
-    def __str__(self):
-        return self.file.name
 
-    class Meta:
-        verbose_name = 'attachment'
-        verbose_name_plural = 'attachments'
-
-
-class Forum_admin(models.Model):
-    #未定义外键
-    admin = models.ForeignKey('UseId', on_delete=models.CASCADE)
-    forum = models.ForeignKey(Forum_forum, on_delete=models.CASCADE)
-    Authorization = models.ForeignKey('Grant', on_delete=models.CASCADE)
+# class Forum_admin(models.Model):
+#     # 未定义外键
+#     admin = models.ForeignKey('UseId', on_delete=models.CASCADE)
+#     forum = models.ForeignKey(Forum_forum, on_delete=models.CASCADE)
+#     # Authorization = models.ForeignKey('Grant', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.admin)+'-'+str(self.forum)
