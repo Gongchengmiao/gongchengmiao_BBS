@@ -97,8 +97,8 @@ class common_member_field_home(models.Model):
 class common_member_star(models.Model):
     uid = models.ForeignKey(common_member, on_delete=models.CASCADE, db_constraint=True)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, on_delete=models.CASCADE, db_constraint=True)
-    spid = models.ForeignKey(forum_school_info, on_delete=models.CASCADE,
+    pid = models.ForeignKey(forum_post, null=True, on_delete=models.CASCADE, db_constraint=True)
+    spid = models.ForeignKey(forum_school_info, null=True, on_delete=models.CASCADE,
                              db_constraint=True)
 
 
