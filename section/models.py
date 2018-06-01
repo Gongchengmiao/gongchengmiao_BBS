@@ -43,10 +43,11 @@ class Forum_forum(models.Model):
 
 
 class Forum_attachemnt(models.Model):
-    aid = models.IntegerField(primary_key=True)  # 附件id
-    tid = models.IntegerField(default=0)
-    pid = models.ForeignKey('article.forum_post',null=True, on_delete=models.CASCADE)
-    uid = models.ForeignKey('user.common_member', null=True, on_delete= models.CASCADE)
+    pass
+    #aid = models.IntegerField(primary_key=True)  # 附件id
+    #tid = models.IntegerField(default=0)
+    #pid = models.ForeignKey('article.forum_post', null=True, on_delete=models.CASCADE)
+    #uid = models.ForeignKey('user.common_member', null=True, on_delete= models.CASCADE)
     # uploadTime = models.DateTimeField(auto_now_add=True)  # 上传时间
     # Automatically set the field to now when the object is first created.
     # If you want to be able to modify this field, set the following instead of auto_now_add=True:
@@ -58,12 +59,6 @@ class Forum_attachemnt(models.Model):
     # readperm = models.IntegerField()  # 读取权限
     # 考虑改成外键
 
-    def __str__(self):
-        return self.file.name
-
-    class Meta:
-        verbose_name = 'attachment'
-        verbose_name_plural = 'attachments'
 
 
 class Forum_admin(models.Model):
@@ -72,9 +67,6 @@ class Forum_admin(models.Model):
     #admin = models.ForeignKey('UseId', on_delete=models.CASCADE)
     #forum = models.ForeignKey(Forum_forum, on_delete=models.CASCADE)
     # Authorization = models.ForeignKey('Grant', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.admin)+'-'+str(self.forum)
 
     class Meta:
         verbose_name = 'forum-admin'
