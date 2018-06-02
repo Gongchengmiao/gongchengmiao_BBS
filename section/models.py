@@ -42,8 +42,8 @@ class Forum_forum(models.Model):
         return self.name
 
 
-class Forum_attachemnt(models.Model):
-    pass
+# class Forum_attachemnt(models.Model):
+#     pass
     #aid = models.IntegerField(primary_key=True)  # 附件id
     #tid = models.IntegerField(default=0)
     #pid = models.ForeignKey('article.forum_post', null=True, on_delete=models.CASCADE)
