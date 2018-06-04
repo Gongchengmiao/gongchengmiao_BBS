@@ -10,7 +10,7 @@ from django.db import models
 class forum_post(models.Model):
     # moderate = models.ForeignKey(forum_post_moderate, unique= True)
     # first = models.BooleanField();
-    pid = models.IntegerField(primary_key=True)
+    # pid = models.IntegerField(primary_key=True)
     author_name = models.CharField(max_length=64)
     post_title = models.CharField(max_length=256)
     pub_date = models.DateTimeField(auto_now_add = True, editable=True)
@@ -18,19 +18,25 @@ class forum_post(models.Model):
     # anonymous = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.pid, self.post_title
+        return self.post_title
 
 
 # 学校通告信息
 class forum_school_info(models.Model):
-    pid = models.IntegerField(primary_key=True)
+    # pid = models.IntegerField(primary_key=True)
     author_name = models.CharField(max_length=64)
     post_title = models.CharField(max_length=256)
     pub_date = models.DateTimeField(auto_now_add=True, editable=True)
     text = models.TextField()
 
     def __str__(self):
-        return self.pid, self.post_title
+        return self.post_title
+
+
+# 帖子浏览量信息
+class forum_read(models.Model):
+    pid = models.ForeignKey(forum_post, on_delete=models.CASCADE)
+    read_time = models.IntegerField(default=0)
 
 
 # class forum_thread_moderate(models.Model):

@@ -15,11 +15,11 @@ from django.contrib.auth.admin import UserAdmin
 class Common_memberAdmin(UserAdmin):
     pass
 
-# class Commmon_menber_starAdmin(admin.ModelAdmin):
-#     list_display = ('uid', 'is_school_info', 'pid')
+class Commmon_menber_starAdmin(admin.ModelAdmin):
+    pass
 
 
 
 admin.site.register(common_member, Common_memberAdmin)
 
-# admin.site.register(common_member_star, Commmon_menber_starAdmin)
+admin.site.register(common_member_star, Commmon_menber_starAdmin)

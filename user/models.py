@@ -3,6 +3,7 @@ from article.models import forum_post, forum_school_info
 from section.models import Forum_forum
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+import datetime
 
 
 # 用户主表
@@ -35,7 +36,7 @@ class common_member_action_log(models.Model):
     dateline = models.TimeField()  # 操作时间
 
     def __str__(self):
-        return self.uid, self.action, self.dateline
+        return '{} {} {}'.format(self.uid, self.action, self.dateline)
 
 
 # 用户统计表
@@ -56,7 +57,7 @@ class common_member_count(models.Model):
     blacklist = models.IntegerField()  # 黑名单
 
     def __str__(self):
-        return self.uid, common_member.objects.get(uid=self.uid)
+        return '{} {}'.format(self.uid, common_member.objects.get(uid=self.uid))
 
 
 # 用户惩罚操作表
@@ -69,7 +70,7 @@ class member_crime(models.Model):
     dateline = models.TimeField()  # 惩罚操作时间
 
     def __str__(self):
-        return self.uid, self.action
+        return '{} {}'.format(self.uid, self.action)
 
 
 # 用户论坛字段表
@@ -86,7 +87,7 @@ class common_member_field_forum(models.Model):
     groupterms = models.CharField(max_length=2, choices=groupterms_choice, default=STUDENT)  # 公共用户组
 
     def __str__(self):
-        return self.uid, self.get_groupterms_display()
+        return "{} {}".format(self.uid, self.get_groupterms_display())
 
 
 # 用户家园字段表
@@ -100,14 +101,15 @@ class common_member_field_home(models.Model):
 class common_member_star(models.Model):
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, null=True, on_delete=models.CASCADE)
-    spid = models.ForeignKey(forum_school_info, null=True, on_delete=models.CASCADE)
+    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
+    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
+    star_time = models.DateTimeField(default=datetime.datetime.now())
 
     def __str__(self):
         if self.is_school_info:
-            return self.uid, self.spid
+            return "{}, {}".format(self.uid, self.spid.pk)
         else:
-            return self.uid, self.pid
+            return "{}, {}".format(self.uid, self.pid.pk)
 
 
 # 用户关心版块
