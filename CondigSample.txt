@@ -1,0 +1,1 @@
+./bin/gunicorn --chdir . --pythonpath lib  -w4 -b0.0.0.0:8017 gongchengmiao_BBS.wsgi:application

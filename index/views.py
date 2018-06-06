@@ -9,8 +9,11 @@ import datetime
 def index(request):
     popular_posts = forum_post.objects.order_by('-pub_date')[0:10]
     school_info = forum_school_info.objects.order_by('-pub_date')[0:10]
-    user_star = common_member_star.objects.filter(uid__username
+    try:
+        user_star = common_member_star.objects.filter(uid__username
                                                   =request.COOKIES['username']).order_by('-star_time')[0: 10]
+    except KeyError:
+        user_star = []
 
     context = {
         'latest_posts': enumerate(popular_posts),
