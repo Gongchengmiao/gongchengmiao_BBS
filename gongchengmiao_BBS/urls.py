@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from index import views as index_views
+from gongchengmiao_BBS.settings import STATIC_ROOT
+from django.views.static import serve as static_serve
 
 urlpatterns = [
     path('', index_views.index, name='index'),
+    path('static/', static_serve, {'document_root': STATIC_ROOT}),
     path('admin/', admin.site.urls),
 ]
