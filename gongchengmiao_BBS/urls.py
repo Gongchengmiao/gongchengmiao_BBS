@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from index import views as index_views
 from gongchengmiao_BBS.settings import STATIC_ROOT
+from django.conf.urls import url
 from django.views.static import serve as static_serve
 
 urlpatterns = [
     path('', index_views.index, name='index'),
-    path('static/(?P<path>.*)', static_serve, {'document_root': STATIC_ROOT}),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT}),
     path('admin/', admin.site.urls),
 ]
