@@ -33,6 +33,14 @@ body.signin {
     list-style: none;
     padding: 0;
     margin: 20px 0;
+    color : #00FF7F;
+}
+
+.signinpanel .signin-info strong {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    color : #237ab7;
 }
 
 .signinpanel .form-control {
@@ -96,5 +104,30 @@ body.signin {
     .signuppanel {
         margin:0 20px;
         width:auto;
+    }
+}
+.signup-foot{font-size: 12px;text-align : center;coloe : #FFF;}
+@media screen and (max-width: 768px) {
+    .signinpanel,
+    .signuppanel {
+        margin: 0 auto;
+        width: 420px!important;
+        padding: 20px;
+    }
+    .signinpanel form {
+        margin-top: 20px;
+    }
+    .signup-footer {
+        margin-bottom: 10px;
+    }
+    .signuppanel .form-control {
+        margin-bottom: 10px;
+    }
+    .signup-footer .pull-left,
+    .signup-footer .intro {
+        margin-top : 2px;
+    }
+    .signinpanel .signin-info ul {
+        display: none;
     }
 }
