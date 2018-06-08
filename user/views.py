@@ -17,13 +17,13 @@ def login(request):
         # 当提交表单时, 判断用户名密码是否正确，正确则返回主页的渲染
         # 不正确则返回错误报告
         form = UserLoginForm(request.POST)
-        print(1)
+        # print(1)
         if form.is_valid():
 
             username = request.POST.get('username', '')
             password = request.POST.get('password', '')
             user = auth.authenticate(username=username, password=password)
-            print(username, password)
+            # print(username, password)
 
             if user is not None and user.is_active:
                 auth.login(request, user)
