@@ -1,0 +1,45 @@
+from django import forms
+
+
+# 用户登入表单
+class UserLoginForm(forms.Form):
+    username = forms.CharField(
+        required=True,
+        label=u"用户名",
+        error_messages={
+            "required": u"请输入用户名",
+            "max_length": u"用户名最长为20位",
+            "min_length": u"用户名最短位6位",
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": u"用户名",
+            }
+        ),
+        max_length=20,
+        min_length=6,
+    )
+
+    password = forms.CharField(
+        required=True,
+        label=u"密码",
+        error_messages={
+            "required": u"请输入密码",
+            "max_length": u"密码最长为20位",
+            "min_length": u"密码最短位6位",
+        },
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": u"密码",
+            }
+        ),
+        max_length=20,
+        min_length=6,
+    )
+
+    def clean(self):
+        if not self.is_valid():
+            raise forms.ValidationError(u"用户名和密码必须正确填写")
+        else:
+            cleaned_data = super(UserLoginForm, self).clean()
+
