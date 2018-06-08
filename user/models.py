@@ -16,13 +16,14 @@ class common_member(AbstractUser):
     status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
     email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
     avatarstatus = models.BooleanField(default=False)  # 是否有头像 1=已上传 0=未上传
+    accessmasks = models.BooleanField(default=True)  # 访问权限
+    allowadmincp = models.BooleanField(default=False)  # 管理权限
+    freeze = models.BooleanField(default=False)  # 是否被冻结
+
     # adminid = models.IntegerField(null=True)  # 管理组id 1=管理员 2=超级版主 3=版主
     # regdate = models.DateField()  # 注册时间
     # newpm = models.IntegerField()  # 新短消息数量
     # newprompt = models.IntegerField()  # 新提醒数目
-    accessmasks = models.BooleanField(default=True)  # 访问权限
-    allowadmincp = models.BooleanField(default=False)  # 管理权限
-    freeze = models.BooleanField(default=False)  # 是否被冻结
 
     def __str__(self):
         return self.username
