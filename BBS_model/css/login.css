@@ -106,7 +106,7 @@ body.signin {
         width:auto;
     }
 }
-.signup-foot{font-size: 12px;text-align : center;coloe : #FFF;}
+.signup-foot{font-size: 12px;text-align : center;coloe : #FFF;margin-top: 50px;}
 @media screen and (max-width: 768px) {
     .signinpanel,
     .signuppanel {
