@@ -26,6 +26,7 @@ from user import views as user_views
 urlpatterns = [
     path('', index_views.index, name='index'),
     # path('index/', index_views.index),
+    path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
     path('admin/', admin.site.urls, name='admin'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
