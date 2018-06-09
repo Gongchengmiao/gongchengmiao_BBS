@@ -14,6 +14,7 @@ class UserLoginForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": u"用户名",
+                "class": "form-control",
             }
         ),
         max_length=20,
@@ -31,6 +32,7 @@ class UserLoginForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": u"密码",
+                "class": "form-control",
             }
         ),
         max_length=20,
@@ -42,4 +44,10 @@ class UserLoginForm(forms.Form):
             raise forms.ValidationError(u"用户名和密码必须正确填写")
         else:
             cleaned_data = super(UserLoginForm, self).clean()
+
+# 用户注册表单
+class UserRegisterForm(forms.Form):
+    username = forms.CharField(
+
+    )
 
