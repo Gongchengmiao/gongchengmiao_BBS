@@ -1,9 +1,9 @@
 from django.db import models
 from article.models import forum_post, forum_school_info
 from section.models import Forum_forum
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
-import datetime
+from django.utils.timezone import now
 
 
 # 用户主表
@@ -14,7 +14,7 @@ class common_member(AbstractUser):
     # username = models.CharField(max_length=20, unique=True)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
-    # email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
+    email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
     # avatarstatus = models.BooleanField(default=False)  # 是否有头像 1=已上传 0=未上传
     # accessmasks = models.BooleanField(default=True)  # 访问权限
     # allowadmincp = models.BooleanField(default=False)  # 管理权限
@@ -104,7 +104,7 @@ class common_member_star(models.Model):
     is_school_info = models.BooleanField(default=False)
     pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
     spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
-    star_time = models.DateTimeField(default=datetime.datetime.now())
+    star_time = models.DateTimeField(default=now())
 
     def __str__(self):
         if self.is_school_info:

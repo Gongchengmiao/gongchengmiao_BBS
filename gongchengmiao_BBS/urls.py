@@ -28,5 +28,6 @@ urlpatterns = [
     # path('index/', index_views.index),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
+    path('verify/<username>/', user_views.email_active, name='verify_user'),
     path('admin/', admin.site.urls, name='admin'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

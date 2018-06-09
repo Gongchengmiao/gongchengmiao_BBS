@@ -38,7 +38,7 @@
                 {% csrf_token %}
                 {% if success %}
                     <div class="alert alert-success">
-                        你已成功注册！
+                        我们已经向您的邮箱中发送了一封激活邮件, 注意查收！
                     </div>
                 {% elif user_name_used %}
                     <div class="alert alert-danger">
@@ -55,6 +55,10 @@
                 {% elif not_confirmed %}
                     <div class="alert alert-danger">
                         请同意用户协议！
+                    </div>
+                {% elif error_unknown %}
+                    <div class="alert alert-danger">
+                        请正确填写注册表！
                     </div>
                 {% endif %}
                 <div class="form-group">

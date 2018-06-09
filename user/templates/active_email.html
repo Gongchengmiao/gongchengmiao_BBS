@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "head.html" %}
+<body>
+{% if succeed_verified %}
+    <div class="alert alert-success">
+        您已成功激活！
+    </div>
+{% elif has_verified %}
+    <div class="alert alert-danger">
+        您已经激活过了！
+    </div>
+{% elif user_not_exist %}
+    <div class="alert alert-danger">
+        请不要随便输入网址！
+    </div>
+{% endif %}
+{% include "js_use.html" %}
+</body>
+</html>

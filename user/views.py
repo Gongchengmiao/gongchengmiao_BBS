@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password, check_password
 
 from .forms import UserLoginForm, UserRegisterForm
 from .models import common_member
-
+from django.core.mail import send_mail
 
 # 登入操作实现
 def login(request):
@@ -38,18 +38,22 @@ def login(request):
                 # usrnm.update(username.encode('utf-8'))
                 # pswd = hashlib.md5('madalaotaiqiangle'.encode('utf-8'))
                 # pswd.update(password.encode('utf-8'))
+                if user.email_status is True:
 
-                response = redirect("/")
-                response.set_cookie('username', username,
-                                    expires=datetime.datetime.now()+datetime.timedelta(days=10))
-                passwd = common_member.objects.get(username=username).password
-                response.set_cookie('password', passwd,
-                                    expires=datetime.datetime.now() + datetime.timedelta(days=10))
+                    response = redirect("/")
+                    response.set_cookie('username', username,
+                                        expires=datetime.datetime.now()+datetime.timedelta(days=10))
+                    passwd = common_member.objects.get(username=username).password
+                    response.set_cookie('password', passwd,
+                                        expires=datetime.datetime.now() + datetime.timedelta(days=10))
 
-                auth.login(request, user)
-                return response
+                    auth.login(request, user)
+                    return response
+
+                else:
+                    return render(request, 'login_demo.html', {'form': form, 'email_not_active': True, "title": u'中国科学技术大学BBS登录'})
             else:
-                return render(request, 'login_demo.html', {'form': form, 'password_is_wrong': True})
+                return render(request, 'login_demo.html', {'form': form, 'password_is_wrong': True, "title": u'中国科学技术大学BBS登录'})
 
         else:
 
@@ -58,10 +62,12 @@ def login(request):
 
 # 注册操作实现
 def register(request):
+    # global new_account
     # 当正常访问时候, 返回register.html的渲染
     if request.method == 'GET':
         form = UserRegisterForm()
         # print(1)
+        # send_mail('test_demo_subject', 'test_demo_message', 'paulzh@mail.ustc.edu.cn', ['z1991998920@gmail.com', ])
         return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云BBS"})
     else:
         # 当提交表单时, 判断用户名是否被注册, 密码是否合法, 再次输入密码是否正确, 是否勾选阅读用户协议
@@ -114,9 +120,16 @@ def register(request):
 
             new_account = common_member()
             new_account.username = username
-            new_account.password = make_password(password)  # 需要测试
+            new_account.password = make_password(password)
             new_account.email = email
             new_account.save()
+
+            # 邮箱验证
+            activation_url = ''
+            mail_text = u'To 亲爱的同学: 欢迎您使用瀚海星云, 现在仍然是测试版,' \
+                        u' 若发现漏洞请联系此邮箱\n您的验证网址为\n\n\n\n\n'+activation_url+'\n\n\n\n\n\n\n\n'\
+                        u'From 攻城喵团队'
+            send_mail(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
 
             # 需要加入邮箱验证
             return render(request, "register.html", {
@@ -124,4 +137,24 @@ def register(request):
                 "title": u"欢迎注册翰海星云BBS",
                 "success": True,
             })
+        else:
+            return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云BBS", "error_unknown": True})
+
+            # issue 1: 用户名首字母大写
+
+
+# 邮箱验证界面
+def email_active(request, username):
+    if request.method == 'GET':
+        user = common_member.objects.get(username=username)
+        if user and user.is_active:
+            if user.email_status:
+                return render(request, "active_email.html", {"has_verified": True, "title": u"翰海星云用户验证"})  # 已经验证通过了
+            else:
+                # 现在正在验证
+                user.email_status = True
+                return render(request, "active_email.html", {"succeed_verified": True, "title": u"翰海星云用户验证"})
+        else:
+            # 当前用户不存在
+            return render(request, "active_email.html", {"user_not_exist": True, "title": u"翰海星云用户验证"})
 
