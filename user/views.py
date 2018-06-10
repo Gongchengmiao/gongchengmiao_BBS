@@ -121,11 +121,10 @@ def register(request):
                 })
 
             # 邮箱验证
-            # activation_url = 'roarcanotprogramming.com/verify/'+username+'/'
             hostname = 'roarcannotprogramming.com:8017'
-            activation_url = hostname + reverse('verify_user', args=(username, ))
+            activation_url = hostname + reverse('verify_user')
             mail_text = u'To 亲爱的同学: \n\n欢迎您使用瀚海星云, 现在仍然是测试版,' \
-                        u' 若发现漏洞请联系此邮箱\n您的验证网址为\n\n\n\n\n'+activation_url+'\n\n\n\n\n\n\n\n'\
+                        u' 若发现漏洞请联系此邮箱\n\n\n\n您的验证网址为\n\n\n\n\n'+activation_url+'\n\n\n\n\n\n\n\n'\
                         u'From 攻城喵团队'
             send_mail(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
 
