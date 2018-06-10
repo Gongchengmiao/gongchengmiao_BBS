@@ -26,7 +26,6 @@ from user import views as user_views
 urlpatterns = [
     path('index/', index_views.index, name='index'),
     path('', index_views.redirect_to_login, name='main'),
-    # path('index/', index_views.index),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
     path('verify/<username>/', user_views.email_active, name='verify_user'),
