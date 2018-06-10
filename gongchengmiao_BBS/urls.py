@@ -24,7 +24,8 @@ from user import views as user_views
 # from gongchengmiao_BBS.settings import STATIC_ROOT
 
 urlpatterns = [
-    path('', index_views.index, name='index'),
+    path('index/', index_views.index, name='index'),
+    path('', index_views.redirect_to_login, name='main'),
     # path('index/', index_views.index),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),

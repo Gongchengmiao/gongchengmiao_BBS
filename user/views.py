@@ -5,10 +5,12 @@ from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
+from django.urls import reverse
 
 from .forms import UserLoginForm, UserRegisterForm
 from .models import common_member
 from django.core.mail import send_mail
+
 
 # 登入操作实现
 def login(request):
@@ -40,7 +42,7 @@ def login(request):
                 # pswd.update(password.encode('utf-8'))
                 if user.email_status is True:
 
-                    response = redirect("/")
+                    response = redirect(reverse('index'))
                     response.set_cookie('username', username,
                                         expires=datetime.datetime.now()+datetime.timedelta(days=10))
                     passwd = common_member.objects.get(username=username).password

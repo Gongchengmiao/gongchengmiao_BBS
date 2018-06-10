@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from article.models import forum_post, forum_school_info
 from user.models import common_member_star, common_member
+from django.urls import reverse
 import datetime
 import hashlib
 
@@ -8,7 +9,6 @@ import hashlib
 
 
 def index(request):
-
 
     popular_posts = forum_post.objects.order_by('-pub_date')[0:10]
     school_info = forum_school_info.objects.order_by('-pub_date')[0:10]
@@ -39,3 +39,7 @@ def index(request):
     # 假设Cookie是z19919998920 为了测试
     # response.set_cookie('username', 'z1991998920', expires=datetime.datetime.now()+datetime.timedelta(days=365))
     return response
+
+
+def redirect_to_login(request):
+    return redirect(reverse('login'))
