@@ -13,5 +13,4 @@ build
 *.sqlite
 *.sqlite3
 venv*
-static
 secrets_zh.py
