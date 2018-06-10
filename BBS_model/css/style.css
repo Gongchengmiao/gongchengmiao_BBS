@@ -1840,6 +1840,12 @@ table.dataTable thead .sorting:after {
     width: 100%;
 }
 
+.boxY{width:100px;text-align: center;font-size: 100%}
+.boxY img{
+    border-radius: 50%;
+    width:100%;
+}
+
 .btn-circle {
     width: 30px;
     height: 30px;
