@@ -125,8 +125,8 @@ def register(request):
             new_account.save()
 
             # 邮箱验证
-            activation_url = ''
-            mail_text = u'To 亲爱的同学: 欢迎您使用瀚海星云, 现在仍然是测试版,' \
+            activation_url = 'roarcanotprogramming.com/verify/'+username+'/'
+            mail_text = u'To 亲爱的同学: \n\n欢迎您使用瀚海星云, 现在仍然是测试版,' \
                         u' 若发现漏洞请联系此邮箱\n您的验证网址为\n\n\n\n\n'+activation_url+'\n\n\n\n\n\n\n\n'\
                         u'From 攻城喵团队'
             send_mail(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
@@ -153,6 +153,7 @@ def email_active(request, username):
             else:
                 # 现在正在验证
                 user.email_status = True
+                user.save()
                 return render(request, "active_email.html", {"succeed_verified": True, "title": u"翰海星云用户验证"})
         else:
             # 当前用户不存在

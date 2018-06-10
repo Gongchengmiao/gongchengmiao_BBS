@@ -15,9 +15,8 @@ from django.conf import settings
 # common_member succeed from AbstractUserModel
 
 class UserCreationForm(BaseUserCreationForm):
-
-    # model = settings.AUTH_USER_MODEL
-    # fields = ('username',)
+    class Meta(BaseUserCreationForm.Meta):
+        model = common_member
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -28,9 +27,8 @@ class UserCreationForm(BaseUserCreationForm):
 
 class UserChangeForm(BaseUserChangeForm):
 
-
-    # model = settings.AUTH_USER_MODEL
-    # fields = '__all__'
+    class Meta(BaseUserChangeForm.Meta):
+        model = common_member
 
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)
@@ -44,6 +42,9 @@ class Common_memberAdmin(BaseUserAdmin):
         self.search_fields = ('username', 'email')
         self.form = UserChangeForm
         self.add_form = UserCreationForm
+    fieldsets = BaseUserAdmin.fieldsets + (
+        (None, {'fields': ('email_status',)}),
+    )
 
 
 class Commmon_menber_starAdmin(admin.ModelAdmin):
