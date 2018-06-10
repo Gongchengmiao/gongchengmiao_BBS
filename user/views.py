@@ -53,9 +53,19 @@ def login(request):
                     return response
 
                 else:
-                    return render(request, 'login_demo.html', {'form': form, 'email_not_active': True, "title": u'中国科学技术大学BBS登录'})
+                    return render(request, 'login_demo.html', {
+                        'form': form,
+                        'email_not_active': True,
+                        "title": u'中国科学技术大学BBS登录',
+                        'password_is_wrong': False,
+                    })
             else:
-                return render(request, 'login_demo.html', {'form': form, 'password_is_wrong': True, "title": u'中国科学技术大学BBS登录'})
+                return render(request, 'login_demo.html', {
+                    'form': form,
+                    'password_is_wrong': True,
+                    "title": u'中国科学技术大学BBS登录',
+                    'email_not_active': False,
+                })
 
         else:
 
@@ -85,7 +95,7 @@ def register(request):
 
             if common_member.objects.filter(username=username):
                 # print(3)
-                print(common_member.objects.filter(username=username))
+                # print(common_member.objects.filter(username=username))
                 return render(request, "register.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
