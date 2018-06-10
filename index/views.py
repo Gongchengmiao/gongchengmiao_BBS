@@ -19,7 +19,7 @@ def index(request):
         user = common_member.objects.get(username=cookie_usrnm)
         pswd_user = user.password
 
-        print(pswd_user)
+        # print(pswd_user)
 
         if cookie_pswd == pswd_user:
             user_star = common_member_star.objects.filter(uid__username=cookie_usrnm).order_by('-star_time')[0: 10]
