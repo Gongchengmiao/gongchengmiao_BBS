@@ -122,7 +122,7 @@ def register(request):
 
             # 邮箱验证
             hostname = 'roarcannotprogramming.com:8017'
-            activation_url = hostname + reverse('verify_user')
+            activation_url = hostname + reverse('verify_user', args=(username, ))
             mail_text = u'To 亲爱的同学: \n\n欢迎您使用瀚海星云, 现在仍然是测试版,' \
                         u' 若发现漏洞请联系此邮箱\n\n\n\n您的验证网址为\n\n\n\n\n'+activation_url+'\n\n\n\n\n\n\n\n'\
                         u'From 攻城喵团队'
