@@ -9,7 +9,7 @@ from django.urls import reverse
 
 from .forms import UserLoginForm, UserRegisterForm
 from .models import common_member
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 
 
 # 登入操作实现
@@ -133,10 +133,13 @@ def register(request):
             # 邮箱验证
             hostname = 'roarcannotprogramming.com:8017'
             activation_url = hostname + reverse('verify_user', args=(username, ))
-            mail_text = u'To 亲爱的同学: \n\n欢迎您使用瀚海星云, 现在仍然是测试版,' \
-                        u' 若发现漏洞请联系此邮箱\n\n\n\n您的验证网址为\n\n\n\n\n'+activation_url+'\n\n\n\n\n\n\n\n'\
-                        u'From 攻城喵团队'
-            send_mail(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
+            mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
+                        u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网址为</p><br/><br/><br/><a href="'+activation_url+'">' + u'验证网址' + '</a><br/><br/><br/><br/><br/><br/>'\
+                        u'<p>From 攻城喵团队</p>'
+            # send_mail(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
+            msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
+            msg.content_subtype = "html"
+            msg.send()
 
             new_account = common_member()
             new_account.username = username
