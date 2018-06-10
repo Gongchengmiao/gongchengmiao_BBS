@@ -5,6 +5,8 @@ from .models import common_member, common_member_star
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm,\
     UserCreationForm as BaseUserCreationForm
+from django import forms
+from django.utils.translation import gettext, gettext_lazy as _
 from django.conf import settings
 
 
@@ -15,14 +17,31 @@ from django.conf import settings
 # common_member succeed from AbstractUserModel
 
 class UserCreationForm(BaseUserCreationForm):
+
+    # email_status = forms.CharField(
+    #     label=_("Email_status"),
+    #     strip=False,
+    #     widget=forms.CheckboxInput,
+    #     # help_text=password_validation.password_validators_help_text_html(),
+    # )
+
     class Meta(BaseUserCreationForm.Meta):
         model = common_member
+        # fields = ("username", "email_status")
+        # field_classes = BaseUserCreationForm.Meta.field_classes.update({"email_status": forms.EmailField})
+        # fields['email_status'].requierd = True
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
-        # if 'email_status' not in self.fields:
-        #     self.fields['email_status'] =
-        self.fields['email_status'].required = True
+        # self.fields['email_status'].required = True
+
+    # def save(self, commit=True):
+    #     user = super().save(commit=False)
+    #     user.email_status = self.cleaned_data["email_status"]
+    #     if commit:
+    #         user.save()
+    #     return user
+
 
 
 class UserChangeForm(BaseUserChangeForm):
