@@ -209,10 +209,10 @@ def jump_to_wait(request, username):
         # 查询是否发过邮件
         try:
             email_status = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
-            print(email_status)
+            # print(email_status)
             email_status = email_status[0]
             if str(email_status.last_send_time) > str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
-                print(str(email_status.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+                # print(str(email_status.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
                 return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "time_less": True, })
         except IndexError:
             pass
