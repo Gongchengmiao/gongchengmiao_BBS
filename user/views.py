@@ -6,10 +6,11 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from django.urls import reverse
+from django.utils.timezone import now
 
 from .forms import UserLoginForm, UserRegisterForm
-from .models import common_member
-from django.core.mail import send_mail, EmailMultiAlternatives
+from .models import common_member, common_member_email_send_time
+from django.core.mail import send_mail, EmailMultiAlternatives, BadHeaderError
 
 
 # 登入操作实现
@@ -130,29 +131,40 @@ def register(request):
                     "not_confirmed": True,
                 })
 
-            # 邮箱验证
-            hostname = 'roarcannotprogramming.com:8017'
-            activation_url = hostname + reverse('verify_user', args=(username, ))
-            mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
-                        u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网址为</p><br/><br/><br/><a href="'+activation_url+'">'+activation_url+'</a><br/><br/><br/><br/><br/><br/>'\
-                        u'<p>From 攻城喵团队</p>'
-            # send_mail(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
-            msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
-            msg.content_subtype = "html"
-            msg.send()
-
             new_account = common_member()
             new_account.username = username
             new_account.password = make_password(password)
             new_account.email = email
             new_account.save()
 
-            # 需要加入邮箱验证
-            return render(request, "register.html", {
-                "form": form,
-                "title": u"欢迎注册翰海星云BBS",
-                "success": True,
-            })
+            # return render(request, "register.html", {
+            #     "form": form,
+            #     "title": u"欢迎注册翰海星云BBS",
+            #     "waiting": True,
+            # })
+
+            return redirect(reverse('wait_email', args=(username, )))
+
+            # 邮箱验证
+            # hostname = 'roarcannotprogramming.com:8017'
+            # activation_url = hostname + reverse('verify_user', args=(username, ))
+            # mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
+            #             u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网址为</p><br/><br/><br/><a href="'+activation_url+'">'+activation_url+'</a><br/><br/><br/><br/><br/><br/>'\
+            #             u'<p>From 攻城喵团队</p>'
+            # msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
+            # msg.content_subtype = "html"
+            #
+            # try:
+            #     msg.send()
+            # except BadHeaderError:
+            #     new_account.delete()
+            #     return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云BBS", "error_unknown": True})
+            #
+            # return render(request, "register.html", {
+            #     "form": form,
+            #     "title": u"欢迎注册翰海星云BBS",
+            #     "success": True,
+            # })
         else:
             return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云BBS", "error_unknown": True})
 
@@ -163,6 +175,17 @@ def register(request):
 def email_active(request, username):
     if request.method == 'GET':
         user = common_member.objects.get(username=username)
+
+        try:
+            email_record = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
+            email_record = email_record[0]
+            # print(str(email_record.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+            if str(email_record.last_send_time) < str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+                user.delete()
+                return render(request, "active_email.html", {"title": u"翰海星云用户验证", "time_more": True, })  # 超过验证时间
+        except IndexError:
+            return render(request, "active_email.html", {"title": u"翰海星云用户验证", "never_send": True, })  # 没发过邮件
+
         if user and user.is_active:
             if user.email_status:
                 return render(request, "active_email.html", {"has_verified": True, "title": u"翰海星云用户验证"})  # 已经验证通过了
@@ -175,3 +198,50 @@ def email_active(request, username):
             # 当前用户不存在
             return render(request, "active_email.html", {"user_not_exist": True, "title": u"翰海星云用户验证"})
 
+
+# 注册跳转发送邮箱界面
+def jump_to_wait(request, username):
+    if request.method == 'GET':
+        user = common_member.objects.get(username=username)
+        email = user.email
+        new_account = user
+
+        # 查询是否发过邮件
+        try:
+            email_status = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
+            print(email_status)
+            email_status = email_status[0]
+            if str(email_status.last_send_time) > str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+                print(str(email_status.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+                return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "time_less": True, })
+        except IndexError:
+            pass
+
+        # 配置并发送邮件
+        hostname = 'roarcannotprogramming.com:8017'
+        activation_url = hostname + reverse('verify_user', args=(username,))
+        mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
+                    u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网址为</p><br/><br/><br/><a href="' + activation_url + '">' + activation_url + '</a><br/><br/><br/><br/><br/><br/>' \
+                                                                                                                                    u'<p>From 攻城喵团队</p>'
+        msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
+        msg.content_subtype = "html"
+
+        try:
+            msg.send()
+        except BadHeaderError:
+            new_account.delete()
+            return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "head_wrong": True, })
+
+        # 更新表
+        email_record, created = common_member_email_send_time.objects.get_or_create(user=user)
+        # email_record.user = user
+        email_record.email_time += 1
+        email_record.save()
+
+        return render(request, "wait_email.html", {
+            "title": u"瀚海星云注册邮件认证",
+            "success": True,
+        })
+
+    else:
+        return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "method_wrong": True, })

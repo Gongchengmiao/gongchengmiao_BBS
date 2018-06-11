@@ -29,12 +29,22 @@ class common_member(AbstractUser):
         return self.username
 
 
+# 用户邮件验证发送次数表
+class common_member_email_send_time(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    email_time = models.IntegerField(default=0)  # 邮件发送次数
+    last_send_time = models.DateTimeField(auto_now=True)  # 上次发送时间
+
+    def __str__(self):
+        return '{} {}'.format(self.user, self.email_time)
+
+
 # 用户操作日志表
 class common_member_action_log(models.Model):
     id = models.IntegerField(primary_key=True)
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     action = models.IntegerField()  # 动作, 具体以后再定义
-    dateline = models.TimeField()  # 操作时间
+    dateline = models.DateTimeField(auto_now=True)  # 操作时间
 
     def __str__(self):
         return '{} {} {}'.format(self.uid, self.action, self.dateline)
@@ -68,7 +78,7 @@ class member_crime(models.Model):
     action = models.ForeignKey(common_member_action_log, on_delete=models.CASCADE,
                                db_constraint=True)  # 惩罚行为
     reason = models.TextField()  # 惩罚理由
-    dateline = models.TimeField()  # 惩罚操作时间
+    dateline = models.DateTimeField(auto_now=True)  # 惩罚操作时间
 
     def __str__(self):
         return '{} {}'.format(self.uid, self.action)
@@ -104,7 +114,7 @@ class common_member_star(models.Model):
     is_school_info = models.BooleanField(default=False)
     pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
     spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
-    star_time = models.DateTimeField(default=now())
+    star_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         if self.is_school_info:

@@ -14,6 +14,14 @@
     <div class="alert alert-danger">
         请不要随便输入网址！
     </div>
+{% elif time_more %}
+    <div class="alert alert-danger">
+        超过验证时间，请重新注册！
+    </div>
+{% elif never_send %}
+    <div class="alert alert-danger">
+        我们似乎从未给您发动过验证邮件！
+    </div>
 {% endif %}
 {% include "js_use.html" %}
 </body>

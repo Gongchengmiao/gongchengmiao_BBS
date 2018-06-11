@@ -29,5 +29,6 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
     path('verify/<username>/', user_views.email_active, name='verify_user'),
+    path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
     path('admin/', admin.site.urls, name='admin'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
