@@ -15,8 +15,11 @@ from django.core.mail import send_mail, EmailMultiAlternatives, BadHeaderError
 
 # 登入操作实现
 def login(request):
+    # 如果当前已有用户登入, 则直接跳转到主页
+    if request.user.is_authenticated:
+        return redirect(reverse('index'))
+
     # 当正常访问时, 返回login.html的渲染
-    # print(1)
     if request.method == 'GET':
 
         form = UserLoginForm()
@@ -46,9 +49,9 @@ def login(request):
                     response = redirect(reverse('index'))
                     response.set_cookie('username', username,
                                         expires=datetime.datetime.now()+datetime.timedelta(days=10))
-                    passwd = common_member.objects.get(username=username).password
-                    response.set_cookie('password', passwd,
-                                        expires=datetime.datetime.now() + datetime.timedelta(days=10))
+                    # passwd = common_member.objects.get(username=username).password
+                    # response.set_cookie('password', passwd,
+                    #                     expires=datetime.datetime.now() + datetime.timedelta(days=10))
 
                     auth.login(request, user)
                     return response
