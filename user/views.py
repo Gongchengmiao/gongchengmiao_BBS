@@ -248,3 +248,10 @@ def jump_to_wait(request, username):
 
     else:
         return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "method_wrong": True, })
+
+
+# 登出
+def logout(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+    return redirect(reverse('login'))

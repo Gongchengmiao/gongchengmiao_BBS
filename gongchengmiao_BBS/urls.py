@@ -29,6 +29,7 @@ urlpatterns = [
     path('', index_views.redirect_to_login, name='main'),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
+    path('logout/', user_views.logout, name='logout'),
     path('verify/<username>/', user_views.email_active, name='verify_user'),
     path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
     path('admin/', admin.site.urls, name='admin'),
