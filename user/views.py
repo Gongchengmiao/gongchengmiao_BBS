@@ -2,8 +2,8 @@ import datetime
 
 from django.contrib import auth
 from django.contrib.auth import password_validation
-from django.core.exceptions import ValidationError
-from django.shortcuts import render, redirect
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import make_password, check_password
 from django.urls import reverse
 from django.utils.timezone import now
@@ -204,10 +204,20 @@ def email_active(request, username):
 
 # 注册跳转发送邮箱界面
 def jump_to_wait(request, username):
+    # 只有没有通过验证　并且　距离上次发送邮件时间超过３小时的才能再次发送邮件
     if request.method == 'GET':
-        user = common_member.objects.get(username=username)
+        # try:
+            # user = common_member.objects.get(username=username)
+        user = get_object_or_404(common_member, username=username)
+        # except ObjectDoesNotExist:
+
         email = user.email
+        email_status = user.email_status
         new_account = user
+
+        # 查询是否已经验证通过
+        if email_status:
+            return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "identified": True, })
 
         # 查询是否发过邮件
         try:
@@ -216,8 +226,10 @@ def jump_to_wait(request, username):
             email_status = email_status[0]
             if str(email_status.last_send_time) > str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
                 # print(str(email_status.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+
+                # 间隔时间小于三小时, 返回'请等待三小时'
                 return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "time_less": True, })
-        except IndexError:
+        except IndexError:  # 从未发送过
             pass
 
         # 配置并发送邮件
