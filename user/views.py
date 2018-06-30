@@ -11,6 +11,7 @@ from django.utils.timezone import now
 from .forms import UserLoginForm, UserRegisterForm
 from .models import common_member, common_member_email_send_time
 from django.core.mail import send_mail, EmailMultiAlternatives, BadHeaderError
+from .tasks import send_email_1
 
 
 # 登入操作实现
@@ -242,7 +243,9 @@ def jump_to_wait(request, username):
         msg.content_subtype = "html"
 
         try:
-            msg.send()
+            # msg.send()
+            send_email_1.delay(msg)
+
         except BadHeaderError:
             new_account.delete()
             return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "head_wrong": True, })
