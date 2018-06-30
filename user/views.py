@@ -4,14 +4,19 @@ from django.contrib import auth
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
 from django.contrib.auth.hashers import make_password, check_password
 from django.urls import reverse
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.timezone import now
 
 from .forms import UserLoginForm, UserRegisterForm
 from .models import common_member, common_member_email_send_time
-from django.core.mail import send_mail, EmailMultiAlternatives, BadHeaderError
+from django.core.mail import send_mail, EmailMultiAlternatives, BadHeaderError, EmailMessage
 from .tasks import send_email_1
+from .tokens import account_activation_token
 
 
 # 登入操作实现
@@ -141,6 +146,8 @@ def register(request):
             new_account.email = email
             new_account.save()
 
+            # token = account_activation_token.make_token(new_account)
+
             # return render(request, "register.html", {
             #     "form": form,
             #     "title": u"欢迎注册翰海星云BBS",
@@ -176,21 +183,29 @@ def register(request):
 
 
 # 邮箱验证界面
-def email_active(request, username):
+def email_active(request, uidb64, token):
     if request.method == 'GET':
-        user = common_member.objects.get(username=username)
-
         try:
-            email_record = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
-            email_record = email_record[0]
-            # print(str(email_record.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
-            if str(email_record.last_send_time) < str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
-                user.delete()
-                return render(request, "active_email.html", {"title": u"翰海星云用户验证", "time_more": True, })  # 超过验证时间
-        except IndexError:
-            return render(request, "active_email.html", {"title": u"翰海星云用户验证", "never_send": True, })  # 没发过邮件
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = common_member.objects.get(pk=uid)
+        except(TypeError, ValueError, OverflowError, common_member.DoesNotExist):
+            user = None
+        # user = common_member.objects.get(username=username)
 
-        if user and user.is_active:
+        # if user is not None and account_activation_token.check_token(user, token):
+        if user is not None and user.is_active and account_activation_token.check_token(user, token):
+            # 验证是否超时
+            try:
+                email_record = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
+                email_record = email_record[0]
+                # print(str(email_record.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+                if str(email_record.last_send_time) < str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+                    user.delete()
+                    return render(request, "active_email.html", {"title": u"翰海星云用户验证", "time_more": True, })  # 超过验证时间
+            except IndexError:
+                return render(request, "active_email.html", {"title": u"翰海星云用户验证", "never_send": True, })  # 没发过邮件
+
+            # 邮箱验证
             if user.email_status:
                 return render(request, "active_email.html", {"has_verified": True, "title": u"翰海星云用户验证"})  # 已经验证通过了
             else:
@@ -234,16 +249,29 @@ def jump_to_wait(request, username):
             pass
 
         # 配置并发送邮件
-        hostname = 'roarcannotprogramming.com:8017'
-        activation_url = hostname + reverse('verify_user', args=(username,))
-        mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
-                    u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网' \
-                    u'址为</p><br/><br/><br/><a href="' + activation_url + '">' \
-                    + activation_url +\
-                    '</a><br/><br/><br/><br/><br/><br/>' \
-                    u'<p>From 攻城喵团队</p>'
-        msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
-        msg.content_subtype = "html"
+        # hostname = 'roarcannotprogramming.com:8017'
+        # activation_url = hostname + reverse('verify_user', args=(username,))
+        # mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
+        #             u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网' \
+        #             u'址为</p><br/><br/><br/><a href="' + activation_url + '">' \
+        #             + activation_url +\
+        #             '</a><br/><br/><br/><br/><br/><br/>' \
+        #             u'<p>From 攻城喵团队</p>'
+
+        current_site = get_current_site(request)
+        mail_message = render_to_string('email_message.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': bytes.decode(urlsafe_base64_encode(force_bytes(user.pk))),
+            'token': account_activation_token.make_token(user),
+        })
+
+        # msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
+        # msg.content_subtype = "html"
+
+        msg = EmailMessage(
+            u'瀚海星云-邮箱验证', mail_message, to=[email, ]
+        )
 
         try:
             # msg.send()
@@ -273,3 +301,5 @@ def logout(request):
     if request.user.is_authenticated:
         auth.logout(request)
     return redirect(reverse('login'))
+
+# 找回密码
