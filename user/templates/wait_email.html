@@ -18,6 +18,10 @@
     <div class="alert alert-danger">
     请求错误, 请从新登入界面！
     </div>
+{% elif identified %}
+    <div>
+    您已经通过邮箱验证了，请不要重复验证！
+    </div>
 {% endif %}
 {% include "js_use.html" %}
 </body>
