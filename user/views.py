@@ -237,8 +237,11 @@ def jump_to_wait(request, username):
         hostname = 'roarcannotprogramming.com:8017'
         activation_url = hostname + reverse('verify_user', args=(username,))
         mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
-                    u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网址为</p><br/><br/><br/><a href="' + activation_url + '">' + activation_url + '</a><br/><br/><br/><br/><br/><br/>' \
-                                                                                                                                    u'<p>From 攻城喵团队</p>'
+                    u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网' \
+                    u'址为</p><br/><br/><br/><a href="' + activation_url + '">' \
+                    + activation_url +\
+                    '</a><br/><br/><br/><br/><br/><br/>' \
+                    u'<p>From 攻城喵团队</p>'
         msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
         msg.content_subtype = "html"
 
