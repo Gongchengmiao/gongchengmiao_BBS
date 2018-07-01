@@ -16,6 +16,7 @@
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.css?v17">
 
 </head>
 
@@ -85,11 +86,55 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <h4 class="modal-title">窗口标题</h4>
+                                            <h4 class="modal-title">修改个人信息</h4>
                                             <small class="font-bold">这里可以显示副标题。
                                         </div>
                                         <div class="modal-body">
-                                            <p><strong>H+</strong> 是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的jQuery插件，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。</p>
+
+                                                <div class="form-row">
+                                                    <label>昵称</label>
+                                                    <input class="input-field" name="nickname" type="text" maxlength="30" value="斩于刃" required/>
+                                                    <span class="warning">昵称长度应＜15 个汉字，或＜30 个字符</span>
+                                                </div>
+                                                <div class="form-row birth">
+                                                    <label>生日</label>
+                                                    <input class="input-field" name="birthyear" type="number" min="1901" step="1" pattern="[0-9]{4}" value="1998" required />
+                                                    <span>年</span>
+                                                    <input class="input-field" name="birthmonth" type="number" min="1" max="12" step="1" pattern="[0-9]{1,2}" value="2" required />
+                                                    <span>月</span>
+                                                    <input class="input-field" name="birthday" type="number" min="1" max="31" step="1" pattern="[0-9]{1,2}" value="9" required />
+                                                    <span>日</span>
+                                                    <label>
+                                                        <input name="hide_horoscope" type="checkbox" checked />
+                                                        <span>不展示我的星座</span>
+                                                    </label>
+
+                                                </div>
+                                                <div class="form-row">
+                                                    <label>性别</label><div class="radgroup">
+                                                        <label>
+                                                            <input name="gender" type="radio" required value="M" checked />
+                                                            <span>男</span>
+                                                        </label>
+                                                        <label>
+                                                            <input name="gender" type="radio" required value="F" />
+                                                            <span>女</span>
+                                                        </label>
+                                                        <label>
+                                                            <input name="hide_gender" type="checkbox" />
+                                                            <span>不展示我的性别</span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-row">
+                                                    <label>说明档</label>
+                                                    <div class="textarea-wrapper"><textarea id="desc-textarea" data-origin="#desc-origin"></textarea></div>
+                                                    <div id="desc-origin" style="display: none"><p>CZYZSTSL</p></div>
+                                                </div>
+                                                <hr />
+
+                                            </form>
                                         </div>
 
                                         <div class="modal-footer">
