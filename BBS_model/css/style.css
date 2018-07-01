@@ -4356,6 +4356,10 @@ table.table-mail tr td {
     box-shadow: 0px 0px 3px 0px #919191;
 }
 
+.img-center {
+    display:block;margin-right:auto;margin-left:auto;
+}
+
 /* For handle diferent bg color in AngularJS version */
 
 .dashboards\.dashboard_2 nav.navbar,
