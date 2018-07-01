@@ -63,7 +63,7 @@ class Common_memberAdmin(BaseUserAdmin):
         self.form = UserChangeForm
         self.add_form = UserCreationForm
     fieldsets = BaseUserAdmin.fieldsets + (
-        ('personal info', {'fields': ('email_status','gender','posts','profile', 'following', 'followed')}),
+        ('personal info', {'fields': ('email_status','gender','posts','profile', 'following', 'followed','portrait')}),
     )
 
 

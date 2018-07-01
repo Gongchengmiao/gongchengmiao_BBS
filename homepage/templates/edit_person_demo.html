@@ -65,7 +65,7 @@
         <!-- 此页面的组件注释请见preference.html -->
 
         <form class="main-block" method="post" data-ajaxsubmit data-actiontext="修改">
-
+            {% csrf_token %}
             <div class="form-row">
                 <h2>基本信息</h2>
                 <div class="boxT pull-right">
@@ -73,59 +73,35 @@
                     <h5> </h5>
                     <div>
                         <div class="cyan-small-btn">
-                            <input id="avatar-uploader" class="avatar-upload" name="file" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,image/tiff,image/jpeg,image/png">
+                            {{ form.portrait }}
+                            !<--input id="avatar-uploader" class="avatar-upload" name="file" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,image/tiff,image/jpeg,image/png"-->
                             <span>修改头像</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-row">
-                <label>昵称</label>
-                <input class="input-field" name="nickname" type="text" maxlength="30" value="UserName" required/>
-                <span class="warning">昵称长度应＜15 个汉字，或＜30 个字符</span>
-            </div>
-            <div class="form-row birth">
-                <label>生日</label>
-                <input class="input-field" name="birthyear" type="number" min="1901" max="2017" step="1" pattern="[0-9]{4}" value="1998" required />
-                <span>年</span>
-                <input class="input-field" name="birthmonth" type="number" min="1" max="12" step="1" pattern="[0-9]{1,2}" value="2" required />
-                <span>月</span>
-                <input class="input-field" name="birthday" type="number" min="1" max="31" step="1" pattern="[0-9]{1,2}" value="9" required />
-                <span>日</span>
-                <label>
-                    <input name="hide_horoscope" type="checkbox" checked />
-                    <span>不展示我的星座</span>
-                </label>
-                <span class="warning">您输入的日期不存在</span>
+                {{ form.username }}
             </div>
             <div class="form-row">
                 <label>性别</label>
                 <div class="radgroup">
-                    <label>
-                        <input name="gender" type="radio" required value="M" checked />
-                        <span>男</span>
-                    </label>
-                    <label>
-                        <input name="gender" type="radio" required value="F" />
-                        <span>女</span>
-                    </label>
-                    <label>
-                        <input name="hide_gender" type="checkbox" />
-                        <span>不展示我的性别</span>
-                    </label>
+                    {{ form.gender }}
+                    <span>  </span>
+                    {{ form.show_gender }}
+                    <span>是否显示性别</span>
                 </div>
-                <span class="warning">性别不能为空</span>
             </div>
             <div class="form-row">
-                <label>说明档</label>
-                <div class="textarea-wrapper"><textarea id="desc-textarea" data-origin="#desc-origin"></textarea></div>
-                <div id="desc-origin" style="display: none"><p>MRCZHZR ZS TQL</p></div>
+                {{ form.profile }}
             </div><!--注：需要更改文本编辑器-->
             <hr />
             <div class="form-row extra-margin-top">
                 <button class="cyan-large-btn" type="submit">保存</button>
             </div>
         </form>
+
+
     </div>
 
     <!-- end main -->

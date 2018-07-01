@@ -36,3 +36,4 @@ urlpatterns = [
     path('index_core/', index_views.index, name='index_core'),
     path('homepage/', include('homepage.urls'), name='to_homepage')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

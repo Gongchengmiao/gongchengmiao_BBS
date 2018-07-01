@@ -32,8 +32,9 @@
                                     <a href="edit_person_demo.html" class="btn btn-white btn-xs pull-right">修改资料</a>
 
                                     <div class="boxT">
-                                        <img alt="image" src="img/a3.jpg">
-                                        <h2>用户名</h2>
+                                        {% load staticfiles %}
+                                        <img alt="image" src="{% get_media_prefix %}{{ portrait }}">
+                                        <h2>{{ username }}</h2>
                                     </div>
 
                                 </div>
@@ -49,16 +50,21 @@
                                 <dl class="dl-horizontal">
 
                                     <dt>昵称：</dt>
-                                    <dd>XXX</dd>
+                                    <dd>{{ username }}</dd>
                                     <dt>性别：</dt>
-                                    <dd>女</dd>
+                                    {% if gender == False %}
+                                        <dd>女</dd>
+                                    {% else %}
+                                        <dd>男</dd>
+                                    {% endif %}
+
                                     <dt>等级：</dt>
                                     <dd>6</dd>
                                     <dt>上站次数:</dt>
                                     <dd><!--<a href="project_detail.html#" class="text-navy"> 百度</a>-->66
                                     </dd>
                                     <dt>发帖数：</dt>
-                                    <dd>666</dd>
+                                    <dd>{{ posts }}</dd>
                                     <dt>积分：</dt>
                                     <dd>6666</dd>
                                 </dl>
@@ -76,21 +82,12 @@
                                     <dd>6小时6分钟6秒</dd>
                                     <dt>关注用户：</dt>
                                     <dd class="project-people">
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a3.jpg">
-                                        </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a1.jpg">
-                                        </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a2.jpg">
-                                        </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a4.jpg">
-                                        </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a5.jpg">
-                                        </a>
+                                        {% load staticfiles %}
+                                        {% for i, following in followings %}
+                                             <a href="{% url 'show_info' following.username %}">
+                                                 <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ following.portrait }}">
+                                            </a>
+                                        {% endfor %}
                                     </dd>
                                 </dl>
                             </div>
@@ -113,8 +110,7 @@
                                 <dl class="dl-horizontal">
                                     <dt>个人说明/签名档</dt>
                                     <dd>
-                                        《他改变了中国：江泽民传》，2005年中文版、英文版全球同步发行。该书是一部人物传记，作者为美国作家罗伯特·劳伦斯·库恩（Robert Lawrence Kuhn），中文翻译本署名“谈峥，于海江等”。作者长期关注中国，关注江泽民，并向江泽民的亲属、好友及有关工作人员进行了深入细致的采访，掌握了大量第一手资料，在此基础上写成本书。
-                                        这本传记介绍了江泽民的人生历程，尤其是阐述和评价了传主担任中国主要领导人的10多年中创立的历史功绩。在着重于国事活动的同时，也广泛涉及传主家庭生活、业余爱好、人品风格等方方面面，多角度、多侧面地展现了传主的风采。从这本书中可以体会作者对中国怀有的友好感情，但“作为一位西方人士，作者对某些问题的观点和提法同读者有一定差距，相信读者是会理解和把握”
+                                        {{ profile }}
                                     </dd>
                                 </dl>
                             </div>
@@ -128,7 +124,7 @@
                                             <ul class="nav nav-tabs">
                                                 <li><a href="project_detail.html#tab-1" data-toggle="tab">关注动态</a>
                                                 </li>
-                                                <li class=""><a href="project_detail.html#tab-3" data-toggle="tab">我的动态</a>
+                                                <li class=""><a href="project_detail.html#tab-2" data-toggle="tab">我的动态</a>
                                                 </li>
                                                 <li class=""><a href="project_detail.html#tab-3" data-toggle="tab">我的收藏</a>
                                                 </li>
@@ -141,46 +137,25 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-1">
                                                 <div class="feed-activity-list">
-                                                    <!--<div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a1.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right text-navy">1天前</small>
-                                                            <strong>奔波儿灞</strong> 关注了 <strong>灞波儿奔</strong>.
-                                                            <br>
-                                                            <small class="text-muted">54分钟前 来自 皮皮时光机</small>
-                                                            <div class="actions">
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                                                <a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> 收藏</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
-
-                                                    <!--<div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/profile.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right">5分钟前</small>
-                                                            <strong>作家崔成浩</strong> 发布了一篇文章
-                                                            <br>
-                                                            <small class="text-muted">今天 10:20 来自 iPhone 6 Plus</small>
-
-                                                        </div>
-                                                    </div>-->
-
-                                                    <div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a2.jpg">
+                                                    {% for i, following_action in following_actions %}
+                                                        <div class="feed-element">
+                                                        <a  class="pull-left"-->
+                                                            {% load staticfiles %}
+                                                            <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ following_action.uid.portrait }}">
                                                         </a>
                                                         <div class="media-body ">
                                                             <small class="pull-right">2小时前</small>
-                                                            <strong>ZH</strong> 发布了一篇心得
+                                                                {% if action.action == 'post' %}
+                                                                   <strong>{{ username }}</strong> 发布了一篇心得
+                                                                {% elif action.action == 'star' %}
+                                                                    <strong>{{ username }}</strong> 收藏了一篇心得
+                                                                {% elif action.action == 'upload' %}
+                                                                   <strong>{{ username }}</strong> 上传了文件
+                                                                {% endif %}
                                                             <br>
-                                                            <small class="text-muted">今天 09:27 来自 Koryolink iPhone</small>
+                                                            <small class="text-muted">{{ following_action.dateline }} 来自 Koryolink iPhone</small>
                                                             <div class="well">
-                                                                软工燃尽图及制作方式详解
+                                                                {{ following_action.pid.post_title }}
                                                             </div>
                                                             <div class="pull-right">
                                                                 <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
@@ -189,36 +164,34 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a3.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right">2天前</small>
-                                                            <strong>ZR</strong> 上传了2张图片
-                                                            <br>
-                                                            <small class="text-muted">11月7日 11:56 来自 微博 weibo.com</small>
-                                                            <div class="photos">
-                                                                <a target="_blank" href="http://24.media.tumblr.com/20a9c501846f50c1271210639987000f/tumblr_n4vje69pJm1st5lhmo1_1280.jpg">
-                                                                    <img alt="image" class="feed-photo" src="img/p1.jpg">
-                                                                </a>
-                                                                <a target="_blank" href="http://37.media.tumblr.com/9afe602b3e624aff6681b0b51f5a062b/tumblr_n4ef69szs71st5lhmo1_1280.jpg">
-                                                                    <img alt="image" class="feed-photo" src="img/p3.jpg">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a5.jpg">
+                                                    {% endfor %}
+
+                                                </div>
+
+                                            </div><!--动态形式-->
+
+                                            <div class="tab-pane active" id="tab-2">
+                                                <div class="feed-activity-list">
+
+                                                    {% for i, following_action in my_actions %}
+                                                        <div class="feed-element">
+                                                        <a  class="pull-left">
+                                                            {% load staticfiles %}
+                                                            <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ following_action.uid.portrait }}">
                                                         </a>
                                                         <div class="media-body ">
                                                             <small class="pull-right">2小时前</small>
-                                                            <strong>MRC</strong> 发布了一篇心得
+                                                                {% if action.action == 'post' %}
+                                                                   <strong>{{ username }}</strong> 发布了一篇心得
+                                                                {% elif action.action == 'star' %}
+                                                                    <strong>{{ username }}</strong> 收藏了一篇心得
+                                                                {% elif action.action == 'upload' %}
+                                                                   <strong>{{ username }}</strong> 上传了文件
+                                                                {% endif %}
                                                             <br>
-                                                            <small class="text-muted">今天 09:27 来自 Koryolink iPhone</small>
+                                                            <small class="text-muted">{{ following_action.dateline }} 来自 Koryolink iPhone</small>
                                                             <div class="well">
-                                                                华东数据库第一人修炼之道
+                                                                {{ following_action.pid.post_title }}
                                                             </div>
                                                             <div class="pull-right">
                                                                 <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
@@ -227,56 +200,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!--<div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a4.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right text-navy">5小时前</small>
-                                                            <strong>在水一方Y</strong> 关注了 <strong>那二十年的单身</strong>.
-                                                            <br>
-                                                            <small class="text-muted">今天 10:39 来自 iPhone客户端</small>
-                                                            <div class="actions">
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
+                                                    {% endfor %}
                                                 </div>
 
                                             </div><!--动态形式-->
 
                                             <div class="tab-pane active" id="tab-3">
                                                 <div class="feed-activity-list">
-                                                    <!--<div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a1.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right text-navy">1天前</small>
-                                                            <strong>奔波儿灞</strong> 关注了 <strong>灞波儿奔</strong>.
-                                                            <br>
-                                                            <small class="text-muted">54分钟前 来自 皮皮时光机</small>
-                                                            <div class="actions">
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                                                <a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> 收藏</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
-
-                                                    <!--<div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/profile.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right">5分钟前</small>
-                                                            <strong>作家崔成浩</strong> 发布了一篇文章
-                                                            <br>
-                                                            <small class="text-muted">今天 10:20 来自 iPhone 6 Plus</small>
-
-                                                        </div>
-                                                    </div>-->
-
                                                     <div class="feed-element">
                                                         <a href="profile.html#" class="pull-left">
                                                             <img alt="image" class="img-circle" src="img/a2.jpg">
@@ -296,59 +226,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a3.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right">2天前</small>
-                                                            <strong>ZR</strong> 上传了2张图片
-                                                            <br>
-                                                            <small class="text-muted">11月7日 11:56 来自 微博 weibo.com</small>
-                                                            <div class="photos">
-                                                                <a target="_blank" href="http://24.media.tumblr.com/20a9c501846f50c1271210639987000f/tumblr_n4vje69pJm1st5lhmo1_1280.jpg">
-                                                                    <img alt="image" class="feed-photo" src="img/p7.jpg">
-                                                                </a>
-                                                                <a target="_blank" href="http://37.media.tumblr.com/9afe602b3e624aff6681b0b51f5a062b/tumblr_n4ef69szs71st5lhmo1_1280.jpg">
-                                                                    <img alt="image" class="feed-photo" src="img/p8.jpg">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a5.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right">2小时前</small>
-                                                            <strong>MRC</strong> 发布了一篇心得
-                                                            <br>
-                                                            <small class="text-muted">今天 09:27 来自 MRC's iPhoneX</small>
-                                                            <div class="well">
-                                                                反正就是不用睡觉了
-                                                            </div>
-                                                            <div class="pull-right">
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</a>
-                                                                <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--<div class="feed-element">
-                                                        <a href="profile.html#" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a4.jpg">
-                                                        </a>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right text-navy">5小时前</small>
-                                                            <strong>在水一方Y</strong> 关注了 <strong>那二十年的单身</strong>.
-                                                            <br>
-                                                            <small class="text-muted">今天 10:39 来自 iPhone客户端</small>
-                                                            <div class="actions">
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                                                <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                                                 </div>
 
                                             </div><!--动态形式-->

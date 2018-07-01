@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from user.models import common_member, common_member_action_log, follower_pair, common_member_star
 from article.models import forum_post
 from django.urls import reverse
+from homepage.form import UserInfoChangeForm
+from gongchengmiao_BBS import settings
 from django.http import HttpResponseRedirect
 # Create your views here.
 
@@ -45,13 +47,45 @@ def show_info(request, username):
 
 def view_self_info(request):
     print('view_self')
-    context = {
+    if request.user.is_authenticated == False:
+        return redirect(reverse('login'))
+    my_actions = common_member_action_log.objects.filter(uid=request.user).order_by('-dateline')[0:10]
 
+    my_followings = follower_pair.objects.filter(by=request.user).order_by('-follow_time').all()
+    following_id = []
+    for following in my_followings:
+        following_id.append(following.followed)
+    following_actions = common_member_action_log.objects.filter(uid__in=following_id).order_by('-dateline')[0:10]
+    print(following_actions[0].uid.username)
+    following_id = following_id[0:5]
+    my_star_posts = common_member_star.objects.filter(uid=request.user).order_by('-star_time')[0:10]
+    portrait = str(request.user.portrait)
+    context = {
+        'username': request.user.username,
+        'portrait': portrait,
+        'gender': request.user.gender,
+        'profile': request.user.profile,
+        'posts': request.user.posts,
+        'my_actions': enumerate(my_actions),
+        'followings': enumerate(following_id),
+        'following_actions': enumerate(following_actions),
+        'my_star_posts': enumerate(my_star_posts)
     }
 
-    return render(request, 'personal_page_demo.html',context)
+    return render(request, 'personal_page_demo.html', context)
 
 
 def edit_info(request):
     print("edit")
-    return render(request, 'edit_person_demo.html')
+    if request.method == 'GET':
+        form = UserInfoChangeForm()
+        # print(1)
+        # send_mail('test_demo_subject', 'test_demo_message', 'paulzh@mail.ustc.edu.cn', ['z1991998920@gmail.com', ])
+        return render(request, "edit_person_demo.html", {"form": form})
+    else:
+        # 当提交表单时, 判断用户名是否被注册, 密码是否合法, 再次输入密码是否正确, 是否勾选阅读用户协议
+        form = UserInfoChangeForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['portrait'])
+
+    return render(request, 'edit_person_demo.html',{"form":form})

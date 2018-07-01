@@ -14,6 +14,7 @@ class common_member(AbstractUser):
     # username = models.CharField(max_length=20, unique=True)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
+    portrait = models.ImageField(upload_to='portraits', null=True)
     gender = models.BooleanField(default=True)    # 性别 true为男
     profile = models.CharField(default='', max_length=280)
     email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
@@ -42,7 +43,7 @@ class follower_pair(models.Model):
     by = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_by')
 
     #其他属性
-
+    follow_time = models.DateTimeField(auto_now=True)
 
 # 用户邮件验证发送次数表
 class common_member_email_send_time(models.Model):

@@ -120,6 +120,10 @@
                                     <small class="pull-right">{{ action.dateline }}</small>
                                     {% if action.action == 'post' %}
                                         <strong>{{ username }}</strong> 发布了一篇心得
+                                    {% elif action.action == 'star' %}
+                                        <strong>{{ username }}</strong> 收藏了一篇心得
+                                    {% elif action.action == 'upload' %}
+                                        <strong>{{ username }}</strong> 上传了文件
                                     {% endif %}
                                     <br>
                                     <small class="text-muted">{{ action.dateline }} 来自 土豪金 iPhone</small>
