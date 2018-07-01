@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from homepage import views as homepageViews
 
 urlpatterns = [
     # path('', index_views),
     # path('accounts/login/', auth_views.LoginView.as_view()),
+    path('<uid>', homepageViews.show_info, name='show_info'),
 
 ]
 

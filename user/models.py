@@ -14,6 +14,8 @@ class common_member(AbstractUser):
     # username = models.CharField(max_length=20, unique=True)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
+
+    #profile=models.
     email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
     # avatarstatus = models.BooleanField(default=False)  # 是否有头像 1=已上传 0=未上传
     # accessmasks = models.BooleanField(default=True)  # 访问权限
