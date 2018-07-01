@@ -14,9 +14,17 @@ class common_member(AbstractUser):
     # username = models.CharField(max_length=20, unique=True)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
-
-    #profile=models.
+    gender = models.BooleanField(default=True)    # 性别 true为男
+    profile = models.CharField(default='', max_length=280)
     email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
+    posts = models.IntegerField(default=0)  # 帖子数
+    following = models.IntegerField(default=0)  # 关注者数
+    followed = models.IntegerField(default=0)  # 被关注数
+    followers = models.ManyToManyField('common_member', symmetrical=False, through='follower_pair')
+
+    def follow_list(self):
+        return ','.join([i.username for i in self.followers.all()])
+
     # avatarstatus = models.BooleanField(default=False)  # 是否有头像 1=已上传 0=未上传
     # accessmasks = models.BooleanField(default=True)  # 访问权限
     # allowadmincp = models.BooleanField(default=False)  # 管理权限
@@ -26,9 +34,14 @@ class common_member(AbstractUser):
     # regdate = models.DateField()  # 注册时间
     # newpm = models.IntegerField()  # 新短消息数量
     # newprompt = models.IntegerField()  # 新提醒数目
-
     def __str__(self):
         return self.username
+
+class follower_pair(models.Model):
+    followed = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_followed')
+    by = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_by')
+
+    #其他属性
 
 
 # 用户邮件验证发送次数表
@@ -45,32 +58,41 @@ class common_member_email_send_time(models.Model):
 class common_member_action_log(models.Model):
     id = models.IntegerField(primary_key=True)
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    action = models.IntegerField()  # 动作, 具体以后再定义
+    is_school_info = models.BooleanField(default=False)
+    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
+    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
+    action_choices = (
+        ('post', '发帖'),
+        ('star', '收藏'),
+        ('upload', '上传文件')
+    )
+    action = models.CharField(max_length=10, choices=action_choices)  # 操作类型
     dateline = models.DateTimeField(auto_now=True)  # 操作时间
 
     def __str__(self):
-        return '{} {} {}'.format(self.uid, self.action, self.dateline)
+        return '{} {} {} {}'.format(self.uid, self.action, self.pid, self.dateline)
 
 
 # 用户统计表
-class common_member_count(models.Model):
-    uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    posts = models.IntegerField()  # 帖子数
-    threads = models.IntegerField()  # 主题数
-    digestposts = models.IntegerField()  # 精华数
-    doings = models.IntegerField()  # 记录数
-    blogs = models.IntegerField()  # 日志数
-    albums = models.IntegerField()  # 相册数
-    sharings = models.IntegerField()  # 分享数
-    attachsize = models.IntegerField()  # 上传附件占用的空间
-    views = models.IntegerField()  # 空间查看数
-    oltime = models.IntegerField()  # 在线时间
-    todayattachs = models.IntegerField()  # 当天上传附件数
-    todayattachsize = models.IntegerField()  # 当天上传附件容量
-    blacklist = models.IntegerField()  # 黑名单
-
-    def __str__(self):
-        return '{} {}'.format(self.uid, common_member.objects.get(uid=self.uid))
+# (部分合并到用户主表！！！
+# class common_member_count(models.Model):
+#     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     posts = models.IntegerField()  # 帖子数
+#     threads = models.IntegerField()  # 主题数
+#     digestposts = models.IntegerField()  # 精华数
+#     doings = models.IntegerField()  # 记录数
+#     blogs = models.IntegerField()  # 日志数
+#     albums = models.IntegerField()  # 相册数
+#     sharings = models.IntegerField()  # 分享数
+#     attachsize = models.IntegerField()  # 上传附件占用的空间
+#     views = models.IntegerField()  # 空间查看数
+#     oltime = models.IntegerField()  # 在线时间
+#     todayattachs = models.IntegerField()  # 当天上传附件数
+#     todayattachsize = models.IntegerField()  # 当天上传附件容量
+#     blacklist = models.IntegerField()  # 黑名单
+#
+#     def __str__(self):
+#         return '{} {}'.format(self.uid, common_member.objects.get(uid=self.uid))
 
 
 # 用户惩罚操作表
@@ -124,12 +146,4 @@ class common_member_star(models.Model):
         else:
             return "{}, {}".format(self.uid, self.pid.pk)
 
-
-# 用户关心版块
-# class common_member_star(models.Model):
-#     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     section_id = models.ForeignKey(Forum_forum, on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return self.uid, Forum_forum.objects.get(fid=self.section_id)
 

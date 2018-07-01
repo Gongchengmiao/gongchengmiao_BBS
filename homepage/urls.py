@@ -21,7 +21,9 @@ from homepage import views as homepageViews
 urlpatterns = [
     # path('', index_views),
     # path('accounts/login/', auth_views.LoginView.as_view()),
-    path('<uid>', homepageViews.show_info, name='show_info'),
+    path('self/', homepageViews.view_self_info, name='view_self_info'),
+    path('edit/', homepageViews.edit_info, name='edit_info'),
+    path('uid=<uid>', homepageViews.show_info, name='show_info'),
 
 ]
 

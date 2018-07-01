@@ -10,7 +10,7 @@ from django.db import models
 class forum_post(models.Model):
     # moderate = models.ForeignKey(forum_post_moderate, unique= True)
     # first = models.BooleanField();
-    # pid = models.IntegerField(primary_key=True)
+    pid = models.IntegerField(primary_key=True)
     author_name = models.CharField(max_length=64)
     post_title = models.CharField(max_length=256)
     pub_date = models.DateTimeField(auto_now_add = True, editable=True)
@@ -23,7 +23,7 @@ class forum_post(models.Model):
 
 # 学校通告信息
 class forum_school_info(models.Model):
-    # pid = models.IntegerField(primary_key=True)
+    pid = models.IntegerField(primary_key=True)
     author_name = models.CharField(max_length=64)
     post_title = models.CharField(max_length=256)
     pub_date = models.DateTimeField(auto_now_add=True, editable=True)
