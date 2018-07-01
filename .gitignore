@@ -14,3 +14,4 @@ build
 *.sqlite3
 venv*
 secrets_zh.py
+supervisord.conf
