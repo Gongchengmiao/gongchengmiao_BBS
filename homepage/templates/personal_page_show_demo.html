@@ -33,35 +33,39 @@
                         <img alt="image" class="img-responsive" src="img/profile_big.jpg">
                     </div>
                     <div class="ibox-content profile-content">
-                        <h4><strong>UserName</strong></h4>
+                        <h4><strong>{{ username }}</strong></h4>
 
                         <h5>
-                            说明档
+                            {{ gender }}
                         </h5>
                         <p>
-                            这里是个性签名
+                            {{ profile }}
                         </p>
                         <div class="row m-t-lg">
                             <div class="col-sm-4">
                                 <i class="fa fa-anchor"></i><!--换成帖子图标ICON-->
-                                <h5><strong>169</strong> 帖子</h5>
+                                <h5><strong>{{ posts }}</strong> 帖子</h5>
                             </div>
                             <div class="col-sm-4">
                                 <i class="fa fa-bell-o"></i>
-                                <h5><strong>28</strong> 关注</h5>
+                                <h5><strong>{{ following }}</strong> 关注</h5>
                             </div>
                             <div class="col-sm-4">
                                 <i class="fa fa-heartbeat"></i>
-                                <h5><strong>240</strong> 关注者</h5>
+                                <h5><strong>{{ followed }}</strong> 关注者</h5>
                             </div>
                         </div>
                         <div class="user-button">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> 发送消息</button>
+                                    <form action="" method="get">
+                                        <button name='btn' type="submit" value="send_msg" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> 发送消息</button>
+                                    </form>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-danger btn-sm btn-block"><i class="fa fa-heart-o"></i> 关注</button>
+                                    <form>
+                                        <button name="btn" type="submit" value="follow_him" class="btn btn-danger btn-sm btn-block"><i class="fa fa-heart-o"></i> 关注</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -95,45 +99,46 @@
 
                     <div>
                         <div class="feed-activity-list">
+                           {% if school_info %}
+                                {% for i, post in school_info %}
+                                    <tr>
+                                    <td>{{ i|add:'1' }}</td>
+                                    <td>{{ post.post_title }}</td>
+                                    <td>{{ post.author_name }}</td>
+                                    <td>{{ post.pub_date }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
 
-                            <div class="feed-element">
+                            {% if actions %}
+                                {% for i,action in actions %}
+                                     <div class="feed-element">
                                 <a href="profile.html#" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/a2.jpg">
                                 </a>
                                 <div class="media-body ">
-                                    <small class="pull-right">2小时前</small>
-                                    <strong>ZH</strong> 发布了一篇心得
+                                    <small class="pull-right">{{ action.dateline }}</small>
+                                    {% if action.action == 'post' %}
+                                        <strong>{{ username }}</strong> 发布了一篇心得
+                                    {% endif %}
                                     <br>
-                                    <small class="text-muted">今天 09:27 来自 土豪金 iPhone</small>
+                                    <small class="text-muted">{{ action.dateline }} 来自 土豪金 iPhone</small>
                                     <div class="well">
-                                        德国前场有一辆大巴
+                                        {{ action.pid.post_title }}
                                     </div>
-                                    <div class="pull-right">
-                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                        <a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> 收藏</a>
-                                        <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
-                                    </div>
+                                    <form action="" method="get">
+                                        <div class="pull-right">
+                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
+                                            <button name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
+                                            <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="feed-element">
-                                <a href="profile.html#" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a3.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right">2天前</small>
-                                    <strong>ZR</strong> 上传了2张图片
-                                    <br>
-                                    <small class="text-muted">11月7日 11:56 来自 微博 weibo.com</small>
-                                    <div class="photos">
-                                        <a target="_blank" href="">
-                                            <img alt="image" class="feed-photo" src="img/p2.jpg">
-                                        </a>
-                                        <a target="_blank" href="">
-                                            <img alt="image" class="feed-photo" src="img/p3.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
+
+
                             <div class="feed-element">
                                 <a href="profile.html#" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/a5.jpg">
@@ -144,19 +149,20 @@
                                     <br>
                                     <small class="text-muted">今天 09:27 来自 MRC's iPhoneX</small>
                                     <div class="well">
-                                        反正就是不用睡觉了
+                                        反正就是不用睡觉了(这条测试用)
                                     </div>
                                     <div class="pull-right">
                                         <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                        <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</a>
+                                        <a class="btn btn-xs btn-red"><i class="fa fa-thumbs-up"></i> 收藏 </a>
                                         <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-
-                        <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> 显示更多</button>
+                        <form action="" method="get">
+                            <button name="btn" type="submit" value="show_more" class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> 显示更多</button>
+                        </form>
 
                     </div>
 

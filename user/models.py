@@ -136,8 +136,8 @@ class common_member_field_home(models.Model):
 class common_member_star(models.Model):
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE, unique=True)
-    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE, unique=True)
+    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
+    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
     star_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
