@@ -1,0 +1,135 @@
+
+<!-- start pre_output -->
+
+
+<!-- end pre_output -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="x-pjax-version" content="v8">
+
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://bbs.pku.edu.cn/v2/mobile/modify-profile.php">
+    <script type="text/javascript">
+        window.login = true;
+        window.username = "UserID";
+    </script>
+
+    <!-- start _stylesheets_and_scripts.php-->
+    <link rel="stylesheet" href="css/all.css?v17">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <script>
+        if (typeof(window.console) == 'undefined')
+            window.console = {};
+        if (typeof(window.console.log) == 'undefined')
+            window.console.log = function(a){};
+    </script>
+
+
+    <!-- end _stylesheets_and_scripts.php-->
+
+    <!-- start meta -->
+    <title>修改资料 - 瀚海星云BBS</title>
+
+    <!-- end meta -->
+    <script>
+        var isShownWelcome = false;
+    </script>
+</head>
+<body>
+<div style="margin:0 auto;width:0px;height:0px;overflow:hidden;"><img src="img/icons.png"></div> <!-- for wechat thumb -->
+
+
+    <div id="login-info" style="display: none">
+        <div data-role="login-info-username" data-value="UserID"></div>
+        <div data-role="login-info-nickname" data-value="UserName"></div>
+        <div data-role="login-info-rankname" data-value="UserRank"></div>
+        <div data-role="login-info-numposts" data-value="0"></div>
+    </div>
+    <!-- this is the real content, should be returned from server when PJAX working.-->
+    <!-- start main -->
+    <div id="bdwm-title">修改资料 - 瀚海星云BBS</div>
+    <div id="page-settings">
+        <div class="breadcrumb-trail">
+            <a href="">首页</a>
+            <a href="">UserID</a>
+            <a href="">修改资料</a>
+        </div>
+        <!-- 此页面的组件注释请见preference.html -->
+
+        <form class="main-block" method="post" data-ajaxsubmit data-actiontext="修改">
+
+            <div class="form-row">
+                <h2>基本信息</h2>
+                <div class="boxT pull-right">
+                    <img alt="image" src="img/a3.jpg">
+                    <h5> </h5>
+                    <div>
+                        <div class="cyan-small-btn">
+                            <input id="avatar-uploader" class="avatar-upload" name="file" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,image/tiff,image/jpeg,image/png">
+                            <span>修改头像</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <label>昵称</label>
+                <input class="input-field" name="nickname" type="text" maxlength="30" value="UserName" required/>
+                <span class="warning">昵称长度应＜15 个汉字，或＜30 个字符</span>
+            </div>
+            <div class="form-row birth">
+                <label>生日</label>
+                <input class="input-field" name="birthyear" type="number" min="1901" max="2017" step="1" pattern="[0-9]{4}" value="1998" required />
+                <span>年</span>
+                <input class="input-field" name="birthmonth" type="number" min="1" max="12" step="1" pattern="[0-9]{1,2}" value="2" required />
+                <span>月</span>
+                <input class="input-field" name="birthday" type="number" min="1" max="31" step="1" pattern="[0-9]{1,2}" value="9" required />
+                <span>日</span>
+                <label>
+                    <input name="hide_horoscope" type="checkbox" checked />
+                    <span>不展示我的星座</span>
+                </label>
+                <span class="warning">您输入的日期不存在</span>
+            </div>
+            <div class="form-row">
+                <label>性别</label>
+                <div class="radgroup">
+                    <label>
+                        <input name="gender" type="radio" required value="M" checked />
+                        <span>男</span>
+                    </label>
+                    <label>
+                        <input name="gender" type="radio" required value="F" />
+                        <span>女</span>
+                    </label>
+                    <label>
+                        <input name="hide_gender" type="checkbox" />
+                        <span>不展示我的性别</span>
+                    </label>
+                </div>
+                <span class="warning">性别不能为空</span>
+            </div>
+            <div class="form-row">
+                <label>说明档</label>
+                <div class="textarea-wrapper"><textarea id="desc-textarea" data-origin="#desc-origin"></textarea></div>
+                <div id="desc-origin" style="display: none"><p>MRCZHZR ZS TQL</p></div>
+            </div><!--注：需要更改文本编辑器-->
+            <hr />
+            <div class="form-row extra-margin-top">
+                <button class="cyan-large-btn" type="submit">保存</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- end main -->
+
+
+
+</body>
+</html>
