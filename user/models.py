@@ -14,8 +14,10 @@ class common_member(AbstractUser):
     # username = models.CharField(max_length=20, unique=True)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
-    portrait = models.ImageField(upload_to='portraits', null=True)
-    gender = models.BooleanField(default=True)    # 性别 true为男
+    portrait = models.ImageField(upload_to='portraits', null=True,blank=True)
+    gender_choices = (('m', '男'), ('f', '女'))
+    gender = models.CharField(max_length=1, default='m', choices=gender_choices)    # 性别 true为男
+    show_gender = models.BooleanField(default=True)  # 是否显示
     profile = models.CharField(default='', max_length=280)
     email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
     posts = models.IntegerField(default=0)  # 帖子数

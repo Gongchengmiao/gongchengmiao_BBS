@@ -30,7 +30,8 @@
                 </div>
                 <div>
                     <div class="ibox-content no-padding border-left-right">
-                        <img alt="image" class="img-responsive" src="img/profile_big.jpg">
+                        {% load staticfiles %}
+                        <img alt="image" class="img-responsive" src="{% get_media_prefix %}{{ portrait }}">
                     </div>
                     <div class="ibox-content profile-content">
                         <h4><strong>{{ username }}</strong></h4>
@@ -99,22 +100,13 @@
 
                     <div>
                         <div class="feed-activity-list">
-                           {% if school_info %}
-                                {% for i, post in school_info %}
-                                    <tr>
-                                    <td>{{ i|add:'1' }}</td>
-                                    <td>{{ post.post_title }}</td>
-                                    <td>{{ post.author_name }}</td>
-                                    <td>{{ post.pub_date }}</td>
-                                    </tr>
-                                {% endfor %}
-                            {% endif %}
 
                             {% if actions %}
                                 {% for i,action in actions %}
                                      <div class="feed-element">
                                 <a href="profile.html#" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a2.jpg">
+                                    {% load staticfiles %}
+                                    <img alt="image" class="img-responsive" src="{% get_media_prefix %}{{ portrait }}">
                                 </a>
                                 <div class="media-body ">
                                     <small class="pull-right">{{ action.dateline }}</small>
@@ -145,7 +137,8 @@
 
                             <div class="feed-element">
                                 <a href="profile.html#" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a5.jpg">
+                                    {% load staticfiles %}
+                                    <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ portrait }}">
                                 </a>
                                 <div class="media-body ">
                                     <small class="pull-right">2小时前</small>

@@ -38,6 +38,7 @@ def show_info(request, username):
         'posts': user.posts,
         'following': user.following,
         'followed': user.followed,
+        'portrait': user.portrait,
         'actions': enumerate(actions)
     }
 
@@ -56,7 +57,6 @@ def view_self_info(request):
     for following in my_followings:
         following_id.append(following.followed)
     following_actions = common_member_action_log.objects.filter(uid__in=following_id).order_by('-dateline')[0:10]
-    print(following_actions[0].uid.username)
     following_id = following_id[0:5]
     my_star_posts = common_member_star.objects.filter(uid=request.user).order_by('-star_time')[0:10]
     portrait = str(request.user.portrait)
@@ -76,16 +76,19 @@ def view_self_info(request):
 
 
 def edit_info(request):
-    print("edit")
-    if request.method == 'GET':
-        form = UserInfoChangeForm()
-        # print(1)
-        # send_mail('test_demo_subject', 'test_demo_message', 'paulzh@mail.ustc.edu.cn', ['z1991998920@gmail.com', ])
-        return render(request, "edit_person_demo.html", {"form": form})
-    else:
-        # 当提交表单时, 判断用户名是否被注册, 密码是否合法, 再次输入密码是否正确, 是否勾选阅读用户协议
-        form = UserInfoChangeForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data['portrait'])
+    if request.user.is_authenticated == False:
+        return redirect(reverse('login'))
 
-    return render(request, 'edit_person_demo.html',{"form":form})
+    instance_user = common_member.objects.filter(username=request.user.username).all()[0]
+    if request.method == 'GET':
+        myform = UserInfoChangeForm(instance=instance_user)
+        return render(request, "edit_person_demo.html", {"form": myform, "portrait": request.user.portrait})
+    else:
+        myform = UserInfoChangeForm(request.POST, request.FILES, instance=instance_user)
+        if myform.is_valid():
+            # print('valid')
+            myform.save()
+            # print(myform.errors)
+        else:
+            print(myform.errors)
+        return render(request, 'edit_person_demo.html', {"form": myform, "portrait": request.user.portrait})
