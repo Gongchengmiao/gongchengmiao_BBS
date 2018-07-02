@@ -48,7 +48,7 @@ def show_info(request, username):
 
 
 def view_self_info(request):
-    print('view_self')
+    # print('view_self')
     if request.user.is_authenticated == False:
         return redirect(reverse('login'))
     my_actions = common_member_action_log.objects.filter(uid=request.user).order_by('-dateline')[0:10]
@@ -91,5 +91,6 @@ def edit_info(request):
             myform.save()
             # print(myform.errors)
         else:
-            print(myform.errors)
+            # print(myform.errors)
+            pass
         return render(request, 'edit_person_demo.html', {"form": myform, "portrait": request.user.portrait})
