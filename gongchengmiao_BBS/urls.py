@@ -34,4 +34,6 @@ urlpatterns = [
     path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
     path('admin/', admin.site.urls, name='admin'),
     path('index_core/', index_views.index, name='index_core'),
+    path('pswdgetback', user_views.pswdgetback, name='pswd_get_back'),
+    path('waitemailback/<username>/', user_views.pswdgetback_jump, name='wait_email_back'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
