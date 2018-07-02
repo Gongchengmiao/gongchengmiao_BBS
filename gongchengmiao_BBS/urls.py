@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from index import views as index_views
 from django.conf.urls.static import static
 from gongchengmiao_BBS import settings
@@ -34,4 +34,6 @@ urlpatterns = [
     path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
     path('admin/', admin.site.urls, name='admin'),
     path('index_core/', index_views.index, name='index_core'),
+    path('homepage/', include('homepage.urls'), name='to_homepage')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
