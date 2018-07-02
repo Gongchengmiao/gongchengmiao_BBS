@@ -28,6 +28,7 @@ def show_info(request, username):
             pass
         elif 'star_btn' in list(request.GET):
             the_post = forum_post.objects.filter(pid=int(request.GET['star_btn']))[0]
+            common_member_action_log.objects.create(uid=request.user, pid=the_post, action='star')
             if len(common_member_star.objects.filter(uid=request.user, pid=the_post)) != 0:
                 common_member_star.objects.create(uid=request.user, pid=the_post)
 
