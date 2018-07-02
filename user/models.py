@@ -3,6 +3,7 @@ from article.models import forum_post, forum_school_info
 from section.models import Forum_forum
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
+from .validators import BbsUsernameValidator
 from django.utils.timezone import now
 
 
@@ -20,6 +21,7 @@ class common_member(AbstractUser):
     show_gender = models.BooleanField(default=True)  # 是否显示
     profile = models.CharField(default='', max_length=280)
     email_status = models.BooleanField(default=False)  # email是否经过验证 1=验证通过 0=未验证
+    username_validator = BbsUsernameValidator
     posts = models.IntegerField(default=0)  # 帖子数
     following = models.IntegerField(default=0)  # 关注者数
     followed = models.IntegerField(default=0)  # 被关注数
