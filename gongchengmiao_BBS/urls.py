@@ -19,6 +19,7 @@ from index import views as index_views
 from django.conf.urls.static import static
 from gongchengmiao_BBS import settings
 from user import views as user_views
+from homepage import views as homepage_views
 from django.views.generic import TemplateView
 # from django.conf.urls import url
 # from django.views.static import serve as static_serve
@@ -34,6 +35,9 @@ urlpatterns = [
     path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
     path('admin/', admin.site.urls, name='admin'),
     path('index_core/', index_views.index, name='index_core'),
-    path('homepage/', include('homepage.urls'), name='to_homepage')
+    path('homepage/self', homepage_views.view_self_info, name='view_self_info'),
+    # path('self/', homepageViews.view_self_info, name='view_self_info'),
+    path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
+    path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
