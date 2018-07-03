@@ -90,6 +90,5 @@ def edit_info(request):
             # print('valid')
             myform.save()
             # print(myform.errors)
-        else:
-            print(myform.errors)
-        return render(request, 'edit_person_demo.html', {"form": myform, "portrait": request.user.portrait})
+
+        return redirect(reverse('view_self_info'))
