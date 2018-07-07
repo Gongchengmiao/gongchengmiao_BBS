@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from index import views as index_views
 from django.conf.urls.static import static
 from gongchengmiao_BBS import settings
 from user import views as user_views
+from homepage import views as homepage_views
 from django.views.generic import TemplateView
 # from django.conf.urls import url
 # from django.views.static import serve as static_serve
@@ -36,4 +37,9 @@ urlpatterns = [
     path('index_core/', index_views.index, name='index_core'),
     path('pswdgetback', user_views.pswdgetback, name='pswd_get_back'),
     path('waitemailback/<username>/', user_views.pswdgetback_jump, name='wait_email_back'),
+    path('homepage/self', homepage_views.view_self_info, name='view_self_info'),
+    # path('self/', homepageViews.view_self_info, name='view_self_info'),
+    path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
+    path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

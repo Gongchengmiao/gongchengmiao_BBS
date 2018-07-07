@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>个人资料-瀚海星云BBS</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    {% load static %}
+    <link rel="shortcut icon" href="{% static "favicon.ico"%}">
+    <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
+    <link href="{% static "css/font-awesome.css"%}" rel="stylesheet">
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>个人资料</h5>
+                </div>
+                <div>
+                    <div class="ibox-content no-padding border-left-right">
+                        {% load staticfiles %}
+                        <img alt="image" class="img-responsive" src="{% get_media_prefix %}{{ portrait }}">
+                    </div>
+                    <div class="ibox-content profile-content">
+                        <h4><strong>{{ username }}</strong></h4>
+
+                        <h5>
+                            {{ gender }}
+                        </h5>
+                        <p>
+                            {{ profile }}
+                        </p>
+                        <div class="row m-t-lg">
+                            <div class="col-sm-4">
+                                <i class="fa fa-anchor"></i><!--换成帖子图标ICON-->
+                                <h5><strong>{{ posts }}</strong> 帖子</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <i class="fa fa-bell-o"></i>
+                                <h5><strong>{{ following }}</strong> 关注</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <i class="fa fa-heartbeat"></i>
+                                <h5><strong>{{ followed }}</strong> 关注者</h5>
+                            </div>
+                        </div>
+                        <div class="user-button">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <form action="" method="get">
+                                        <button name='btn' type="submit" value="send_msg" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> 发送消息</button>
+                                    </form>
+                                </div>
+                                <div class="col-sm-6">
+                                    <form>
+                                        <button name="btn" type="submit" value="follow_him" class="btn btn-danger btn-sm btn-block"><i class="fa fa-heart-o"></i> 关注</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>最新动态</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="profile.html#">选项1</a>
+                            </li>
+                            <li><a href="profile.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <div>
+                        <div class="feed-activity-list">
+
+                            {% if actions %}
+                                {% for i,action in actions %}
+                                     <div class="feed-element">
+                                <a href="profile.html#" class="pull-left">
+                                    {% load staticfiles %}
+                                    <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ portrait }}">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">{{ action.dateline }}</small>
+                                    {% if action.action == 'post' %}
+                                        <strong>{{ username }}</strong> 发布了一篇心得
+                                    {% elif action.action == 'star' %}
+                                        <strong>{{ username }}</strong> 收藏了一篇心得
+                                    {% elif action.action == 'upload' %}
+                                        <strong>{{ username }}</strong> 上传了文件
+                                    {% endif %}
+                                    <br>
+                                    <small class="text-muted">{{ action.dateline }} 来自 土豪金 iPhone</small>
+                                    <div class="well">
+                                        {{ action.pid.post_title }}
+                                    </div>
+                                    <form action="" method="get">
+                                        <div class="pull-right">
+                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
+                                            <button name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
+                                            <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                                {% endfor %}
+                            {% endif %}
+
+
+                            <div class="feed-element">
+                                <a href="profile.html#" class="pull-left">
+                                    {% load staticfiles %}
+                                    <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ portrait }}">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">2小时前</small>
+                                    <strong>MRC</strong> 发布了一篇心得
+                                    <br>
+                                    <small class="text-muted">今天 09:27 来自 MRC's iPhoneX</small>
+                                    <div class="well">
+                                        反正就是不用睡觉了(这条测试用)
+                                    </div>
+                                    <div class="pull-right">
+                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
+                                        <a class="btn btn-xs btn-red"><i class="fa fa-thumbs-up"></i> 收藏 </a>
+                                        <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <form action="" method="get">
+                            <button name="btn" type="submit" value="show_more" class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> 显示更多</button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+
+
+
+<!-- 自定义js -->
+<script src="{% static "js/content.js" %}"></script>
+
+
+<!-- Peity -->
+<script src="{% static "js/plugins/peity/jquery.peity.min.js" %}"></script>
+
+<!-- Peity -->
+<script src="{% static "js/demo/peity-demo.js" %}"></script>
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<!--统计代码，可删除-->
+
+</body>
+
+</html>
