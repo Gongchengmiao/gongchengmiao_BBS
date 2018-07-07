@@ -12,7 +12,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.timezone import now
 
-from .forms import UserLoginForm, UserRegisterForm, UserPswdGetBackForm
+from .forms import UserLoginForm, UserRegisterForm, UserPswdGetBackForm, UserChangePSWDForm
 from .models import common_member, common_member_email_send_time
 from django.core.mail import send_mail, EmailMultiAlternatives, BadHeaderError, EmailMessage
 from .tasks import send_email_1
@@ -125,7 +125,6 @@ def register(request):
                 })
 
             if password != password_confirm:
-                # print(5)
                 return render(request, "register.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
@@ -133,7 +132,6 @@ def register(request):
                 })
 
             if confirm_message is False:
-                # print(6)
                 return render(request, "register.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
@@ -332,6 +330,7 @@ def pswdgetback(request):
             return render(request, "password_getback_demo.html", {'form': form, 'message_wrong': True})
 
 
+# 找回密码发送邮件跳转界面
 def pswdgetback_jump(request, username):
     # 只有没有通过验证　并且　距离上次发送邮件时间超过３小时的才能再次发送邮件
     if request.method == 'GET':
@@ -385,4 +384,71 @@ def pswdgetback_jump(request, username):
         return render(request, "pswd_get_back_jump.html", {"title": u"瀚海星云注册邮件认证", "method_wrong": True, })
 
     
+# 找回密码界面
+# 应补充: 一个链接完成后页面失效
+def pswd_get_back_view(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = common_member.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, common_member.DoesNotExist):
+        user = None
+
+    if request.method == 'GET':
+        if user is not None and user.is_active and pswd_get_back_token.check_token(user, token):
+            # 验证是否超时
+            try:
+                email_record = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
+                email_record = email_record[0]
+
+                if str(email_record.last_send_time) < str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+
+                    return render(request, "error_messages.html", {"title": u"翰海星云错误消息", "time_more": True, })  # 超过验证时间
+            except IndexError:
+                return render(request, "error_messages.html", {"title": u"翰海星云用户错误消息", "never_send": True, })  # 没发过邮件
+
+            form = UserChangePSWDForm()
+            return render(request, "pswd_change_demo.html", {"form": form, "title": u"翰海星云修改密码"})  # 发送密码找回界面
+        else:
+            # 当前用户不存在
+            return render(request, "error_messages.html", {
+                            "title": u"翰海星云用户错误消息",
+                            "user_not_exist": True,
+                            }
+                          )
+
+    else:  # method == 'POST'
+        # username = request.POST.get('new_pswd', '')
+        form = UserChangePSWDForm(request.POST)
+        new_pswd = form.cleaned_data['new_pswd']
+        new_pswd_confirm = form.cleaned_data['new_pswd_confirm']
+
+        try:
+            password_validation.validate_password(new_pswd, user.username)
+        except ValidationError as err:
+            error = err
+            return render(request, "pswd_change_demo.html", {
+                "form": form,
+                "title": u"翰海星云修改密码",
+                "password_invalidate": True,
+                "error_msg": error
+            })
+
+        if new_pswd != new_pswd_confirm:
+            return render(request, "pswd_change_demo.html", {"title": u"翰海星云修改密码",
+                                                             "form": form,
+                                                             "confirm_error": u"两次密码输入不一致"})
+
+        user.password = make_password(new_pswd)
+        user.save()
+
+        return render(request, "pswd_change_demo.html", {
+            "title": u"翰海星云修改密码",
+            "form": form,
+            "success": True
+        })
+
+
+
+
+
 

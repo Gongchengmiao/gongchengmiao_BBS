@@ -14,7 +14,8 @@ class UserLoginForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": u"用户名",
-                "class": "form-control",
+                # "class": "form-control",
+                "class": "form-control uname"
             }
         ),
         max_length=20,
@@ -32,7 +33,8 @@ class UserLoginForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": u"密码",
-                "class": "form-control",
+                # "class": "form-control",
+                "class": "form-control pword m-b"
             }
         ),
         max_length=20,
@@ -154,3 +156,32 @@ class UserPswdGetBackForm(forms.Form):
         ),
     )
 
+
+# 用户修改密码表单
+class UserChangePSWDForm(forms.Form):
+    new_pswd = forms.CharField(
+        required=True,
+        label=u'新密码',
+        error_messages={
+            'required': u'请输入新密码',
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": u"请输入新密码",
+                "class": "form-control",
+            }
+        ),
+    ),
+    new_pswd_confirm = forms.CharField(
+        required=True,
+        label=u'确认密码',
+        error_messages={
+            'required': u'请确认密码',
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": u"请确认密码",
+                "class": "form-control",
+            }
+        ),
+    )
