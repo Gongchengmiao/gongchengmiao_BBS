@@ -15,6 +15,10 @@
 
    `pip install -r requirements.txt`
 
-4. 运行
+4. 部署
 
-   `python3 manage.py runserver`
+   `python manage.py collectstatic`
+
+5. 运行
+
+   `python manage.py runserver`

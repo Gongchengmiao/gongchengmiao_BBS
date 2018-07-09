@@ -12,3 +12,5 @@ dist
 build
 *.sqlite
 *.sqlite3
+venv*
+secrets_zh.py

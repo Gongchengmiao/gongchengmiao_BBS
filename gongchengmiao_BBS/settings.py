@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from secrets_zh import mail_passwd
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '%*!x=sc6$=_i*if)o3sus%w$xg8aqxs7bg8pf+@m_q1d(ll%2#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', ]
 
 
 # Application definition
@@ -88,6 +89,12 @@ DATABASES = {
 }
 
 
+# User model
+# Zh_roar defined new user model based on AbstractUserModel
+
+
+AUTH_USER_MODEL = 'user.common_member'
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -127,3 +134,28 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'mail.ustc.edu.cn'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'paulzh@mail.ustc.edu.cn'
+EMAIL_HOST_PASSWORD = mail_passwd
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# celery settings
+# celery中间人 redis://redis服务所在的ip地址:端口/数据库号
+BROKER_URL = 'redis://localhost:6379/0'
+# celery结果返回，可用于跟踪结果
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# celery内容等消息的格式设置
+CELERY_ACCEPT_CONTENT = ['application/json', 'application/x-python-serialize']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+# celery时区设置，使用settings中TIME_ZONE同样的时区
+CELERY_TIMEZONE = TIME_ZONE

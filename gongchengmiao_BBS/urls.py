@@ -15,7 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from index import views as index_views
+from django.conf.urls.static import static
+from gongchengmiao_BBS import settings
+from user import views as user_views
+from django.views.generic import TemplateView
+# from django.conf.urls import url
+# from django.views.static import serve as static_serve
+# from gongchengmiao_BBS.settings import STATIC_ROOT
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+    path('index/', index_views.index_shell, name='index'),
+    path('', index_views.redirect_to_login, name='main'),
+    path('register/', user_views.register, name='register'),
+    path('login/', user_views.login, name='login'),
+    path('logout/', user_views.logout, name='logout'),
+    path('verify/<uidb64>/<token>/', user_views.email_active, name='verify_user'),
+    path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
+    path('admin/', admin.site.urls, name='admin'),
+    path('index_core/', index_views.index, name='index_core'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
