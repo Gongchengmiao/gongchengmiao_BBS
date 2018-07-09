@@ -1,5 +1,5 @@
 from django.db import models
-from article.models import forum_post, forum_school_info
+from article.models import ArticlePost
 from section.models import Forum_forum
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
@@ -64,8 +64,7 @@ class common_member_action_log(models.Model):
     id = models.IntegerField(primary_key=True)
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
-    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
+    pid = models.ForeignKey(ArticlePost, null=True, blank=True, on_delete=models.CASCADE)
     action_choices = (
         ('post', '发帖'),
         ('star', '收藏'),
@@ -141,14 +140,10 @@ class common_member_field_home(models.Model):
 class common_member_star(models.Model):
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
-    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
+    pid = models.ForeignKey(ArticlePost, null=True, blank=True, on_delete=models.CASCADE)
     star_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        if self.is_school_info:
-            return "{}, {}".format(self.uid, self.spid.pk)
-        else:
-            return "{}, {}".format(self.uid, self.pid.pk)
+            return "{}, {}".format(self.uid, self.pid)
 
 
