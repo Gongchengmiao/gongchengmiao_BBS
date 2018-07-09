@@ -162,7 +162,6 @@ CELERY_RESULT_SERIALIZER = 'json'
 # celery时区设置，使用settings中TIME_ZONE同样的时区
 CELERY_TIMEZONE = TIME_ZONE
 
-# MEDIA_ROOT = u'C:/Users/马睿淳/Desktop/大二下/软工/code/media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
