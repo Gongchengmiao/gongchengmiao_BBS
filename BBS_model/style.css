@@ -4340,6 +4340,14 @@ table.table-mail tr td {
     color: #888888;
 }
 
+.text-muted1 {
+    color: #888888;
+}
+
+.text-muted1:hover{
+    color: #0a6aa1;
+}
+
 .simple_tag {
     background-color: #f3f3f4;
     border: 1px solid #e7eaec;
@@ -5262,6 +5270,10 @@ a.compose-mail {
     padding: 10px 20px;
     font-size: 11px;
     line-height: 16px;
+}
+
+.feed-element .well0:hover {
+    background-color: lightgray;
 }
 
 .feed-element .actions {
