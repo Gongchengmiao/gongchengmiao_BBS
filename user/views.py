@@ -53,8 +53,8 @@ def login(request):
                 if user.email_status is True:
 
                     response = redirect(reverse('index'))
-                    response.set_cookie('username', username,
-                                        expires=datetime.datetime.now()+datetime.timedelta(days=10))
+                    # response.set_cookie('username', username,
+                    #                     expires=datetime.datetime.now()+datetime.timedelta(days=10))
                     # passwd = common_member.objects.get(username=username).password
                     # response.set_cookie('password', passwd,
                     #                     expires=datetime.datetime.now() + datetime.timedelta(days=10))
