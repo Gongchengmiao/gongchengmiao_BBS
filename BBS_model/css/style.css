@@ -726,11 +726,19 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     border-color: #1ab394;
     color: #FFFFFF;
 }
-
+.btn-blue {
+    background-color: #b3d4fd;
+    border-color:#b3d4fd;
+    color: #FFFFFF;
+}
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
+.btn-blue:hover,
+.btn-blue:focus,
+.btn-blue:active,
+.btn-blue.active,
 .open .dropdown-toggle.btn-primary {
     background-color: #18a689;
     border-color: #18a689;
@@ -804,8 +812,8 @@ fieldset[disabled] .btn-success.active {
 }
 
 .btn-info {
-    background-color: #23c6c8;
-    border-color: #23c6c8;
+    background-color: #b3d4fd;
+    border-color: #b3d4fd;
     color: #FFFFFF;
 }
 
@@ -4159,7 +4167,9 @@ table.table-mail tr td {
 .ibox-tools a.btn-primary {
     color: #fff;
 }
-
+.ibox-tools a.btn-ownadd {
+    color: #b3d4fd;
+}
 .ibox-tools .dropdown-menu > li > a {
     padding: 4px 10px;
     font-size: 12px;
