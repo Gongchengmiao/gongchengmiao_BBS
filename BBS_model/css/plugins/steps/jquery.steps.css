@@ -148,7 +148,7 @@
 }
 
 .wizard-big.wizard > .content {
-    min-height: 400px;
+    min-height: 25vw;
     background: #D0DCF3;
 }
 .wizard.vertical > .content
