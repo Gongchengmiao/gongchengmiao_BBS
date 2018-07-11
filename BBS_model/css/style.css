@@ -812,8 +812,8 @@ fieldset[disabled] .btn-success.active {
 }
 
 .btn-info {
-    background-color: #b3d4fd;
-    border-color: #b3d4fd;
+    background-color:dodgerblue;
+    border-color: dodgerblue;
     color: #FFFFFF;
 }
 
@@ -822,8 +822,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info:active,
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
-    background-color: #21b9bb;
-    border-color: #21b9bb;
+    background-color: darkblue;
+    border-color:darkblue ;
     color: #FFFFFF;
 }
 
@@ -1223,7 +1223,7 @@ button.dim:active:before {
 
 .label-info,
 .badge-info {
-    background-color: #23c6c8;
+    background-color: dodgerblue;
     color: #FFFFFF;
 }
 
