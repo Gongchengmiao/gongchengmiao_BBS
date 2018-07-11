@@ -41,5 +41,7 @@ urlpatterns = [
     # path('self/', homepageViews.view_self_info, name='view_self_info'),
     path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
     path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
+    path('pswdgetback/<uid64>/<token>/', user_views.pswd_get_back_view, name='pswd_get_beck_2'),
+    path('pswdgetbackjmp/<username>/', user_views.pswdgetback_jump, name='pswdgetback_jump'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

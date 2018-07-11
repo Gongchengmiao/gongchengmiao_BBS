@@ -135,7 +135,7 @@ class UserPswdGetBackForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": u"请输入用户名",
-                "class": "form-control",
+                "class": "form-control uname",
             }
         ),
         max_length=20,
@@ -151,7 +151,7 @@ class UserPswdGetBackForm(forms.Form):
         widget=forms.EmailInput(
             attrs={
                 "placeholder": u"请输入邮箱",
-                "class": "form-control",
+                "class": "form-control uname",
             }
         ),
     )
@@ -165,10 +165,10 @@ class UserChangePSWDForm(forms.Form):
         error_messages={
             'required': u'请输入新密码',
         },
-        widget=forms.TextInput(
+        widget=forms.PasswordInput(
             attrs={
                 "placeholder": u"请输入新密码",
-                "class": "form-control",
+                "class": "form-control pword m-b",
             }
         ),
     ),
@@ -178,10 +178,10 @@ class UserChangePSWDForm(forms.Form):
         error_messages={
             'required': u'请确认密码',
         },
-        widget=forms.TextInput(
+        widget=forms.PasswordInput(
             attrs={
                 "placeholder": u"请确认密码",
-                "class": "form-control",
+                "class": "form-control pword m-b",
             }
         ),
     )

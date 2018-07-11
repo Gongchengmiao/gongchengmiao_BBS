@@ -319,7 +319,7 @@ def pswdgetback(request):
             if not user.email_status:
                 # 邮箱未被激活
                 return render(request, "password_getback_demo.html", {'form': form, 'email_status_error': True, })
-            return redirect(reverse('wait_email_back', args=(username, )))
+            return redirect(reverse('pswdgetback_jump', args=(username, )))
         else:
             # 表单不合法
             return render(request, "password_getback_demo.html", {'form': form, 'message_wrong': True})

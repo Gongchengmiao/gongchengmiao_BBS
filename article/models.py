@@ -10,13 +10,14 @@ from django.utils import timezone
 from slugify import slugify
 from django.urls import reverse
 
-class ArticleColumn(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='article_column')
-	column = models.CharField(max_length=200)
-	created = models.DateField(auto_now_add=True)
 
-	def __str__(self):
-		return self.column
+class ArticleColumn(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='article_column')
+    column = models.CharField(max_length=200)
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.column
 
 
 class ArticlePost(models.Model):
@@ -51,7 +52,7 @@ class forum_post(models.Model):
     # pid = models.IntegerField(primary_key=True)
     author_name = models.CharField(max_length=64)
     post_title = models.CharField(max_length=256)
-    pub_date = models.DateTimeField(auto_now_add = True, editable=True)
+    pub_date = models.DateTimeField(auto_now_add=True, editable=True)
     text = models.TextField()
     # anonymous = models.BooleanField(default=False)
 
