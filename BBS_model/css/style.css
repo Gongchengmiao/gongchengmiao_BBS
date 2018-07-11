@@ -2112,11 +2112,11 @@ table.dataTable thead .sorting:after {
 
 .form-control:focus,
 .single-line:focus {
-    border-color: #1ab394 !important;
+    border-color: #5897fb !important;
 }
 
 .has-success .form-control {
-    border-color: #1ab394;
+    border-color: #5897fb;
 }
 
 .has-warning .form-control {
@@ -2128,7 +2128,7 @@ table.dataTable thead .sorting:after {
 }
 
 .has-success .control-label {
-    color: #1ab394;
+    color: #5897fb;
 }
 
 .has-warning .control-label {
@@ -2767,8 +2767,8 @@ label.error {
 }
 
 .img-preview-sm {
-    height: 130px;
-    width: 200px;
+    height: 50%;
+    width: 50%;
 }
 
 /* Forum styles  */
