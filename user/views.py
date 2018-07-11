@@ -12,11 +12,11 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.timezone import now
 
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, UserPswdGetBackForm, UserChangePSWDForm
 from .models import common_member, common_member_email_send_time
 from django.core.mail import send_mail, EmailMultiAlternatives, BadHeaderError, EmailMessage
 from .tasks import send_email_1
-from .tokens import account_activation_token
+from .tokens import account_activation_token, pswd_get_back_token
 
 
 # 登入操作实现
@@ -53,8 +53,8 @@ def login(request):
                 if user.email_status is True:
 
                     response = redirect(reverse('index'))
-                    response.set_cookie('username', username,
-                                        expires=datetime.datetime.now()+datetime.timedelta(days=10))
+                    # response.set_cookie('username', username,
+                    #                     expires=datetime.datetime.now()+datetime.timedelta(days=10))
                     # passwd = common_member.objects.get(username=username).password
                     # response.set_cookie('password', passwd,
                     #                     expires=datetime.datetime.now() + datetime.timedelta(days=10))
@@ -125,7 +125,6 @@ def register(request):
                 })
 
             if password != password_confirm:
-                # print(5)
                 return render(request, "register.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
@@ -133,7 +132,6 @@ def register(request):
                 })
 
             if confirm_message is False:
-                # print(6)
                 return render(request, "register.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
@@ -160,7 +158,9 @@ def register(request):
             # hostname = 'roarcannotprogramming.com:8017'
             # activation_url = hostname + reverse('verify_user', args=(username, ))
             # mail_text = u'<p>To 亲爱的同学:</p> <br/> <br/> <p>欢迎您使用瀚海星云, 现在仍然是测试版,' \
-            #             u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网址为</p><br/><br/><br/><a href="'+activation_url+'">'+activation_url+'</a><br/><br/><br/><br/><br/><br/>'\
+            #             u' 若发现漏洞请联系此邮箱</p> <br/><br/><p>您的验证网址
+            # 为</p><br/><br/><br/><a href="'+activation_url+'">'+activatio
+            # n_url+'</a><br/><br/><br/><br/><br/><br/>'\
             #             u'<p>From 攻城喵团队</p>'
             # msg = EmailMultiAlternatives(u'瀚海星云-邮箱验证', mail_text, 'paulzh@mail.ustc.edu.cn', [email, ])
             # msg.content_subtype = "html"
@@ -169,7 +169,8 @@ def register(request):
             #     msg.send()
             # except BadHeaderError:
             #     new_account.delete()
-            #     return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云BBS", "error_unknown": True})
+            #     return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云
+            # BBS", "error_unknown": True})
             #
             # return render(request, "register.html", {
             #     "form": form,
@@ -302,4 +303,152 @@ def logout(request):
         auth.logout(request)
     return redirect(reverse('login'))
 
+
 # 找回密码
+def pswdgetback(request):
+    if request.method == 'GET':
+        # 正常访问
+        form = UserPswdGetBackForm()
+        return render(request, 'password_getback_demo.html', {'form': form, })
+    else:
+        # 提交表单
+        form = UserPswdGetBackForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            user = common_member.objects.get(username=username)
+            if user.email != email:
+                # 用户名或者邮箱错误
+                return render(request, "password_getback_demo.html", {'form': form, 'email_or_username_wrong': True, })
+            if not user.email_status:
+                # 邮箱未被激活
+                return render(request, "password_getback_demo.html", {'form': form, 'email_status_error': True, })
+            return redirect(reverse('wait_email_back', args=(username, )))
+        else:
+            # 表单不合法
+            return render(request, "password_getback_demo.html", {'form': form, 'message_wrong': True})
+
+
+# 找回密码发送邮件跳转界面
+def pswdgetback_jump(request, username):
+    # 只有没有通过验证　并且　距离上次发送邮件时间超过３小时的才能再次发送邮件
+    if request.method == 'GET':
+        user = get_object_or_404(common_member, username=username)
+        email = user.email
+        # 查询是否发过邮件
+        try:
+            email_status = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
+            # print(email_status)
+            email_status = email_status[0]
+            if str(email_status.last_send_time) > str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+                # print(str(email_status.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+
+                # 间隔时间小于三小时, 返回'请等待三小时'
+                return render(request, "pswd_get_back_jump.html", {"title": u"瀚海星云找回密码邮件认证",
+                                                                   "time_less": True, })
+        except IndexError:  # 从未发送过
+            pass
+
+        # 配置并发送邮件
+        current_site = get_current_site(request)
+        mail_message = render_to_string('email_message.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': bytes.decode(urlsafe_base64_encode(force_bytes(user.pk))),
+            'token': pswd_get_back_token.make_token(user),
+        })
+
+        msg = EmailMessage(
+            u'瀚海星云-邮箱验证', mail_message, to=[email, ]
+        )
+
+        try:
+            # 异步发送
+            send_email_1.delay(msg)
+
+        except BadHeaderError:
+            return render(request, "pswd_get_back_jump.html", {"title": u"瀚海星云注册邮件认证", "head_wrong": True, })
+
+        # 更新表
+        email_record, created = common_member_email_send_time.objects.get_or_create(user=user)
+        email_record.email_time += 1
+        email_record.save()
+
+        return render(request, "pswd_get_back_jump.html", {
+            "title": u"瀚海星云注册邮件认证",
+            "success": True,
+        })
+
+    else:
+        return render(request, "pswd_get_back_jump.html", {"title": u"瀚海星云注册邮件认证", "method_wrong": True, })
+
+    
+# 找回密码界面
+# 应补充: 一个链接完成后页面失效
+def pswd_get_back_view(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = common_member.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, common_member.DoesNotExist):
+        user = None
+
+    if request.method == 'GET':
+        if user is not None and user.is_active and pswd_get_back_token.check_token(user, token):
+            # 验证是否超时
+            try:
+                email_record = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
+                email_record = email_record[0]
+
+                if str(email_record.last_send_time) < str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+
+                    return render(request, "error_messages.html", {"title": u"翰海星云错误消息", "time_more": True, })  # 超过验证时间
+            except IndexError:
+                return render(request, "error_messages.html", {"title": u"翰海星云用户错误消息", "never_send": True, })  # 没发过邮件
+
+            form = UserChangePSWDForm()
+            return render(request, "pswd_change_demo.html", {"form": form, "title": u"翰海星云修改密码"})  # 发送密码找回界面
+        else:
+            # 当前用户不存在
+            return render(request, "error_messages.html", {
+                            "title": u"翰海星云用户错误消息",
+                            "user_not_exist": True,
+                            }
+                          )
+
+    else:  # method == 'POST'
+        # username = request.POST.get('new_pswd', '')
+        form = UserChangePSWDForm(request.POST)
+        new_pswd = form.cleaned_data['new_pswd']
+        new_pswd_confirm = form.cleaned_data['new_pswd_confirm']
+
+        try:
+            password_validation.validate_password(new_pswd, user.username)
+        except ValidationError as err:
+            error = err
+            return render(request, "pswd_change_demo.html", {
+                "form": form,
+                "title": u"翰海星云修改密码",
+                "password_invalidate": True,
+                "error_msg": error
+            })
+
+        if new_pswd != new_pswd_confirm:
+            return render(request, "pswd_change_demo.html", {"title": u"翰海星云修改密码",
+                                                             "form": form,
+                                                             "confirm_error": u"两次密码输入不一致"})
+
+        user.password = make_password(new_pswd)
+        user.save()
+
+        return render(request, "pswd_change_demo.html", {
+            "title": u"翰海星云修改密码",
+            "form": form,
+            "success": True
+        })
+
+
+
+
+
+

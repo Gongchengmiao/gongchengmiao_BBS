@@ -14,7 +14,8 @@ class UserLoginForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": u"用户名",
-                "class": "form-control",
+                # "class": "form-control",
+                "class": "form-control uname"
             }
         ),
         max_length=20,
@@ -32,7 +33,8 @@ class UserLoginForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": u"密码",
-                "class": "form-control",
+                # "class": "form-control",
+                "class": "form-control pword m-b"
             }
         ),
         max_length=20,
@@ -119,4 +121,67 @@ class UserRegisterForm(forms.Form):
     confirm_message = forms.BooleanField(
         required=True,
         widget=forms.CheckboxInput(),
+    )
+
+
+# 用户找回密码表单
+class UserPswdGetBackForm(forms.Form):
+    username = forms.CharField(
+        required=True,
+        label=u'用户名',
+        error_messages={
+            "required": u"请输入用户名",
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": u"请输入用户名",
+                "class": "form-control",
+            }
+        ),
+        max_length=20,
+        min_length=6,
+    )
+
+    email = forms.EmailField(
+        required=True,
+        label=u'邮箱',
+        error_messages={
+            "required": u"请输入邮箱",
+        },
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": u"请输入邮箱",
+                "class": "form-control",
+            }
+        ),
+    )
+
+
+# 用户修改密码表单
+class UserChangePSWDForm(forms.Form):
+    new_pswd = forms.CharField(
+        required=True,
+        label=u'新密码',
+        error_messages={
+            'required': u'请输入新密码',
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": u"请输入新密码",
+                "class": "form-control",
+            }
+        ),
+    ),
+    new_pswd_confirm = forms.CharField(
+        required=True,
+        label=u'确认密码',
+        error_messages={
+            'required': u'请确认密码',
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": u"请确认密码",
+                "class": "form-control",
+            }
+        ),
     )
