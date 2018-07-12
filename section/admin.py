@@ -1,5 +1,5 @@
-# from django.contrib import admin
-# from django.db import models
+from django.contrib import admin
+from .models import SectionForum
 # from django import forms
 # from .models import Forum_forum
 #
@@ -11,5 +11,5 @@
 #
 #
 #
-# admin.site.register(Forum_forum, Forum_forumAdmin)
+admin.site.register(SectionForum)
 

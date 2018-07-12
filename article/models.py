@@ -3,7 +3,8 @@ from gongchengmiao_BBS import settings
 from django.utils import timezone
 from django.urls import reverse
 
-from django.template.defaultfilters import slugify
+#from django.template.defaultfilters import slugify
+from uuslug import slugify
 
 # # 一般帖子信息
 # class forum_post(models.Model):
@@ -33,14 +34,14 @@ class ArticlePost(models.Model):
     pid = models.IntegerField(primary_key=True)  # 增加一个主键
     is_school_info = models.BooleanField(default=False)  # 是否公告
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name="article")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="article")
     title = models.CharField(max_length=200)
     body = models.TextField()
-
+    isElite = models.BooleanField(default=False)
     pub_date = models.DateTimeField(auto_now_add=True, editable=True)
 
-    slug = models.SlugField(max_length=500,default=slugify(title))
-    slug.allow_unicode = True
+    section_belong_fk = models.ForeignKey('section.SectionForum', on_delete=models.CASCADE, null=True)
+    slug = models.SlugField(max_length=500, default=slugify(str(title)), allow_unicode=True)
 
     def __str__(self):
         return self.title

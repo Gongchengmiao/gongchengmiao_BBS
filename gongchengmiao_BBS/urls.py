@@ -21,6 +21,7 @@ from gongchengmiao_BBS import settings
 from user import views as user_views
 from homepage import views as homepage_views
 from article import views as article_views
+from section import views as section_views
 from django.views.generic import TemplateView
 # from django.conf.urls import url
 # from django.views.static import serve as static_serve
@@ -43,5 +44,6 @@ urlpatterns = [
     path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
     path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
     path('article/', article_views.article_post, name="article_post"),
+    path('section/<section_slug>', section_views.section_all, name='section_all')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
