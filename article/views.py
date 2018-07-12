@@ -44,5 +44,6 @@ def article_post(request):
     else:
         article_post_form = ArticlePostForm()
         article_columns = request.user.article_column.all()    #⑦
-        article_tags = request.user.tag.all()    #①
+        #article_tags = request.user.tag.all()    #①
+        article_tags = {}
         return render(request, "article/column/article_post.html", {"article_post_form":article_post_form, "article_columns":article_columns, "article_tags":article_tags})

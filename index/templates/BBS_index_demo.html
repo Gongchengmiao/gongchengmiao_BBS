@@ -62,8 +62,8 @@
                                 {% for i, post in latest_posts %}
                                     <tr>
                                     <td>{{ i|add:'1' }}</td>
-                                    <td>{{ post.post_title }}</td>
-                                    <td>{{ post.author_name }}</td>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.author }}</td>
                                     <td>{{ post.pub_date }}</td>
                                     </tr>
                                 {% endfor %}
@@ -113,8 +113,8 @@
                                 {% for i, post in school_info %}
                                     <tr>
                                     <td>{{ i|add:'1' }}</td>
-                                    <td>{{ post.post_title }}</td>
-                                    <td>{{ post.author_name }}</td>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.author }}</td>
                                     <td>{{ post.pub_date }}</td>
                                     </tr>
                                 {% endfor %}
@@ -286,21 +286,12 @@
                                 <tbody>
                                 {% if user_star %}
                                     {% for i, post in user_star %}
-                                        {% if post.is_school_info %}
                                         <tr>
                                         <td>{{ i|add:'1' }}</td>
-                                        <td>{{ post.spid.post_title }}</td>
-                                        <td>{{ post.spid.author_name }}</td>
-                                        <td>{{ post.spid.pub_date }}</td>
-                                        </tr>
-                                        {% else %}
-                                        <tr>
-                                        <td>{{ i|add:'1' }}</td>
-                                        <td>{{ post.pid.post_title }}</td>
-                                        <td>{{ post.pid.author_name }}</td>
+                                        <td>{{ post.pid.title }}</td>
+                                        <td>{{ post.pid.author }}</td>
                                         <td>{{ post.pid.pub_date }}</td>
                                         </tr>
-                                        {% endif %}
                                     {% endfor %}
                                 {% endif %}
                                 </tbody>

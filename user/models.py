@@ -1,6 +1,5 @@
 from django.db import models
 from article.models import ArticlePost
-from section.models import Forum_forum
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from .validators import BbsUsernameValidator
