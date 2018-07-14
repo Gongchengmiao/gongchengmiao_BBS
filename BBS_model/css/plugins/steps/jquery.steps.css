@@ -138,7 +138,7 @@
     display: block;
     margin: 5px 5px 10px 5px;
     min-height: 120px;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     width: auto;
 
@@ -148,7 +148,7 @@
 }
 
 .wizard-big.wizard > .content {
-    min-height: 320px;
+    min-height: 25vw;
     background: #D0DCF3;
 }
 .wizard.vertical > .content
