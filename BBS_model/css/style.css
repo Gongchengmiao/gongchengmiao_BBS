@@ -4377,7 +4377,7 @@ table.table-mail tr td {
 }
 
 .text-muted1 {
-    color: #888888;
+    color: black;
 }
 
 .text-muted1:hover{
@@ -7351,7 +7351,7 @@ navbar-static-top {
 }
 
 .nav.nav-tabs > li.active > a {
-    color: #39aef5;
+
 }
 
 .content-tabs {
