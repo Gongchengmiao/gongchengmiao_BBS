@@ -4321,6 +4321,10 @@ table.table-mail tr td {
     background-color: #1c84c6;
 }
 
+.progress-bar-success1 {
+    background-color: dodgerblue;
+}
+
 .progress-bar-info {
     background-color: #23c6c8;
 }
@@ -7351,7 +7355,7 @@ navbar-static-top {
 }
 
 .nav.nav-tabs > li.active > a {
-
+    color: #647280;
 }
 
 .content-tabs {
