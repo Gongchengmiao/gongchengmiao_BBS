@@ -727,8 +727,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     color: #FFFFFF;
 }
 .btn-blue {
-    background-color: #b3d4fd;
-    border-color:#b3d4fd;
+    background-color: royalblue;
+    border-color:royalblue;
     color: #FFFFFF;
 }
 .btn-primary:hover,
@@ -740,8 +740,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn-blue:active,
 .btn-blue.active,
 .open .dropdown-toggle.btn-primary {
-    background-color: #18a689;
-    border-color: #18a689;
+    background-color: dodgerblue;
+    border-color: dodgerblue;
     color: #FFFFFF;
 }
 
@@ -1956,7 +1956,7 @@ table.dataTable thead .sorting:after {
 }
 
 .pace .pace-progress {
-    background: #1ab394;
+    background: dodgerblue;
     position: fixed;
     z-index: 2000;
     top: 0;
@@ -2120,11 +2120,11 @@ table.dataTable thead .sorting:after {
 
 .form-control:focus,
 .single-line:focus {
-    border-color: #1ab394 !important;
+    border-color: lightskyblue !important;
 }
 
 .has-success .form-control {
-    border-color: #1ab394;
+    border-color: lightskyblue;
 }
 
 .has-warning .form-control {
@@ -4319,6 +4319,10 @@ table.table-mail tr td {
 
 .progress-bar-success {
     background-color: #1c84c6;
+}
+
+.progress-bar-success1 {
+    background-color: dodgerblue;
 }
 
 .progress-bar-info {
@@ -7351,7 +7355,7 @@ navbar-static-top {
 }
 
 .nav.nav-tabs > li.active > a {
-
+    color: #647280;
 }
 
 .content-tabs {
