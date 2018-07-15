@@ -7258,9 +7258,122 @@ body.rtls.top-navigation .footer.fixed {
 
 .page-tabs a.active:hover,
 .page-tabs a.active i:hover {
-    background: #293846;
+    background: #a6a6ff;
     color: #fff;
 }
+
+
+/*
+ *
+ *   SKIN 1 - H+ - 后台主题UI框架
+ *   NAME - Blue light
+ *
+*/
+
+.navbar-top-links li:last-child {
+    margin-right: 30px;
+}
+
+.fixed-nav .minimalize-styl-2 {
+    margin: 14px 5px 5px 15px;
+}
+
+.spin-icon {
+    background: #0e9aef !important;
+}
+
+.nav-header {
+    background: #0e9aef;
+    background: url('patterns/header-profile-skin-1.png');
+}
+
+.mini-navbar .nav-second-level {
+    background: #FFFFFF;
+}
+
+.nav > li.active > a {
+    color: #fff;
+}
+
+.navbar-minimalize {
+    background: #0e9aef;
+    border-color: #0e9aef;
+}
+
+.navbar-minimalize:hover {
+    background: #405bef;
+    border-color: #0e9aef;
+}
+
+navbar-static-top {
+    background: #ffffff;
+}
+
+.fixed-nav.skin-1 .navbar-fixed-top {
+    background: #fff;
+}
+
+.wrapper-content {
+    padding: 30px 15px;
+}
+
+ #page-wrapper {
+    background: #f4f6fa;
+}
+
+.nav > li.active {
+    border: none;
+    background: #0e9aef;
+}
+
+.nav-header {
+    padding: 35px 25px 25px 25px;
+}
+
+.nav-header a.dropdown-toggle {
+    color: #fff;
+    margin-top: 10px;
+}
+
+.nav-header a.dropdown-toggle .text-muted {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.profile-element {
+    text-align: center;
+}
+
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus {
+    background: #39aef5;
+    color: #fff;
+}
+
+.nav.nav-tabs > li.active > a {
+    color: #39aef5;
+}
+
+.content-tabs {
+    border-bottom: solid 2px #39aef5;
+}
+
+.nav.nav-tabs > li.active {
+    background: transparent;
+}
+
+.page-tabs a.active {
+    background: #39aef5;
+    color: #fff;
+}
+
+.page-tabs a.active:hover,
+.page-tabs a.active i:hover {
+    background: #0e9aef;
+    color: #fff;
+}
+
+
 
 /*
  *
@@ -7312,6 +7425,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .skin-1 .nav > li.active > a {
     color: #fff;
+    background: #0e9aef;
 }
 
 .skin-1 .navbar-minimalize {
@@ -7963,6 +8077,14 @@ body.skin-3 {
 
 .contentwidth {
     width: 340px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content_width_index {
+    width: 30%;
     white-space: nowrap;
     word-break: keep-all;
     overflow: hidden;
