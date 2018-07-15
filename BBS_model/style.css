@@ -726,11 +726,19 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     border-color: #1ab394;
     color: #FFFFFF;
 }
-
+.btn-blue {
+    background-color: #b3d4fd;
+    border-color:#b3d4fd;
+    color: #FFFFFF;
+}
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
+.btn-blue:hover,
+.btn-blue:focus,
+.btn-blue:active,
+.btn-blue.active,
 .open .dropdown-toggle.btn-primary {
     background-color: #18a689;
     border-color: #18a689;
@@ -804,8 +812,8 @@ fieldset[disabled] .btn-success.active {
 }
 
 .btn-info {
-    background-color: #23c6c8;
-    border-color: #23c6c8;
+    background-color:dodgerblue;
+    border-color: dodgerblue;
     color: #FFFFFF;
 }
 
@@ -814,8 +822,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info:active,
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
-    background-color: #21b9bb;
-    border-color: #21b9bb;
+    background-color: darkblue;
+    border-color:darkblue ;
     color: #FFFFFF;
 }
 
@@ -1215,7 +1223,7 @@ button.dim:active:before {
 
 .label-info,
 .badge-info {
-    background-color: #23c6c8;
+    background-color: dodgerblue;
     color: #FFFFFF;
 }
 
@@ -2070,6 +2078,7 @@ table.dataTable thead .sorting:after {
 
 .glyphicon.fa {
     font-family: "FontAwesome";
+    background: #E5EDF2;
 }
 
 /* INPUTS */
@@ -4028,7 +4037,7 @@ code {
     -o-border-image: none;
     border-image: none;
     border-style: solid solid none;
-    border-width: 4px 0px 0;
+    border-width: 4px 0 0;
     color: inherit;
     margin-bottom: 0;
     padding: 14px 15px 7px;
@@ -4046,7 +4055,25 @@ code {
     -o-border-image: none;
     border-image: none;
     border-style: solid solid none;
-    border-width: 4px 0px 0;
+    border-width: 4px 0 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 100px;
+}
+
+.ibox-titleblue {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: rgba(84,135,255,1);
+    -webkit-border-image: none;
+    -o-border-image: none;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0 0;
     color: inherit;
     margin-bottom: 0;
     padding: 14px 15px 7px;
@@ -4158,7 +4185,9 @@ table.table-mail tr td {
 .ibox-tools a.btn-primary {
     color: #fff;
 }
-
+.ibox-tools a.btn-ownadd {
+    color: #b3d4fd;
+}
 .ibox-tools .dropdown-menu > li > a {
     padding: 4px 10px;
     font-size: 12px;
@@ -5270,6 +5299,10 @@ a.compose-mail {
     padding: 10px 20px;
     font-size: 11px;
     line-height: 16px;
+}
+
+.feed-element .well0 {
+    background-color: white;
 }
 
 .feed-element .well0:hover {
@@ -7919,4 +7952,12 @@ body.skin-3 {
         width: 12.5%;
         font-size: 12px
     }
+}
+
+.contentwidth {
+    width: 340px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
