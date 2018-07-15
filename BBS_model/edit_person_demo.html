@@ -25,6 +25,11 @@
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
     <script>
         if (typeof(window.console) == 'undefined')
             window.console = {};
@@ -62,7 +67,7 @@
             <a href="">UserID</a>
             <a href="">修改资料</a>
         </div>
-        <!-- 此页面的组件注释请见preference.html -->
+
 
         <form class="main-block" method="post" data-ajaxsubmit data-actiontext="修改">
 
@@ -73,7 +78,7 @@
                     <h5> </h5>
                     <div>
                         <div class="cyan-small-btn"  style="background-color: dodgerblue">
-                            <input id="avatar-uploader" class="avatar-upload" name="file" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,image/tiff,image/jpeg,image/png">
+                            <input id="avatar-uploader" class="avatar-upload " name="file" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,image/tiff,image/jpeg,image/png">
                             <span>修改头像</span>
                         </div>
                     </div>
@@ -116,11 +121,31 @@
                 </div>
                 <span class="warning">性别不能为空</span>
             </div>
+
+            <div class="form-row">
+                <label>学号/工号</label>
+                <input class="input-field" name="stuid" type="text" maxlength="10" value="PBxxxxxxxx" required/>
+                <span class="warning" >学号/工号应在0~10字符</span>
+            </div>
+
+            <div class="form-row">
+                <label>学院/部门</label>
+                <div class="input-group">
+                    <select data-placeholder="选择学院/部门..." class="chosen-select" style="width:350px;" tabindex="2">
+                        <option value="">请选择学院/部门</option>
+                        <option value="110000" hassubinfo="true">06信息学院</option>
+                        <option value="120000" hassubinfo="true">11计算机学院</option>
+                        <option value="130000" hassubinfo="true">00少年班学院</option>
+                        <option value="140000" hassubinfo="true">其他学院或部门</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="form-row">
                 <label>说明档</label>
                 <div class="textarea-wrapper"><textarea id="desc-textarea" data-origin="#desc-origin"></textarea></div>
                 <div id="desc-origin" style="display: none"><p>MRCZHZR ZS TQL</p></div>
-            </div><!--注：需要更改文本编辑器-->
+            </div>
             <hr />
             <div class="form-row extra-margin-top">
                 <button class="cyan-large-btn" type="submit" style="background-color: dodgerblue">保存</button>
@@ -130,6 +155,15 @@
 
     <!-- end main -->
 
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script src="js/demo/form-advanced-demo.js"></script>
 
 
 </body>
