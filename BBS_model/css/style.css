@@ -1776,6 +1776,10 @@ a.list-group-item.active:focus {
     min-height: 200px;
 }
 
+.h-600{
+    min-height: 600px;
+}
+
 .legendLabel {
     padding-left: 5px;
 }
