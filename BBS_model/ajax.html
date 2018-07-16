@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $("#myDiv").load("./login.txt",function(responseTxt,statusTxt,xhr){
+                    if(statusTxt=="success")
+                        alert("外部内容加载成功！");
+                    if(statusTxt=="error")
+                        alert("Error: "+xhr.status+": "+xhr.statusText);
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<div id="myDiv"><h2>改变文本</h2></div>
+<button>确认</button>
+
+</body>
+</html>
