@@ -40,10 +40,6 @@
                             <li>
                                 <a href="mailbox.html"> <i class="fa fa-certificate"></i> 重要信息<span class="label label-info pull-right">16</span></a>
                             </li>
-                            <li>
-                                <a href="mailbox.html"> <i class="fa fa-file-text-o"></i> 草稿 <span class="label label-info pull-right">2</span>
-                                </a>
-                            </li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -67,14 +63,10 @@
                     草稿箱
                 </h2>
                 <div class="mail-tools tooltip-demo m-t-md">
-                    <div class="btn-group pull-right">
-                        <button class="btn btn-info btn-sm"><i class="fa fa-arrow-left"></i>
-                        </button>
-                        <button class="btn btn-info btn-sm"><i class="fa fa-arrow-right"></i>
-                        </button>
 
-                    </div>
                     <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i>
+                    </button>
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="标记为重要" onclick="window.alert('标记成功！')"><i class="fa fa-certificate"></i>
                     </button>
 
                 </div>
@@ -83,7 +75,7 @@
 
                 <table class="table table-hover table-mail">
                     <tbody>
-                    <tr class="unread">
+                    <tr class="read">
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
@@ -93,7 +85,7 @@
                         </td>
                         <td class="text-right mail-date">昨天 10:20</td>
                     </tr>
-                    <tr class="unread">
+                    <tr class="read">
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks" checked>
 
@@ -236,7 +228,21 @@
                     </tr>
                     </tbody>
                 </table>
-
+                <div class="text-center">
+                    <div class="btn-group">
+                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button class="btn btn-white active" style="color: #0a6aa1">1</button>
+                        <button class="btn btn-white" style="color: #0a6aa1">2</button>
+                        <button class="btn btn-white" style="color: #0a6aa1">3</button>
+                        <button class="btn btn-white" style="color: #0a6aa1">4</button>
+                        <button class="btn btn-white" style="color: #0a6aa1">5</button>
+                        <button class="btn btn-white" style="color: #0a6aa1">6</button>
+                        <button class="btn btn-white" style="color: #0a6aa1">7</button>
+                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
 
             </div>
         </div>
