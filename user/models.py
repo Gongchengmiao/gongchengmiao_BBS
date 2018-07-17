@@ -3,6 +3,8 @@ from article.models import ArticlePost
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from .validators import BbsUsernameValidator
+from uuslug import slugify
+from django.urls import reverse
 from django.utils.timezone import now
 
 
@@ -11,9 +13,10 @@ class common_member(AbstractUser):
 
     # uid = models.IntegerField(max_length=12, primary_key=True)
     # email = models.EmailField()
-    # username = models.CharField(max_length=20, unique=True)
+    username = models.CharField(max_length=30, unique=True)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
+    slug = models.SlugField(max_length=100, default=slugify(str(username)), allow_unicode=True)
     portrait = models.ImageField(upload_to='portraits', null=True,blank=True)
     gender_choices = (('m', '男'), ('f', '女'))
     gender = models.CharField(max_length=1, default='m', choices=gender_choices)    # 性别 true为男
@@ -33,13 +36,20 @@ class common_member(AbstractUser):
     # accessmasks = models.BooleanField(default=True)  # 访问权限
     # allowadmincp = models.BooleanField(default=False)  # 管理权限
     # freeze = models.BooleanField(default=False)  # 是否被冻结
-    pass
     # adminid = models.IntegerField(null=True)  # 管理组id 1=管理员 2=超级版主 3=版主
     # regdate = models.DateField()  # 注册时间
     # newpm = models.IntegerField()  # 新短消息数量
     # newprompt = models.IntegerField()  # 新提醒数目
     def __str__(self):
         return self.username
+
+    def save(self, *args, **kargs):  # ④
+        self.slug = slugify(self.username)  # ⑤
+        super(common_member, self).save(*args, **kargs)
+
+    def get_url(self):  # ⑥
+        return reverse("section_all", args={self.slug})
+
 
 class follower_pair(models.Model):
     followed = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_followed')

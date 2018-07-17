@@ -76,7 +76,7 @@ class followers_Adim(admin.ModelAdmin):
 class User_action_log_Admin(admin.ModelAdmin):
     list_display = ('id', 'uid', 'action','dateline')
     fieldsets = (
-        (None, {'fields': ('id', 'uid', 'action','is_school_info', 'pid', 'spid')}),
+        (None, {'fields': ('id', 'uid', 'action','is_school_info', 'pid')}),
     )
 
 admin.site.register(common_member, Common_memberAdmin)
