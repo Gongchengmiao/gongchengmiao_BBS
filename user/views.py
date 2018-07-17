@@ -347,7 +347,7 @@ def pswdgetback_jump(request, username):
 
         # 配置并发送邮件
         current_site = get_current_site(request)
-        mail_message = render_to_string('email_message.html', {
+        mail_message = render_to_string('email_message_pswd_getback.html', {
             'user': user,
             'domain': current_site.domain,
             'uid': bytes.decode(urlsafe_base64_encode(force_bytes(user.pk))),
@@ -355,7 +355,7 @@ def pswdgetback_jump(request, username):
         })
 
         msg = EmailMessage(
-            u'瀚海星云-邮箱验证', mail_message, to=[email, ]
+            u'瀚海星云-邮箱找回', mail_message, to=[email, ]
         )
 
         try:
@@ -412,35 +412,43 @@ def pswd_get_back_view(request, uidb64, token):
                           )
 
     else:  # method == 'POST'
-        # username = request.POST.get('new_pswd', '')
         form = UserChangePSWDForm(request.POST)
-        new_pswd = form.cleaned_data['new_pswd']
-        new_pswd_confirm = form.cleaned_data['new_pswd_confirm']
+        if form.is_valid():
+            # username = request.POST.get('new_pswd', '')
+            new_pswd = form.cleaned_data['new_pswd']
+            new_pswd_confirm = form.cleaned_data['new_pswd_confirm']
 
-        try:
-            password_validation.validate_password(new_pswd, user.username)
-        except ValidationError as err:
-            error = err
+            try:
+                password_validation.validate_password(new_pswd, user.username)
+            except ValidationError as err:
+                error = err
+                return render(request, "pswd_change_demo.html", {
+                    "form": form,
+                    "title": u"翰海星云修改密码",
+                    "password_invalidate": True,
+                    "error_msg": error
+                })
+
+            if new_pswd != new_pswd_confirm:
+                return render(request, "pswd_change_demo.html", {"title": u"翰海星云修改密码",
+                                                                 "form": form,
+                                                                 "confirm_error": u"两次密码输入不一致"})
+
+            user.password = make_password(new_pswd)
+            user.save()
+
             return render(request, "pswd_change_demo.html", {
-                "form": form,
                 "title": u"翰海星云修改密码",
-                "password_invalidate": True,
-                "error_msg": error
+                "form": form,
+                "success": True
             })
 
-        if new_pswd != new_pswd_confirm:
-            return render(request, "pswd_change_demo.html", {"title": u"翰海星云修改密码",
-                                                             "form": form,
-                                                             "confirm_error": u"两次密码输入不一致"})
-
-        user.password = make_password(new_pswd)
-        user.save()
-
-        return render(request, "pswd_change_demo.html", {
-            "title": u"翰海星云修改密码",
-            "form": form,
-            "success": True
-        })
+        else:
+            return render(request, "pswd_change_demo.html", {
+                "title": u"翰海星云修改密码",
+                "form": form,
+                "error_unknown": True
+            })
 
 
 
