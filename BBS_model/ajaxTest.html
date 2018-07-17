@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="../js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#one").click(function() {
+                $.ajax({
+                    type : "GET",
+                    url : "",
+                    dataType : "text",
+                    data : "page=1",
+                    async : true,
+                    success : function(data) {
+                        alert(data);
+                        $("#two").append(data);
+                    },
+                    error : function() {
+                        alert('请求有误');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="one">one</div>
+<br>
+<span id="two">two</span>
+</body>
+</html>

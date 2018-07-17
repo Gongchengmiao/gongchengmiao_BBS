@@ -11,8 +11,7 @@
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-    <link rel="shortcut icon" href="img/ustc.png">
-    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
@@ -45,6 +44,7 @@
                                 </a>
                             </li>
                         </ul>
+
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
 
                 <form method="get" action="index.html" class="pull-right mail-search">
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm" name="search" placeholder="搜索草稿标题，正文等">
+                        <input type="text" class="form-control input-sm" name="search" placeholder="搜索邮件标题，正文等">
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-sm btn-info">
                                 搜索
@@ -64,7 +64,7 @@
                     </div>
                 </form>
                 <h2>
-                    草稿箱
+                    收件箱 (16)
                 </h2>
                 <div class="mail-tools tooltip-demo m-t-md">
                     <div class="btn-group pull-right">
@@ -74,7 +74,12 @@
                         </button>
 
                     </div>
-                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i>
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="刷新邮件列表"><i class="fa fa-refresh"></i> 刷新</button>
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="标为已读"><i class="fa fa-eye"></i>
+                    </button>
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="标为重要"><i class="fa fa-exclamation"></i>
+                    </button>
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="标为垃圾邮件"><i class="fa fa-trash-o"></i>
                     </button>
 
                 </div>
@@ -87,6 +92,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
+                        <td class="mail-ontact"><a href="mail_detail.html">支付宝</a>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">支付宝提醒</a>
                         </td>
                         <td class=""><i class="fa fa-paperclip"></i>
@@ -96,7 +103,8 @@
                     <tr class="unread">
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks" checked>
-
+                        </td>
+                        <td class="mail-ontact"><a href="mail_detail.html">Amaze UI</a>
                         </td>
                         <td class="mail-subject"><a href="mail_detail.html">Amaze UI Beta2 发布</a>
                         </td>
@@ -107,6 +115,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
+                        <td class="mail-ontact"><a href="mail_detail.html">WordPress</a> <span class="label label-warning pull-right">验证邮件</span>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">wp-user-frontend-pro v2.1.9</a>
                         </td>
                         <td class=""></td>
@@ -115,6 +125,8 @@
                     <tr class="read">
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
+                        </td>
+                        <td class="mail-ontact"><a href="mail_detail.html">淘宝网</a>
                         </td>
                         <td class="mail-subject"><a href="mail_detail.html">史上最全！淘宝双11红包疯抢攻略！</a>
                         </td>
@@ -125,7 +137,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-
+                        <td class="mail-ontact"><a href="mail_detail.html">淘宝网</a> <span class="label label-danger pull-right">AD</span>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">亲，双11来啦！帮你挑货，还送你4999元红包！仅此一次！</a>
                         </td>
                         <td class=""><i class="fa fa-paperclip"></i>
@@ -136,7 +149,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-
+                        <td class="mail-ontact"><a href="mail_detail.html">支付宝</a>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">支付宝提醒</a>
                         </td>
                         <td class=""><i class="fa fa-paperclip"></i>
@@ -146,7 +160,9 @@
                     <tr class="read">
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
-
+                        </td>
+                        <td class="mail-ontact"><a href="mail_detail.html">Amaze UI</a>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">Amaze UI Beta2 发布</a>
                         </td>
                         <td class=""></td>
@@ -156,7 +172,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-
+                        <td class="mail-ontact"><a href="mail_detail.html">WordPress</a> <span class="label label-warning pull-right">验证邮件</span>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">wp-user-frontend-pro v2.1.9</a>
                         </td>
                         <td class=""></td>
@@ -165,7 +182,8 @@
                     <tr class="read">
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
-
+                        </td>
+                        <td class="mail-ontact"><a href="mail_detail.html">淘宝网</a>
                         </td>
                         <td class="mail-subject"><a href="mail_detail.html">史上最全！淘宝双11红包疯抢攻略！</a>
                         </td>
@@ -176,7 +194,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-
+                        <td class="mail-ontact"><a href="mail_detail.html">淘宝网</a> <span class="label label-danger pull-right">AD</span>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">亲，双11来啦！帮你挑货，还送你4999元红包！仅此一次！</a>
                         </td>
                         <td class=""><i class="fa fa-paperclip"></i>
@@ -187,7 +206,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-
+                        <td class="mail-ontact"><a href="mail_detail.html">支付宝</a>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">支付宝提醒</a>
                         </td>
                         <td class=""><i class="fa fa-paperclip"></i>
@@ -198,6 +218,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
+                        <td class="mail-ontact"><a href="mail_detail.html">Amaze UI</a>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">Amaze UI Beta2 发布</a>
                         </td>
                         <td class=""></td>
@@ -207,7 +229,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-
+                        <td class="mail-ontact"><a href="mail_detail.html">WordPress</a> <span class="label label-warning pull-right">验证邮件</span>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">wp-user-frontend-pro v2.1.9</a>
                         </td>
                         <td class=""></td>
@@ -217,7 +240,8 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-
+                        <td class="mail-ontact"><a href="mail_detail.html">淘宝网</a>
+                        </td>
                         <td class="mail-subject"><a href="mail_detail.html">史上最全！淘宝双11红包疯抢攻略！</a>
                         </td>
                         <td class=""></td>
@@ -227,9 +251,10 @@
                         <td class="check-mail">
                             <input type="checkbox" class="i-checks">
                         </td>
-                        <td class="mail-ontact"><a href="mail_detail.html">淘宝网</a> </span>
+                        <td class="mail-ontact"><a href="mail_detail.html">淘宝网</a> <span class="label label-danger pull-right">AD</span>
                         </td>
-
+                        <td class="mail-subject"><a href="mail_detail.html">亲，双11来啦！帮你挑货，还送你4999元红包！仅此一次！</a>
+                        </td>
                         <td class=""><i class="fa fa-paperclip"></i>
                         </td>
                         <td class="text-right mail-date">上午6:48</td>

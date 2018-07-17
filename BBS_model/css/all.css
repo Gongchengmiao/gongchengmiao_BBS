@@ -3049,7 +3049,7 @@ input:not([type=radio], [type=checkbox]), textarea {
   margin: 30px 0 25px;
   letter-spacing: 0.1em; }
   .breadcrumb-trail > a {
-    color: #535353;
+    color: #dfedff;
     border: none; }
     .breadcrumb-trail > a:after {
       content: " >>";
@@ -3121,9 +3121,9 @@ input:not([type=radio], [type=checkbox]), textarea {
   line-height: 18px;
   outline: none; }
   .cyan-small-btn:hover {
-    background-color: #6db6a2; }
+    background-color: royalblue; }
   .cyan-small-btn:active {
-    background-color: #59a992; }
+    background-color: royalblue; }
 
 .white-large-btn {
   border: 1px solid #bfbfbf;
