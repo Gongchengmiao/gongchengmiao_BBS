@@ -22,10 +22,10 @@
 
 </head>
 
-<body class="sky-bg">
+<body class="gray-bg">
     <div class="wrapper wrapper-content">
         <div class="row">
-            <div class="col-sm-3" style="background: #FFFFFF">
+            <div class="col-sm-3" >
                 <div class="ibox float-e-margins">
                     <div class="ibox-content mailbox-content" style="display: block">
                         <div class="file-manager">
@@ -83,8 +83,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 animated fadeInRight">
-                <div class="mail-box-header">
+            <div class="col-sm-9 animated fadeInRight" style="height: 100%">
+                <div class="mail-box-header" >
                     <h2>
                     发帖
                 </h2>
@@ -110,9 +110,6 @@
                     <div class="mail-text h-200">
 
                         <div class="summernote">
-
-
-
 
                         </div>
                         <div class="clearfix"></div>
@@ -156,7 +153,8 @@
 
 
             $('.summernote').summernote({
-                lang: 'zh-CN'
+                lang: 'zh-CN',
+                height: 200 ,
             });
 
         });
@@ -170,9 +168,6 @@
             $('.click2edit').destroy();
         };
     </script>
-
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
-    <!--统计代码，可删除-->
 
 </body>
 
