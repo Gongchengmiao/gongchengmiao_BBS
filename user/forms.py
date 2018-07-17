@@ -159,6 +159,7 @@ class UserPswdGetBackForm(forms.Form):
 
 # 用户修改密码表单
 class UserChangePSWDForm(forms.Form):
+
     new_pswd = forms.CharField(
         required=True,
         label=u'新密码',
@@ -171,7 +172,8 @@ class UserChangePSWDForm(forms.Form):
                 "class": "form-control pword m-b",
             }
         ),
-    ),
+    )
+
     new_pswd_confirm = forms.CharField(
         required=True,
         label=u'确认密码',
