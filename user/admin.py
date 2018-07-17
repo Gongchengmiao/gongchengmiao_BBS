@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
-from .models import common_member, common_member_star
+from .models import common_member, common_member_star, follower_pair, common_member_action_log
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm,\
     UserCreationForm as BaseUserCreationForm
@@ -51,26 +51,38 @@ class UserChangeForm(BaseUserChangeForm):
 
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)
-        self.fields['email_status'].requierd = True
+        self.list_display = ('username', 'gender', 'profile', 'posts', 'follow_list', 'email', 'email_status', 'is_staff', 'is_superuser')
+        #self.fields['email_status'].requierd = True
 
 
 class Common_memberAdmin(BaseUserAdmin):
     def __init__(self, *args, **kwargs):
         super(Common_memberAdmin, self).__init__(*args, **kwargs)
-        self.list_display = ('username', 'email', 'email_status', 'is_staff', 'is_superuser')
+        self.list_display = ('username','gender', 'email', 'email_status','follow_list', 'is_staff', 'is_superuser')
         self.search_fields = ('username', 'email')
         self.form = UserChangeForm
         self.add_form = UserCreationForm
     fieldsets = BaseUserAdmin.fieldsets + (
-        (None, {'fields': ('email_status',)}),
+        ('personal info', {'fields': ('email_status','gender','posts','profile', 'following', 'followed','portrait')}),
     )
 
 
 class Commmon_menber_starAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('uid', 'pid')
 
+class followers_Adim(admin.ModelAdmin):
+    list_display=('followed','by')
 
+class User_action_log_Admin(admin.ModelAdmin):
+    list_display = ('id', 'uid', 'action','dateline')
+    fieldsets = (
+        (None, {'fields': ('id', 'uid', 'action','is_school_info', 'pid', 'spid')}),
+    )
 
 admin.site.register(common_member, Common_memberAdmin)
 
 admin.site.register(common_member_star, Commmon_menber_starAdmin)
+
+admin.site.register(follower_pair,followers_Adim)
+
+admin.site.register(common_member_action_log, User_action_log_Admin)

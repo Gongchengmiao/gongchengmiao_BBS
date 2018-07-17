@@ -1,0 +1,19 @@
+{% autoescape off %}
+
+To 亲爱的{{ user.username}}同学:
+
+
+
+欢迎您使用瀚海星云, 现在仍然是测试版, 若发现漏洞请联系此邮箱
+
+
+您的密码找回网址网址为:
+
+
+
+http://{{ domain }}{% url 'pswd_get_beck_2' uidb64=uid token=token%}
+
+
+                                              From 攻城喵团队
+
+{% endautoescape %}

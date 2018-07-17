@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% include "head.html" %}
+<body>
+{% if success %}
+    <div class="alert alert-success">
+        邮件发送成功,请在３小时内找回密码！
+    </div>
+{% elif head_wrong %}
+    <div class="alert alert-danger">
+    邮件头错误, 请重新提交！
+    </div>
+{% elif time_more %}
+    <div class="alert alert-danger">
+    邮件超过３小时未验证，请重新提交
+    </div>
+{% elif never_send %}
+    <div class="alert alert-danger">
+    啊噢, 我们没有给你发送过相关邮件哦！
+    </div>
+{% elif user_not_exist %}
+    <div class="alert alert-danger">
+    当前用户不存在!
+    </div>
+{% endif %}
+{% include "js_use.html" %}
+</body>
+</html>

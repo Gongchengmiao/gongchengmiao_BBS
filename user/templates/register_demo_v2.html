@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+{% include "head.html" %}
+{% load static %}
+
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="signin-info">
+                <div class="logopanel m-b">
+                    <h1>瀚海星云</h1>
+                </div>
+                <div class="m-b"></div>
+                <h4>欢迎注册 瀚海星云</h4>
+                <p>创建一个新账户用于学习交流、获取信息</p>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <form class="m-t" method="post" role="form">
+                {% csrf_token %}
+                {% if success %}
+                    <div class="alert alert-success">
+                        我们已经向您的邮箱中发送了一封激活邮件, 注意查收！
+                    </div>
+                {% elif waiting %}
+                    <div class="alert alert-success">
+                        正在给您发注册邮件，请等待！
+                    </div>
+                {% elif user_name_used %}
+                    <div class="alert alert-danger">
+                        用户名已被注册！
+                    </div>
+                {% elif password_invalidate %}
+                    <div class="alert alert-danger">
+                        {{ error_msg }}
+                    </div>
+                {% elif pw_confirm_error %}
+                    <div class="alert alert-danger">
+                        两次密码输入不一致!
+                    </div>
+                {% elif not_confirmed %}
+                    <div class="alert alert-danger">
+                        请同意用户协议！
+                    </div>
+                {% elif error_unknown %}
+                    <div class="alert alert-danger">
+                        啊噢, 出现了未知错误, 请确保注册表规范填写并重新提交注册申请！
+                    </div>
+                {% endif %}
+                <h3 class="no-margins">注册：</h3>
+                <p class="m-t-md">注册一个瀚海星云账号</p>
+                <div class="form-group">
+{#                    <input type="text" class="form-control" placeholder="请输入用户名" required="">#}
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+{#                    <input type="password" class="form-control" placeholder="请输入密码" required="">#}
+                    {{ form.password }}
+                </div>
+                <div class="form-group">
+{#                    <input type="password" class="form-control" placeholder="请再次输入密码" required="">#}
+                    {{ form.password_confirm }}
+                </div>
+                <div class="form-group">
+{#                    <input type="password" class="form-control" placeholder="请再次输入密码" required="">#}
+                    {{ form.email }}
+                </div>
+                <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+{#                            <input type="checkbox"><i></i> 我同意注册协议#}
+                            {{ form.confirm_message }}<i></i>我同意注册协议
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info block full-width m-b">注 册</button>
+                <strong>已经有账号了？ <a href="{% url "login" %}">立即登陆&raquo;</a></strong>
+            </form>
+        </div>
+    </div>
+    <div class="signup-foot">
+        <div class="intro">本站教育网访问地址<a href="http://bbs.ustc.edu.cn">bbs.ustc.edu.cn(202.38.64.3)</a></div>
+        <div class="intro">非中国教育网用户请使用本站<a class="cn" href="http://bbs2.ustc.edu.cn" target="_blank" title="bbs2.ustc.edu.cn">电信线路</a>或<a class="cn" href="http://bbs3.ustc.edu.cn" target="_blank" title="bbs3.ustc.edu.cn">网通线路</a></div>
+        <div class="intro">手机用户切换到<a href="{% url "login" %}">移动版</a> PC用户切换到<a href="{% url "login" %}">普通版</a></div>
+        <div class="intro">IPV6用户可通过本站IPV6地址访问<a href="http://bbs6.ustc.edu.cn" target="_blank">bbs6.ustc.edu.cn(2001:da8:d800::3)</a></div>
+        <span class="copyright">© 1996-2012 bbs.ustc.edu.cn All Rights Reserved.</span><span class="icp">ICP备案号：皖ICP备05002528号</span>
+    </div>
+</div>
+    <!-- 全局js -->
+    {% include "js_use.html" %}
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+</body>
+
+</html>
