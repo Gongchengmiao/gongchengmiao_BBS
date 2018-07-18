@@ -5,7 +5,7 @@ from django.urls import reverse
 from homepage.form import UserInfoChangeForm
 from django.contrib.auth.decorators import login_required
 from gongchengmiao_BBS import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
 
 
@@ -14,22 +14,22 @@ def show_info(request, slug):
     user = get_object_or_404(common_member, slug=slug)  # 被浏览者
     actions = common_member_action_log.objects.filter(uid=user).order_by('-dateline')[0:5]
 
-    if request.method == 'GET' and len(request.GET):
-        if 'btn' in list(request.GET) and request.GET['btn'] == 'show_more':
-            actions = common_member_action_log.objects.filter(uid=user).order_by('-dateline')[0:10]
-        elif 'btn' in list(request.GET) and request.GET['btn'] == 'follow_him'and slug != request.user.slug:
-            common_member.objects.filter(slug=slug).update(followed=user.followed+1)
-            common_member.objects.filter(username=request.user.username).update(following=request.user.following+1)
-            follower_pair.objects.create(followed=user, by=request.user)
-            user = common_member.objects.filter(slug=slug)  # 被浏览者
-            user = user[0]
-        elif 'btn' in list(request.GET) and request.GET['btn'] == 'send_msg':
-            pass
-        elif 'star_btn' in list(request.GET):
-            the_post = ArticlePost.objects.filter(pid=int(request.GET['star_btn']))[0]
-            common_member_action_log.objects.create(uid=request.user, pid=the_post, action='star')
-            if len(common_member_star.objects.filter(uid=request.user, pid=the_post)) != 0:
-                common_member_star.objects.create(uid=request.user, pid=the_post)
+    # if request.method == 'GET' and len(request.GET):
+    #     if 'btn' in list(request.GET) and request.GET['btn'] == 'show_more':
+    #         actions = common_member_action_log.objects.filter(uid=user).order_by('-dateline')[0:10]
+    #     elif 'btn' in list(request.GET) and request.GET['btn'] == 'follow_him'and slug != request.user.slug:
+    #         common_member.objects.filter(slug=slug).update(followed=user.followed+1)
+    #         common_member.objects.filter(username=request.user.username).update(following=request.user.following+1)
+    #         follower_pair.objects.create(followed=user, by=request.user)
+    #         user = common_member.objects.filter(slug=slug)  # 被浏览者
+    #         user = user[0]
+    #     elif 'btn' in list(request.GET) and request.GET['btn'] == 'send_msg':
+    #         pass
+    #     elif 'star_btn' in list(request.GET):
+    #         the_post = ArticlePost.objects.filter(pid=int(request.GET['star_btn']))[0]
+    #         common_member_action_log.objects.create(uid=request.user, pid=the_post, action='star')
+    #         if len(common_member_star.objects.filter(uid=request.user, pid=the_post)) != 0:
+    #             common_member_star.objects.create(uid=request.user, pid=the_post)
 
     context = {
         'user': user,
@@ -86,11 +86,43 @@ def edit_info(request):
 
         return redirect(reverse('view_self_info'))
 
+
 @login_required(login_url='/login/')
 def show_info_ajax_follow(request):
-    print(request.GET.get("user_slug"))
-    return HttpResponse('关注成功')
+    #print(request.GET.get("user_slug"))
+    target_slug = request.GET.get("user_slug")
+    if target_slug != request.user.slug:
+        target_user = common_member.objects.filter(slug=target_slug).first()
+        common_member.objects.filter(slug=target_slug).update(followed=target_user.followed + 1)
+        common_member.objects.filter(username=request.user.username).update(following=request.user.following + 1)
+        follower_pair.objects.create(followed=target_user, by=request.user)
+        return HttpResponse('关注成功')
+    else:
+        return HttpResponse('不能关注本人')
+
 
 @login_required(login_url='/login/')
 def show_info_ajax_more(request):
-    pass
+    target_slug = request.GET.get("user_slug")
+    target_user = common_member.objects.filter(slug=target_slug).first()
+    add_actions = common_member_action_log.objects.filter(uid=target_user).order_by('-dateline')[0:10]
+    action_list = list(add_actions.values())
+    user_list = list(str(target_user))
+    context = {
+        'user': user_list,
+        'list': action_list
+    }
+
+    return JsonResponse(context)
+
+
+@login_required(login_url='/login/')
+def show_info_ajax_star(request):
+    print('star')
+    the_post = ArticlePost.objects.filter(pid=int(request.GET['pid']))[0]
+    if len(common_member_star.objects.filter(uid=request.user, pid=the_post)) == 0:
+        common_member_action_log.objects.create(uid=request.user, pid=the_post, action='star')
+        common_member_star.objects.create(uid=request.user, pid=the_post)
+        return HttpResponse('收藏成功')
+    else:
+        return HttpResponse('已经收藏该帖')

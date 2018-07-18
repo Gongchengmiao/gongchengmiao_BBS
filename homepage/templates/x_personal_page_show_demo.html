@@ -96,14 +96,14 @@
                 <div class="ibox-content">
 
                     <div>
-                        <div class="feed-activity-list">
+                        <div class="feed-activity-list" id = "display_list">
 
                             {% if actions %}
                                 {% for i,action in actions %}
                                      <div class="feed-element">
                                 <a href="profile.html#" class="pull-left">
                                     {% load staticfiles %}
-                                    <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ portrait }}">
+                                    <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ user.portrait }}">
                                 </a>
                                 <div class="media-body ">
                                     <small class="pull-right">{{ action.dateline }}</small>
@@ -119,43 +119,19 @@
                                     <div class="well">
                                         {{ action.pid.title }}
                                     </div>
-                                    <form action="" method="get">
                                         <div class="pull-right">
                                             <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                            <button name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
+                                            <button id="star_btn" name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
                                             <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                                 {% endfor %}
                             {% endif %}
 
-
-                            <div class="feed-element">
-                                <a href="profile.html#" class="pull-left">
-                                    {% load staticfiles %}
-                                    <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ portrait }}">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right">2小时前</small>
-                                    <strong>MRC</strong> 发布了一篇心得
-                                    <br>
-                                    <small class="text-muted">今天 09:27 来自 MRC's iPhoneX</small>
-                                    <div class="well">
-                                        反正就是不用睡觉了(这条测试用)
-                                    </div>
-                                    <div class="pull-right">
-                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                        <a class="btn btn-xs btn-red"><i class="fa fa-thumbs-up"></i> 收藏 </a>
-                                        <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
-                        <button class="btn btn-info btn-block m"><i class="fa fa-arrow-down"></i> 显示更多</button>
+                        <button class="btn btn-info btn-block m" id="more_btn"><i class="fa fa-arrow-down"></i> 显示更多</button>
 
                     </div>
 
@@ -188,16 +164,41 @@
             $.ajax({
                 type:"get",
                 url:"{% url 'show_info_ajax_follow' %}",
-                data:{user_slug:"{{ user.slug }}"},
+                data:{'user_slug':"{{ user.slug }}"},
                 data_type:"json",
                 success:function (ret) {
                     alert(ret)
                 }
                 }
             )
+        });
+
+        $("#star_btn").click(function () {
+            $.ajax({
+                type:"get",
+                url:"{% url "show_info_ajax_star" %}",
+                data:{pid:$("#star_btn").val()},
+                data_type:"json",
+                success:function (ret,status) {
+                    alert(ret)
+                }
+            })
+        });
+
+        $("#more_btn").click(function () {
+            $.ajax({
+                type:"get",
+                data:{'user_slug':"{{ user.slug }}"},
+                data_type:"json",
+                url:"{% url "show_info_ajax_more" %}",
+                success:function (ret,status) {
+                     $.each(ret.list, function(i,item){
+                         var html = "";
+                     $("#display_list").append(html);
+                     });
+                }
+            })
         })
-
-
     });
     </script>
 

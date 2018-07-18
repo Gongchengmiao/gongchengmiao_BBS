@@ -83,7 +83,7 @@ class common_member_action_log(models.Model):
     dateline = models.DateTimeField(auto_now=True)  # 操作时间
 
     def __str__(self):
-        return '{} {} {} {}'.format(self.uid, self.action, self.pid, self.dateline)
+        return '{} {} {} {}'.format(self.uid, self.action, self.pid.title, self.dateline)
 
 
 # 用户统计表
