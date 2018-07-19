@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<div style="margin-left:10px">
+    <form class="form-horizontal" action="." mothod="post">{% csrf_token %}
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-2 text-right"><span>标题:</span></div>
+            <div class="col-md-10 text-left">{{article_post_form.title}}</div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+        	<div class="col-md-2 text-right"><span>内容:</span></div>
+        	<div class="colmd-10 text-left">{{ article_post_form.body }}</div>
+        </div>
+        <div class="row">
+            <input type="button" class="btn btn-primary btn-lg" value="发布" onclick="publish_article()">
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src='{% static "js/jquery.js" %}'></script>
+<script type="text/javascript" src="{% static 'js/layer.js'%}"></script>
+<script type="text/javascript">
+	function publish_article(){
+		var title = $("#id_title").val();
+        var body = $("#id_body").val();
+        $.ajax({
+        	url: "{% url 'article:article_post' %}",
+        	type: "POST",
+        	data: {"title":title, "body":body},
+        	success: function(e){
+        		if(e=="1"){
+                    layer.msg("successful");
+        		}else if(e=="2"){
+        			layer.msg("sorry.") ;
+        		}else{
+        			layer.msg("项目名称必须写，不能空。");
+        		}
+        	},
+        });
+	}
+
+
+</script>
