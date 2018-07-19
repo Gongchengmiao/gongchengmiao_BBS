@@ -6,5 +6,4 @@ app_name = "article"
 
 urlpatterns = [
     path('article-post/', views.article_post, name="article_post"),
-
 ]
