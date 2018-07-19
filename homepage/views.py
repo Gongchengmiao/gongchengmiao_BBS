@@ -12,7 +12,7 @@ from django.http import HttpResponse, JsonResponse
 @login_required(login_url='/login/')
 def show_info(request, slug):
     user = get_object_or_404(common_member, slug=slug)  # 被浏览者
-    actions = common_member_action_log.objects.filter(uid=user).order_by('-dateline')[0:5]
+    actions = common_member_action_log.objects.filter(uid=user).order_by('-dateline')[0:2]
 
     # if request.method == 'GET' and len(request.GET):
     #     if 'btn' in list(request.GET) and request.GET['btn'] == 'show_more':
@@ -66,7 +66,7 @@ def view_self_info(request):
         'my_star_posts': enumerate(my_star_posts)
     }
 
-    return render(request, 'personal_page_demo.html', context)
+    return render(request, 'x_personal_page_demo.html', context)
 
 
 def edit_info(request):
@@ -105,11 +105,24 @@ def show_info_ajax_follow(request):
 def show_info_ajax_more(request):
     target_slug = request.GET.get("user_slug")
     target_user = common_member.objects.filter(slug=target_slug).first()
-    add_actions = common_member_action_log.objects.filter(uid=target_user).order_by('-dateline')[0:10]
-    action_list = list(add_actions.values())
-    user_list = list(str(target_user))
+    present_ac_num = int(request.GET.get("action_num"))
+    if present_ac_num == common_member_action_log.objects.filter(uid=target_user).count():
+        context={
+            "isFull": '1'
+        }
+        return JsonResponse(context)
+    add_actions = common_member_action_log.objects.filter(uid=target_user).order_by('-dateline')[present_ac_num:]
+    action_list = []
+    for ac in add_actions:
+        item = {'time': '', 'type': '', 'title': ''}
+        item['time'] = ac.dateline.strftime('%a %d/%m/%y')
+        item['type'] = ac.action
+        item['title'] = ac.pid.title
+        action_list.append(item)
     context = {
-        'user': user_list,
+        'isFull': 0,
+        'user': str(target_user.username),
+        'portrait': settings.MEDIA_URL+target_user.portrait.name,
         'list': action_list
     }
 
@@ -118,7 +131,6 @@ def show_info_ajax_more(request):
 
 @login_required(login_url='/login/')
 def show_info_ajax_star(request):
-    print('star')
     the_post = ArticlePost.objects.filter(pid=int(request.GET['pid']))[0]
     if len(common_member_star.objects.filter(uid=request.user, pid=the_post)) == 0:
         common_member_action_log.objects.create(uid=request.user, pid=the_post, action='star')

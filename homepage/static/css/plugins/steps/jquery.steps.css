@@ -111,7 +111,7 @@
 .wizard > .steps .current a:hover,
 .wizard > .steps .current a:active
 {
-    background: #1AB394;
+    background: #5897fb;
     color: #fff;
     cursor: default;
 }
@@ -120,7 +120,7 @@
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active
 {
-    background: #6fd1bd;
+    background: #b3d4fd;
     color: #fff;
 }
 
@@ -138,7 +138,7 @@
     display: block;
     margin: 5px 5px 10px 5px;
     min-height: 120px;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     width: auto;
 
@@ -148,7 +148,8 @@
 }
 
 .wizard-big.wizard > .content {
-    min-height: 320px;
+    min-height: 25vw;
+    background: #D0DCF3;
 }
 .wizard.vertical > .content
 {
@@ -251,7 +252,7 @@
 .wizard > .actions a:hover,
 .wizard > .actions a:active
 {
-    background: #1AB394;
+    background: #0d8ddb;
     color: #fff;
     display: block;
     padding: 0.5em 1em;

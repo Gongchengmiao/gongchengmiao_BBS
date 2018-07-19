@@ -11,13 +11,15 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-
     {% load static %}
-    <link rel="shortcut icon" href="{% static "favicon.ico"%}">
+    <link rel="shortcut icon" href="{% static "img/ustc.png"%}">
+    <link href="{% static "css/style_35_common.css" %}" rel="stylesheet">
+    <link href="{% static "css/style_35_forum_viewthread.css" %}" rel="stylesheet">
     <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
     <link href="{% static "css/font-awesome.css"%}" rel="stylesheet">
     <link href="{% static "css/animate.css" %}" rel="stylesheet">
     <link href="{% static "css/style.css" %}" rel="stylesheet">
+
 
 </head>
 
@@ -121,7 +123,7 @@
                                     </div>
                                         <div class="pull-right">
                                             <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                            <button id="star_btn" name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
+                                            <button  name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
                                             <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
                                         </div>
                                 </div>
@@ -131,7 +133,7 @@
 
                         </div>
 
-                        <button class="btn btn-info btn-block m" id="more_btn"><i class="fa fa-arrow-down"></i> 显示更多</button>
+                        <button class="btn btn-info btn-block m" id="show_more_btn"><i class="fa fa-arrow-down"></i> 显示更多</button>
 
                     </div>
 
@@ -173,11 +175,54 @@
             )
         });
 
-        $("#star_btn").click(function () {
+        $("#show_more_btn").click(function () {
             $.ajax({
                 type:"get",
+                url:"{% url 'show_info_ajax_more' %}",
+                data:{
+                    'user_slug':"{{ user.slug }}",
+                    'action_num':$("div.feed-element").size()
+                },
+                data_type:"json",
+                success:function (ret) {
+                    if(ret.isFull==='1')
+                    {
+                        alert('已显示全部动态')
+                        return
+                    }
+                    $.each(ret.list,function (i,ac) {
+                        var html = " <div class=\"feed-element\">\n" +
+                            "                                <a href=\"profile.html#\" class=\"pull-left\">\n" +
+                            "                                    <img alt=\"image\" class=\"img-circle\" src=\" "+ret.portrait+" \">\n" +
+                            "                                </a>\n" +
+                            "                                <div class=\"media-body \">\n" +
+                            "                                    <small class=\"pull-right\">2小时前</small>\n" +
+                            "                                    <strong>"+ret.user+"</strong> "+ac.type+"了一篇心得\n" +
+                            "                                    <br>\n" +
+                            "                                    <small class=\"text-muted\">"+ac.time+" 来自 MRC's iPhoneX</small>\n" +
+                            "                                    <div class=\"well\">\n" +
+                            "                                        "+ac.title+"\n" +
+                            "                                    </div>\n" +
+                            "                                    <div class=\"pull-right\">\n" +
+                            "                                        <a class=\"btn btn-xs btn-white\"><i class=\"fa fa-thumbs-up\"></i> 赞 </a>\n" +
+                            "                                        <a class=\"btn btn-xs btn-red\"><i class=\"fa fa-thumbs-up\"></i> 收藏 </a>\n" +
+                            "                                        <a class=\"btn btn-xs btn-primary\"><i class=\"fa fa-pencil\"></i> 评论</a>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                            </div>";
+
+                    $("#display_list").append(html)
+                    })
+                }
+            })
+
+        });
+
+        $("button[name='star_btn']").click(function () {
+             $.ajax({
+                type:"get",
                 url:"{% url "show_info_ajax_star" %}",
-                data:{pid:$("#star_btn").val()},
+                data:{pid:$(this).val()},
                 data_type:"json",
                 success:function (ret,status) {
                     alert(ret)
@@ -185,20 +230,7 @@
             })
         });
 
-        $("#more_btn").click(function () {
-            $.ajax({
-                type:"get",
-                data:{'user_slug':"{{ user.slug }}"},
-                data_type:"json",
-                url:"{% url "show_info_ajax_more" %}",
-                success:function (ret,status) {
-                     $.each(ret.list, function(i,item){
-                         var html = "";
-                     $("#display_list").append(html);
-                     });
-                }
-            })
-        })
+
     });
     </script>
 
