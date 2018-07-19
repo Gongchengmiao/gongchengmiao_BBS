@@ -34,6 +34,7 @@ urlpatterns = [
     path('verify/<uidb64>/<token>/', user_views.email_active, name='verify_user'),
     path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
     path('admin/', admin.site.urls, name='admin'),
+    path('article/', include('article.urls', namespace='article')),
     path('index_core/', index_views.index, name='index_core'),
     path('pswdgetback', user_views.pswdgetback, name='pswd_get_back'),
     path('waitemailback/<username>/', user_views.pswdgetback_jump, name='wait_email_back'),
