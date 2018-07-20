@@ -7,7 +7,7 @@ import hashlib
 
 # Create your views here.
 def index_shell(request):
-    return render(request, "daohanglan_demo.html")
+    return render(request, "x_whole_demo.html")
 
 
 def index(request):
