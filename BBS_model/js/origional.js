@@ -19,3 +19,19 @@ function outHide() {
 }
 
 
+
+function SectionUpdate() {
+    function load(){
+        document.getElementById("update");
+    }
+    load();
+    $.ajax({
+        type: "POST",
+        cache: false,
+        dataType: "html",
+        url: "x_mailbox_demo.html",
+        success: function () {
+            load();
+        }
+    });
+}
