@@ -3177,7 +3177,7 @@ a.forum-item-title:hover {
         top: 24px;
         left: 100%;
         border-color: transparent;
-        border-left-color: white;
+        border-left-color: white;/index/
     }
 
     .center-orientation .vertical-timeline-content .btn {
@@ -3187,7 +3187,7 @@ a.forum-item-title:hover {
     .center-orientation .vertical-timeline-content .vertical-date {
         position: absolute;
         width: 100%;
-        left: 122%;
+        left: 122%;/index/
         top: 2px;
         font-size: 14px;
     }
@@ -3220,7 +3220,7 @@ a.forum-item-title:hover {
 }
 
 .sidebard-panel {
-    width: 220px;
+    width: 220px;/index/
     background: #ebebed;
     padding: 10px 20px;
     position: absolute;
@@ -3237,7 +3237,7 @@ a.forum-item-title:hover {
 .sidebard-panel p {
     font-size: 12px;
 }
-
+/index/
 .sidebard-panel .feed-element {
     margin-top: 20px;
     padding-bottom: 0;
@@ -3303,7 +3303,7 @@ a.forum-item-title:hover {
 .sidebar-container ul.nav-tabs li a {
     border: none;
     padding: 12px 10px;
-    margin: 0;
+    margin: 0;/index/
     border-radius: 0;
     background: #2f4050;
     color: #fff;
