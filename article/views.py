@@ -20,19 +20,18 @@ import json
 @csrf_exempt
 def article_post(request):
     if request.method=="POST":
-        if request.method=="POST":
-            article_post_form = ArticlePostForm(data=request.POST)
-            if article_post_form.is_valid():
-                cd = article_post_form.cleaned_data
-                try:
-                    new_article = article_post_form.save(commit=False)
-                    new_article.author = request.user
-                    new_article.save()
-                    return HttpResponse("1")
-                except:
-                    return HttpResponse("2")
-            else:
-                return HttpResponse("3")
+        article_post_form = ArticlePostForm(data=request.POST)
+        if article_post_form.is_valid():
+            cd = article_post_form.cleaned_data
+            try:
+                new_article = article_post_form.save(commit=False)
+                new_article.author = request.user
+                new_article.save()
+                return HttpResponse("1")
+            except:
+                return HttpResponse("2")
+        else:
+            return HttpResponse("3")
     else:
         article_post_form = ArticlePostForm()
-        return render(request, "article_post.html", {"article_post_form":article_post_form})
+        return render(request, "x_fatie_demo.html", {"article_post_form":article_post_form})
