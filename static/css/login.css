@@ -9,7 +9,7 @@ html{height: 100%;}
 body.signin {
     background: #18c8f6;
     height: auto;
-    background:url("../img/login-background.jpg") no-repeat center fixed;
+    background:url("/static/img/login-background.jpg") no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -33,6 +33,14 @@ body.signin {
     list-style: none;
     padding: 0;
     margin: 20px 0;
+    color : #00FF7F;
+}
+
+.signinpanel .signin-info strong {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    color : #237ab7;
 }
 
 .signinpanel .form-control {
@@ -41,11 +49,11 @@ body.signin {
 }
 
 .signinpanel .uname {
-    background: #fff url(../img/user.png) no-repeat 95% center;color:#333;
+    background: #fff url(/static/img/user.png) no-repeat 95% center;color:#333;
 }
 
 .signinpanel .pword {
-    background: #fff url(../img/locked.png) no-repeat 95% center;color:#333;
+    background: #fff url(/static/img/locked.png) no-repeat 95% center;color:#333;
 }
 
 .signinpanel .btn {
@@ -96,5 +104,30 @@ body.signin {
     .signuppanel {
         margin:0 20px;
         width:auto;
+    }
+}
+.signup-foot{font-size: 12px;text-align : center;coloe : #FFF;margin-top: 50px;}
+@media screen and (max-width: 768px) {
+    .signinpanel,
+    .signuppanel {
+        margin: 0 auto;
+        width: 420px!important;
+        padding: 20px;
+    }
+    .signinpanel form {
+        margin-top: 20px;
+    }
+    .signup-footer {
+        margin-bottom: 10px;
+    }
+    .signuppanel .form-control {
+        margin-bottom: 10px;
+    }
+    .signup-footer .pull-left,
+    .signup-footer .intro {
+        margin-top : 2px;
+    }
+    .signinpanel .signin-info ul {
+        display: none;
     }
 }

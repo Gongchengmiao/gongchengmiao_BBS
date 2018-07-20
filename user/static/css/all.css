@@ -265,18 +265,18 @@
       width: 15px;
       margin-right: 6px;
       margin-bottom: 2px;
-      background-image: url("../images/global/starn.png");
+      background-image: url("/static/images/global/starn.png");
       background-size: 15px 15px;
       z-index: 30;
       cursor: pointer; }
       #board-head #add-fav .star:hover, #board-head #add-fav .star.active {
-        background-image: url("../images/global/stary.png"); }
+        background-image: url("/static/images/global/stary.png"); }
     #board-head #add-fav .rss {
       height: 18px;
       width: 18px;
       margin-left: 6px;
       margin-bottom: 3px;
-      background-image: url("../images/topics/rss.png"); }
+      background-image: url("/static/images/topics/rss.png"); }
     #board-head #add-fav .fav-text {
       cursor: pointer; }
   #board-head #content {
@@ -584,11 +584,11 @@
         display: inline-block;
         height: 15px;
         width: 15px;
-        background-image: url("../images/global/starn.png");
+        background-image: url("/static/images/global/starn.png");
         background-size: 15px 15px;
         z-index: 30; }
         #page-board .boards-wrapper .board-block .star:hover, #page-board .boards-wrapper .board-block .star.active {
-          background-image: url("../images/global/stary.png"); }
+          background-image: url("/static/images/global/stary.png"); }
   #page-board .boards-wrapper.zones > .board-block {
     width: 500px;
     height: 146px; }
@@ -1551,29 +1551,29 @@
     background-position: center center;
     background-repeat: no-repeat no-repeat; }
     #page-collection button.btn.icon-font.archive {
-      background-image: url(../images/collection/small_shouruwenji.png); }
+      background-image: url(/static/images/collection/small_shouruwenji.png); }
     #page-collection button.btn.icon-font.archive:hover {
-      background-image: url(../images/collection/small_shouruwenji_hover.png); }
+      background-image: url(/static/images/collection/small_shouruwenji_hover.png); }
     #page-collection button.btn.icon-font.add-fav {
-      background-image: url(../images/collection/small_shoucang.png); }
+      background-image: url(/static/images/collection/small_shoucang.png); }
     #page-collection button.btn.icon-font.add-fav:hover {
-      background-image: url(../images/collection/small_shoucang_hover.png); }
+      background-image: url(/static/images/collection/small_shoucang_hover.png); }
     #page-collection button.btn.icon-font.remove-fav {
-      background-image: url(../images/collection/small_quxiaoshoucang.png); }
+      background-image: url(/static/images/collection/small_quxiaoshoucang.png); }
     #page-collection button.btn.icon-font.remove-fav:hover {
-      background-image: url(../images/collection/small_quxiaoshoucang_hover.png); }
+      background-image: url(/static/images/collection/small_quxiaoshoucang_hover.png); }
     #page-collection button.btn.icon-font.delete {
-      background-image: url(../images/collection/small_shanchu.png); }
+      background-image: url(/static/images/collection/small_shanchu.png); }
     #page-collection button.btn.icon-font.delete:hover {
-      background-image: url(../images/collection/small_shanchu_hover.png); }
+      background-image: url(/static/images/collection/small_shanchu_hover.png); }
     #page-collection button.btn.icon-font.move {
-      background-image: url(../images/collection/small_yidong.png); }
+      background-image: url(/static/images/collection/small_yidong.png); }
     #page-collection button.btn.icon-font.move:hover {
-      background-image: url(../images/collection/small_yidong_hover.png); }
+      background-image: url(/static/images/collection/small_yidong_hover.png); }
     #page-collection button.btn.icon-font.rename {
-      background-image: url(../images/collection/small_chongmingming.png); }
+      background-image: url(/static/images/collection/small_chongmingming.png); }
     #page-collection button.btn.icon-font.rename:hover {
-      background-image: url(../images/collection/small_chongmingming_hover.png); }
+      background-image: url(/static/images/collection/small_chongmingming_hover.png); }
   #page-collection .collection-list {
     width: 100%; }
     #page-collection .collection-list.disabled {
@@ -1657,7 +1657,7 @@
           line-height: 55px;
           float: right;
           margin-right: 30px;
-          background-image: url(../images/collection/small_xiequanxian_hover.png);
+          background-image: url(/static/images/collection/small_xiequanxian_hover.png);
           background-position: center center;
           background-repeat: no-repeat no-repeat; }
       #page-collection .collection-list .collection-item .item-author {
@@ -1702,7 +1702,7 @@
   #page-collection .show-while-sorting {
     display: none; }
   #page-collection .drop-area {
-    background-image: url(../images/collection/tuorukuang.png);
+    background-image: url(/static/images/collection/tuorukuang.png);
     background-repeat: no-repeat no-repeat;
     background-size: contain;
     height: 178px;
@@ -1754,7 +1754,7 @@
   #page-error #error-body #error-image {
     width: 300px;
     height: 193px;
-    background: url("../images/global/error.png");
+    background: url("/static/images/global/error.png");
     background-size: 300px 193px;
     margin: 20px auto; }
   #page-error #error-body > p {
@@ -1769,9 +1769,9 @@
 
 @font-face {
   font-family: 'font-for-page-favorite';
-  src: url("../font/favorite/iconfont.eot");
+  src: url("/static/font/favorite/iconfont.eot");
   /* IE9*/
-  src: url("../font/favorite/iconfont.eot?#iefix") format("embedded-opentype"), url("../font/favorite/iconfont.woff") format("woff"), url("../font/favorite/iconfont.ttf") format("truetype"), url("../font/favorite/iconfont.svg#iconfont") format("svg");
+  src: url("/static/font/favorite/iconfont.eot?#iefix") format("embedded-opentype"), url("/static/font/favorite/iconfont.woff") format("woff"), url("/static/font/favorite/iconfont.ttf") format("truetype"), url("/static/font/favorite/iconfont.svg#iconfont") format("svg");
   /* iOS 4.1- */ }
 
 #page-favorite, #page-favorite-collection {
@@ -2965,14 +2965,14 @@ input:not([type=radio], [type=checkbox]), textarea {
         background: #efedec center no-repeat; }
     #page-content #go-to-btn-container .go-to-top {
       margin-top: -99px;
-      background-image: url("../images/global/go-to-top.png"); }
+      background-image: url("/static/images/global/go-to-top.png"); }
       #page-content #go-to-btn-container .go-to-top:hover {
-        background-image: url("../images/global/go-to-top-hover.png"); }
+        background-image: url("/static/images/global/go-to-top-hover.png"); }
     #page-content #go-to-btn-container .go-to-bottom {
       margin-top: -1px;
-      background-image: url("../images/global/go-to-bottom.png"); }
+      background-image: url("/static/images/global/go-to-bottom.png"); }
       #page-content #go-to-btn-container .go-to-bottom:hover {
-        background-image: url("../images/global/go-to-bottom-hover.png"); }
+        background-image: url("/static/images/global/go-to-bottom-hover.png"); }
 
 #footer {
   margin-left: 160px;
@@ -3259,7 +3259,7 @@ input.generic-input-box {
   box-shadow: none; }
 
 .cursor-zoom-in {
-  cursor: url("../images/global/zoom.png"), pointer;
+  cursor: url("/static/images/global/zoom.png"), pointer;
   cursor: zoom-in; }
 
 pre {
@@ -3381,13 +3381,13 @@ a.special-button {
   display: inline-block; }
 
 .vip-min-0 {
-  background: url(../images/user/icon-verified-0-min.png); }
+  background: url(/static/images/user/icon-verified-0-min.png); }
 
 .vip-min-1 {
-  background: url(../images/user/icon-verified-1-min.png); }
+  background: url(/static/images/user/icon-verified-1-min.png); }
 
 .vip-min-2 {
-  background: url(../images/user/icon-verified-2-min.png); }
+  background: url(/static/images/user/icon-verified-2-min.png); }
 
 input[type=text], input[type=number], input[type=password], input[type=email], input[type=tel], textarea {
   border-radius: 3px;
@@ -4040,7 +4040,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
           margin-top: -96px;
           height: 90px;
           width: 90px;
-          background: url("../images/welcome/qrcode_wechat.png");
+          background: url("/static/images/welcome/qrcode_wechat.png");
           border-radius: 4px;
           border: 1px solid #5ac64f; }
         #page-login .main-container .footer a:last-of-type {
@@ -4200,7 +4200,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
         width: 15px;
         margin-right: 6px;
         margin-bottom: 2px;
-        background-image: url("../images/topics/star.png");
+        background-image: url("/static/images/topics/star.png");
         z-index: 30;
         cursor: pointer; }
       #page-mail #mail-head .add-fav .star:hover, #page-mail-list #mail-head .add-fav .star:hover {
@@ -4214,7 +4214,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
         width: 18px;
         margin-left: 6px;
         margin-bottom: 3px;
-        background-image: url("../images/topics/rss.png"); }
+        background-image: url("/static/images/topics/rss.png"); }
     #page-mail #mail-head .tab, #page-mail-list #mail-head .tab {
       margin: 0;
       display: inline-block;
@@ -4640,10 +4640,10 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
         margin-right: 10px;
         width: 20px;
         height: 20px;
-        background-image: url("../images/global/starn.png"); }
+        background-image: url("/static/images/global/starn.png"); }
         #page-mail #mail-list .list-item .star:hover, #page-mail #mail-list .list-item .star.active, #page-mail-list #mail-list .list-item .star:hover, #page-mail-list #mail-list .list-item .star.active {
           cursor: pointer;
-          background-image: url("../images/global/stary.png"); }
+          background-image: url("/static/images/global/stary.png"); }
       #page-mail #mail-list .list-item .portrait, #page-mail-list #mail-list .list-item .portrait {
         width: 78px;
         margin-left: 15px;
@@ -5692,7 +5692,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
         float: right; }
         #page-post #post-read header .view-full-post:before {
           content: "";
-          background: url(../images/icons/iconfont-liulan.png);
+          background: url(/static/images/icons/iconfont-liulan.png);
           display: inline-block;
           width: 12px;
           height: 11px;
@@ -5720,17 +5720,17 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
             line-height: 20px;
             height: 20px; }
             #page-post #post-read header > .right.share > a.weibo {
-              background-image: url("../images/icons/iconfont-weibo.png"); }
+              background-image: url("/static/images/icons/iconfont-weibo.png"); }
               #page-post #post-read header > .right.share > a.weibo:hover {
-                background-image: url("../images/icons/action/iconfont-weibo-hover.png"); }
+                background-image: url("/static/images/icons/action/iconfont-weibo-hover.png"); }
             #page-post #post-read header > .right.share > a.wechat {
-              background-image: url("../images/icons/iconfont-weixin.png"); }
+              background-image: url("/static/images/icons/iconfont-weixin.png"); }
               #page-post #post-read header > .right.share > a.wechat:hover {
-                background-image: url("../images/icons/action/iconfont-weixin-hover.png"); }
+                background-image: url("/static/images/icons/action/iconfont-weixin-hover.png"); }
             #page-post #post-read header > .right.share > a.renren {
-              background-image: url("../images/icons/iconfont-renren.png"); }
+              background-image: url("/static/images/icons/iconfont-renren.png"); }
               #page-post #post-read header > .right.share > a.renren:hover {
-                background-image: url("../images/icons/action/iconfont-renren-hover.png"); }
+                background-image: url("/static/images/icons/action/iconfont-renren-hover.png"); }
           #page-post #post-read header > .right.share .wechat-qrcode {
             position: absolute;
             top: 25px;
@@ -5931,46 +5931,46 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
                     background-size: contain;
                     -moz-background-size: contain; }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a .image.reply {
-                      background-image: url("../images/icons/iconfont-huifu.png"); }
+                      background-image: url("/static/images/icons/iconfont-huifu.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a .image.fold-up {
-                      background-image: url("../images/icons/iconfont-fold.png"); }
+                      background-image: url("/static/images/icons/iconfont-fold.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a .image.mail {
-                      background-image: url("../images/icons/iconfont-xin.png"); }
+                      background-image: url("/static/images/icons/iconfont-xin.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a .image.reprint {
-                      background-image: url("../images/icons/iconfont-fenxiang.png"); }
+                      background-image: url("/static/images/icons/iconfont-fenxiang.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a .image.resend {
-                      background-image: url("../images/icons/iconfont-jijian.png"); }
+                      background-image: url("/static/images/icons/iconfont-jijian.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a .image.collect {
-                      background-image: url("../images/icons/iconfont-shouruwenji.png"); }
+                      background-image: url("/static/images/icons/iconfont-shouruwenji.png"); }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a:hover span {
                     color: #959595; }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a:hover .image.reply {
-                    background-image: url("../images/icons/action/iconfont-huifu-hover.png"); }
+                    background-image: url("/static/images/icons/action/iconfont-huifu-hover.png"); }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a:hover .image.fold-up {
-                    background-image: url("../images/icons/action/iconfont-fold-hover.png"); }
+                    background-image: url("/static/images/icons/action/iconfont-fold-hover.png"); }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a:hover .image.mail {
-                    background-image: url("../images/icons/action/iconfont-xin-hover.png"); }
+                    background-image: url("/static/images/icons/action/iconfont-xin-hover.png"); }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a:hover .image.reprint {
-                    background-image: url("../images/icons/action/iconfont-fenxiang-hover.png"); }
+                    background-image: url("/static/images/icons/action/iconfont-fenxiang-hover.png"); }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a:hover .image.resend {
-                    background-image: url("../images/icons/action/iconfont-jijian-hover.png"); }
+                    background-image: url("/static/images/icons/action/iconfont-jijian-hover.png"); }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a:hover .image.collect {
-                    background-image: url("../images/icons/action/iconfont-collect-hover.png"); }
+                    background-image: url("/static/images/icons/action/iconfont-collect-hover.png"); }
                   #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a.disable {
                     cursor: default; }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a.disable span {
                       color: #e4e4e4;
                       cursor: default; }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a.disable .image.reply {
-                      background-image: url("../images/icons/action/iconfont-huifu-disable.png"); }
+                      background-image: url("/static/images/icons/action/iconfont-huifu-disable.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a.disable .image.mail {
-                      background-image: url("../images/icons/action/iconfont-xin-disable.png"); }
+                      background-image: url("/static/images/icons/action/iconfont-xin-disable.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a.disable .image.reprint {
-                      background-image: url("../images/icons/action/iconfont-fenxiang-disable.png"); }
+                      background-image: url("/static/images/icons/action/iconfont-fenxiang-disable.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a.disable .image.resend {
-                      background-image: url("../images/icons/action/iconfont-jijian-disable.png"); }
+                      background-image: url("/static/images/icons/action/iconfont-jijian-disable.png"); }
                     #page-post #post-read .post-card .post-main .operations .toolbox > ul > li a.disable .image.collect {
-                      background-image: url("../images/icons/action/iconfont-collect-disable.png"); }
+                      background-image: url("/static/images/icons/action/iconfont-collect-disable.png"); }
                 #page-post #post-read .post-card .post-main .operations .toolbox > ul > li .bdwm-down-list {
                   right: 8px;
                   top: 40px; }
@@ -7422,7 +7422,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
         display: inline-block;
         height: 15px;
         width: 15px;
-        background-image: url("../images/board/star.png");
+        background-image: url("/static/images/board/star.png");
         z-index: 30; }
         #page-search .search-result .board-block .star:hover {
           background-position: -30px 0 !important; }
@@ -7842,7 +7842,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
           width: 15px;
           height: 15px;
           float: left;
-          background-image: url("../images/topics/star.png");
+          background-image: url("/static/images/topics/star.png");
           margin: 5px 7px; }
           #page-thread-opt #board-body .list-item .thread-opt ul .score-item .score-list li:hover, #page-thread-opt #board-body .list-item .thread-opt ul .score-item .score-list li.hover,
           #page-thread-opt .board-body .list-item .thread-opt ul .score-item .score-list li:hover,
@@ -8490,7 +8490,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
     .page-thread .option-button .change {
       width: 14px;
       height: 12px;
-      background-image: url("../images/topics/change.png");
+      background-image: url("/static/images/topics/change.png");
       background-position: 0 !important;
       margin-top: 7px; }
     #page-thread .option-button .delete,
@@ -8498,7 +8498,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
       width: 11px;
       height: 11px;
       margin-top: 7px;
-      background-image: url("../images/topics/delete.png");
+      background-image: url("/static/images/topics/delete.png");
       background-position: 0 !important; }
     #page-thread .option-button:hover, #page-thread .option-button:active,
     .page-thread .option-button:hover,
@@ -9532,9 +9532,9 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
 @charset "UTF-8";
 @font-face {
   font-family: 'font-for-page-vote';
-  src: url("../font/vote/iconfont.eot");
+  src: url("/static/font/vote/iconfont.eot");
   /* IE9*/
-  src: url("../font/vote/iconfont.eot?#iefix") format("embedded-opentype"), url("../font/vote/iconfont.woff") format("woff"), url("../font/vote/iconfont.ttf") format("truetype"), url("../font/vote/iconfont.svg#iconfont") format("svg");
+  src: url("/static/font/vote/iconfont.eot?#iefix") format("embedded-opentype"), url("/static/font/vote/iconfont.woff") format("woff"), url("/static/font/vote/iconfont.ttf") format("truetype"), url("/static/font/vote/iconfont.svg#iconfont") format("svg");
   /* iOS 4.1- */ }
 
 #page-thread #vote, #page-thread #vote-opt {
@@ -9735,11 +9735,11 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
       width: 10px;
       height: 7px;
       content: "";
-      background: url("../images/topics/triangle-down.png"); }
+      background: url("/static/images/topics/triangle-down.png"); }
     #page-thread #vote .list-content .list-item.active .status:before, #page-thread #vote-opt .list-content .list-item.active .status:before {
       content: "收起"; }
     #page-thread #vote .list-content .list-item.active .status:after, #page-thread #vote-opt .list-content .list-item.active .status:after {
-      background: url("../images/topics/triangle-up.png"); }
+      background: url("/static/images/topics/triangle-up.png"); }
   #page-thread #vote .list-content .vote-body, #page-thread #vote-opt .list-content .vote-body {
     font-size: 14px;
     color: #434343; }
@@ -10002,7 +10002,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
       width: 10px;
       height: 10px;
       margin-left: 15px;
-      background-image: url(../images/icons/action/iconfont-cancel.png); }
+      background-image: url(/static/images/icons/action/iconfont-cancel.png); }
     #page-thread #vote-opt .open-vote-body .options-wrapper.radio .input-wrapper:before {
       border-radius: 6px; }
     #page-thread #vote-opt .open-vote-body .options-wrapper .red {
