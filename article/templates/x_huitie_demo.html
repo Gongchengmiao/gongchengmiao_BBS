@@ -793,11 +793,19 @@
                 var postmaxchars = parseInt('100000');
                 var disablepostctrl = parseInt('0');
             </script>
+            <form class="form-horizontal" action="." method="post">{% csrf_token %}
 
             <!--以下是文本编辑器，用于回帖-->
             <div class="mail-text h-200">
                 <div class="summernote">
-                    <h2>这里可以回帖</h2>
+
+
+
+
+
+
+
+                    <h2>{{ comment_form.body }}</h2>
                     <p>采用了summernote文本编辑插件</p>
 
 
@@ -807,11 +815,14 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
+
             <div class="mail-body text-right tooltip-demo">
+                <p><input type="submit" name="" value="发表" class="btn btn-primary"> </p>
                 <a href="" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> 发表</a>
                 <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard"><i class="fa fa-times"></i> 放弃</a>
                  </div>
             <div class="clearfix"></div>
+            </form>
 
             <!-- 全局js -->
             <script src="js/jquery.min.js?v=2.1.4"></script>

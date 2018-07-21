@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 from django import forms
 from .models import forum_post,forum_school_info
-from .models import ArticleColumn, ArticlePost
+from .models import ArticleColumn, ArticlePost, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -17,3 +17,4 @@ admin.site.register(forum_post, PostAdmin)
 admin.site.register(forum_school_info, SchoolInfoAdmin)
 admin.site.register(ArticleColumn)
 admin.site.register(ArticlePost)
+admin.site.register(Comment)

@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .forms import ArticlePostForm
+from .forms import ArticlePostForm, CommentForm
 from .models import ArticleColumn, ArticlePost
 
 import json
@@ -39,4 +39,17 @@ def article_post(request):
 
 def article_detail(request, id, slug):
     article = get_object_or_404(ArticlePost, id = id, slug = slug)
-    return render(request, "x_huitie_demo.html", {"article":article})
+
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.article = article
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+
+
+
+    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form})
