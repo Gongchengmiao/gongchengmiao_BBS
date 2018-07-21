@@ -18,20 +18,40 @@ function outHide() {
     showDiv.innerHTML = '';
 }
 
-
-
-function SectionUpdate() {
-    function load(){
-        document.getElementById("update");
-    }
-    load();
-    $.ajax({
-        type: "POST",
-        cache: false,
-        dataType: "html",
-        url: "x_mailbox_demo.html",
-        success: function () {
-            load();
-        }
-    });
+function imgRefresh1() {
+    document.getElementById('imgshow').setAttribute("src","img/boy_glasses.jpg");
 }
+function imgRefresh2() {
+    document.getElementById('imgshow').setAttribute("src","img/boy_sport.jpg");
+}
+function imgRefresh3() {
+    document.getElementById('imgshow').setAttribute("src","img/boy_hat.jpg");
+}
+function imgRefresh4() {
+    document.getElementById('imgshow').setAttribute("src","img/girl_rollhair.jpg");
+}
+function imgRefresh5() {
+    document.getElementById('imgshow').setAttribute("src","img/girl_shorthair.jpg");
+}
+function imgRefresh6() {
+    document.getElementById('imgshow').setAttribute("src","img/girl_silent.jpg");
+}
+
+function nowFitShow() {
+    document.getElementById('imgnow').setAttribute("src",document.getElementById('imgshow').src);
+}
+
+function showFitNow() {
+    document.getElementById('imgshow').setAttribute("src",document.getElementById('imgnow').src);
+}
+
+$('#boyg').on('click', imgRefresh1);
+$('#boys').on('click', imgRefresh2);
+$('#boyh').on('click', imgRefresh3);
+$('#girlr').on('click', imgRefresh4);
+$('#girlsh').on('click', imgRefresh5);
+$('#girlsi').on('click', imgRefresh6);
+$('#imgsave').on('click', nowFitShow);
+$('#changeimg').on('click', showFitNow);
+
+
