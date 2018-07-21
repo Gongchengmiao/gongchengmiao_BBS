@@ -91,7 +91,7 @@
                         <fieldset>
                             <h2>个人资料信息</h2>
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-8">
                                     <div class="form-group">
                                         <label>姓名 *</label>
                                         <input id="name" name="name" type="text" class="form-control required">
@@ -105,20 +105,45 @@
                                         <input id="location" name="location" type="text" class="form-control required">
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>头像 </label>
-                                        <div class="img-circle image-crop" style="width: 40%;height: 40%;">
-                                            <img src="img/a3.jpg">
+                                        <div class="boxT1 pull-right">
+                                            <img alt="image" src="img/boy_hat.jpg" class="img-circle" id="imgnow">
+                                            <h5> </h5>
+                                            <div>
+                                                <button type="button" class="btn-xs btn-blue" data-toggle="modal" data-target="#myModal" id="changeimg">
+                                                    修改头像
+                                                </button>
+                                                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content animated fadeIn">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <img alt="image" class="img-circle" src="img/ustc.png" id="imgshow" style="width: 48px;height: 48px;">
+                                                                <h4 class="modal-title">更换头像</h4>
+                                                                <small>请从默认头像中选择一个。</small>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <dd class="project-people1">
+                                                                    <img alt="image" class="img-circle" src="img/boy_glasses.jpg" id="boyg">
+                                                                    <img alt="image" class="img-circle" src="img/boy_hat.jpg" id="boyh">
+                                                                    <img alt="image" class="img-circle" src="img/boy_sport.jpg" id="boys">
+                                                                    <img alt="image" class="img-circle" src="img/girl_rollhair.jpg" id="girlr">
+                                                                    <img alt="image" class="img-circle" src="img/girl_shorthair.jpg" id="girlsh">
+                                                                    <img alt="image" class="img-circle" src="img/girl_silent.jpg" id="girlsi">
+                                                                </dd>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                                                <button type="button" class="btn btn-blue" id="imgsave">保存</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-3" >
-                                    <h4>头像预览</h4>
-                                    <label title="上传图片" for="inputImage" class="btn-sm btn-success">
-                                        <input type="file" accept="image/*" name="file" id="inputImage" class="hide"> 上传新图片
-                                    </label>
-                                    <div class="img-preview img-preview-sm"></div>
                                 </div>
                             </div>
                         </fieldset>
@@ -153,77 +178,78 @@
 <script src="js/plugins/validate/messages_zh.min.js"></script>
 
 
-<script>
-    $(document).ready(function () {
-        $("#wizard").steps();
-        $("#form").steps({
-            bodyTag: "fieldset",
-            onStepChanging: function (event, currentIndex, newIndex) {
-                // Always allow going backward even if the current step contains invalid fields!
-                if (currentIndex > newIndex) {
-                    return true;
+    <script>
+        $(document).ready(function () {
+            $("#wizard").steps();
+            $("#form").steps({
+                bodyTag: "fieldset",
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+
+                    // Forbid suppressing "Warning" step if the user is to young
+                    if (newIndex === 3 && Number($("#age").val()) < 18) {
+                        return false;
+                    }
+
+                    var form = $(this);
+
+                    // Clean up if user went backward before
+                    if (currentIndex < newIndex) {
+                        // To remove error styles
+                        $(".body:eq(" + newIndex + ") label.error", form).remove();
+                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                    }
+
+                    // Disable validation on fields that are disabled or hidden.
+                    form.validate().settings.ignore = ":disabled,:hidden";
+
+                    // Start validation; Prevent going forward if false
+                    return form.valid();
+                },
+                onStepChanged: function (event, currentIndex, priorIndex) {
+                    // Suppress (skip) "Warning" step if the user is old enough.
+                    if (currentIndex === 2 && Number($("#age").val()) >= 18) {
+                        $(this).steps("next");
+                    }
+
+                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3) {
+                        $(this).steps("previous");
+                    }
+                },
+                onFinishing: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
                 }
-
-                // Forbid suppressing "Warning" step if the user is to young
-                if (newIndex === 3 && Number($("#age").val()) < 18) {
-                    return false;
+            }).validate({
+                errorPlacement: function (error, element) {
+                    element.before(error);
+                },
+                rules: {
+                    confirm: {
+                        equalTo: "#password"
+                    }
                 }
-
-                var form = $(this);
-
-                // Clean up if user went backward before
-                if (currentIndex < newIndex) {
-                    // To remove error styles
-                    $(".body:eq(" + newIndex + ") label.error", form).remove();
-                    $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
-                }
-
-                // Disable validation on fields that are disabled or hidden.
-                form.validate().settings.ignore = ":disabled,:hidden";
-
-                // Start validation; Prevent going forward if false
-                return form.valid();
-            },
-            onStepChanged: function (event, currentIndex, priorIndex) {
-                // Suppress (skip) "Warning" step if the user is old enough.
-                if (currentIndex === 2 && Number($("#age").val()) >= 18) {
-                    $(this).steps("next");
-                }
-
-                // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-                if (currentIndex === 2 && priorIndex === 3) {
-                    $(this).steps("previous");
-
-                }
-            },
-            onFinishing: function (event, currentIndex) {
-                var form = $(this);
-
-                // Disable validation on fields that are disabled.
-                // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
-                form.validate().settings.ignore = ":disabled";
-
-                // Start validation; Prevent form submission if false
-                return form.valid();
-            },
-            onFinished: function (event, currentIndex) {
-                var form = $(this);
-
-                // Submit form input
-                form.submit();
-            }
-        }).validate({
-            errorPlacement: function (error, element) {
-                element.before(error);
-            },
-            rules: {
-                confirm: {
-                    equalTo: "#password"
-                }
-            }
+            });
         });
-    });
-</script>
+    </script>
+
+    <script src="js/origional.js"></script>
 
     <!-- Image cropper -->
     <script src="js/plugins/cropper/cropper.min.js"></script>
