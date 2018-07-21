@@ -10,7 +10,7 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import ArticlePostForm, CommentForm
-from .models import ArticleColumn, ArticlePost
+from .models import ArticleColumn, ArticlePost, Comment
 
 import json
 # Create your views here.
@@ -39,6 +39,11 @@ def article_post(request):
 
 def article_detail(request, id, slug):
     article = get_object_or_404(ArticlePost, id = id, slug = slug)
+    author = article.author
+
+    comments = Comment.objects.all()
+
+
 
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
@@ -52,4 +57,4 @@ def article_detail(request, id, slug):
 
 
 
-    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form})
+    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments})
