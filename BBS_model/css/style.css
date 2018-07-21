@@ -697,6 +697,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     color: #1ab394;
 }
 
+
 .btn-success.btn-outline {
     color: #1c84c6;
 }
@@ -707,6 +708,10 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 
 .btn-warning.btn-outline {
     color: #f8ac59;
+}
+
+.btn-warning1.btn-outline {
+    color: #f8d632;
 }
 
 .btn-danger.btn-outline {
@@ -742,6 +747,15 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .open .dropdown-toggle.btn-primary {
     background-color: dodgerblue;
     border-color: dodgerblue;
+    color: #FFFFFF;
+}
+
+.btn-primary1:hover,
+.btn-primary1:focus,
+.btn-primary1:active,
+.btn-primary1.active {
+    background-color: #1ab394;
+    border-color: #1ab394;
     color: #FFFFFF;
 }
 
@@ -899,6 +913,12 @@ fieldset[disabled] .btn-default.active {
     color: #FFFFFF;
 }
 
+.btn-warning1 {
+    background-color: #f8d632;
+    border-color: #f8d632;
+    color: #FFFFFF;
+}
+
 .btn-warning:hover,
 .btn-warning:focus,
 .btn-warning:active,
@@ -906,6 +926,16 @@ fieldset[disabled] .btn-default.active {
 .open .dropdown-toggle.btn-warning {
     background-color: #f7a54a;
     border-color: #f7a54a;
+    color: #FFFFFF;
+}
+
+.btn-warning1:hover,
+.btn-warning1:focus,
+.btn-warning1:active,
+.btn-warning1.active,
+.open .dropdown-toggle.btn-warning1 {
+    background-color: #f8d632;
+    border-color: #f8d632;
     color: #FFFFFF;
 }
 
@@ -1841,13 +1871,29 @@ table.dataTable thead .sorting:after {
     border-radius: 50%;
 }
 
+.img-circle:hover{
+    cursor: pointer;
+    border-color: #5897fb;
+}
+
 .boxT {
     width: 10%;
     text-align: center;
     font-size: 100%
 }
 
+.boxT1 {
+    width: 20%;
+    text-align: center;
+    font-size: 100%
+}
+
 .boxT img {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.boxT1 img {
     border-radius: 50%;
     width: 100%;
 }
@@ -5420,6 +5466,22 @@ dd.project-people {
     height: 32px;
 }
 
+.project-people1,
+.project-actions {
+    text-align: right;
+    vertical-align: middle;
+}
+
+dd.project-people1 {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.project-people1 img {
+    width: 64px;
+    height: 64px;
+}
+
 .project-title a {
     font-size: 14px;
     color: #676a6c;
@@ -7982,6 +8044,10 @@ body.skin-3 {
 .J_menuTab {
     -webkit-transition: all .3s ease-out 0s;
     transition: all .3s ease-out 0s;
+}
+
+.atitle{
+
 }
 
 ::-webkit-scrollbar-track {

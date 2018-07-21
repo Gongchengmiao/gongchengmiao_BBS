@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>瀚海星云BBS-发帖</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="img/ustc.png">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3" >
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content mailbox-content" style="display: block">
+                        <div class="file-manager">
+                            <a class="btn btn-block btn-info compose-mail" href="mail_compose.html">发帖</a>
+                            <div class="space-25"></div>
+                            <ul class="folder-list m-b-md" style="padding: 0">
+
+                                <li>
+                                    <a href="mailbox.html"> <i class="fa fa-file-text-o"></i> 草稿 <span class="label label-info pull-right">2</span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                            <h5>分类</h5>
+                            <ul class="category-list" style="padding: 0">
+                                <li>
+                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-navy"></i> 表白</a>
+                                </li>
+                                <li>
+                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-danger"></i> 求助</a>
+                                </li>
+                                <li>
+                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-primary"></i> 通知</a>
+                                </li>
+                                <li>
+                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-info"></i> 招聘</a>
+                                </li>
+                                <li>
+                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-warning"></i> 交友</a>
+                                </li>
+                            </ul>
+
+                            <h5 class="tag-title">分区</h5>
+                            <ul class="tag-list" style="padding: 0">
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> A</a>
+                                </li>
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> B</a>
+                                </li>
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> C</a>
+                                </li>
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> D</a>
+                                </li>
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> E</a>
+                                </li>
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> F</a>
+                                </li>
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> G</a>
+                                </li>
+                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> H</a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 animated fadeInRight" style="height: 100%">
+                <div class="mail-box-header" >
+                    <h2>
+                    发帖
+                </h2>
+                </div>
+                <form class="form-horizontal" aciton="." method="post">
+                    {% csrf_token %}
+                    <div class="mail-box">
+
+
+                    <div class="mail-body">
+
+                        <form class="form-horizontal" method="get">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">主题：</label>
+
+                                <div class="col-sm-10">
+                                    {{article_post_form.title}}
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="mail-text h-200">
+
+                        <div class="summernote">
+                            {{ article_post_form.body }}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="mail-body text-right tooltip-demo">
+                        <input type="submit" class="btn btn-primary btn-lg" value="发布">
+                    </div>
+                    <div class="clearfix"></div>
+
+
+
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script type="text/javascript">
+	function publish_article(){
+		var title = $("#id_title").val();
+        var body = $("#id_body").val();
+        $.ajax({
+        	url: "{% url 'article:article_post' %}",
+        	type: "POST",
+        	data: {"title":title, "body":body},
+        	success: function(e){
+        		if(e=="1"){
+                    layer.msg("successful");
+        		}else if(e=="2"){
+        			layer.msg("sorry.") ;
+        		}else{
+        			layer.msg("项目名称必须写，不能空。");
+        		}
+        	},
+        });
+	}
+
+
+</script>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- SUMMERNOTE -->
+    <script src="js/plugins/summernote/summernote.min.js"></script>
+    <script src="js/plugins/summernote/summernote-zh-CN.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+
+            $('.summernote').summernote({
+                lang: 'zh-CN',
+                height: 200 ,
+            });
+
+        });
+        var edit = function () {
+            $('.click2edit').summernote({
+                focus: true
+            });
+        };
+        var save = function () {
+            var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+            $('.click2edit').destroy();
+        };
+    </script>
+
+
+</body>
+
+</html>
