@@ -47,7 +47,7 @@ urlpatterns = [
     path('homepage/ajax_star', homepage_views.show_info_ajax_star, name='show_info_ajax_star'),
     path('homepage/ajax_more', homepage_views.show_info_ajax_more, name='show_info_ajax_more'),
     path('article/', article_views.article_post, name="article_post"),
-    path('section/<section_slug>', section_views.section_all, name='section_all')
+    path('section/<section_slug>', section_views.section_all, name='section_all'),
     path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
     path('pswdgetback/<uid64>/<token>/', user_views.pswd_get_back_view, name='pswd_get_beck_2'),
     path('pswdgetbackjmp/<username>/', user_views.pswdgetback_jump, name='pswdgetback_jump'),

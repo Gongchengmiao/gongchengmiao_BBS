@@ -18,5 +18,4 @@ def section_all(request, section_slug):
         'section': section,
         'posts': posts,
     }
-
-    return render(request, 'tiezi_demo.html', context)
+    return render(request, 'x_bankuai_demo.html', context)
