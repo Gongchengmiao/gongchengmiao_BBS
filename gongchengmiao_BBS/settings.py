@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'section',
     'user',
     'zone',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gongchengmiao_BBS.wsgi.application'
+
+ASGI_APPLICATION = "gongchengmiao_BBS.routing.application"
 
 
 # Database
@@ -113,6 +116,26 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "asgi_redis.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#         "ROUTING": "chat.routing.channel_routing",
+#     },
+# }
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+        "ROUTING": "gongchengmiao_BBS.routing.channel_routing"
+    },
+}
 
 
 # Internationalization
