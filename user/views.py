@@ -29,7 +29,7 @@ def login(request):
     if request.method == 'GET':
 
         form = UserLoginForm()
-        return render(request, "login_demo.html", {"form": form, "title": u'中国科学技术大学BBS登录'})
+        return render(request, "login_v2_demo.html", {"form": form, "title": u'中国科学技术大学BBS登录'})
     else:
 
         # 当提交表单时, 判断用户名密码是否正确，正确则返回主页的渲染
@@ -63,14 +63,14 @@ def login(request):
                     return response
 
                 else:
-                    return render(request, 'login_demo.html', {
+                    return render(request, 'login_v2_demo.html', {
                         'form': form,
                         'email_not_active': True,
                         "title": u'中国科学技术大学BBS登录',
                         'password_is_wrong': False,
                     })
             else:
-                return render(request, 'login_demo.html', {
+                return render(request, 'login_v2_demo.html', {
                     'form': form,
                     'password_is_wrong': True,
                     "title": u'中国科学技术大学BBS登录',
@@ -79,7 +79,7 @@ def login(request):
 
         else:
 
-            return render(request, "login_demo.html", {"form": form, "title": u'中国科学技术大学BBS登录'})
+            return render(request, "login_v2_demo.html", {"form": form, "title": u'中国科学技术大学BBS登录'})
 
 
 # 注册操作实现
@@ -88,9 +88,7 @@ def register(request):
     # 当正常访问时候, 返回register.html的渲染
     if request.method == 'GET':
         form = UserRegisterForm()
-        # print(1)
-        # send_mail('test_demo_subject', 'test_demo_message', 'paulzh@mail.ustc.edu.cn', ['z1991998920@gmail.com', ])
-        return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云BBS"})
+        return render(request, "register_demo_v2.html", {"form": form, "title": u"欢迎注册瀚海星云BBS"})
     else:
         # 当提交表单时, 判断用户名是否被注册, 密码是否合法, 再次输入密码是否正确, 是否勾选阅读用户协议
         form = UserRegisterForm(request.POST)
@@ -101,12 +99,9 @@ def register(request):
             password_confirm = form.cleaned_data['password_confirm']
             email = form.cleaned_data['email']
             confirm_message = form.cleaned_data['confirm_message']
-            # print(2)
 
             if common_member.objects.filter(username=username):
-                # print(3)
-                # print(common_member.objects.filter(username=username))
-                return render(request, "register.html", {
+                return render(request, "register_demo_v2.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
                     "user_name_used": True,
@@ -117,7 +112,7 @@ def register(request):
             except ValidationError as err:
                 # print(4)
                 error = err
-                return render(request, "register.html", {
+                return render(request, "register_demo_v2.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
                     "password_invalidate": True,
@@ -125,14 +120,14 @@ def register(request):
                 })
 
             if password != password_confirm:
-                return render(request, "register.html", {
+                return render(request, "register_demo_v2.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
                     "pw_confirm_error": True,
                 })
 
             if confirm_message is False:
-                return render(request, "register.html", {
+                return render(request, "register_demo_v2.html", {
                     "form": form,
                     "title": u"欢迎注册瀚海星云BBS",
                     "not_confirmed": True,
@@ -178,7 +173,7 @@ def register(request):
             #     "success": True,
             # })
         else:
-            return render(request, "register.html", {"form": form, "title": u"欢迎注册瀚海星云BBS", "error_unknown": True})
+            return render(request, "register_demo_v2.html", {"form": form, "title": u"欢迎注册瀚海星云BBS", "error_unknown": True})
 
             # issue 1: 用户名首字母大写
 
@@ -324,7 +319,7 @@ def pswdgetback(request):
             if not user.email_status:
                 # 邮箱未被激活
                 return render(request, "password_getback_demo.html", {'form': form, 'email_status_error': True, })
-            return redirect(reverse('wait_email_back', args=(username, )))
+            return redirect(reverse('pswdgetback_jump', args=(username, )))
         else:
             # 表单不合法
             return render(request, "password_getback_demo.html", {'form': form, 'message_wrong': True})

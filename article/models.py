@@ -1,6 +1,13 @@
 from django.db import models
-from gongchengmiao_BBS import settings
+
+
+# Create your models here.
+
+
+from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils import timezone
+from slugify import slugify
 from django.urls import reverse
 
 #from django.template.defaultfilters import slugify

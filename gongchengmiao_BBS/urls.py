@@ -39,8 +39,7 @@ urlpatterns = [
     path('index_core/', index_views.index, name='index_core'),
     path('pswdgetback', user_views.pswdgetback, name='pswd_get_back'),
     path('waitemailback/<username>/', user_views.pswdgetback_jump, name='wait_email_back'),
-
-    path('homepage/self/', homepage_views.view_self_info, name='view_self_info'),
+    path('homepage/self', homepage_views.view_self_info, name='view_self_info'),
     # path('self/', homepageViews.view_self_info, name='view_self_info'),
     path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
     path('homepage/uid=<slug>', homepage_views.show_info, name='show_info'),
@@ -49,5 +48,8 @@ urlpatterns = [
     path('homepage/ajax_more', homepage_views.show_info_ajax_more, name='show_info_ajax_more'),
     path('article/', article_views.article_post, name="article_post"),
     path('section/<section_slug>', section_views.section_all, name='section_all')
+    path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
+    path('pswdgetback/<uid64>/<token>/', user_views.pswd_get_back_view, name='pswd_get_beck_2'),
+    path('pswdgetbackjmp/<username>/', user_views.pswdgetback_jump, name='pswdgetback_jump'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
