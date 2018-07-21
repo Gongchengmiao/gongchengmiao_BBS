@@ -1871,13 +1871,29 @@ table.dataTable thead .sorting:after {
     border-radius: 50%;
 }
 
+.img-circle:hover{
+    cursor: pointer;
+    border-color: #5897fb;
+}
+
 .boxT {
     width: 10%;
     text-align: center;
     font-size: 100%
 }
 
+.boxT1 {
+    width: 20%;
+    text-align: center;
+    font-size: 100%
+}
+
 .boxT img {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.boxT1 img {
     border-radius: 50%;
     width: 100%;
 }
@@ -5450,6 +5466,22 @@ dd.project-people {
     height: 32px;
 }
 
+.project-people1,
+.project-actions {
+    text-align: right;
+    vertical-align: middle;
+}
+
+dd.project-people1 {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.project-people1 img {
+    width: 64px;
+    height: 64px;
+}
+
 .project-title a {
     font-size: 14px;
     color: #676a6c;
@@ -8012,6 +8044,10 @@ body.skin-3 {
 .J_menuTab {
     -webkit-transition: all .3s ease-out 0s;
     transition: all .3s ease-out 0s;
+}
+
+.atitle{
+
 }
 
 ::-webkit-scrollbar-track {
