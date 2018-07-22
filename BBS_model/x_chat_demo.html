@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title> 聊天窗口 </title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="img/ustc.png">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <script type="text/javascript" src="js/origional.js"></script>
+</head>
+<body onload="Recieve()" class="sky-bg">
+<div class="talk_con">
+    <div class="talk_show" id="words">
+        <div class="metalk">
+              <span>
+                    <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb">A</a>:你说你🐎呢？
+              </span>
+        </div>
+
+        <div class="othertalk">
+              <span>
+                    <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb">B</a>:我也说我🐎呢。
+              </span>
+        </div>
+    </div>
+    <div class="talk_input">
+        <input type="text" class="talk_word" placeholder="输入消息内容，点击发送按钮发送" id="talkwords">
+        <input onclick="talk()" type="button" value="发送" class="talk_sub btn-info btn" id="talksub">
+    </div>
+</div>
+</body>
+</html>
