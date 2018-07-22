@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'user',
     'zone',
     'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gongchengmiao_BBS.wsgi.application'
 
-ASGI_APPLICATION = "gongchengmiao_BBS.routing.application"
+# ASGI_APPLICATION = "gongchengmiao_BBS.routing.application"
 
 
 # Database
@@ -127,13 +128,25 @@ AUTH_PASSWORD_VALIDATORS = [
 #     },
 # }
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("localhost", 6379)],
+#         },
+#         "ROUTING": "gongchengmiao_BBS.routing.channel_routing"
+#     },
+# }
+
+# Channels
+ASGI_APPLICATION = 'gongchengmiao_BBS.routing.application'
+
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("localhost", 6379)],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
         },
-        "ROUTING": "gongchengmiao_BBS.routing.channel_routing"
     },
 }
 
