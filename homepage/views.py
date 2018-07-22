@@ -39,29 +39,22 @@ def show_info(request, slug):
     return render(request, 'x_personal_page_show_demo.html', context)
 
 
-
+@login_required(login_url='/login/')
 def view_self_info(request):
-    # print('view_self')
-    if request.user.is_authenticated == False:
-        return redirect(reverse('login'))
     my_actions = common_member_action_log.objects.filter(uid=request.user).order_by('-dateline')[0:10]
-
-    my_followings = follower_pair.objects.filter(by=request.user).order_by('-follow_time').all()
-    following_id = []
-    for following in my_followings:
-        following_id.append(following.followed)
-    following_actions = common_member_action_log.objects.filter(uid__in=following_id).order_by('-dateline')[0:10]
-    following_id = following_id[0:5]
+    my_following_pair = follower_pair.objects.filter(by=request.user).order_by('-follow_time').all()[0:8]
+    my_followings = []
+    for fo in my_following_pair:
+        my_followings.append(fo.followed)
+    following_actions = common_member_action_log.objects.filter(uid__in=my_followings).order_by('-dateline')[0:10]
     my_star_posts = common_member_star.objects.filter(uid=request.user).order_by('-star_time')[0:10]
     portrait = str(request.user.portrait)
+
     context = {
-        'username': request.user.username,
+        'user_self': request.user,
         'portrait': portrait,
-        'gender': request.user.gender,
-        'profile': request.user.profile,
-        'posts': request.user.posts,
         'my_actions': enumerate(my_actions),
-        'followings': enumerate(following_id),
+        'followings': enumerate(my_followings),
         'following_actions': enumerate(following_actions),
         'my_star_posts': enumerate(my_star_posts)
     }
@@ -69,6 +62,7 @@ def view_self_info(request):
     return render(request, 'x_personal_page_demo.html', context)
 
 
+@login_required(login_url='/login/')
 def edit_info(request):
     if request.user.is_authenticated == False:
         return redirect(reverse('login'))
@@ -138,3 +132,5 @@ def show_info_ajax_star(request):
         return HttpResponse('收藏成功')
     else:
         return HttpResponse('已经收藏该帖')
+
+

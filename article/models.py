@@ -29,7 +29,7 @@ from uuslug import slugify
 
 
 class ArticleColumn(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='article_column')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     column = models.CharField(max_length=200)
     created = models.DateField(auto_now_add=True)
 
@@ -41,7 +41,7 @@ class ArticlePost(models.Model):
     pid = models.IntegerField(primary_key=True)  # 增加一个主键
     is_school_info = models.BooleanField(default=False)  # 是否公告
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="article")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     body = models.TextField()
     isElite = models.BooleanField(default=False)

@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from .validators import BbsUsernameValidator
 from uuslug import slugify
+from datetime import date
 from django.urls import reverse
 from django.utils.timezone import now
 
@@ -14,10 +15,12 @@ class common_member(AbstractUser):
     # uid = models.IntegerField(max_length=12, primary_key=True)
     # email = models.EmailField()
     username = models.CharField(max_length=30, unique=True)
+    department = models.CharField(max_length=30, default='', null=True)
+    birthday = models.DateField(default=date.today)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
     slug = models.SlugField(max_length=100, default=slugify(str(username)), allow_unicode=True)
-    portrait = models.ImageField(upload_to='portraits', null=True,blank=True)
+    portrait = models.ImageField(upload_to='portraits', null=True, blank=True)
     gender_choices = (('m', '男'), ('f', '女'))
     gender = models.CharField(max_length=1, default='m', choices=gender_choices)    # 性别 true为男
     show_gender = models.BooleanField(default=True)  # 是否显示
@@ -52,8 +55,8 @@ class common_member(AbstractUser):
 
 
 class follower_pair(models.Model):
-    followed = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_followed')
-    by = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_by')
+    followed = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_followed')
+    by = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_by')
 
     #其他属性
     follow_time = models.DateTimeField(auto_now=True)

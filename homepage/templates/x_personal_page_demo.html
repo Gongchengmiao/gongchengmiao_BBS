@@ -29,11 +29,11 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="m-b-md">
-                                    <a href="x_edit_person_demo.html" class="btn btn-blue pull-right">修改资料</a>
+                                    <a href="{% url 'edit_info' %}" class="btn btn-blue pull-right">修改资料</a>
 
                                     <div class="boxT">
                                         <img alt="image" src="img/a3.jpg">
-                                        <h2>章豪</h2>
+                                        <h2>{{ user_self.username }}</h2>
                                     </div>
 
                                 </div>
@@ -48,16 +48,22 @@
                             <div class="col-sm-5">
                                 <dl class="dl-horizontal">
 
-                                    <dt>昵称：</dt>
-                                    <dd>XXX</dd>
+                                    <dt>学院</dt>
+                                    <dd>{{ user.department }}</dd>
                                     <dt>性别：</dt>
-                                    <dd>女</dd>
+                                    <dd>
+                                        {% if user_self.gender == 'm' %}
+                                            男
+                                        {% else %}
+                                            女
+                                        {% endif %}
+                                    </dd>
                                     <dt>等级：</dt>
                                     <dd>6</dd>
                                     <dt>上站次数:</dt>
                                     <dd>66</dd>
                                     <dt>发帖数：</dt>
-                                    <dd>666</dd>
+                                    <dd>{{ user.posts }}</dd>
                                     <dt>积分：</dt>
                                     <dd>6666</dd>
                                 </dl>
@@ -75,21 +81,13 @@
                                     <dd>6小时6分钟6秒</dd>
                                     <dt>关注用户：</dt>
                                     <dd class="project-people">
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a3.jpg">
+                                        {% if followings %}
+                                            {% for i,following in followings %}
+                                        <a href="{% url 'show_info' following.slug %}">
+                                            <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ following.portrait }}">
                                         </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a1.jpg">
-                                        </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a2.jpg">
-                                        </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a4.jpg">
-                                        </a>
-                                        <a href="personal_page_show_demo.html">
-                                            <img alt="image" class="img-circle" src="img/a5.jpg">
-                                        </a>
+                                            {% endfor %}
+                                        {% endif %}
                                     </dd>
                                 </dl>
                             </div>
@@ -112,8 +110,7 @@
                                 <dl class="dl-horizontal">
                                     <dt>个人说明/签名档</dt>
                                     <dd>
-                                        《他改变了中国：江泽民传》，2005年中文版、英文版全球同步发行。该书是一部人物传记，作者为美国作家罗伯特·劳伦斯·库恩（Robert Lawrence Kuhn），中文翻译本署名“谈峥，于海江等”。作者长期关注中国，关注江泽民，并向江泽民的亲属、好友及有关工作人员进行了深入细致的采访，掌握了大量第一手资料，在此基础上写成本书。
-                                        这本传记介绍了江泽民的人生历程，尤其是阐述和评价了传主担任中国主要领导人的10多年中创立的历史功绩。在着重于国事活动的同时，也广泛涉及传主家庭生活、业余爱好、人品风格等方方面面，多角度、多侧面地展现了传主的风采。
+                                        {{ user_self.profile }}
                                     </dd>
                                 </dl>
                             </div>
@@ -125,7 +122,7 @@
                                     <div class="panel-heading">
                                         <div class="panel-options">
                                             <ul class="nav nav-tabs">
-                                                <li><a href="#tab-1" data-toggle="tab">我关注的</a>
+                                                <li><a href="#tab-1" data-toggle="tab">关注动态</a>
                                                 </li>
                                                 <li class=""><a href="#tab-2" data-toggle="tab">我的动态</a>
                                                 </li>
@@ -144,67 +141,6 @@
                                             <div class="tab-pane active" id="tab-1">
 
                                                 <div class="feed-activity-list">
-                                                    <div class="feed-element" style="cursor: pointer">
-                                                        <div class="media-body">
-                                                            <div style="margin: 0 auto;float: right;position: relative;left: -10px;">
-                                                                <div style="margin: 0 auto">
-                                                                    <small class="pull-right text-muted">2018-5-28</small>
-                                                                </div>
-                                                                <div style="margin: 0 auto">
-                                                                    <a href="profile.html#" class="pull-right">
-                                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
-                                                                        <i style="font-size: xx-small">benerboba</i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="location.href='x_huitie_demo.html'">
-                                                                <p class="contentwidth" onmouseover="overShow(this,event)" onmouseout="outHide()">章豪信号与系统4.3</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="feed-element" style="cursor: pointer">
-                                                        <div class="media-body">
-                                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
-                                                                <div style="margin: 0 auto">
-                                                                    <small class="pull-right text-muted">2018-6-17</small>
-                                                                </div>
-                                                                <div style="margin: 0 auto">
-                                                                    <a href="profile.html#" class="pull-right">
-                                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
-                                                                        <i style="font-size: xx-small">作家崔成浩</i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-muted1 well well0 " style="left: auto;margin: 0 auto;font-size: medium" onclick="location.href='x_huitie_demo.html'">
-                                                                <p class="contentwidth" onmouseover="overShow(this,event)" onmouseout="outHide()">章豪信号与系统考了95，他的微机原理考了96，这个学期，到现在为止，它考了3门4.3,他太厉害了，他好巨啊，他太强了，豪哥年年起飞。</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="feed-element" style="cursor: pointer">
-                                                        <div class="media-body">
-                                                            <div class="pull-left" style="margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px">
-                                                                <a class="btn btn-xs btn-success">
-                                                                    <i class="fa fa-star"></i> 精
-                                                                </a>
-                                                            </div>
-                                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
-                                                                <div style="margin: 0 auto">
-                                                                    <small class="pull-right text-muted">2018-6-17</small>
-                                                                </div>
-                                                                <div style="margin: 0 auto">
-                                                                    <a href="profile.html#" class="pull-right">
-                                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
-                                                                        <i style="font-size: xx-small">在水一方Y</i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="location.href='x_huitie_demo.html'">
-                                                                <p class="contentwidth" onmouseover="overShow(this,event)" onmouseout="outHide()">Jerry马上就挂满20学分啦！</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
                                                 </div>
 
@@ -227,52 +163,30 @@
                                             <div class="tab-pane" id="tab-2">
                                                 <div class="feed-activity-list">
 
-                                                    <div class="feed-element" style="cursor: pointer">
-                                                        <div class="media-body">
-                                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
-                                                                <div style="margin: 0 auto">
-                                                                    <small class="pull-right">2018-7-11</small>
-                                                                </div>
-                                                                <div style="margin: 0 auto">
-                                                                    <a href="profile.html#" class="pull-right">
-                                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
-                                                                        <i style="font-size: xx-small">Jerry</i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium;"
+                                                     {% if my_actions %}
+                                                        {% for i,ac in my_actions %}
+                                                            <div class="feed-element">
+                                                        <a href="{% url 'show_info' user_self.slug %}" class="pull-left">
+                                                            <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ following.portrait }}">
+                                                        </a>
+                                                        <div class="media-body ">
+                                                            {% if ac.action == 'post' %}
+                                                                <strong>你</strong> 发布了
+                                                            {% elif ac.action == 'star' %}
+                                                                <strong>你</strong> 收藏了
+                                                            {% elif ac.action == 'upload' %}
+                                                                <strong>你</strong> 上传了
+                                                            {% endif %}
+                                                            <br>
+                                                            <div class="text-muted1 well well0" style="cursor: pointer;"
                                                                  onclick="location.href='#'"
                                                             >
-                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">C罗走了？伤心的要死</p>
+                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ ac.pid.title }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="feed-element" style="cursor: pointer">
-                                                        <div class="media-body">
-                                                            <div class="pull-left" style="margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px">
-                                                                <a class="btn btn-xs btn-success">
-                                                                    <i class="fa fa-star"></i> 精
-                                                                </a>
-                                                            </div>
-                                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
-                                                                <div style="margin: 0 auto">
-                                                                    <small class="pull-right">2018-7-12</small>
-                                                                </div>
-                                                                <div style="margin: 0 auto">
-                                                                    <a href="profile.html#" class="pull-right">
-                                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
-                                                                        <i style="font-size: xx-small">在水一方Y</i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium;"
-                                                                 onclick="location.href='#'"
-                                                            >
-                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">官方：C罗加盟尤文图斯！</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        {% endfor %}
+                                                    {% endif %}
 
                                                 </div>
                                                 <div class="text-center">

@@ -87,6 +87,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     {% if posts %}
                                         {% for post in posts%}
                                             {% if post.isElite == False %}
@@ -109,6 +110,32 @@
                                         </div>
                                     </div>
                                             {% else %}
+
+                                                <div class="feed-element" style="cursor: pointer">
+                                        <div class="media-body">
+                                            <div class="pull-left" style="margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px">
+                                                <a class="btn btn-xs btn-success">
+                                                    <i class="fa fa-star"></i> 精
+                                                </a>
+                                            </div>
+                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
+                                                <div style="margin: 0 auto">
+                                                    <small class="pull-right">{{ post.pub_date }}</small>
+                                                </div>
+                                                <div style="margin: 0 auto">
+                                                    <a href="profile.html#" class="pull-right">
+                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
+                                                        <i style="font-size: xx-small">{{ post.author.username }}</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ section.get_url }}')">
+                                                {{ post.title }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                            {% endif %}
+                                            {% if post.isElite == True %}
 
                                                 <div class="feed-element" style="cursor: pointer">
                                         <div class="media-body">
