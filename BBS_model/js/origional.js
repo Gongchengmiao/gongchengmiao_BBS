@@ -82,7 +82,6 @@ function talk() {
     var TalkWords = document.getElementById("talkwords");
     var TalkSub = document.getElementById("talksub");
 
-    TalkSub.onclick = function(){
         //定义空字符串
         var str = "";
         if(TalkWords.value == ""){
@@ -97,7 +96,7 @@ function talk() {
               '</div>';
         Words.innerHTML = Words.innerHTML + str;
         Words.scrollTop = Words.scrollHeight;
-    };
+    TalkWords.value = "";
 }
 
 
