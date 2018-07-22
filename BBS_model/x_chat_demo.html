@@ -34,9 +34,18 @@
         </div>
     </div>
     <div class="talk_input">
-        <input type="text" class="talk_word" placeholder="输入消息内容，点击发送按钮发送" id="talkwords">
+        <input type="text" class="talk_word" placeholder="输入消息内容，点击发送按钮或回车发送" id="talkwords">
         <input onclick="talk()" type="button" value="发送" class="talk_sub btn-info btn" id="talksub">
     </div>
 </div>
 </body>
+
+<script language= "JavaScript">
+    function keyEnter(){
+        if (event.keyCode == 13) {
+            talk();
+        }
+    }
+    document.onkeydown = keyEnter;
+</script>
 </html>
