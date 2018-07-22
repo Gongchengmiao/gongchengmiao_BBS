@@ -1,7 +1,7 @@
 /*
  *
  *   H+ - 后台主题UI框架
- *   version 4.9
+ *   version homepage
  *
 */
 
@@ -202,7 +202,7 @@ body.body-small .navbar-top-links li:last-child {
 
 .nav-header {
     padding: 33px 25px;
-    background: url("patterns/header-profile.png") no-repeat;
+    background: url("/static/css/patterns/header-profile.png") no-repeat;
 }
 
 .pace-done .nav-header {
@@ -697,6 +697,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     color: #1ab394;
 }
 
+
 .btn-success.btn-outline {
     color: #1c84c6;
 }
@@ -707,6 +708,10 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 
 .btn-warning.btn-outline {
     color: #f8ac59;
+}
+
+.btn-warning1.btn-outline {
+    color: #f8d632;
 }
 
 .btn-danger.btn-outline {
@@ -742,6 +747,15 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .open .dropdown-toggle.btn-primary {
     background-color: dodgerblue;
     border-color: dodgerblue;
+    color: #FFFFFF;
+}
+
+.btn-primary1:hover,
+.btn-primary1:focus,
+.btn-primary1:active,
+.btn-primary1.active {
+    background-color: #1ab394;
+    border-color: #1ab394;
     color: #FFFFFF;
 }
 
@@ -899,6 +913,12 @@ fieldset[disabled] .btn-default.active {
     color: #FFFFFF;
 }
 
+.btn-warning1 {
+    background-color: #f8d632;
+    border-color: #f8d632;
+    color: #FFFFFF;
+}
+
 .btn-warning:hover,
 .btn-warning:focus,
 .btn-warning:active,
@@ -906,6 +926,16 @@ fieldset[disabled] .btn-default.active {
 .open .dropdown-toggle.btn-warning {
     background-color: #f7a54a;
     border-color: #f7a54a;
+    color: #FFFFFF;
+}
+
+.btn-warning1:hover,
+.btn-warning1:focus,
+.btn-warning1:active,
+.btn-warning1.active,
+.open .dropdown-toggle.btn-warning1 {
+    background-color: #f8d632;
+    border-color: #f8d632;
     color: #FFFFFF;
 }
 
@@ -3147,7 +3177,7 @@ a.forum-item-title:hover {
         top: 24px;
         left: 100%;
         border-color: transparent;
-        border-left-color: white;
+        border-left-color: white;/index/
     }
 
     .center-orientation .vertical-timeline-content .btn {
@@ -3157,7 +3187,7 @@ a.forum-item-title:hover {
     .center-orientation .vertical-timeline-content .vertical-date {
         position: absolute;
         width: 100%;
-        left: 122%;
+        left: 122%;/index/
         top: 2px;
         font-size: 14px;
     }
@@ -3190,7 +3220,7 @@ a.forum-item-title:hover {
 }
 
 .sidebard-panel {
-    width: 220px;
+    width: 220px;/index/
     background: #ebebed;
     padding: 10px 20px;
     position: absolute;
@@ -3207,7 +3237,7 @@ a.forum-item-title:hover {
 .sidebard-panel p {
     font-size: 12px;
 }
-
+/index/
 .sidebard-panel .feed-element {
     margin-top: 20px;
     padding-bottom: 0;
@@ -3273,7 +3303,7 @@ a.forum-item-title:hover {
 .sidebar-container ul.nav-tabs li a {
     border: none;
     padding: 12px 10px;
-    margin: 0;
+    margin: 0;/index/
     border-radius: 0;
     background: #2f4050;
     color: #fff;
@@ -3380,7 +3410,7 @@ body.full-height-layout #page-wrapper {
 }
 
 body.boxed-layout {
-    background: url('patterns/shattered.png');
+    background: url('/static/css/patterns/shattered.png');
 }
 
 body.boxed-layout #wrapper {
@@ -7231,7 +7261,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .blue-skin {
     font-weight: 600;
-    background: url("patterns/header-profile-skin-1.png") repeat scroll 0 0;
+    background: url("/static/css/patterns/header-profile-skin-1.png") repeat scroll 0 0;
 }
 
 .blue-skin:hover {
@@ -7240,7 +7270,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .yellow-skin {
     font-weight: 600;
-    background: url("patterns/header-profile-skin-3.png") repeat scroll 0 100%;
+    background: url("/static/css/patterns/header-profile-skin-3.png") repeat scroll 0 100%;
 }
 
 .yellow-skin:hover {
@@ -7292,7 +7322,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .nav-header {
     background: #0e9aef;
-    background: url('patterns/header-profile-skin-1.png');
+    background: url('/static/css/patterns/header-profile-skin-1.png');
 }
 
 .mini-navbar .nav-second-level {
@@ -7408,7 +7438,7 @@ navbar-static-top {
 
 .skin-1 .nav-header {
     background: #0e9aef;
-    background: url('patterns/header-profile-skin-1.png');
+    background: url('/static/css/patterns/header-profile-skin-1.png');
 }
 
 .skin-1.mini-navbar .nav-second-level {
@@ -7561,7 +7591,7 @@ body.boxed-layout.skin-3 #wrapper {
 
 .skin-3 .nav-header {
     background: #ecba52;
-    background: url('patterns/header-profile-skin-3.png');
+    background: url('/static/css/patterns/header-profile-skin-3.png');
 }
 
 .skin-3.mini-navbar .nav-second-level {

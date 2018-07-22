@@ -7,7 +7,7 @@ import hashlib
 
 # Create your views here.
 def index_shell(request):
-    return render(request, "daohanglan_demo.html")
+    return render(request, "x_whole_demo.html", {})
 
 
 def index(request):
@@ -42,7 +42,7 @@ def index(request):
         'user_star': enumerate(user_star),
     }
 
-    response = render(request, 'BBS_index_demo.html', context)
+    response = render(request, 'x_BBS_index_demo.html', context)
     return response
 
 
