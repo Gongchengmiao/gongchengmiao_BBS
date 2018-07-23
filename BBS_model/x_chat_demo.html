@@ -22,20 +22,28 @@
 <div class="talk_con">
     <div class="talk_show" id="words">
         <div class="metalk">
-              <span>
-                    <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb">A</a>:你说你🐎呢？
-              </span>
+            <div class="author-name">
+                <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb"><strong>我</strong></a>
+                <small class="chat-date">10:02</small>
+            </div>
+            <span>
+                你说你🐎呢？
+            </span>
         </div>
 
         <div class="othertalk">
+            <div class="author-name">
+                <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb"><strong>产品经理</strong></a>
+                <small class="chat-date">10:02</small>
+            </div>
               <span>
-                    <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb">B</a>:我也说我🐎呢。
+                  我也说我🐎呢。
               </span>
         </div>
     </div>
     <div class="talk_input">
         <input type="text" class="talk_word" placeholder="输入消息内容，点击发送按钮或回车发送" id="talkwords">
-        <input onclick="talk()" type="button" value="发送" class="talk_sub btn-info btn" id="talksub">
+        <input onclick="talk()" type="button" value="发送" class="pull-right talk_sub btn-info btn" id="talksub">
     </div>
 </div>
 
@@ -134,6 +142,7 @@
 
     </a>
 </div>
+
 </body>
 
 <script language= "JavaScript">
