@@ -836,8 +836,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info:active,
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
-    background-color: darkblue;
-    border-color:darkblue ;
+    background-color: #0000d1;
+    border-color:#0000d1 ;
     color: #FFFFFF;
 }
 
@@ -5886,7 +5886,7 @@ del {
     height: 38px;
     width: 38px;
     display: block;
-    background: #1ab394;
+    background: dodgerblue;
     padding: 9px 8px;
     text-align: center;
     color: #fff;
@@ -5895,7 +5895,7 @@ del {
 
 .open-small-chat:hover {
     color: white;
-    background: #1ab394;
+    background: #0000ff;
 }
 
 .small-chat-box {
@@ -5905,7 +5905,7 @@ del {
     right: 80px;
     background: #fff;
     border: 1px solid #e7eaec;
-    width: 230px;
+    width: 300px;
     height: 320px;
     border-radius: 4px;
 }
@@ -5924,7 +5924,7 @@ del {
 }
 
 .small-chat-box .heading {
-    background: #2f4050;
+    background: royalblue;
     padding: 8px 15px;
     font-weight: bold;
     color: #fff;
@@ -5961,7 +5961,7 @@ del {
 }
 
 .small-chat-box .content .chat-message.active {
-    background: #1ab394;
+    background: #83bdfa;
     color: #fff;
 }
 
