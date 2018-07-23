@@ -5827,7 +5827,7 @@ table.issue-tracker tbody tr td {
 .agile-list li {
     background: #FAFAFB;
     border: 1px solid #e7eaec;
-    margin: 0px 0 10px 0;
+    margin: 0px 0 0px 0;
     padding: 10px;
     border-radius: 2px;
 }
@@ -5910,6 +5910,22 @@ del {
     border-radius: 4px;
 }
 
+.friendlist {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 380px;
+    background: #fff;
+    border: 1px solid #e7eaec;
+    width: 100px;
+    height: 320px;
+    border-radius: 4px;
+}
+
+.friendlist.active{
+    display: block;
+}
+
 .small-chat-box.ng-small-chat {
     display: block;
 }
@@ -5926,6 +5942,13 @@ del {
 .small-chat-box .heading {
     background: royalblue;
     padding: 8px 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.friendlist .heading{
+    background: royalblue;
+    padding: 7px 15px;
     font-weight: bold;
     color: #fff;
 }
@@ -7387,7 +7410,7 @@ navbar-static-top {
     padding: 30px 15px;
 }
 
- #page-wrapper {
+#page-wrapper {
     background: #f4f6fa;
 }
 
