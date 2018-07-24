@@ -70,6 +70,23 @@ class PostRead(models.Model):
     post_fk = models.ForeignKey(ArticlePost, on_delete=models.CASCADE)
     read_time = models.IntegerField(default=0)
 
+class Comment(models.Model):
+    article = models.ForeignKey(ArticlePost, related_name='comments', on_delete=models.CASCADE)
+    commentator = models.CharField(max_length=90)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return "Comment by {0} on {1}".format(self.commentator, self.article)
+
+
+
+
+
+
 # class forum_post_moderate(models.Model):
 #     status = models.BooleanField(default = True)
 

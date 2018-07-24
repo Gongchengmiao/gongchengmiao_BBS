@@ -18,6 +18,7 @@ function outHide() {
     showDiv.innerHTML = '';
 }
 
+
 function imgRefresh1() {
     document.getElementById('imgshow').setAttribute("src","img/boy_glasses.jpg");
 }
@@ -54,4 +55,21 @@ $('#girlsi').on('click', imgRefresh6);
 $('#imgsave').on('click', nowFitShow);
 $('#changeimg').on('click', showFitNow);
 
+
+
+function loadData()
+{
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.open("GET","x_mailbox_demo.html",false);
+    xmlhttp.send();
+    document.getElementById("update").innerHTML=xmlhttp.responseText;
+}
 

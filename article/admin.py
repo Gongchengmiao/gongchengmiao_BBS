@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
-from .models import ArticleColumn, ArticlePost
+from .models import ArticleColumn, ArticlePost, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -14,3 +14,4 @@ class SchoolInfoAdmin(admin.ModelAdmin):
 
 admin.site.register(ArticleColumn)
 admin.site.register(ArticlePost)
+admin.site.register(Comment)
