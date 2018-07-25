@@ -15,7 +15,18 @@ class common_member(AbstractUser):
     # uid = models.IntegerField(max_length=12, primary_key=True)
     # email = models.EmailField()
     username = models.CharField(max_length=30, unique=True)
-    department = models.CharField(max_length=30, default='', null=True)
+    stu_num = models.CharField(max_length=10, null=True)
+    dept_choices = (
+        ('000', '少年班学院'),
+        ('001', '数学科学院'),
+        ('203', '物理学院'),
+        ('204', '管理学院'),
+        ('206', '化学学院'),
+        ('210', '信息科学技术学院'),
+        ('jwc', '教务处'),
+
+    )
+    department = models.CharField(max_length=30, null=True, choices=dept_choices)
     birthday = models.DateField(default=date.today)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除

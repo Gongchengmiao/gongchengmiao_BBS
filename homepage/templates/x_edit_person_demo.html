@@ -11,24 +11,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta http-equiv="x-pjax-version" content="v8">
 
-    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://bbs.pku.edu.cn/v2/mobile/modify-profile.php">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href= 'https://bbs.pku.edu.cn/v2/mobile/modify-profile.php' %}>
     <script type="text/javascript">
         window.login = true;
         window.username = "UserID";
     </script>
 
     <!-- start _stylesheets_and_scripts.php-->
-    <link rel="stylesheet" href="css/all.css?v17">
-    <link rel="shortcut icon" href="img/ustc.png">
-    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+        {% load static %}
+    <!-- start _stylesheets_and_scripts.php-->
+    <link rel="stylesheet" href="{% static "css/all.css" %}">
+    <link rel="shortcut icon" href="{% static "img/ustc.png" %}">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/font-awesome.css" %}" rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
 
 
 
-    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="{% static "css/plugins/chosen/chosen.css" %}" rel="stylesheet">
 
     <script>
         if (typeof(window.console) == 'undefined')
@@ -48,8 +50,8 @@
         var isShownWelcome = false;
     </script>
 </head>
-<body style="background: url('img/sky1.jpg');">
-<div style="margin:0 auto;width:0px;height:0px;overflow:hidden;"><img src="img/icons.png"></div> <!-- for wechat thumb -->
+<body style="background: url({% static "img/sky1.jpg" %});">
+<div style="margin:0 auto;width:0px;height:0px;overflow:hidden;"><img src="{% static "img/icons.png" %}"></div> <!-- for wechat thumb -->
 
 
     <div id="login-info" style="display: none">
@@ -70,85 +72,94 @@
 
 
         <form class="main-block" method="post" data-ajaxsubmit data-actiontext="修改">
-
+            {% csrf_token %}
             <div class="form-row">
                 <h2>基本信息</h2>
                 <div class="boxT pull-right">
-                    <img alt="image" src="img/a3.jpg">
+                    <img alt="image" src="{% get_media_prefix %}{{ portrait }}" id="imgnow" >
                     <h5> </h5>
                     <div>
-                        <div class="cyan-small-btn"  style="background-color: dodgerblue">
-                            <input id="avatar-uploader" class="avatar-upload " name="file" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,image/tiff,image/jpeg,image/png">
-                            <span>修改头像</span>
+                        <button type="button" class="btn-xs btn-blue" data-toggle="modal" data-target="#myModal" id="changeimg">
+                            修改头像
+                        </button>
+                        <div class="cyan-small-btn">
+                            {{ form.portrait }}
+                            <span>本地上传</span>
+                        </div>
+                        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated fadeIn">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <img alt="image" class="img-circle" src="{% static "img/ustc.png" %}" id="imgshow" style="width: 48px;height: 48px;">
+                                        <h4 class="modal-title">更换头像</h4>
+                                        <small>请从默认头像中选择一个。</small>
+                                    </div>
+                                    <div class="modal-body">
+                                        <dd class="project-people1">
+                                            <img alt="default_img1" class="img-circle" src="{% static "img/boy_glasses.jpg" %}" id="boyg">
+                                            <img alt="default_img2" class="img-circle" src="{% static "img/boy_hat.jpg" %}" id="boyh">
+                                            <img alt="default_img3" class="img-circle" src="{% static "img/boy_sport.jpg" %}" id="boys">
+                                            <img alt="default_img4" class="img-circle" src="{% static "img/girl_rollhair.jpg" %}" id="girlr">
+                                            <img alt="default_img5" class="img-circle" src="{% static "img/girl_shorthair.jpg" %}" id="girlsh">
+                                            <img alt="default_img6" class="img-circle" src="{% static "img/girl_silent.jpg" %}" id="girlsi">
+                                        </dd>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-blue" id="imgsave">保存</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="form-row">
                 <label>昵称</label>
-                <input class="input-field" name="nickname" type="text" maxlength="30" value="UserName" required/>
+                {{ form.username }}
                 <span class="warning" >昵称长度应＜15 个汉字，或＜30 个字符</span>
             </div>
             <div class="form-row birth">
                 <label>生日</label>
-                <input class="input-field" name="birthyear" type="number" min="1901" max="2017" step="1" pattern="[0-9]{4}" value="1998" required />
-                <span>年</span>
-                <input class="input-field" name="birthmonth" type="number" min="1" max="12" step="1" pattern="[0-9]{1,2}" value="2" required />
-                <span>月</span>
-                <input class="input-field" name="birthday" type="number" min="1" max="31" step="1" pattern="[0-9]{1,2}" value="9" required />
-                <span>日</span>
-                <label>
-                    <input name="hide_horoscope" type="checkbox" checked />
-                    <span>不展示我的星座</span>
-                </label>
-                <span class="warning">您输入的日期不存在</span>
+                {{ form.birthday }}
             </div>
             <div class="form-row">
                 <label>性别</label>
-                <div class="radgroup">
-                    <label>
-                        <input name="gender" type="radio" required value="M" checked />
-                        <span>男</span>
-                    </label>
-                    <label>
-                        <input name="gender" type="radio" required value="F" />
-                        <span>女</span>
-                    </label>
-                    <label>
-                        <input name="hide_gender" type="checkbox" />
-                        <span>不展示我的性别</span>
-                    </label>
+                    <div class="radgroup">
+                        <div class="radgroup">
+                        {% for radio in form.gender %}
+                            <label>
+                                {{ radio }}
+                            </label>
+                        {% endfor %}
+                        {{ form.show_gender }}
+                        <span>是否显示性别</span>
+                    </div>
                 </div>
                 <span class="warning">性别不能为空</span>
             </div>
 
             <div class="form-row">
                 <label>学号/工号</label>
-                <input class="input-field" name="stuid" type="text" maxlength="10" value="PBxxxxxxxx" required/>
+                {{ form.stu_num }}
                 <span class="warning" >学号/工号应在0~10字符</span>
             </div>
 
             <div class="form-row">
                 <label>学院/部门</label>
-                <div class="input-group">
-                    <select data-placeholder="选择学院/部门..." class="chosen-select" style="width:350px;" tabindex="2">
-                        <option value="">请选择学院/部门</option>
-                        <option value="110000" hassubinfo="true">06信息学院</option>
-                        <option value="120000" hassubinfo="true">11计算机学院</option>
-                        <option value="130000" hassubinfo="true">00少年班学院</option>
-                        <option value="140000" hassubinfo="true">其他学院或部门</option>
-                    </select>
-                </div>
+                {{ form.department }}
             </div>
 
             <div class="form-row">
                 <label>说明档</label>
-                <div class="textarea-wrapper"><textarea id="desc-textarea" data-origin="#desc-origin"></textarea></div>
+                {{ form.profile }}
                 <div id="desc-origin" style="display: none"><p>MRCZHZR ZS TQL</p></div>
             </div>
             <hr />
             <div class="form-row extra-margin-top">
-                <button class="cyan-large-btn" type="submit" style="background-color: dodgerblue">保存</button>
+                <button class="cyan-large-btn" type="submit" id="save_btn" style="background-color: dodgerblue">保存</button>
             </div>
         </form>
     </div>
@@ -157,14 +168,115 @@
 
 
 <!-- 全局js -->
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 
 <!-- Chosen -->
-<script src="js/plugins/chosen/chosen.jquery.js"></script>
-<script src="js/demo/form-advanced-demo.js"></script>
+<script src="{% static "js/plugins/chosen/chosen.jquery.js" %}"></script>
+<script src="{% static "js/demo/form-advanced-demo.js" %}"></script>
 
+<script>
+        function overShow(obj,e) {
+        var showDiv = document.getElementById('showDiv');
+        var theEvent = window.event|| e;
+        var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+        var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+        var x = e.pageX || e.clientX + scrollX;
+        var y = e.pageY || e.clientY + scrollY;
+        showDiv.style.left = x+'px';
+        showDiv.style.top = y+'px';
+        showDiv.style.display = 'block';
+        //alert(obj.innerHTML);
+        showDiv.innerHTML = obj.innerHTML;
+    }
+
+    function outHide() {
+        var showDiv = document.getElementById('showDiv');
+        showDiv.style.display = 'none';
+        showDiv.innerHTML = '';
+    }
+
+
+    function imgRefresh1() {
+        document.getElementById('imgshow').setAttribute("src",document.getElementById('boyg').src);
+        document.getElementById('imgshow').setAttribute("alt",document.getElementById('boyg').alt);
+    }
+    function imgRefresh2() {
+        document.getElementById('imgshow').setAttribute("src",document.getElementById('boys').src);
+        document.getElementById('imgshow').setAttribute("alt",document.getElementById('boys').alt);
+    }
+    function imgRefresh3() {
+        document.getElementById('imgshow').setAttribute("src",document.getElementById('boyh').src);
+        document.getElementById('imgshow').setAttribute("alt",document.getElementById('boyh').alt);
+    }
+    function imgRefresh4() {
+        document.getElementById('imgshow').setAttribute("src",document.getElementById('girlr').src);
+        document.getElementById('imgshow').setAttribute("alt",document.getElementById('girlr').alt);
+    }
+    function imgRefresh5() {
+        document.getElementById('imgshow').setAttribute("src",document.getElementById('girlsh').src);
+        document.getElementById('imgshow').setAttribute("alt",document.getElementById('girlsh').alt);
+    }
+    function imgRefresh6() {
+        document.getElementById('imgshow').setAttribute("src",document.getElementById('girlsi').src);
+        document.getElementById('imgshow').setAttribute("alt",document.getElementById('girlsi').alt);
+    }
+
+    function nowFitShow() {
+        document.getElementById('imgnow').setAttribute("src",document.getElementById('imgshow').src);
+        document.getElementById('imgnow').setAttribute("alt",document.getElementById('imgshow').alt);
+    }
+
+    function showFitNow() {
+        document.getElementById('imgshow').setAttribute("src",document.getElementById('imgnow').src);
+        document.getElementById('imgshow').setAttribute("alt","image");
+        document.getElementById('imgnow').setAttribute("alt","image");
+    }
+
+    function saveImgNow() {
+        $.ajax({
+            type:"post",
+            url:"{% url 'edit_info_save_portrait' %}",
+            data:{
+                portrait_alt:document.getElementById('imgnow').alt
+            },
+            data_type:"json",
+            success:function (ret) {
+                alert(ret)
+            }
+        })
+    }
+
+    $('#boyg').on('click', imgRefresh1);
+    $('#boys').on('click', imgRefresh2);
+    $('#boyh').on('click', imgRefresh3);
+    $('#girlr').on('click', imgRefresh4);
+    $('#girlsh').on('click', imgRefresh5);
+    $('#girlsi').on('click', imgRefresh6);
+    $('#imgsave').on('click', nowFitShow);
+    $('#changeimg').on('click', showFitNow);
+    $('#save_btn').on('click', saveImgNow);
+
+
+
+    function loadData()
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("GET","x_mailbox_demo.html",false);
+        xmlhttp.send();
+        document.getElementById("update").innerHTML=xmlhttp.responseText;
+    }
+
+
+</script>
 
 </body>
 </html>

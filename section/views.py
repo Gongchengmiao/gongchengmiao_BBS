@@ -12,8 +12,8 @@ Num_per_page = 5
 @login_required(login_url='/login/')
 def section_all(request, section_slug):
     section = SectionForum.objects.filter(slug=section_slug).first()
-    posts = ArticlePost.objects.filter(section_belong_fk=section).order_by('-pub_date').all()[0:2*Num_per_page]
-    post_num = len(posts)
+    posts = ArticlePost.objects.filter(section_belong_fk=section).order_by('-pub_date')[0:2*Num_per_page]
+    post_num = ArticlePost.objects.filter(section_belong_fk=section).count()
     context = {
         'section': section,
         'post_num': post_num,
@@ -23,26 +23,25 @@ def section_all(request, section_slug):
 
 
 def section_open_posts_list(request):
-    print("what")
+    # print("what")
     sec_slug = request.GET.get("sec_slug")
     section = SectionForum.objects.filter(slug=sec_slug).first()
     page = request.GET.get("page")  # present active page button
+    post_num = ArticlePost.objects.filter(section_belong_fk=section).count()
+    page_num = math.ceil(post_num/Num_per_page)
     if page == '':
         page = '1'
     page = int(page)
-    if request.GET.get("isElite") == '0':
-        posts = ArticlePost.objects.filter(section_belong_fk=section).order_by('-pub_date').all()
-    else:
-        posts = ArticlePost.objects.filter(section_belong_fk=section, isElite=True).order_by('-pub_date').all()
-    post_num = len(posts)
-    page_num = math.ceil(post_num/Num_per_page)
 
     if request.GET.get('isDecPage') == '1':
         page = max(page-1, 1)
     elif request.GET.get('isIncPage') == '1':
-        page = min(page+1, page_num)
+        page = min(page+1,page_num)
 
-    posts = posts[Num_per_page*(page-1): Num_per_page*page]
+    if request.GET.get("isElite") == '0':
+        posts = ArticlePost.objects.filter(section_belong_fk=section).order_by('-pub_date')[Num_per_page*(page-1): Num_per_page*page]
+    else:
+        posts = ArticlePost.objects.filter(section_belong_fk=section, isElite=True).order_by('-pub_date')[Num_per_page*(page-1): Num_per_page*page]
 
     # find the pages to display
     pages_to_show = []

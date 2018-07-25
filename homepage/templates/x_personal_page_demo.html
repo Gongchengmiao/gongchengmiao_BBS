@@ -32,7 +32,7 @@
                                     <a href="{% url 'edit_info' %}" class="btn btn-blue pull-right">修改资料</a>
 
                                     <div class="boxT">
-                                        <img alt="image" src="img/a3.jpg">
+                                        <img alt="image" src="{% get_media_prefix %}{{ user_self.portrait }}">
                                         <h2>{{ user_self.username }}</h2>
                                     </div>
 
@@ -48,8 +48,8 @@
                             <div class="col-sm-5">
                                 <dl class="dl-horizontal">
 
-                                    <dt>学院</dt>
-                                    <dd>{{ user.department }}</dd>
+                                    <dt>学院：</dt>
+                                    <dd>{{ user_self.department }}</dd>
                                     <dt>性别：</dt>
                                     <dd>
                                         {% if user_self.gender == 'm' %}
@@ -58,12 +58,12 @@
                                             女
                                         {% endif %}
                                     </dd>
-                                    <dt>等级：</dt>
-                                    <dd>6</dd>
+                                    <dt>生日：</dt>
+                                    <dd>{{ birth }}</dd>
                                     <dt>上站次数:</dt>
                                     <dd>66</dd>
                                     <dt>发帖数：</dt>
-                                    <dd>{{ user.posts }}</dd>
+                                    <dd>{{ user_self.posts }}</dd>
                                     <dt>积分：</dt>
                                     <dd>6666</dd>
                                 </dl>
@@ -140,36 +140,46 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-1">
 
-                                                <div class="feed-activity-list">
-
-                                                </div>
-
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"></i>
-                                                        </button>
-                                                        <button class="btn btn-white active" style="color: #0a6aa1">1</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">2</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">3</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">4</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">5</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">6</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">7</button>
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"></i>
-                                                        </button>
+                                                <div class="feed-activity-list" id = "my_following_list">
+                                                    {% if following_actions %}
+                                                        {% for i,ac in following_actions %}
+                                                            <div class="feed-element">
+                                                        <a href="{% url 'show_info' ac.uid.slug %}" class="pull-left">
+                                                            <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ ac.uid.portrait }}">
+                                                        </a>
+                                                        <div class="media-body ">
+                                                            <small class="pull-right">{{ ac.dateline }}</small>
+                                                            {% if ac.action == 'post' %}
+                                                                <strong>{{ ac.uid.username }}</strong> 发表了
+                                                            {% elif ac.action == 'star' %}
+                                                                <strong>{{ ac.uid.username }}</strong> 收藏了
+                                                            {% elif ac.action == 'upload' %}
+                                                                <strong>{{ ac.uid.username }}</strong> 上传了
+                                                            {% endif %}
+                                                            <br>
+                                                            <div class="text-muted1 well well0" style="cursor: pointer;"
+                                                                 onclick="location.href='{% url 'view_self_info' %}'"
+                                                            >
+                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ ac.pid.title }}</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
+                                                        {% endfor %}
+                                                    {% endif %}
                                                 </div>
+
                                             </div>
                                             <div class="tab-pane" id="tab-2">
-                                                <div class="feed-activity-list">
-
+                                                <div class="feed-activity-list" id="my_action_list">
                                                      {% if my_actions %}
                                                         {% for i,ac in my_actions %}
                                                             <div class="feed-element">
                                                         <a href="{% url 'show_info' user_self.slug %}" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ following.portrait }}">
+                                                            <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ user_self.portrait }}">
                                                         </a>
                                                         <div class="media-body ">
+                                                            <small class="pull-right">{{ ac.dateline }}</small>
                                                             {% if ac.action == 'post' %}
                                                                 <strong>你</strong> 发布了
                                                             {% elif ac.action == 'star' %}
@@ -179,7 +189,7 @@
                                                             {% endif %}
                                                             <br>
                                                             <div class="text-muted1 well well0" style="cursor: pointer;"
-                                                                 onclick="location.href='#'"
+                                                                 onclick="location.href='{% url 'view_self_info' %}'"
                                                             >
                                                                 <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ ac.pid.title }}</p>
                                                             </div>
@@ -187,27 +197,14 @@
                                                     </div>
                                                         {% endfor %}
                                                     {% endif %}
-
-                                                </div>
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"></i>
-                                                        </button>
-                                                        <button class="btn btn-white active" style="color: #0a6aa1">1</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">2</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">3</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">4</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">5</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">6</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">7</button>
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"></i>
-                                                        </button>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="tab-3">
-                                                <div class="feed-activity-list">
-                                                    <div class="feed-element" style="cursor: pointer">
+                                                <div class="feed-activity-list" id="my_star_list">
+                                                    {% if my_star_posts %}
+                                                        {% for i,po in my_star_posts %}
+                                                            {% if po.isElite == True %}
+                                                                <div class="feed-element" style="cursor: pointer">
                                                         <div class="media-body">
                                                             <div class="pull-left" style="margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px">
                                                                 <a class="btn btn-xs btn-success">
@@ -219,60 +216,48 @@
                                                                     <small class="pull-right">2018-7-12</small>
                                                                 </div>
                                                                 <div style="margin: 0 auto">
-                                                                    <a href="profile.html#" class="pull-right">
+                                                                    <a href="{% url 'show_info' po.author.slug %}" class="pull-right">
                                                                         <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
-                                                                        <i style="font-size: xx-small">在水一方Y</i>
+                                                                        <i style="font-size: xx-small">{{ po.author.username }}</i>
                                                                     </a>
                                                                 </div>
                                                             </div>
                                                             <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium;"
-                                                                 onclick="location.href='#'"
+                                                                 onclick="location.href='{% url 'view_self_info' %}'"
                                                             >
-                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">官方：C罗加盟尤文图斯！</p>
+                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ po.title }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="feed-element" style="cursor: pointer">
+                                                            {% else %}
+                                                                <div class="feed-element" style="cursor: pointer">
                                                         <div class="media-body">
                                                             <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
                                                                 <div style="margin: 0 auto">
                                                                     <small class="pull-right">2018-6-17</small>
                                                                 </div>
                                                                 <div style="margin: 0 auto">
-                                                                    <a href="profile.html#" class="pull-right">
+                                                                    <a href="{% url 'show_info' po.author.slug %}" class="pull-right">
                                                                         <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
-                                                                        <i style="font-size: xx-small">作家崔成浩</i>
+                                                                        <i style="font-size: xx-small">{{ po.author.username }}</i>
                                                                     </a>
                                                                 </div>
                                                             </div>
                                                             <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium;"
-                                                                 onclick="location.href='#'"
+                                                                 onclick="location.href='{% url 'view_self_info' %}'"
                                                             >
-                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">章豪信号与系统考了95，他的微机原理考了96，这个学期，到现在为止，它考了3门4.3……</p>
+                                                                <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ po.title }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
 
-                                                </div>
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"></i>
-                                                        </button>
-                                                        <button class="btn btn-white active" style="color: #0a6aa1">1</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">2</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">3</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">4</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">5</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">6</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">7</button>
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"></i>
-                                                        </button>
-                                                    </div>
                                                 </div>
                                             </div><!--动态形式-->
                                             <div class="tab-pane" id="tab-4">
-                                                <div class="feed-activity-list">
+                                                <div class="feed-activity-list" id="comment_list">
                                                     <div class="feed-element">
                                                         <a href="profile.html#" class="pull-left">
                                                             <img alt="image" class="img-circle" src="img/a2.jpg">
@@ -318,21 +303,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"></i>
-                                                        </button>
-                                                        <button class="btn btn-white active" style="color: #0a6aa1">1</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">2</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">3</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">4</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">5</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">6</button>
-                                                        <button class="btn btn-white" style="color: #0a6aa1">7</button>
-                                                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -372,6 +342,122 @@
 
                 simpleLoad(btn, false)
             });
+
+            $(window).scroll(function () {
+                var dis = $(document).scrollTop() - ($(document).height() - $(window).height());
+                if(dis>=0){
+                    var tab_chosen = $("a[aria-expanded='true']").text();
+                    var tab,display_list;
+                    if(tab_chosen === "关注动态"){
+                         tab = "1";
+                         display_list = "my_following_list";
+                    }
+                    else if(tab_chosen === "我的动态"){
+                        tab = "2";
+                        display_list = "my_action_list";
+                    }
+                    else if(tab_chosen === "我的收藏"){
+                        tab = "3";
+                        display_list = "my_star_list";
+                    }
+                    else if(tab_chosen === "回复我的"){
+                        tab = "4";
+                        display_list = "comment_list";
+                    }
+                    var pre_num = $("#"+display_list).children("div").size();
+                    $.ajax({
+                        type:'get',
+                        url:"{% url 'view_self_ajax_scroll' %}",
+                        data:{
+                            tab:tab,
+                            pre_num:pre_num
+
+                        },
+                        data_type:"json",
+                        success:function (ret) {
+                            var html;
+                            if(ret.is_all === '1'){
+                                alert("已经到底啦~")
+                                return
+                            }
+                            if(tab === "3"){
+                                $.each(ret.item_list, function (i,item) {
+                                    if(item.isElite === "True"){
+                                        html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                                            "                                                        <div class=\"media-body\">\n" +
+                                            "                                                            <div class=\"pull-left\" style=\"margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px\">\n" +
+                                            "                                                                <a class=\"btn btn-xs btn-success\">\n" +
+                                            "                                                                    <i class=\"fa fa-star\"></i> 精\n" +
+                                            "                                                                </a>\n" +
+                                            "                                                            </div>\n" +
+                                            "                                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                                            "                                                                <div style=\"margin: 0 auto\">\n" +
+                                            "                                                                    <small class=\"pull-right\">2018-7-12</small>\n" +
+                                            "                                                                </div>\n" +
+                                            "                                                                <div style=\"margin: 0 auto\">\n" +
+                                            "                                                                    <a href=\""+item.author_url+"\" class=\"pull-right\">\n" +
+                                            "                                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                                            "                                                                        <i style=\"font-size: xx-small\">"+item.author+"</i>\n" +
+                                            "                                                                    </a>\n" +
+                                            "                                                                </div>\n" +
+                                            "                                                            </div>\n" +
+                                            "                                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium;\"\n" +
+                                            "                                                                 onclick=\"location.href='"+item.post_url+"'\"\n" +
+                                            "                                                            >\n" +
+                                            "                                                                <p class=\"contentwidth\"  onmouseover=\"overShow(this,event)\" onmouseout=\"outHide()\">"+item.title+"</p>\n" +
+                                            "                                                            </div>\n" +
+                                            "                                                        </div>\n" +
+                                            "                                                    </div>";
+                                    }
+                                    else{
+                                        html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                                            "                                                        <div class=\"media-body\">\n" +
+                                            "                                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                                            "                                                                <div style=\"margin: 0 auto\">\n" +
+                                            "                                                                    <small class=\"pull-right\">2018-6-17</small>\n" +
+                                            "                                                                </div>\n" +
+                                            "                                                                <div style=\"margin: 0 auto\">\n" +
+                                            "                                                                    <a href=\""+item.author_url+"\" class=\"pull-right\">\n" +
+                                            "                                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                                            "                                                                        <i style=\"font-size: xx-small\">"+item.author+"</i>\n" +
+                                            "                                                                    </a>\n" +
+                                            "                                                                </div>\n" +
+                                            "                                                            </div>\n" +
+                                            "                                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium;\"\n" +
+                                            "                                                                 onclick=\"location.href='"+item.post_url+"'\"\n" +
+                                            "                                                            >\n" +
+                                            "                                                                <p class=\"contentwidth\"  onmouseover=\"overShow(this,event)\" onmouseout=\"outHide()\">"+item.title+"</p>\n" +
+                                            "                                                            </div>\n" +
+                                            "                                                        </div>\n" +
+                                            "                                                    </div>";
+                                    }
+                                    $("#"+display_list).append(html);
+                                })
+                            }
+                            else{
+                                $.each(ret.item_list, function (i, item) {
+                                    html = "<div class=\"feed-element\">\n" +
+                                        "                                                        <a href=\""+item.user_url+"\" class=\"pull-left\">\n" +
+                                        "                                                            <img alt=\"image\" class=\"img-circle\" src=\""+item.portrait+"\">\n" +
+                                        "                                                        </a>\n" +
+                                        "                                                        <div class=\"media-body \">\n" +
+                                        "                                                            <small class=\"pull-right\">"+item.date_time+"</small>\n" +
+                                        "                                                                <strong>"+item.username+"</strong> 上传了\n" +
+                                        "                                                            <br>\n" +
+                                        "                                                            <div class=\"text-muted1 well well0\" style=\"cursor: pointer;\"\n" +
+                                        "                                                                 onclick=\"location.href='"+item.post_url+"'\"\n" +
+                                        "                                                            >\n" +
+                                        "                                                                <p class=\"contentwidth\"  onmouseover=\"overShow(this,event)\" onmouseout=\"outHide()\">"+item.post_title+"</p>\n" +
+                                        "                                                            </div>\n" +
+                                        "                                                        </div>\n" +
+                                        "                                                    </div>";
+                                    $("#"+display_list).append(html);
+                                })
+                            }
+                        }
+                    })
+                }
+            })
         });
 
         function simpleLoad(btn, state) {
