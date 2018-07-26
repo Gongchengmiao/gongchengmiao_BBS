@@ -43,8 +43,8 @@ class common_member(AbstractUser):
         return self.username
 
 class follower_pair(models.Model):
-    followed = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_followed')
-    by = models.ForeignKey(common_member,on_delete=models.CASCADE, related_name='%(class)s_by')
+    followed = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_followed')
+    by = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_by')
 
     #其他属性
     follow_time = models.DateTimeField(auto_now=True)

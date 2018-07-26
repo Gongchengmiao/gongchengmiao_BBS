@@ -70,14 +70,17 @@ class Common_memberAdmin(BaseUserAdmin):
 class Commmon_menber_starAdmin(admin.ModelAdmin):
     list_display = ('uid', 'pid')
 
+
 class followers_Adim(admin.ModelAdmin):
-    list_display=('followed','by')
+    list_display=('followed', 'by')
+
 
 class User_action_log_Admin(admin.ModelAdmin):
     list_display = ('id', 'uid', 'action','dateline')
     fieldsets = (
         (None, {'fields': ('id', 'uid', 'action','is_school_info', 'pid', 'spid')}),
     )
+
 
 admin.site.register(common_member, Common_memberAdmin)
 

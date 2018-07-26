@@ -1,3 +1,22 @@
 from django.db import models
+from user.models import common_member
 
 # Create your models here.
+
+
+class ChatGroup(models.Model):
+    group_name = models.CharField(max_length=256)
+    chat_users = models.ManyToManyField(common_member)
+
+    def __str__(self):
+        return self.group_name
+
+
+class ChatLog(models.Model):
+    chat_group = models.ForeignKey(ChatGroup, on_delete=models.CASCADE)
+    chat_text = models.CharField(max_length=256)
+
+    def __str__(self):
+        return "{}  {}".format(self.chat_group, self.chat_text)
+
+
