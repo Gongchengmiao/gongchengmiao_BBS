@@ -5,7 +5,7 @@ from .models import ChatGroup, ChatLog
 
 
 class ChatGroupAdmin(admin.ModelAdmin):
-    list_display = ('group_name',)
+    list_display = ('channel_name',)
 
 
 class ChatLogAdmin(admin.ModelAdmin):

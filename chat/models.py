@@ -5,11 +5,11 @@ from user.models import common_member
 
 
 class ChatGroup(models.Model):
-    group_name = models.CharField(max_length=256)
+    channel_name = models.CharField(max_length=256)
     chat_users = models.ManyToManyField(common_member)
 
     def __str__(self):
-        return self.group_name
+        return self.channel_name
 
 
 class ChatLog(models.Model):
