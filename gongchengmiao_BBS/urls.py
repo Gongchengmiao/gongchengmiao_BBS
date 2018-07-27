@@ -50,6 +50,9 @@ urlpatterns = [
     path('homepage/ajax_more', homepage_views.show_info_ajax_more, name='show_info_ajax_more'),
     path('homepage/ajax_scroll', homepage_views.view_self_ajax_scroll, name='view_self_ajax_scroll'),
     path('homepage/ajax_save_portrait', homepage_views.edit_info_ajax_save_portrait, name='edit_info_save_portrait'),
+    path('homepage/ajax_upload_temp', homepage_views.edit_info_ajax_upload_temp, name='edit_info_ajax_upload_temp'),
+    path('homepage/ajax_get_temp', homepage_views.edit_info_ajax_get_temp, name='edit_info_ajax_get_temp'),
+    path('homepage/ajax_delete_temp', homepage_views.delete_temp, name='edit_info_ajax_delete_temp'),
 
     path('article/', article_views.article_post, name="article_post"),
 

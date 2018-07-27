@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from gongchengmiao_BBS import settings
 from django.http import HttpResponse, JsonResponse
+import os
+import time
 # Create your views here.
 
 
@@ -48,13 +50,13 @@ def view_self_info(request):
     following_actions = common_member_action_log.objects.filter(uid__in=my_followings).order_by('-dateline')[0:1]
     my_star_pids = common_member_star.objects.filter(uid=request.user).order_by('-star_time').values('pid')[0:1]
     my_star_posts = ArticlePost.objects.filter(pid__in=my_star_pids).all()
-    portrait = str(request.user.portrait)
+    portrait = str(request.user.portrait.name)
     my_followings = my_followings[0:8]
 
     context = {
         'user_self': request.user,
         'portrait': portrait,
-        'birth':request.user.birthday.strftime('%d/%m/%y'),
+        'birth': request.user.birthday.strftime('%d/%m/%y'),
         'my_actions': enumerate(my_actions),
         'followings': enumerate(my_followings),
         'following_actions': enumerate(following_actions),
@@ -144,11 +146,10 @@ def edit_info(request):
         if myform.is_valid():
             # print('valid')
             myform.save()
+            print(myform.errors)
         else:
             print(myform.errors)
-
-        return redirect(reverse('view_self_info'))
-
+        return render(request, "x_edit_person_demo.html", {"form": myform, "portrait": request.user.portrait})
 
 @login_required(login_url='/login/')
 def show_info_ajax_follow(request):
@@ -170,7 +171,7 @@ def show_info_ajax_more(request):
     target_user = common_member.objects.filter(slug=target_slug).first()
     present_ac_num = int(request.GET.get("action_num"))
     if present_ac_num == common_member_action_log.objects.filter(uid=target_user).count():
-        context={
+        context = {
             "isFull": '1'
         }
         return JsonResponse(context)
@@ -207,7 +208,15 @@ def show_info_ajax_star(request):
 @csrf_exempt
 def edit_info_ajax_save_portrait(request):
     alt = request.POST.get('portrait_alt')
-    if alt != 'image':
+    if alt == 'image_upload':
+        user = common_member.objects.filter(id=request.user.id).first()
+        user.portrait.name = 'portraits/'+user.temp_portrait.name
+        user.save()
+    elif alt != 'image':
+        path = os.path.join(settings.MEDIA_ROOT + '\\portraits', request.user.temp_portrait.name)
+        if os.path.exists(path):
+            # 删除文件，可使用以下两种方法。
+            os.remove(path)
         image_dir = {
             'default_img1': "portraits/default_img/boy_glasses.jpg",
             'default_img2': "portraits/default_img/boy_hat.jpg",
@@ -219,3 +228,43 @@ def edit_info_ajax_save_portrait(request):
         common_member.objects.filter(id=request.user.id).update(portrait=image_dir[alt])
 
     return HttpResponse(request.POST.get('portrait_alt'))
+
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def edit_info_ajax_upload_temp(request):
+    if request.method == 'POST':
+        user = request.POST.get('user')
+        img = request.FILES.get('img')
+        # print(user, img.name)
+        path = os.path.join(settings.MEDIA_ROOT+'\\portraits', img.name)
+        f = open(path, 'wb')
+        for chunk in img.chunks():
+           f.write(chunk)
+        f.close()
+        common_member.objects.filter(id=request.user.id).update(temp_portrait=img.name)
+        # common_member.objects.filter(id=request.user.id).temp_portrait.save(name=img.name)
+        return HttpResponse('ok')
+    return HttpResponse()
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def edit_info_ajax_get_temp(request):
+    user = common_member.objects.filter(id=request.user.id).first()
+    ret = settings.MEDIA_URL + 'portraits/' + user.temp_portrait.name
+    context = {
+        'temp_src': str(ret)
+    }
+
+    return JsonResponse(context)
+
+def delete_temp(request):
+    user = common_member.objects.filter(id=request.user.id).first()
+    if ('portraits/' + user.temp_portrait.name) != user.portrait.name:
+        path = os.path.join(settings.MEDIA_ROOT + '\\portraits', user.temp_portrait.name)
+        if os.path.exists(path):
+            # 删除文件，可使用以下两种方法。
+            os.remove(path)
+    return HttpResponse('deleted')

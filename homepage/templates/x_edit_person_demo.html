@@ -71,21 +71,18 @@
         </div>
 
 
-        <form class="main-block" method="post" data-ajaxsubmit data-actiontext="修改">
+        <form class="main-block" method="post" data-ajaxsubmit data-actiontext="修改" >
             {% csrf_token %}
             <div class="form-row">
                 <h2>基本信息</h2>
                 <div class="boxT pull-right">
+                    {%  load staticfiles %}
                     <img alt="image" src="{% get_media_prefix %}{{ portrait }}" id="imgnow" >
                     <h5> </h5>
                     <div>
                         <button type="button" class="btn-xs btn-blue" data-toggle="modal" data-target="#myModal" id="changeimg">
                             修改头像
                         </button>
-                        <div class="cyan-small-btn">
-                            {{ form.portrait }}
-                            <span>本地上传</span>
-                        </div>
                         <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated fadeIn">
@@ -103,6 +100,10 @@
                                             <img alt="default_img4" class="img-circle" src="{% static "img/girl_rollhair.jpg" %}" id="girlr">
                                             <img alt="default_img5" class="img-circle" src="{% static "img/girl_shorthair.jpg" %}" id="girlsh">
                                             <img alt="default_img6" class="img-circle" src="{% static "img/girl_silent.jpg" %}" id="girlsi">
+                                            <div class="cyan-small-btn" >
+                                                <input  type="file" name="portrait" id="temp_portrait">
+                                                <span>修改头像</span>
+                                            </div>
                                         </dd>
                                     </div>
                                     <div class="modal-footer">
@@ -225,12 +226,43 @@
     function nowFitShow() {
         document.getElementById('imgnow').setAttribute("src",document.getElementById('imgshow').src);
         document.getElementById('imgnow').setAttribute("alt",document.getElementById('imgshow').alt);
+
+        var fileobj = $("#temp_portrait")[0].files[0];
+        if(fileobj){
+            var form = new FormData();
+            form.append('img',fileobj);
+            $.ajax({
+                type:'POST',
+                url:'{% url 'edit_info_ajax_upload_temp' %}',
+                data:form,
+                processData:false,  // 告诉jquery不转换数据
+                contentType:false,  // 告诉jquery不设置内容格式
+                success:function (arg) {
+                    console.log(arg);
+                    $.ajax({
+                type:'get',
+                url:'{% url 'edit_info_ajax_get_temp' %}',
+                success:function (ret) {
+                    //alert(ret.temp_src)
+                    document.getElementById('imgshow').setAttribute("src",ret.temp_src);
+                    document.getElementById('imgshow').setAttribute("alt","image_upload");
+                    document.getElementById('imgnow').setAttribute("src",ret.temp_src);
+                    document.getElementById('imgnow').setAttribute("alt","image_upload");
+                }
+            });
+                    document.getElementById('temp_portrait').value = "";
+                }
+            });
+        }
+
     }
 
     function showFitNow() {
         document.getElementById('imgshow').setAttribute("src",document.getElementById('imgnow').src);
         document.getElementById('imgshow').setAttribute("alt","image");
         document.getElementById('imgnow').setAttribute("alt","image");
+
+
     }
 
     function saveImgNow() {
@@ -242,10 +274,17 @@
             },
             data_type:"json",
             success:function (ret) {
-                alert(ret)
+                alert("信息保存成功");
+                $.ajax({
+                    type:'get',
+                    url:"{% url 'edit_info_ajax_delete_temp' %}"
+                });
+                window.location.href="{% url 'view_self_info' %}";
             }
-        })
+        });
+
     }
+
 
     $('#boyg').on('click', imgRefresh1);
     $('#boys').on('click', imgRefresh2);
@@ -257,7 +296,22 @@
     $('#changeimg').on('click', showFitNow);
     $('#save_btn').on('click', saveImgNow);
 
-
+     window.onbeforeunload = function() {
+         $.ajax({
+            type:"post",
+            url:"{% url 'edit_info_save_portrait' %}",
+            data:{
+                portrait_alt:document.getElementById('imgnow').alt
+            },
+            data_type:"json",
+            success:function (ret) {
+                $.ajax({
+                    type:'get',
+                    url:"{% url 'edit_info_ajax_delete_temp' %}"
+                });
+            }
+        });
+     };
 
     function loadData()
     {

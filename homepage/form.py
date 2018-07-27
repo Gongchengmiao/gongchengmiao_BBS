@@ -68,6 +68,7 @@ class UserInfoChangeForm(forms.ModelForm):
                 }
             ),
             'gender': forms.RadioSelect(),
+            'portrait': forms.FileInput(),
             'username': forms.TextInput(
                 attrs={
                     "placeholder": u"请输入用户名",
@@ -78,4 +79,6 @@ class UserInfoChangeForm(forms.ModelForm):
         required = {
             'portrait': False
         }
+
+
 

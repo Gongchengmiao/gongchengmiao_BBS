@@ -32,6 +32,8 @@ class common_member(AbstractUser):
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
     slug = models.SlugField(max_length=100, default=slugify(str(username)), allow_unicode=True)
     portrait = models.ImageField(upload_to='portraits', null=True, blank=True)
+    temp_portrait = models.ImageField(upload_to='portraits', null=True, blank=True)  # 临时预览头像
+    points = models.IntegerField(default=0)  # 积分
     gender_choices = (('m', '男'), ('f', '女'))
     gender = models.CharField(max_length=1, default='m', choices=gender_choices)    # 性别 true为男
     show_gender = models.BooleanField(default=True)  # 是否显示
