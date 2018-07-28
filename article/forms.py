@@ -1,14 +1,21 @@
 from django import forms
+from DjangoUeditor.forms import UEditorField
 from .models import ArticleColumn, ArticlePost
 from .models import Comment
 
-class ArticlePostForm(forms.ModelForm):
-	class Meta:
-		model = ArticlePost
-		fields = ("title", "body")
+
+# class ArticlePostForm(forms.ModelForm):
+# 	class Meta:
+# 		model = ArticlePost
+# 		fields = ("title", "ueditor_body")
+
+class ArticlePostForm(forms.Form):
+    title = forms.CharField()
+    content = UEditorField('内容', width=800, height=900, toolbars="full",
+                           imagePath="images/", filePath="files/",upload_settings = {"imageMaxSize": 1204000},settings = {})
 
 
 class CommentForm(forms.ModelForm):
-	class Meta:
-		model = Comment
-		fields = ("body",)
+    class Meta:
+        model = Comment
+        fields = ("body",)

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import sys
 # from secrets_zh import mail_passwd
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'section',
     'user',
     'zone',
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [
@@ -164,4 +166,7 @@ CELERY_TIMEZONE = TIME_ZONE
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 

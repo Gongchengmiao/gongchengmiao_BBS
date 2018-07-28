@@ -24,8 +24,10 @@ def article_post(request):
         if article_post_form.is_valid():
             cd = article_post_form.cleaned_data
             try:
-                new_article = article_post_form.save(commit=False)
+                new_article = ArticlePost()
                 new_article.author = request.user
+                new_article.title = cd.get('title')
+                new_article.ueditor_body = cd.get('content')
                 new_article.save()
                 return HttpResponse("1")
             except:

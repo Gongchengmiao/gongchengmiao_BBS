@@ -61,5 +61,7 @@ urlpatterns = [
 
     path('pswdgetback/<uidb64>/<token>/', user_views.pswd_get_back_view, name='pswd_get_beck_2'),
     path('pswdgetbackjmp/<username>/', user_views.pswdgetback_jump, name='pswdgetback_jump'),
+
+    path('ueditor/', include('DjangoUeditor.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

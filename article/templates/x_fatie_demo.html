@@ -22,6 +22,7 @@
     <link href="{% static 'css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
+    {{ article_post_form.media }}
 </head>
 
 <body class="gray-bg">
@@ -114,7 +115,7 @@
                     <div class="mail-text h-200">
 
                         <div class="summernote">
-                            {{ article_post_form.body }}
+                            {{ article_post_form.content }}
                         </div>
                         <div class="clearfix"></div>
                     </div>

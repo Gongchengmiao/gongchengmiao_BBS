@@ -9,6 +9,7 @@ from django.conf import settings
 from django.utils import timezone
 from slugify import slugify
 from django.urls import reverse
+from DjangoUeditor.models import UEditorField
 
 #from django.template.defaultfilters import slugify
 from uuslug import slugify
@@ -44,6 +45,9 @@ class ArticlePost(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     body = models.TextField()
+    ueditor_body = UEditorField(width=600, height=300, null=True, toolbars="full", imagePath="images/", filePath="files/",
+                                upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='内容')
+
     isElite = models.BooleanField(default=False)
     pub_date = models.DateTimeField(auto_now_add=True, editable=True)
 
