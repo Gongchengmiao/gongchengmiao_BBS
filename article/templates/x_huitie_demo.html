@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 
@@ -11,21 +12,21 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="img/ustc.png">
-    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static "img/ustc.png" %}">
+    <link href="{% static "css/bootstrap.min.css?v=3.3.6" %}" rel="stylesheet">
+    <link href="{% static "css/font-awesome.css?v=4.4.0" %}" rel="stylesheet">
 
-    <link href="css/style_35_common.css" rel="stylesheet">
-    <link href="css/style_35_forum_viewthread.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="{% static "css/style_35_common.css" %}" rel="stylesheet">
+    <link href="{% static "css/style_35_forum_viewthread.css" %}" rel="stylesheet">
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css?v=4.1.0" %}" rel="stylesheet">
 
 
-    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="{% static "css/plugins/iCheck/custom.css" %}" rel="stylesheet">
+    <link href="{% static "css/plugins/summernote/summernote.css" %}" rel="stylesheet">
+    <link href="{% static "css/plugins/summernote/summernote-bs3.css" %}" rel="stylesheet">
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css?v=4.1.0" %}" rel="stylesheet">
 </head>
 
 <body id="nv_forum" class="pg_viewthread" onkeydown="if(event.keyCode==27) return false;" style="background-position-y: 41px;">
@@ -214,11 +215,10 @@
                                     <a href="space-uid-58928499.html" class="xi2 xw1">UserName2</a>
                                     &nbsp;{{ comment.body }}&nbsp;
                                     <span class="xg1">
-发表于 <span title="2018-6-9 00:57:19">12&nbsp;小时前</span></span>
+发表于 <span title="2018-6-9 00:57:19">{{ comment.created }}</span></span>
                                 </div>
                             </div>
                                 {% endif %}
-
                             {% endfor %}
 
 
@@ -530,128 +530,11 @@
                 <!--eof:added user-pvalue javascript :by  liuwenbin-->
                 </div><!--回帖框-->
 
-                <div id="post_708605421">
-                    <table id="pid708605421" summary="pid708605421" cellspacing="0" cellpadding="0">
-                        <tbody>
-                        <tr>
-                            <td class="pls" rowspan="2">
-                                <div class="pi clearfix">
-                                    <div class="authi" id="authi_708605421"><a href="" target="_blank" class="xw1">UserName2</a>
+                {% for comment in comments %}
+                    {% if comment.article.author == author %}
 
-                                    </div>
-                                </div>
-                                <p>身份：游客</p>
-                                <!-- 名片开始 -->
-                                <div class="p_pop blk bui card" id="userinfo708605421" style="display: none; margin-top: -11px;">
-                                    <div class="m z">
-                                        <div id="userinfo708605421_ma"></div>
-                                    </div>
-                                    <div class="i y">
-                                        <div>
-                                            <strong><a href="space-uid-58928499.html" target="_blank" class="xi2">UserName2</a></strong>
-                                            <em>当前离线</em>
-                                        </div>
-
-
-
-                                    </div>
-                                    <a href="javascript:;" class="btn-follow" touid="58928499" type="on" formhash="24d3bf46" onclick="javascript:udblogin();">关注</a>
-                                </div>
-                                <!-- 名片结束-->
-                                <div>
-                                    <div class="avatar" onmouseover="showauthor(this, 'userinfo708605421')"><a href="" target="_blank"><img src="img/girl_rollhair.jpg" class="img-circle" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_big.jpg'"></a></div>
-                                    <p><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=51" target="_blank"><font color="#cc0000">Lv.11</font></a></em></p>
-                                    <p class="xg1">个性签名</p></div>
-                                <div id="g_up708605421_menu" class="tip tip_4" style="display: none;">
-                                    <div class="tip_horn"></div>
-                                    <div class="tip_c"><font color="#cc0000">Lv.6666</font>, 积分 66666, 距离下一级还需 6 积分</div>
-                                </div>
-                                <dl class="pil clearfix">
-                                    <dt>UID</dt><dd>6666</dd><dt>帖子</dt><dd><a href="" target="_blank" class="xi2">66666</a></dd><dt>人气</dt><dd>6666 </dd></dl>
-                                <ul class="xl xl2 o cl">
-                                    <!--<li class="callon"><a href="space-uid-58928499.html" target="_blank" title="串个门" class="xi2">串个门</a></li>-->
-                                    <li class="pm2"><a href="home.php?mod=space&amp;do=pm&amp;action=send&amp;handlekey=showmsg_58928499&amp;uid=58928499&amp;pid=708605421&amp;tid=46338365" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
-                                    <li class="buddy"><a href="home.php?mod=spacecp&amp;ac=friend&amp;op=add&amp;uid=58928499&amp;handlekey=addfriendhk_58928499" id="a_friend_li_708605421" onclick="showWindow(this.id, this.href, 'get', 1, {'ctrlid':this.id,'pos':'00'});" title="加好友" class="xi2">加好友</a></li>
-                                    <!--<li class="poke2"><a href="home.php?mod=spacecp&amp;ac=poke&amp;op=send&amp;uid=58928499" id="a_poke_li_708605421" onclick="showWindow(this.id, this.href, 'get', 0);" title="打招呼" class="xi2">打招呼</a></li>-->
-                                </ul>
-                            </td>
-                            <td class="plc">
-                                <div class="pi" style="height: 8%;">
-                                    <strong>
-                                        <a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=46338365&amp;pid=708605421" title="" id="postnum708605421" onclick="setCopy(this.href, '帖子地址复制成功');return false;">2L</a>
-                                    </strong>
-                                    <div class="pti">
-                                        <div class="pdbt">
-                                        </div>
-                                        <div class="authi">
-                                            <em id="authorposton708605421">发表于 <span title="2018-6-9 01:49:14">5&nbsp;小时前</span></em>
-                                            <span class="pipe">|</span><a href="forum.php?mod=viewthread&amp;tid=46338365&amp;page=1&amp;authorid=58928499" rel="nofollow">只看该作者</a>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-                                <div class="pct"><div class="pcb ">
-
-
-                                    <div class="t_fsz">
-                                        <table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_708605421">
-                                            这是回复内容。</td></tr></tbody></table>
-                                    </div>
-                                    <div id="comment_708605421" class="cm">
-                                    </div>
-
-
-                                    <div id="post_rate_div_708605421"></div>
-                                </div>
-                                </div>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="plc plm" valign="top" style="height:1px;">
-                                <!--新版广告系统帖内广告C3-->
-                                <div style="width:0px;"><script src=""></script><div style="width:0px;margin:0 auto;"><a class="da-block-wrapper" locid="121" pid="1200" href="" target="_blank" style="display:inline-block;position:relative;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528516956332&di=52f1a1073e5e98d2ab540b7ee8f2ccfe&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F44%2F53%2F13v58PIC5pc_1024.png" width="200" height="30" style="vertical-align:top;"></a></div></div>
-                                <!--新版广告系统帖内广告C3--></td>
-                        </tr>
-                        <tr>
-                            <td class="pls"></td>
-                            <td class="plc">
-                                <div class="po">
-                                    <div class="pob cl">
-                                        <em></em>
-                                        <p>
-                                            <a href="javascript:;" onclick="showWindow('miscreport708605421', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605421&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>
-                                        </p>
-
-                                        <!--<link rel="stylesheet" href="http://assets.dwstatic.com/special/1604lolbbs/css/recommend.css" />
-
-                                        <div class="recommend">
-                                        <div class="titleHeader">
-                                        <div class="flag">
-                                        相关帖子推荐
-                                        </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        </div>-->
-                                        <script type="text/javascript" reload="1">checkmgcmn('post_708605421')</script>
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-                        <tr class="ad">
-                            <td class="pls"></td>
-                            <td class="plc">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!--bof:added user-pvalue javascript :by  liuwenbin-->
-                    <!--eof:added user-pvalue javascript :by  liuwenbin-->
-                </div><!--回帖框-->
+                    {% endif %}
+                {% endfor %}
 
                 <div id="post_708605421">
                     <table id="pid708605421" summary="pid708605421" cellspacing="0" cellpadding="0">
