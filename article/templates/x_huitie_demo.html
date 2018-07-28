@@ -27,6 +27,7 @@
     <link href="{% static "css/plugins/summernote/summernote-bs3.css" %}" rel="stylesheet">
     <link href="{% static "css/animate.css" %}" rel="stylesheet">
     <link href="{% static "css/style.css?v=4.1.0" %}" rel="stylesheet">
+    {{ comment_form.media }}
 </head>
 
 <body id="nv_forum" class="pg_viewthread" onkeydown="if(event.keyCode==27) return false;" style="background-position-y: 41px;">
@@ -166,15 +167,9 @@
 
                         <div class="t_fsz">
                             <table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_708605202">
-                                尝试使用一个论坛框架源码构筑了帖子页面<br>
-                                <br>
-                                涉及的一些功能做了修改<br>
-                                <br>
-                                相关链接还需要添加<br>
-                                <br>
-                                图标ICON也要换<br>
-                                <br>
-                                {{ article.body }}
+                                {% autoescape off %}
+                                {{ article.ueditor_body }}
+                                {% endautoescape %}
                                 <ignore_js_op>
 
                                     <img id="aimg_40668452" src="img/p2.jpg" zoomfile="" file="img/p2.jpg" class="zoom" onclick="zoom(this, this.src)" width="800" inpost="1" alt="cache1528479029434.jpg" title="cache1528479029434.jpg" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" initialized="true">
@@ -227,110 +222,8 @@
 
 
 
-                            <div class="pstl xs1">
-                                <div class="psta"><a href="space-uid-58928499.html" c="1"><img src="img/a7.jpg" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_small.jpg'" /></a></div>
-                                <div class="psti">
-                                    <a href="space-uid-58928499.html" class="xi2 xw1">UserName2</a>
-                                    &nbsp;这里是评论&nbsp;
-                                    <span class="xg1">
-发表于 <span title="2018-6-9 00:57:19">12&nbsp;小时前</span></span>
-                                </div>
-                            </div>
-                            <div class="pstl xs1">
-                                <div class="psta"><a href="space-uid-58928499.html" c="1"><img src="img/a9.jpg" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_small.jpg'" /></a></div>
-                                <div class="psti">
-                                    <a href="space-uid-58928499.html" class="xi2 xw1">UserName3</a>
-                                    &nbsp;这里是第二条评论
-                                    <span class="xg1">
-发表于 <span title="2018-6-8 23:21:41">昨天&nbsp;23:21</span></span>
-                                </div>
-                            </div>
                         </div>
 
-                        <div id="vfastpost">
-                            <div id="vfpopup" class="container xi3" style="display:none;">
-                                <span class="tig_bottom">◆</span>
-                                <span class="tig_bottom1">◆</span>
-                                <p class="vct">这里是快速回复，赶紧试试哦</p>
-                                <a href="javascript:;" id="vf_known" class="xi3 y">我知道了</a>
-                            </div>
-                            <form method="post" autocomplete="off" id="vfastpostform" action="forum.php?mod=post&amp;action=reply&amp;fid=1345&amp;tid=46338365&amp;fromvf=1&amp;extra=page%3D1&amp;replysubmit=yes&amp;infloat=yes&amp;handlekey=vfastpost" onsubmit="return false;">
-                                <input type="hidden" name="formhash" value="24d3bf46">
-                                <input type="hidden" name="replysubmit" value="true">
-                                <table cellspacing="0" cellpadding="0" id="vfastposttb">
-                                    <tbody><tr>
-                                        <td id="vf_l"></td>
-                                        <td id="vf_m"><input type="text" name="message" id="vmessage" onkeydown="seditor_ctlent(event, 'submit_fastpost()');" style="color: rgb(11,11,11);"></td>
-                                        <td id="vf_r"></td>
-                                        <td id="vf_b"><button type="button" class="pn pnc" id="vreplysubmit">&nbsp;</button></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                        </div>
-
-                        <script type="text/javascript" reload="1">
-                            var vf_tips = '你有什么观点可以在这里进行快速回复';
-                            $('vmessage').value = vf_tips;
-                            $('vmessage').style.color = '#CDCDCD';
-                            $('vmessage').onclick = function() {
-                                if($('vmessage').value==vf_tips) {
-                                    $('vmessage').value='';
-                                    $('vmessage').style.color="#000";
-                                }
-                            }
-                            $('vmessage').onblur = function() {
-                                if(!$('vmessage').value) {
-                                    $('vmessage').value=vf_tips;
-                                    $('vmessage').style.color="#CDCDCD";
-                                }
-                            }
-                            function submit_fastpost() {
-                                $('vmessage').value = parseurl($('vmessage').value);
-                                ajaxpost('vfastpostform', 'return_reply', 'return_reply', 'onerror');
-                            }
-                            $('vreplysubmit').onclick = function() {
-                                if($('vmessage').value == vf_tips) {
-                                    return false;
-                                } else {
-//实名制
-//submit_fastpost();
-                                    if(discuz_uid == 0) {
-                                        udblogin();
-                                        return false;
-                                    }
-                                    dwUDBBind.isBind().done(function () {
-                                        submit_fastpost();
-                                    });
-                                }
-                            }
-                            $('vf_known').onclick = function() {
-                                $('vfpopup').style.display = 'none';
-                                setcookie('vfastpost', 1, 86400*30*3);
-                            }
-                            function succeedhandle_vfastpost(locationhref, message,p) {
-                                try {
-                                    var pid = locationhref.lastIndexOf('#pid');
-                                    if(pid != -1) {
-                                        pid = locationhref.substr(pid + 4);
-                                        ajaxget('forum.php?mod=viewthread&tid=46338365&viewpid=' + pid, 'post_new', 'ajaxwaitid', '', null, 'appendreply()');
-                                        if(replyreload) {
-                                            var reloadpids = replyreload.split(',');
-                                            for(i = 1;i < reloadpids.length;i++) {
-                                                ajaxget('forum.php?mod=viewthread&tid=46338365&viewpid=' + reloadpids[i], 'post_' + reloadpids[i]);
-                                            }
-                                        }
-                                    } else {
-                                        showDialog(message, 'notice', '', 'location.href="' + locationhref + '"');
-                                    }
-                                } catch(e) {
-                                    location.href = locationhref;
-                                }
-                                $('vmessage').value=vf_tips;
-                                $('vmessage').style.color = '#CDCDCD';
-                                $('postlistreply').focus();
-                            }
-                        </script>
 
                         <div id="post_rate_div_708605202"></div>
                 </td>
@@ -709,7 +602,7 @@
 
 
 
-                    <h2>{{ comment_form.body }}</h2>
+                    <h2>{{ comment_form.comment_content }}</h2>
                     <p>采用了summernote文本编辑插件</p>
 
 
@@ -1106,6 +999,16 @@
         });
 
     </script>	</div>
+
+
+
+
+
+
+
+
+
+
 <script>
     (function(){
         var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?5747e802a3798a73fb706f5de1510865":"https://jspassport.ssl.qhimg.com/11.0.1.js?5747e802a3798a73fb706f5de1510865";
@@ -1292,7 +1195,6 @@
 </script>
 
 
-<!-- 5153弹窗导量 -->
 
 
 <!--[if IE 6]>

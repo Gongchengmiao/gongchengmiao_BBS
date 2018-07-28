@@ -135,24 +135,6 @@
 
     <!-- 全局js -->
     <script type="text/javascript">
-	function publish_article(){
-		var title = $("#id_title").val();
-        var body = $("#id_body").val();
-        $.ajax({
-        	url: "{% url 'article:article_post' %}",
-        	type: "POST",
-        	data: {"title":title, "body":body},
-        	success: function(e){
-        		if(e=="1"){
-                    layer.msg("successful");
-        		}else if(e=="2"){
-        			layer.msg("sorry.") ;
-        		}else{
-        			layer.msg("项目名称必须写，不能空。");
-        		}
-        	},
-        });
-	}
 
 
 </script>

@@ -39,10 +39,10 @@ class ArticleColumn(models.Model):
 
 
 class ArticlePost(models.Model):
-    pid = models.IntegerField(primary_key=True)  # 增加一个主键
+    pid = models.AutoField(primary_key=True, auto_created=True)  # 增加一个主键
     is_school_info = models.BooleanField(default=False)  # 是否公告
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     body = models.TextField()
     ueditor_body = UEditorField(width=600, height=300, null=True, toolbars="full", imagePath="images/", filePath="files/",
@@ -77,14 +77,15 @@ class PostRead(models.Model):
 class Comment(models.Model):
     article = models.ForeignKey(ArticlePost, related_name='comments', on_delete=models.CASCADE)
     commentator = models.CharField(max_length=90)
-    body = models.TextField()
+    body =UEditorField(width=300, height=200, null=True, toolbars="mini", imagePath="images/", filePath="files/",
+                                upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='内容')
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
-        return "Comment by {0} on {1}".format(self.commentator, self.article)
+        return self.article.title
 
 
 
