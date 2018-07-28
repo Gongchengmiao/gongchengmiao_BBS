@@ -37,8 +37,8 @@ def article_post(request):
         return render(request, "x_fatie_demo.html", {"article_post_form":article_post_form})
 
 
-def article_detail(request, id, slug):
-    article = get_object_or_404(ArticlePost, id = id, slug = slug)
+def article_detail(request, pid, slug):
+    article = get_object_or_404(ArticlePost, pid=id, slug=slug)
     author = article.author
 
     comments = Comment.objects.all()
