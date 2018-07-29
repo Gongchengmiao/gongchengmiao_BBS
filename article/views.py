@@ -73,8 +73,12 @@ def article_detail(request, pid, slug):
             new_comment.article = article
             new_comment.ueditor_body = cd.get('comment_body')
             new_comment.commentator = request.user
+            new_comment.counter = article.comment_counter + 1
+            article.comment_counter = article.comment_counter + 1
+            article.save()
             new_comment.save()
             url = reverse('article_detail', kwargs={'pid': article.pid, 'slug': article.slug})
+
             return HttpResponseRedirect(url)
     else:
         comment_form = CommentForm()

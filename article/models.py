@@ -53,7 +53,7 @@ class ArticlePost(models.Model):
 
     section_belong_fk = models.ForeignKey('section.SectionForum', on_delete=models.CASCADE, null=True)
     slug = models.SlugField(max_length=500, default=slugify(str(title)), allow_unicode=True)
-
+    comment_counter = models.IntegerField(default=0)
     def __str__(self):
         return self.title
 
@@ -80,7 +80,7 @@ class Comment(models.Model):
     ueditor_body = UEditorField(width=300, height=200, null=True, toolbars="mini", imagePath="images/", filePath="files/",
                                 upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='内容')
     created = models.DateTimeField(auto_now_add=True)
-
+    counter = models.IntegerField()
     class Meta:
         ordering = ('created',)
 
