@@ -15,7 +15,7 @@ class ArticlePostForm(forms.Form):
                            imagePath="images/", filePath="files/",upload_settings = {"imageMaxSize": 1204000},settings = {})
 
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ("body",)
+class CommentForm(forms.Form):
+    comment_body = UEditorField('内容', width=400, height=300, toolbars="mini",
+                           imagePath="images/", filePath="files/",upload_settings = {"imageMaxSize": 1204000},settings = {})
+
