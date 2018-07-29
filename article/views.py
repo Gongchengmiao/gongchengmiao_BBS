@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import ArticleColumn
 from django.urls import reverse
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -45,11 +45,25 @@ def article_post(request):
 
 @login_required(login_url='/login')
 @csrf_exempt
-def article_detail(request, pid, slug, page):
+def article_detail(request, pid, slug):
     article = get_object_or_404(ArticlePost, pid=pid, slug=slug)
     author = article.author
 
-    comments = Comment.objects.filter(article=article).all()[page * 10 - 10: page * 10]
+    all_comments = Comment.objects.filter(article=article).all()
+    paginator = Paginator(all_comments, 10)
+    page = request.GET.get('page')
+    try:
+        current_page = paginator.page(page)
+        comments = current_page.object_list
+    except PageNotAnInteger:
+        current_page = paginator.page(1)
+        comments = current_page.object_list
+    except EmptyPage:
+        current_page = paginator.page(paginator.num_pages)
+        comments = current_page.object_list
+
+
+
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -62,4 +76,4 @@ def article_detail(request, pid, slug, page):
             return HttpResponseRedirect(url)
     else:
         comment_form = CommentForm()
-    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments})
+    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments, "page":current_page})

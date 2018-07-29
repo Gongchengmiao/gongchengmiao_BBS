@@ -340,7 +340,25 @@
                 </div><!--回帖框-->
                 {% endfor %}
             {% endif %}
+            <!-- 分页模块-->
+            <div class="pagination">
+                <span class="step-link">
+                    {% if page.has_previous %}
+                    <a href="?page={{ page.previous_page_number }}">Previous</a>
+                    {% endif %}
+                    <span class="current">
 
+                        Page {{ page.number }} of {{ page.paginator.num_pages }}
+                    </span>
+                    {% if page.has_next %}
+                    <a href="?page={{ page.next_page_number }}">Next</a>
+                    {% endif %}
+                </span>
+            </div>
+
+
+
+            <!--分页模块结束-->
 
 
                 <div id="postlistreply" class="pl">
@@ -357,22 +375,72 @@
                 <input type="hidden" name="listextra" value="page%3D1">
                 <input type="hidden" name="page" value="1">
             </form><!--猜测是回传表单的模块？-->
+<!--
+            <div class="text-center">
+                <div class="btn-group">
+                    {% if page.has_previous %}
+                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"><a href="?page={{ page.previous_page_number }}">Previous</a></i>
+                    </button>
+
+                    {% endif %}
+                    <button class="btn btn-white active" style="color: #0a6aa1">1</button>
+                    <button class="btn btn-white" style="color: #0a6aa1">2</button>
+
+                    <button class="btn btn-white" style="color: #0a6aa1"><span class="current">
+                        Page {{ page.number }} of {{ page.paginator.num_pages }}
+                    </span></button>
+                    <button class="btn btn-white" style="color: #0a6aa1">7</button>
+                    {% if page.has_next %}
+                    <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"><a href="?page={{ page.next_page_number }}">Next</a></i>
+                    </button>
+                    {% endif %}
+                </div>
+            </div><!--翻页栏-->
+
+
 
             <div class="text-center">
                 <div class="btn-group">
-                    <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"></i>
+                    {% if page.has_previous %}
+                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"><a href="?page={{ page.previous_page_number }}">Previous</a></i>
                     </button>
-                    <button class="btn btn-white active" style="color: #0a6aa1">1</button>
-                    <button class="btn btn-white" style="color: #0a6aa1">2</button>
-                    <button class="btn btn-white" style="color: #0a6aa1">3</button>
-                    <button class="btn btn-white" style="color: #0a6aa1">4</button>
-                    <button class="btn btn-white" style="color: #0a6aa1">5</button>
-                    <button class="btn btn-white" style="color: #0a6aa1">6</button>
-                    <button class="btn btn-white" style="color: #0a6aa1">7</button>
-                    <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"></i>
+                    {% endif %}
+                    {% if page.count <= 5 %}
+                        {% for foo in page.paginator.page_range %}
+                            {% if foo == page.number %}
+                            <button class="btn btn-white" style="color: #0a6aa1"><span class="current">
+                            Page {{ page.number }} of {{ page.paginator.num_pages }}
+                            </span></button>
+                            {% else %}
+                                <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"><a href="?page={{ foo }}">{{ foo }}</a></i>
                     </button>
+                            {% endif %}
+                        {% endfor %}
+                        {% for i in page.paginator.page_range %}
+                          {% if page.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                    {% else %}
+
+                    {% endif %}
+
+
+
+                    <button class="btn btn-white" style="color: #0a6aa1"><span class="current">
+                        Page {{ page.number }} of {{ page.paginator.num_pages }}
+                    </span></button>
+
+                    {% if page.has_next %}
+                    <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"><a href="?page={{ page.next_page_number }}">Next</a></i>
+                    </button>
+                    {% endif %}
                 </div>
-            </div><!--翻页栏-->
+
+
+
             <div class="row" style="color: transparent"><p>a </p></div>
 
             <!--[diy=diyfastposttop]--><div id="diyfastposttop" class="area"></div><!--[/diy]-->
