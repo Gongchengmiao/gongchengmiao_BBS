@@ -110,10 +110,9 @@
                         <tr>
                         <td class="pls" rowspan="2">
                         <a name="newpost"></a> <div class="pi clearfix">
-                        <div class="authi" id="authi_708605202"><a href="" target="_blank" class="xw1">UserName1</a>
+                        <div class="authi" id="authi_708605202"><a href="" target="_blank" class="xw1">{{ article.author }}</a>
                         </div>
                     </div>
-                        <p>身份：作者</p>
                         <!-- 名片开始 -->
                         <div class="p_pop blk bui card" id="userinfo708605202" style="display: none; margin-top: -11px;">
                             <div class="m z">
@@ -124,12 +123,9 @@
                         <!-- 名片结束-->
                         <div>
                             <div class="avatar" onmouseover="showauthor(this, 'userinfo708605202')"><a href="" target="_blank"><img class="img-circle" src="{% static 'img/boy_hat.jpg' %}"></a></div>
-                            <p><em><a href="" target="_blank"><font color="#88abda">Lv.666</font></a></em></p>
-                            <p class="xg1">个性签名</p></div>
                         <!--<div class="rank-value"><span class="prank-backimg" style="background:url(http://att.bbs.duowan.com/forum/201511/30/175221nn5wz25xgzxfz2wx.png) no-repeat;"></span><div class="rank-value-tip tip"><i></i><div><em>本版排名：<span class="user-prank" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em>本版声望：<span class="user-pvalue" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em style="color:#888;">荣誉黄鸡</em><span class="user-pinfo-uid" style="display:none;">61898532</span><a href="plugin.php?id=prestige:prestige_intro&amp;fid=1345" title="">[声望说明]</a></div></div></div>-->
                         <div id="g_up708605202_menu" class="tip tip_4" style="display: none;">
                             <div class="tip_horn"></div>
-                            <div class="tip_c"><font color="#88abda">Lv.666</font>, 积分 666, 距离下一级还需 6 积分</div>
                         </div>
                         <dl class="pil clearfix">
                             <dt>UID</dt><dd>66666666</dd><dt>帖子</dt><dd><a href="home.php?mod=space&amp;uid=61898532&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" target="_blank" class="xi2">6666</a></dd><dt>人气</dt><dd>66 </dd></dl><p class="md_ctrl">
@@ -246,7 +242,6 @@
 
                             </div>
                         </div>
-                        <p>身份：游客</p>
                         <!-- 名片开始 -->
                         <div class="p_pop blk bui card" id="userinfo708605421" style="display: none; margin-top: -11px;">
                             <div class="m z">
@@ -254,7 +249,7 @@
                             </div>
                             <div class="i y">
                                 <div>
-                                    <strong><a href="space-uid-58928499.html" target="_blank" class="xi2">UserName2</a></strong>
+                                    <strong><a href="space-uid-58928499.html" target="_blank" class="xi2">{{ comment.article.author }}</a></strong>
                                     <em>当前离线</em>
                                 </div>
 
@@ -266,14 +261,10 @@
                         <!-- 名片结束-->
                         <div>
                             <div class="avatar" onmouseover="showauthor(this, 'userinfo708605421')"><a href="" target="_blank"><img src="{% static 'img/boy_glasses.jpg' %}" class="img-circle" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_big.jpg'"></a></div>
-                            <p><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=51" target="_blank"><font color="#cc0000">Lv.11</font></a></em></p>
-                            <p class="xg1">个性签名</p></div>
                         <div id="g_up708605421_menu" class="tip tip_4" style="display: none;">
                             <div class="tip_horn"></div>
-                            <div class="tip_c"><font color="#cc0000">Lv.6666</font>, 积分 66666, 距离下一级还需 6 积分</div>
                         </div>
                         <dl class="pil clearfix">
-                            <dt>UID</dt><dd>6666</dd><dt>帖子</dt><dd><a href="" target="_blank" class="xi2">66666</a></dd><dt>人气</dt><dd>6666 </dd></dl>
                         <ul class="xl xl2 o cl">
                             <!--<li class="callon"><a href="space-uid-58928499.html" target="_blank" title="串个门" class="xi2">串个门</a></li>-->
                             <li class="pm2" style="background:#FFFFFF"><a href="home.php?mod=space&amp;do=pm&amp;action=send&amp;handlekey=showmsg_58928499&amp;uid=58928499&amp;pid=708605421&amp;tid=46338365" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>

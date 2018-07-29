@@ -45,14 +45,11 @@ def article_post(request):
 
 @login_required(login_url='/login')
 @csrf_exempt
-def article_detail(request, pid, slug):
+def article_detail(request, pid, slug, page):
     article = get_object_or_404(ArticlePost, pid=pid, slug=slug)
     author = article.author
 
-    comments = Comment.objects.filter(article=article).all()[0:10]
-
-
-
+    comments = Comment.objects.filter(article=article).all()[page * 10 - 10: page * 10]
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
