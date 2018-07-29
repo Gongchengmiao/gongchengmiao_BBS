@@ -167,68 +167,7 @@
                             </td></tr></tbody></table>
                         </div>
 
-                        <script type="text/javascript" reload="1">
-                            var vf_tips = '你有什么观点可以在这里进行快速回复';
-                            $('vmessage').value = vf_tips;
-                            $('vmessage').style.color = '#CDCDCD';
-                            $('vmessage').onclick = function() {
-                                if($('vmessage').value==vf_tips) {
-                                    $('vmessage').value='';
-                                    $('vmessage').style.color="#000";
-                                }
-                            }
-                            $('vmessage').onblur = function() {
-                                if(!$('vmessage').value) {
-                                    $('vmessage').value=vf_tips;
-                                    $('vmessage').style.color="#CDCDCD";
-                                }
-                            }
-                            function submit_fastpost() {
-                                $('vmessage').value = parseurl($('vmessage').value);
-                                ajaxpost('vfastpostform', 'return_reply', 'return_reply', 'onerror');
-                            }
-                            $('vreplysubmit').onclick = function() {
-                                if($('vmessage').value == vf_tips) {
-                                    return false;
-                                } else {
-//实名制
-//submit_fastpost();
-                                    if(discuz_uid == 0) {
-                                        udblogin();
-                                        return false;
-                                    }
-                                    dwUDBBind.isBind().done(function () {
-                                        submit_fastpost();
-                                    });
-                                }
-                            }
-                            $('vf_known').onclick = function() {
-                                $('vfpopup').style.display = 'none';
-                                setcookie('vfastpost', 1, 86400*30*3);
-                            }
-                            function succeedhandle_vfastpost(locationhref, message,p) {
-                                try {
-                                    var pid = locationhref.lastIndexOf('#pid');
-                                    if(pid != -1) {
-                                        pid = locationhref.substr(pid + 4);
-                                        ajaxget('forum.php?mod=viewthread&tid=46338365&viewpid=' + pid, 'post_new', 'ajaxwaitid', '', null, 'appendreply()');
-                                        if(replyreload) {
-                                            var reloadpids = replyreload.split(',');
-                                            for(i = 1;i < reloadpids.length;i++) {
-                                                ajaxget('forum.php?mod=viewthread&tid=46338365&viewpid=' + reloadpids[i], 'post_' + reloadpids[i]);
-                                            }
-                                        }
-                                    } else {
-                                        showDialog(message, 'notice', '', 'location.href="' + locationhref + '"');
-                                    }
-                                } catch(e) {
-                                    location.href = locationhref;
-                                }
-                                $('vmessage').value=vf_tips;
-                                $('vmessage').style.color = '#CDCDCD';
-                                $('postlistreply').focus();
-                            }
-                        </script>
+
 
                         <div id="post_rate_div_708605202"></div>
                 </td>
@@ -261,17 +200,6 @@
                                     <a href="javascript:;" onclick="showWindow('miscreport708605202', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605202&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>
                                 </p>
 
-                                <!--<link rel="stylesheet" href="http://assets.dwstatic.com/special/1604lolbbs/css/recommend.css" />
-
-                                <div class="recommend">
-                                <div class="titleHeader">
-                                <div class="flag">
-                                相关帖子推荐
-                                </div>
-                                </div>
-                                <div class="clearfix"></div>
-
-                                </div>-->
 
 
                                 <script type="text/javascript" reload="1">checkmgcmn('post_708605202')</script>

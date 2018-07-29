@@ -43,7 +43,8 @@ def article_post(request):
         article_post_form = ArticlePostForm()
         return render(request, "x_fatie_demo.html", {"article_post_form":article_post_form})
 
-
+@login_required(login_url='/login')
+@csrf_exempt
 def article_detail(request, pid, slug):
     article = get_object_or_404(ArticlePost, pid=pid, slug=slug)
     author = article.author
