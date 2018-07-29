@@ -50,6 +50,7 @@ def article_detail(request, pid, slug):
     author = article.author
 
     all_comments = Comment.objects.filter(article=article).all()
+
     paginator = Paginator(all_comments, 10)
     page = request.GET.get('page')
     try:
@@ -71,6 +72,7 @@ def article_detail(request, pid, slug):
             new_comment = Comment()
             new_comment.article = article
             new_comment.ueditor_body = cd.get('comment_body')
+            new_comment.commentator = request.user
             new_comment.save()
             url = reverse('article_detail', kwargs={'pid': article.pid, 'slug': article.slug})
             return HttpResponseRedirect(url)

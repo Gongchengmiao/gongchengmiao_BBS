@@ -76,13 +76,13 @@ class PostRead(models.Model):
 
 class Comment(models.Model):
     article = models.ForeignKey(ArticlePost, related_name='comments', on_delete=models.CASCADE)
-    commentator = models.CharField(max_length=90,default='MrWho')
+    commentator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ueditor_body = UEditorField(width=300, height=200, null=True, toolbars="mini", imagePath="images/", filePath="files/",
                                 upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='内容')
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ('created',)
 
     def __str__(self):
         return self.article.title
