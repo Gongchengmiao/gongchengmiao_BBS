@@ -16,6 +16,6 @@ class ArticlePostForm(forms.Form):
 
 
 class CommentForm(forms.Form):
-    comment_content = UEditorField('内容', width=400, height=300, toolbars="mini",
-                           imagePath="images/", filePath="files/", upload_settings={"imageMaxSize": 1204000},
-                           settings={})
+    comment_body = UEditorField('内容', width=400, height=300, toolbars="mini",
+                           imagePath="images/", filePath="files/",upload_settings = {"imageMaxSize": 1204000},settings = {})
+

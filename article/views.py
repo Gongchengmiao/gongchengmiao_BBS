@@ -1,10 +1,11 @@
-
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import ArticleColumn
+from django.urls import reverse
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render, redirect ,reverse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -19,18 +20,23 @@ import json
 @login_required(login_url='/login')
 @csrf_exempt
 def article_post(request):
-    if request.method == "POST":
+    if request.method=="POST":
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
             cd = article_post_form.cleaned_data
+            #try:
             new_article = ArticlePost()
             new_article.author = request.user
             new_article.title = cd.get('title')
             new_article.ueditor_body = cd.get('content')
             new_article.save()
-            test_article  = ArticlePost.objects.filter(slug=new_article.slug).first()
-            # return HttpResponse("1")
-            return redirect(reverse('article_detail', kwargs={'pid': new_article.pid, 'slug':new_article.slug}))
+            #url = reverse('')
+            url = reverse('article_detail', kwargs={'pid':new_article.pid,'slug':new_article.slug})
+            #print(url)
+            return HttpResponseRedirect(url)
+                #return HttpResponse('1')
+            #except:
+                #return HttpResponse("2")
         else:
             return HttpResponse("3")
     else:
@@ -42,7 +48,7 @@ def article_detail(request, pid, slug):
     article = get_object_or_404(ArticlePost, pid=pid, slug=slug)
     author = article.author
 
-    comments = Comment.objects.all()
+    comments = Comment.objects.filter(article=article).all()[0:10]
 
 
 
@@ -51,13 +57,9 @@ def article_detail(request, pid, slug):
         if comment_form.is_valid():
             cd = comment_form.cleaned_data
             new_comment = Comment()
-            new_comment.body = cd.get('comment_content')
             new_comment.article = article
+            new_comment.ueditor_body = cd.get('comment_body')
             new_comment.save()
     else:
         comment_form = CommentForm()
-
-
-
-
     return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments})
