@@ -4,14 +4,14 @@ from django import forms
 from .models import ArticleColumn, ArticlePost, Comment
 
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('author_name', 'post_title', 'pub_date', 'text')
-
-
-class SchoolInfoAdmin(admin.ModelAdmin):
-    list_display = ('post_title', 'author_name', 'post_title', 'pub_date', 'text')
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('pid', 'title','is_school_info', 'author')
+    fieldsets = (
+        (None, {'fields': ('title', 'is_school_info', 'author', 'ueditor_body', 'isElite',
+                           'section_belong_fk', 'slug')}),
+    )
 
 
 admin.site.register(ArticleColumn)
-admin.site.register(ArticlePost)
+admin.site.register(ArticlePost, ArticleAdmin)
 admin.site.register(Comment)

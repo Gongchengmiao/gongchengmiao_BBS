@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 class SectionForum(models.Model):
-    section_id = models.IntegerField(primary_key=True)  # 论坛id
+    section_id = models.AutoField(primary_key=True)  # 论坛id
     # section_up_id = models.IntegerField(default=None, null=True)  # 上级论坛id
     types_choices = (
         ('g', 'group'),
@@ -27,6 +27,7 @@ class SectionForum(models.Model):
     posts = models.IntegerField(default=0) # 帖子数量
     todayposts = models.IntegerField(default=0)
     lastpostid = models.ForeignKey('article.ArticlePost', null=True, default=None, on_delete=models.CASCADE)
+    follower_num = models.IntegerField(default=0)
     # allowEmoijs = models.BooleanField(default=True)
     # allowHtml = models.BooleanField(default=True)
     # allowImgcode = models.BooleanField(default=True)

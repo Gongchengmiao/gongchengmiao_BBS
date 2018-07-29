@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from user.models import common_member, common_member_action_log, follower_pair, common_member_star
-from article.models import ArticlePost
+from article.models import ArticlePost, Comment
 from django.urls import reverse
 from homepage.form import UserInfoChangeForm
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,7 @@ import time
 @login_required(login_url='/login/')
 def show_info(request, slug):
     user = get_object_or_404(common_member, slug=slug)  # 被浏览者
-    actions = common_member_action_log.objects.filter(uid=user).order_by('-dateline')[0:2]
+    actions = common_member_action_log.objects.filter(uid=user).order_by('-dateline')[0:5]
 
     # if request.method == 'GET' and len(request.GET):
     #     if 'btn' in list(request.GET) and request.GET['btn'] == 'show_more':
@@ -44,23 +44,27 @@ def show_info(request, slug):
 
 @login_required(login_url='/login/')
 def view_self_info(request):
-    my_actions = common_member_action_log.objects.filter(uid=request.user).order_by('-dateline')[0:1]
+    my_actions = common_member_action_log.objects.filter(uid=request.user).order_by('-dateline')[0:10]
     my_following_id = follower_pair.objects.filter(by=request.user).order_by('-follow_time').values('followed')
     my_followings = common_member.objects.filter(id__in=my_following_id).all()
-    following_actions = common_member_action_log.objects.filter(uid__in=my_followings).order_by('-dateline')[0:1]
-    my_star_pids = common_member_star.objects.filter(uid=request.user).order_by('-star_time').values('pid')[0:1]
+    following_actions = common_member_action_log.objects.filter(uid__in=my_followings).order_by('-dateline')[0:10]
+    my_star_pids = common_member_star.objects.filter(uid=request.user).order_by('-star_time').values('pid')[0:10]
     my_star_posts = ArticlePost.objects.filter(pid__in=my_star_pids).all()
     portrait = str(request.user.portrait.name)
     my_followings = my_followings[0:8]
+    my_articles_id = ArticlePost.objects.filter(author=request.user).values('pid').all()
+    comments = Comment.objects.filter(article_id__in=my_articles_id).order_by('-created').all()[0:1]
 
     context = {
         'user_self': request.user,
         'portrait': portrait,
+        'percentage': request.user.points/100,
         'birth': request.user.birthday.strftime('%d/%m/%y'),
         'my_actions': enumerate(my_actions),
         'followings': enumerate(my_followings),
         'following_actions': enumerate(following_actions),
-        'my_star_posts': enumerate(my_star_posts)
+        'my_star_posts': enumerate(my_star_posts),
+        'comments': enumerate(comments),
     }
 
     return render(request, 'x_personal_page_demo.html', context)
@@ -89,7 +93,7 @@ def view_self_ajax_scroll(request):
                 item['action_body'] = '收藏了'
             elif ac.action == 'upload':
                 item['action_body'] = '上传了'
-            item['post_url'] = "homepage/uid="+ac.uid.slug+"/"   # 需要修改 ！！！！！！！！！！！！！！！
+            item['post_url'] = ac.pid.get_url()
             item['post_title'] = ac.pid.title
             item_list.append(item)
     elif tab == '2':
@@ -107,7 +111,7 @@ def view_self_ajax_scroll(request):
                 item['action_body'] = '收藏了'
             elif ac.action == 'upload':
                 item['action_body'] = '上传了'
-            item['post_url'] = "homepage/uid="+ac.uid.slug+"/"   # 需要修改 ！！！！！！！！！！！！！！！
+            item['post_url'] = ac.pid.get_url()
             item['post_title'] = ac.pid.title
             item_list.append(item)
     elif tab == '3':
@@ -120,11 +124,23 @@ def view_self_ajax_scroll(request):
             item['isElite'] = po.isElite
             item['author'] = po.author.username
             item['author_url'] = "homepage/uid="+po.author.uid.slug+"/"
-            item['post_url'] = "homepage/self/"   # 需要修改 ！！！！！！！！！！！！！！！
+            item['post_url'] = po.get_url()
             item['pub_time'] = po.pub_date.strftime('%d/%m/%y')
             item_list.append(item)
     elif tab == '4':
-        pass  # 评论部分未完成
+        my_articles_id = ArticlePost.objects.filter(author=request.user).values('pid').all()
+        comments = Comment.objects.filter(article_id__in=my_articles_id).order_by('-created').all()[pre_num:pre_num+5]
+        for co in comments:
+            item = {}
+            item = item.fromkeys(('article_title', 'article_url', 'portrait', 'commentator_name', 'commentator_url', 'comment_body', 'time'))
+            item['article_title'] = co.article.title
+            item['article_url'] = co.article.get_url()
+            item['portrait'] = settings.MEDIA_URL + co.commentator.portrait.name
+            item['commentator_name'] = co.commentator.username
+            item['commentator_url'] = reverse('show_info', kwargs={'slug':co.commentator.slug})
+            item['comment_body'] = str(co.ueditor_body)
+            item['time'] = co.created.strftime('%d/%m/%y')
+            item_list.append(item)
     is_all = '0'
     if len(item_list) == 0:
         is_all = '1'
@@ -175,17 +191,20 @@ def show_info_ajax_more(request):
             "isFull": '1'
         }
         return JsonResponse(context)
-    add_actions = common_member_action_log.objects.filter(uid=target_user).order_by('-dateline')[present_ac_num:]
+    add_actions = common_member_action_log.objects.filter(uid=target_user).order_by('-dateline')[present_ac_num:present_ac_num+5]
     action_list = []
     for ac in add_actions:
-        item = {'time': '', 'type': '', 'title': ''}
+        item = {'time': '', 'type': '', 'title': '', 'post_url':"", 'pid':''}
+        item['pid'] = str(ac.pid.pid)
         item['time'] = ac.dateline.strftime('%a %d/%m/%y')
-        item['type'] = ac.action
+        item['type'] = ac.get_action_display()
         item['title'] = ac.pid.title
+        item['post_url'] = ac.pid.get_url()
         action_list.append(item)
     context = {
         'isFull': 0,
         'user': str(target_user.username),
+        'user_url': str(reverse('show_info', kwargs={'slug': target_user.slug})),
         'portrait': settings.MEDIA_URL+target_user.portrait.name,
         'list': action_list
     }

@@ -61,11 +61,8 @@ class ArticlePost(models.Model):
         self.slug = slugify(self.title)  # ⑤
         super(ArticlePost, self).save(*args, **kargs)
 
-    def get_absolute_url(self):  # ⑥
-        return reverse("article:article_detail", args=[self.pid, self.slug])
-
-    def get_url_path(self):
-        return reverse("article:list_article_detail", args=[self.pid, self.slug])
+    def get_url(self):  # ⑥
+        return reverse("article_detail", args=[self.pid, self.slug])
 
 
 # 帖子浏览量信息
@@ -75,7 +72,7 @@ class PostRead(models.Model):
     read_time = models.IntegerField(default=0)
 
 class Comment(models.Model):
-    article = models.ForeignKey(ArticlePost, related_name='comments', on_delete=models.CASCADE)
+    article = models.ForeignKey(ArticlePost, related_name='comments', on_delete=models.CASCADE, null=True)
     commentator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ueditor_body = UEditorField(width=300, height=200, null=True, toolbars="mini", imagePath="images/", filePath="files/",
                                 upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='内容')
