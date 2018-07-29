@@ -60,7 +60,8 @@ def article_detail(request, pid, slug):
             new_comment.article = article
             new_comment.ueditor_body = cd.get('comment_body')
             new_comment.save()
-            comment_form=CommentForm()
+            url = reverse('article_detail', kwargs={'pid': article.pid, 'slug': article.slug})
+            return HttpResponseRedirect(url)
     else:
         comment_form = CommentForm()
     return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments})
