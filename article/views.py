@@ -20,7 +20,7 @@ import json
 @login_required(login_url='/login')
 @csrf_exempt
 def article_post(request):
-    if request.method=="POST":
+    if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
             cd = article_post_form.cleaned_data
@@ -57,6 +57,7 @@ def article_detail(request, pid, slug):
         if comment_form.is_valid():
             cd = comment_form.cleaned_data
             new_comment = Comment()
+            new_comment.commentator = request.user
             new_comment.article = article
             new_comment.ueditor_body = cd.get('comment_body')
             new_comment.save()

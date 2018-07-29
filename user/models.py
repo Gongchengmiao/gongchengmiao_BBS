@@ -1,5 +1,4 @@
 from django.db import models
-from article.models import ArticlePost
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from .validators import BbsUsernameValidator
@@ -23,6 +22,7 @@ class common_member(AbstractUser):
         ('204', '管理学院'),
         ('206', '化学学院'),
         ('210', '信息科学技术学院'),
+        ('215', '计算机科学与技术学院'),
         ('jwc', '教务处'),
 
     )
@@ -44,6 +44,7 @@ class common_member(AbstractUser):
     following = models.IntegerField(default=0)  # 关注者数
     followed = models.IntegerField(default=0)  # 被关注数
     followers = models.ManyToManyField('common_member', symmetrical=False, through='follower_pair')
+    section_followed = models.ManyToManyField('section.SectionForum', symmetrical=False, through='section_follow_pair')
 
     def follow_list(self):
         return ','.join([i.username for i in self.followers.all()])
@@ -64,15 +65,21 @@ class common_member(AbstractUser):
         super(common_member, self).save(*args, **kargs)
 
     def get_url(self):  # ⑥
-        return reverse("section_all", args={self.slug})
+        return reverse("show_info", args={self.slug})
 
 
 class follower_pair(models.Model):
     followed = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_followed')
     by = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_by')
-
-    #其他属性
+    # 其他属性
     follow_time = models.DateTimeField(auto_now=True)
+
+
+class section_follow_pair(models.Model):
+    section = models.ForeignKey('section.SectionForum', on_delete=models.CASCADE)
+    user = models.ForeignKey(common_member, on_delete=models.CASCADE)
+
+    follower_time = models.DateTimeField(auto_now=True)
 
 # 用户邮件验证发送次数表
 class common_member_email_send_time(models.Model):
@@ -86,14 +93,13 @@ class common_member_email_send_time(models.Model):
 
 # 用户操作日志表
 class common_member_action_log(models.Model):
-    id = models.IntegerField(primary_key=True)
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(ArticlePost, null=True, blank=True, on_delete=models.CASCADE)
+    pid = models.ForeignKey('article.ArticlePost', null=True, blank=True, on_delete=models.CASCADE)
     action_choices = (
-        ('post', '发帖'),
+        ('post', '发表'),
         ('star', '收藏'),
-        ('upload', '上传文件')
+        ('upload', '上传')
     )
     action = models.CharField(max_length=10, choices=action_choices)  # 操作类型
     dateline = models.DateTimeField(auto_now=True)  # 操作时间
@@ -154,18 +160,18 @@ class common_member_field_forum(models.Model):
         return "{} {}".format(self.uid, self.get_groupterms_display())
 
 
-# 用户家园字段表
-class common_member_field_home(models.Model):
-    uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    spacename = models.CharField(max_length=256)
-    domain = models.CharField(max_length=15)  # 空间绑定二级域名 home
+# # 用户家园字段表
+# class common_member_field_home(models.Model):
+#     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     spacename = models.CharField(max_length=256)
+#     domain = models.CharField(max_length=15)  # 空间绑定二级域名 home
 
 
 # 用户收藏表
 class common_member_star(models.Model):
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(ArticlePost, null=True, blank=True, on_delete=models.CASCADE)
+    pid = models.ForeignKey('article.ArticlePost', null=True, blank=True, on_delete=models.CASCADE)
     star_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):

@@ -59,6 +59,7 @@ urlpatterns = [
 
     path('section/sec=<section_slug>', section_views.section_all, name='section_all'),
     path('section/open_posts_list', section_views.section_open_posts_list, name='open_posts_list'),
+    path('section/follow_sec', section_views.section_follow, name='section_follow'),
 
     path('pswdgetback/<uidb64>/<token>/', user_views.pswd_get_back_view, name='pswd_get_beck_2'),
     path('pswdgetbackjmp/<username>/', user_views.pswdgetback_jump, name='pswdgetback_jump'),

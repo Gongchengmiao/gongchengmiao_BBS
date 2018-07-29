@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import SectionForum
 from article.models import ArticlePost
+from user.models import section_follow_pair
 from django.http import HttpResponse, JsonResponse
 import math
 # Create your views here.
@@ -22,6 +23,7 @@ def section_all(request, section_slug):
     return render(request, 'x_bankuai_demo.html', context)
 
 
+@login_required(login_url='/login/')
 def section_open_posts_list(request):
     # print("what")
     sec_slug = request.GET.get("sec_slug")
@@ -53,11 +55,13 @@ def section_open_posts_list(request):
     post_list = []
     for po in posts:
         item = {}
-        item = item.fromkeys(('pub_date', 'author', 'url', 'title'))
+        item = item.fromkeys(('pub_date', 'author', 'author_url', 'url', 'title'))
+        item['author_url'] = po.author.get_url()
         item['pub_date'] = po.pub_date.strftime('%a %d/%m/%y')
         item['author'] = po.author.username
-        item['url'] = section.get_url()            # 测试用 要改 ！！！！！！！！！！！！！
+        item['url'] = po.get_url()
         item['title'] = po.title
+        item['isElite'] = str(po.isElite)
         post_list.append(item)
 
     context = {
@@ -67,3 +71,19 @@ def section_open_posts_list(request):
     }
 
     return JsonResponse(context)
+
+
+@login_required(login_url='/login/')
+def section_follow(request):
+    sec_slug = request.GET.get('section_slug')
+    section = SectionForum.objects.filter(slug=sec_slug).first()
+    test= section_follow_pair.objects.filter(section=section, user=request.user).all()
+    if test:
+        return HttpResponse('已经关注')
+    new_pair = section_follow_pair()
+    new_pair.user = request.user
+    new_pair.section = section
+    section.follower_num += 1
+    new_pair.save()
+    section.save()
+    return HttpResponse('关注成功~')

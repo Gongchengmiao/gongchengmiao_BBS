@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
-from .models import common_member, common_member_star, follower_pair, common_member_action_log
+from .models import common_member, common_member_star, follower_pair, common_member_action_log ,section_follow_pair
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm,\
     UserCreationForm as BaseUserCreationForm
@@ -84,5 +84,7 @@ admin.site.register(common_member, Common_memberAdmin)
 admin.site.register(common_member_star, Commmon_menber_starAdmin)
 
 admin.site.register(follower_pair,followers_Adim)
+
+admin.site.register(section_follow_pair)
 
 admin.site.register(common_member_action_log, User_action_log_Admin)

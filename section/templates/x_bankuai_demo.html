@@ -47,12 +47,12 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <h5 style="color: black"class="text-center">
-                                        <strong style="color: black;">关注:</strong> 288(未完成)
+                                        <strong style="color: black;">关注:</strong> {{ section.follower_num }}
                                     </h5>
                                 </div>
                                 <div class="col-sm-4">
                                     <h5 style="color: black"class="text-right">
-                                        <strong style="color: black">关注者:</strong> 999(未完成)
+                                        <button type="button" class="btn btn-info btn-xs btn-blue" id="follow_sec_btn"><i class="fa fa-heartbeat"></i> 关注板块</button>
                                     </h5>
                                 </div>
                             </div>
@@ -87,13 +87,13 @@
                                                     <small class="pull-right">{{ post.pub_date }}</small>
                                                 </div>
                                                 <div style="margin: 0 auto">
-                                                    <a href="profile.html#" class="pull-right">
+                                                    <a href="{{ post.author.ge }}" class="pull-right">
                                                         <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
                                                         <i style="font-size: xx-small">{{ post.author }}</i>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ section.get_url }}')">
+                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
                                                 {{ post.title }}
                                             </div>
                                         </div>
@@ -111,13 +111,13 @@
                                                     <small class="pull-right">{{ post.pub_date }}</small>
                                                 </div>
                                                 <div style="margin: 0 auto">
-                                                    <a href="profile.html#" class="pull-right">
+                                                    <a href="{{ post.author.get_url}}" class="pull-right">
                                                         <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
                                                         <i style="font-size: xx-small">{{ post.author.username }}</i>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ section.get_url }}')">
+                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
                                                 {{ post.title }}
                                             </div>
                                         </div>
@@ -153,13 +153,13 @@
                                                     <small class="pull-right">{{ post.pub_date }}</small>
                                                 </div>
                                                 <div style="margin: 0 auto">
-                                                    <a href="profile.html#" class="pull-right">
+                                                    <a href="{{ post.author.get_url }}" class="pull-right">
                                                         <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
                                                         <i style="font-size: xx-small">{{ post.author.username }}</i>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ section.get_url }}')">
+                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
                                                 {{ post.title }}
                                             </div>
                                         </div>
@@ -224,25 +224,53 @@
                     $("#btn_list").append(btn_html);
 
                     $.each(ret.post_list, function (i,post) {
-                        var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                        if(post.isElite === "True")
+                        {
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div class=\"pull-left\" style=\"margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px\">\n" +
+                            "                                                <a class=\"btn btn-xs btn-success\">\n" +
+                            "                                                    <i class=\"fa fa-star\"></i> 精\n" +
+                            "                                                </a>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                        }
+                        else{
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
                             "                                        <div class=\"media-body\">\n" +
                             "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
                             "                                                <div style=\"margin: 0 auto\">\n" +
                             "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
                             "                                                </div>\n" +
                             "                                                <div style=\"margin: 0 auto\">\n" +
-                            "                                                    <a href=\"profile.html#\" class=\"pull-right\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
                             "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
                             "                                                        <i style=\"font-size: xx-small\">"+post.author+"</i>\n" +
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('{{ section.get_url }}')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
                             "                                    </div>";
-                            $("#posts_display_list").append(post_html);
+                        }
+                        $("#posts_display_list").append(post_html);
                     })
 
                 }
@@ -291,24 +319,52 @@
                     $("#btn_list").append(btn_html);
 
                     $.each(ret.post_list, function (i,post) {
-                        var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                        if(post.isElite === "True")
+                        {
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div class=\"pull-left\" style=\"margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px\">\n" +
+                            "                                                <a class=\"btn btn-xs btn-success\">\n" +
+                            "                                                    <i class=\"fa fa-star\"></i> 精\n" +
+                            "                                                </a>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                        }
+                        else{
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
                             "                                        <div class=\"media-body\">\n" +
                             "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
                             "                                                <div style=\"margin: 0 auto\">\n" +
                             "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
                             "                                                </div>\n" +
                             "                                                <div style=\"margin: 0 auto\">\n" +
-                            "                                                    <a href=\"profile.html#\" class=\"pull-right\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
                             "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
                             "                                                        <i style=\"font-size: xx-small\">"+post.author+"</i>\n" +
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('{{ section.get_url }}')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
                             "                                    </div>";
+                        }
                             $("#posts_display_list").append(post_html);
                     })
 
@@ -354,13 +410,13 @@
                             "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
                             "                                                </div>\n" +
                             "                                                <div style=\"margin: 0 auto\">\n" +
-                            "                                                    <a href=\"profile.html#\" class=\"pull-right\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
                             "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
                             "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('{{ section.get_url }}')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
@@ -426,13 +482,13 @@
                             "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
                             "                                                </div>\n" +
                             "                                                <div style=\"margin: 0 auto\">\n" +
-                            "                                                    <a href=\"profile.html#\" class=\"pull-right\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
                             "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
                             "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('{{ section.get_url }}')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
@@ -444,7 +500,17 @@
             })
         });
 
-
+        $("#follow_sec_btn").click(function () {
+            $.ajax({
+                type:'get',
+                url:'{% url 'section_follow' %}',
+                data:{section_slug:"{{ section.slug }}"},
+                data_type:'json',
+                success:function (ret) {
+                    alert(ret);
+                }
+            })
+        })
     });
     </script>
 
