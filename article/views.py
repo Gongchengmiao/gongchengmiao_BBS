@@ -12,10 +12,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import ArticlePostForm, CommentForm
 from .models import ArticleColumn, ArticlePost, Comment
+import redis
+from django.conf import settings
 
 import json
 # Create your views here.
-
+r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
 
 @login_required(login_url='/login')
 @csrf_exempt
@@ -47,6 +49,7 @@ def article_post(request):
 @csrf_exempt
 def article_detail(request, pid, slug):
     article = get_object_or_404(ArticlePost, pid=pid, slug=slug)
+    total_views = r.incr("article:{}:views".format(article.pid))
     author = article.author
 
     all_comments = Comment.objects.filter(article=article).all()
@@ -82,4 +85,4 @@ def article_detail(request, pid, slug):
             return HttpResponseRedirect(url)
     else:
         comment_form = CommentForm()
-    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments, "page":current_page})
+    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments, "page":current_page, "total_views":total_views})

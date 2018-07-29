@@ -64,9 +64,14 @@
                     <tbody><tr>
                         <td class="pls ptm pbm">
                             <div class="hm">
-                                <span class="xg1">浏览次数:</span> <span class="xi1">70</span><span class="pipe">|</span><span class="xg1">回复:</span> <span class="xi1">4</span>
+                                <span class="xg1">浏览次数:</span><span class="xi1"><span style="margin-left:20px">{{ total_views }}</span></span><span class="pipe">|</span><span class="xg1">回复:</span><span class="xi1">{{ article.comment_counter     }}</span>
                             </div>
                         </td>
+                      <!--  <p>
+                            <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">{{ total_likes }}like{{ total_likes|pluralize }}</span>
+                            <span style="margin-left:20px">{{ total_views }}view{{ total_views | pluralize }}</span>
+                        </p>
+                        -->
                         <td class="plc ptm pbn">
                             <h1 class="ts z">
                                 <a href="forum.php?mod=forumdisplay&amp;fid=1345&amp;filter=typeid&amp;typeid=9102">[{{ article.section_belong_fk }}]</a>
