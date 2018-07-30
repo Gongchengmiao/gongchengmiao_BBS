@@ -78,8 +78,8 @@ function loadData()
 
 function talk() {
 
-    var Words = document.getElementById("words");
-    var TalkWords = document.getElementById("talkwords");
+    var Words = document.getElementById("chatshow");
+    var TalkWords = document.getElementById("chatinput");
     var TalkSub = document.getElementById("talksub");
     var date = new Date();
     var hour = date.getHours();
@@ -88,20 +88,18 @@ function talk() {
         //定义空字符串
         var str = "";
         if(TalkWords.value == ""){
-            // 消息为空时弹窗
-            alert("消息不能为空");
             return;
         }
-        str =   '<div class="metalk">' +
+        str =   '<div class="right">' +
                 '<div class="author-name">' +
                 '<a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb"><strong>我</strong></a>' +
                 '<small class="chat-date">' +
                  currentTime +
                 '</small>' +
                 '</div>' +
-                '<span>' +
+                '<div class="chat-message">' +
                  TalkWords.value +
-                '</span>' +
+                '</div>' +
                 '</div>'
                 +'<br>';
         Words.innerHTML = Words.innerHTML + str;
@@ -111,7 +109,7 @@ function talk() {
 
 
 function Recieve() {
-    var Words = document.getElementById("words");
+    var Words = document.getElementById("chatshow");
     var str = "";
     var str2 = str;
 
@@ -119,16 +117,16 @@ function Recieve() {
     {
         $.getJSON("js/userinfo.json", function (data) {
             $.each(data, function (infoIndex, info) {
-                str =   '<div class="othertalk">' +
+                str =   '<div class="left">' +
                         '<div class="author-name">' +
                         '<a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb"><strong>info["name"]</strong></a>' +
                         '<small class="chat-date">' +
                         'info["time"]' +
                         '</small>' +
                         '</div>' +
-                        '<span>' +
+                        '<div class="chat-message active">' +
                         'info["message"]' +
-                        '</span>' +
+                        '</div>' +
                         '</div>'
                         +'<br>';
 
