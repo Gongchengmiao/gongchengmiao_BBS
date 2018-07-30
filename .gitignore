@@ -15,3 +15,4 @@ build
 venv*
 secrets_zh.py
 supervisord.conf
+abc.conf
