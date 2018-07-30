@@ -167,6 +167,7 @@ def edit_info(request):
             print(myform.errors)
         return render(request, "x_edit_person_demo.html", {"form": myform, "portrait": request.user.portrait})
 
+
 @login_required(login_url='/login/')
 def show_info_ajax_follow(request):
     #print(request.GET.get("user_slug"))
