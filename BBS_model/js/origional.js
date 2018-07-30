@@ -446,3 +446,52 @@ function IsRecieve() {
     }
     setTimeout("IsRecieve()",1000);
 }
+
+function fenquRefreshA() {
+    var a = document.getElementById("Alist"), b = document.getElementById("Blist"), c = document.getElementById("Clist"), d = document.getElementById("Dlist");
+    a.style.display = "block";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+
+    document.getElementById("qushow").innerHTML = 'A区：XXXX'+'<span class="caret">'+'</span>';
+    return;
+}
+
+function fenquRefreshB() {
+    var a = document.getElementById("Alist"), b = document.getElementById("Blist"), c = document.getElementById("Clist"), d = document.getElementById("Dlist");
+    a.style.display = "none";
+    b.style.display = "block";
+    c.style.display = "none";
+    d.style.display = "none";
+
+    document.getElementById("qushow").innerHTML = 'B区：XXXXX'+'<span class="caret">'+'</span>';
+    return;
+}
+
+function fenquRefreshC() {
+    var a = document.getElementById("Alist"), b = document.getElementById("Blist"), c = document.getElementById("Clist"), d = document.getElementById("Dlist");
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "block";
+    d.style.display = "none";
+
+    document.getElementById("qushow").innerHTML = 'C区：XXXXX'+'<span class="caret">'+'</span>';
+    return;
+}
+
+function fenquRefreshD() {
+    var a = document.getElementById("Alist"), b = document.getElementById("Blist"), c = document.getElementById("Clist"), d = document.getElementById("Dlist");
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "block";
+
+    document.getElementById("qushow").innerHTML = 'D区：XXXX'+'<span class="caret">'+'</span>';
+    return;
+}
+
+$('#Aqu').on('click', fenquRefreshA);
+$('#Bqu').on('click', fenquRefreshB);
+$('#Cqu').on('click', fenquRefreshC);
+$('#Dqu').on('click', fenquRefreshD);
