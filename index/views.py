@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from article.models import forum_post, forum_school_info
+from article.models import ArticlePost
 from user.models import common_member_star, common_member
 from django.urls import reverse
 import datetime
@@ -12,8 +12,7 @@ def index_shell(request):
 
 def index(request):
 
-    popular_posts = forum_post.objects.order_by('-pub_date')[0:10]
-    school_info = forum_school_info.objects.order_by('-pub_date')[0:10]
+    popular_posts = ArticlePost.objects.order_by('-pub_date')[0:10]
     # try:
     #     # 验证cookie
     #     cookie_usrnm = request.COOKIES['username']
@@ -39,7 +38,7 @@ def index(request):
 
     context = {
         'latest_posts': enumerate(popular_posts),
-        'school_info': enumerate(school_info),
+        'school_info': enumerate(popular_posts),
         'user_star': enumerate(user_star),
     }
 

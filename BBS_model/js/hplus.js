@@ -31,6 +31,7 @@ $(document).ready(function () {
     $('.open-small-chat').click(function () {
         $(this).children().toggleClass('fa-comments').toggleClass('fa-remove');
         $('.small-chat-box').toggleClass('active');
+        $('.friendlist').toggleClass('active');
     });
 
     // 聊天窗口使用slimscroll

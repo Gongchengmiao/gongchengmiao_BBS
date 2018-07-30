@@ -1,4 +1,4 @@
-{% extends "article/base.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}article column{% endblock %}
 {% block content %}
@@ -24,6 +24,7 @@
         <div class="row" style="margin-top: 10px;">
             <div class="col-md-2 text-right"><span>文章标签:</span></div>
             <div class="col-md-10 text-left">
+            {% if article_tags %}
                 {% for tag in article_tags %}
                 <label class="checkbox-inline">
                     <input class="tagcheckbox" type="checkbox" id="{{ tag.id }}" name="article_tag" value="{{ tag.tag }}"> {{ tag.tag }}
@@ -31,6 +32,7 @@
                 {% empty %}
                 <p>You have not type tags for articles. Please <a href="{% url 'article:article_tag' %}">input your tags</a></p>
                 {% endfor %}
+            {% endif %}
             </div>
         </div>
             

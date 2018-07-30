@@ -117,6 +117,8 @@ $(function () {
             dataIndex = $(this).data('index'),
             menuName = $.trim($(this).text()),
             flag = true;
+        if (dataUrl == "x_personal_page_show_demo.html")
+            menuName = "个人页面展示";
         if (dataUrl == undefined || $.trim(dataUrl).length == 0)return false;
 
         // 选项卡菜单已存在
@@ -162,6 +164,8 @@ $(function () {
     }
 
     $('.J_menuItem').on('click', menuItem);
+
+
 
     // 关闭选项卡菜单
     function closeTab() {

@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from secrets_zh import mail_passwd
+import sys
+# from secrets_zh import mail_passwd
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'section',
     'user',
     'zone',
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -144,8 +146,8 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.ustc.edu.cn'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'paulzh@mail.ustc.edu.cn'
-EMAIL_HOST_PASSWORD = mail_passwd
-# EMAIL_HOST_PASSWORD = ''
+#EMAIL_HOST_PASSWORD = mail_passwd
+EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # celery settings
@@ -165,3 +167,9 @@ CELERY_TIMEZONE = TIME_ZONE
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0

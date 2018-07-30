@@ -836,8 +836,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info:active,
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
-    background-color: darkblue;
-    border-color:darkblue ;
+    background-color: #0000d1;
+    border-color:#0000d1 ;
     color: #FFFFFF;
 }
 
@@ -1871,13 +1871,29 @@ table.dataTable thead .sorting:after {
     border-radius: 50%;
 }
 
+.img-circle:hover{
+    cursor: pointer;
+    border-color: #5897fb;
+}
+
 .boxT {
     width: 10%;
     text-align: center;
     font-size: 100%
 }
 
+.boxT1 {
+    width: 20%;
+    text-align: center;
+    font-size: 100%
+}
+
 .boxT img {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.boxT1 img {
     border-radius: 50%;
     width: 100%;
 }
@@ -3566,6 +3582,10 @@ video {
     padding: 20px;
 }
 
+.wrapper-content1 {
+    padding: 2vmin;
+}
+
 #page-wrapper {
     padding: 0 15px;
     position: inherit;
@@ -4034,6 +4054,13 @@ code {
     width: 70px;
     margin: 10px;
     padding: 5px;
+}
+
+.ibox1 {
+    clear: both;
+    margin-bottom: 2.5vmin;
+    margin-top: 0;
+    padding: 0;
 }
 
 .ibox {
@@ -4824,6 +4851,10 @@ a.close-canvas-menu:hover {
     margin: 25px 0;
 }
 
+.space-25_ {
+    margin: 2.5vmin 0;
+}
+
 .space-30 {
     margin: 30px 0;
 }
@@ -5212,6 +5243,10 @@ ul.notes li div {
     margin-top: 20px;
 }
 
+.tag-title1 {
+    margin-top: 2vmin;
+}
+
 .tag-list li {
     float: left;
 }
@@ -5292,6 +5327,10 @@ ul.notes li div {
 
 a.compose-mail {
     padding: 8px 10px;
+}
+
+.compose-mail1 {
+    padding: 0.8vmin 1vmin;
 }
 
 .mail-search {
@@ -5380,6 +5419,14 @@ a.compose-mail {
     margin-bottom: 20px;
 }
 
+.mail-box1 {
+    background-color: #ffffff;
+    border: 1px solid #e7eaec;
+    border-top: 0;
+    padding: 0px;
+    margin-bottom: 2vmin;
+}
+
 .mail-box-header {
     background-color: #ffffff;
     border: 1px solid #e7eaec;
@@ -5388,6 +5435,17 @@ a.compose-mail {
 }
 
 .mail-box-header h2 {
+    margin-top: 0px;
+}
+
+.mail-box-header1 {
+    background-color: #ffffff;
+    border: 1px solid #e7eaec;
+    border-bottom: 0;
+    padding: 3vmin 2vmin 2vmin 2vmin;
+}
+
+.mail-box-header1 h2 {
     margin-top: 0px;
 }
 
@@ -5428,6 +5486,12 @@ a.compose-mail {
     padding: 10px;
 }
 
+.mailbox-content1 {
+    background: none;
+    border: none;
+    padding: 1vmin;
+}
+
 .mail-ontact {
     width: 23%;
 }
@@ -5448,6 +5512,22 @@ dd.project-people {
 .project-people img {
     width: 32px;
     height: 32px;
+}
+
+.project-people1,
+.project-actions {
+    text-align: right;
+    vertical-align: middle;
+}
+
+dd.project-people1 {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.project-people1 img {
+    width: 64px;
+    height: 64px;
 }
 
 .project-title a {
@@ -5854,7 +5934,7 @@ del {
     height: 38px;
     width: 38px;
     display: block;
-    background: #1ab394;
+    background: dodgerblue;
     padding: 9px 8px;
     text-align: center;
     color: #fff;
@@ -5863,7 +5943,7 @@ del {
 
 .open-small-chat:hover {
     color: white;
-    background: #1ab394;
+    background: #0000ff;
 }
 
 .small-chat-box {
@@ -5873,7 +5953,7 @@ del {
     right: 80px;
     background: #fff;
     border: 1px solid #e7eaec;
-    width: 230px;
+    width: 300px;
     height: 320px;
     border-radius: 4px;
 }
@@ -5892,7 +5972,7 @@ del {
 }
 
 .small-chat-box .heading {
-    background: #2f4050;
+    background: royalblue;
     padding: 8px 15px;
     font-weight: bold;
     color: #fff;
@@ -5929,7 +6009,7 @@ del {
 }
 
 .small-chat-box .content .chat-message.active {
-    background: #1ab394;
+    background: #83bdfa;
     color: #fff;
 }
 
@@ -8014,6 +8094,10 @@ body.skin-3 {
     transition: all .3s ease-out 0s;
 }
 
+.atitle{
+
+}
+
 ::-webkit-scrollbar-track {
     background-color: #F5F5F5;
 }
@@ -8112,6 +8196,66 @@ body.skin-3 {
         font-size: 12px
     }
 }
+
+
+
+.talk_con{
+    width:400px;
+    height:400px;
+    border:1px solid #666;
+    margin:50px auto 0;
+    background:#f9f9f9;
+}
+.talk_show{
+    width:380px;
+    height:320px;
+    border:1px solid #666;
+    background:#fff;
+    margin:10px auto 0;
+    overflow:auto;
+}
+.talk_input{
+    width:320px;
+    margin:10px auto 0;
+}
+.talk_word{
+    width:300px;
+    height:30px;
+    padding:0px;
+    float: left;
+    margin-left:-30px;
+    outline:none;
+    text-indent:10px;
+}
+.talk_sub{
+    height:30px;
+    margin-right: -20px;
+    float:right;
+}
+.othertalk{
+    margin:10px;
+}
+.othertalk span{
+    display:inline-block;
+    background: #83bdfa;
+    border-radius:10px;
+    color: #fff;
+    padding:5px 10px;
+    border-color: #0e9aef;
+}
+.metalk{
+    margin:10px;
+    text-align:right;
+}
+.metalk span{
+    display:inline-block;
+    background: #f3f3f4;
+    border-radius:10px;
+    color: dimgrey;
+    padding:5px 10px;
+    border-color: #f3f3f4;
+}
+
 
 .contentwidth {
     width: 340px;

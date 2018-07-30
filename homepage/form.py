@@ -59,7 +59,7 @@ from user.models import common_member
 class UserInfoChangeForm(forms.ModelForm):
     class Meta:
         model = common_member
-        fields = ['username', 'gender', 'profile', 'show_gender', 'portrait']
+        fields = ['username', 'stu_num', 'department', 'gender', 'profile', 'show_gender', 'portrait', 'birthday']
         widgets = {
             'profile': forms.Textarea(
                 attrs={
@@ -68,18 +68,17 @@ class UserInfoChangeForm(forms.ModelForm):
                 }
             ),
             'gender': forms.RadioSelect(),
+            'portrait': forms.FileInput(),
             'username': forms.TextInput(
                 attrs={
                     "placeholder": u"请输入用户名",
                     "class": "input-field",
                 }
             ),
-            'portrait': forms.FileInput(
-                attrs={
-                }
-            )
         }
         required = {
             'portrait': False
         }
+
+
 

@@ -1,7 +1,7 @@
 /*
  *
  *   H+ - 后台主题UI框架
- *   version homepage
+ *   version 4.9
  *
 */
 
@@ -202,7 +202,7 @@ body.body-small .navbar-top-links li:last-child {
 
 .nav-header {
     padding: 33px 25px;
-    background: url("/static/css/patterns/header-profile.png") no-repeat;
+    background: url("patterns/header-profile.png") no-repeat;
 }
 
 .pace-done .nav-header {
@@ -1871,13 +1871,29 @@ table.dataTable thead .sorting:after {
     border-radius: 50%;
 }
 
+.img-circle:hover{
+    cursor: pointer;
+    border-color: #5897fb;
+}
+
 .boxT {
     width: 10%;
     text-align: center;
     font-size: 100%
 }
 
+.boxT1 {
+    width: 20%;
+    text-align: center;
+    font-size: 100%
+}
+
 .boxT img {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.boxT1 img {
     border-radius: 50%;
     width: 100%;
 }
@@ -3410,7 +3426,7 @@ body.full-height-layout #page-wrapper {
 }
 
 body.boxed-layout {
-    background: url('/static/css/patterns/shattered.png');
+    background: url('patterns/shattered.png');
 }
 
 body.boxed-layout #wrapper {
@@ -5450,6 +5466,22 @@ dd.project-people {
     height: 32px;
 }
 
+.project-people1,
+.project-actions {
+    text-align: right;
+    vertical-align: middle;
+}
+
+dd.project-people1 {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.project-people1 img {
+    width: 64px;
+    height: 64px;
+}
+
 .project-title a {
     font-size: 14px;
     color: #676a6c;
@@ -7261,7 +7293,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .blue-skin {
     font-weight: 600;
-    background: url("/static/css/patterns/header-profile-skin-1.png") repeat scroll 0 0;
+    background: url("patterns/header-profile-skin-1.png") repeat scroll 0 0;
 }
 
 .blue-skin:hover {
@@ -7270,7 +7302,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .yellow-skin {
     font-weight: 600;
-    background: url("/static/css/patterns/header-profile-skin-3.png") repeat scroll 0 100%;
+    background: url("patterns/header-profile-skin-3.png") repeat scroll 0 100%;
 }
 
 .yellow-skin:hover {
@@ -7322,7 +7354,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .nav-header {
     background: #0e9aef;
-    background: url('/static/css/patterns/header-profile-skin-1.png');
+    background: url('patterns/header-profile-skin-1.png');
 }
 
 .mini-navbar .nav-second-level {
@@ -7438,7 +7470,7 @@ navbar-static-top {
 
 .skin-1 .nav-header {
     background: #0e9aef;
-    background: url('/static/css/patterns/header-profile-skin-1.png');
+    background: url('patterns/header-profile-skin-1.png');
 }
 
 .skin-1.mini-navbar .nav-second-level {
@@ -7545,7 +7577,7 @@ body.skin-1 {
 
 .skin-1 .content-tabs {
     border-bottom: solid 2px #39aef5;
-}/index/
+}
 
 .skin-1 .nav.nav-tabs > li.active {
     background: transparent;
@@ -7591,7 +7623,7 @@ body.boxed-layout.skin-3 #wrapper {
 
 .skin-3 .nav-header {
     background: #ecba52;
-    background: url('/static/css/patterns/header-profile-skin-3.png');
+    background: url('patterns/header-profile-skin-3.png');
 }
 
 .skin-3.mini-navbar .nav-second-level {
@@ -8012,6 +8044,10 @@ body.skin-3 {
 .J_menuTab {
     -webkit-transition: all .3s ease-out 0s;
     transition: all .3s ease-out 0s;
+}
+
+.atitle{
+
 }
 
 ::-webkit-scrollbar-track {

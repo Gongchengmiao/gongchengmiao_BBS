@@ -74,12 +74,37 @@
             <div class="form-row">
                 <h2>基本信息</h2>
                 <div class="boxT pull-right">
-                    <img alt="image" src="img/a3.jpg">
+                    <img alt="image" src="img/boy_hat.jpg" id="imgnow">
                     <h5> </h5>
                     <div>
-                        <div class="cyan-small-btn"  style="background-color: dodgerblue">
-                            <input id="avatar-uploader" class="avatar-upload " name="file" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,image/tiff,image/jpeg,image/png">
-                            <span>修改头像</span>
+                        <button type="button" class="btn-xs btn-blue" data-toggle="modal" data-target="#myModal" id="changeimg">
+                            修改头像
+                        </button>
+                        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated fadeIn">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <img alt="image" class="img-circle" src="img/ustc.png" id="imgshow" style="width: 48px;height: 48px;">
+                                        <h4 class="modal-title">更换头像</h4>
+                                        <small>请从默认头像中选择一个。</small>
+                                    </div>
+                                    <div class="modal-body">
+                                        <dd class="project-people1">
+                                            <img alt="image" class="img-circle" src="img/boy_glasses.jpg" id="boyg">
+                                            <img alt="image" class="img-circle" src="img/boy_hat.jpg" id="boyh">
+                                            <img alt="image" class="img-circle" src="img/boy_sport.jpg" id="boys">
+                                            <img alt="image" class="img-circle" src="img/girl_rollhair.jpg" id="girlr">
+                                            <img alt="image" class="img-circle" src="img/girl_shorthair.jpg" id="girlsh">
+                                            <img alt="image" class="img-circle" src="img/girl_silent.jpg" id="girlsi">
+                                        </dd>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-blue" id="imgsave">保存</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -160,6 +185,7 @@
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 
+<script src="js/origional.js"></script>
 
 <!-- Chosen -->
 <script src="js/plugins/chosen/chosen.jquery.js"></script>

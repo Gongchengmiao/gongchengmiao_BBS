@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>{{ section.name }}</title>
+    <meta name="keywords" content="喵">
+    <meta name="description" content="喵">
+
+        {% load static %}
+    <link rel="shortcut icon" href="{% static 'img/ustc.png' %}">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/font-awesome.css"%}" rel="stylesheet">
+
+    <link href="{% static "css/style_35_common.css" %}" rel="stylesheet">
+    <link href="{% static "css/style_35_forum_viewthread.css" %}" rel="stylesheet">
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+
+
+    <script type="text/javascript" src="{% static 'js/origional.js' %}"></script>
+
+</head>
+
+<body class="sky-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="ibox-titleblue" style="text-align: center">
+                        <h2><strong style="color: black">{{ section.name }}</strong></h2>
+                    </div>
+
+                    <div>
+                        <div class="ibox-content profile-content">
+                            <h4 style="color: black">{{ section.brief }}</h4>
+                            <div class="row m-t-lg">
+                                <div class="col-sm-4">
+                                    <h5 style="color: black" class="text-left">
+                                        <strong style="color: black;">帖子:</strong>{{ post_num }}
+                                    </h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 style="color: black"class="text-center">
+                                        <strong style="color: black;">关注:</strong> {{ section.follower_num }}
+                                    </h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 style="color: black"class="text-right">
+                                        <button type="button" class="btn btn-info btn-xs btn-blue" id="follow_sec_btn"><i class="fa fa-heartbeat"></i> 关注板块</button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li><a href="#tab-1" data-toggle="tab" id="posts_list">看帖</a>
+                                            </li>
+                                            <li class=""><a href="#tab-2" data-toggle="tab" id="elite_posts_list">精华</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-1">
+
+                                <div class="feed-activity-list" id="posts_display_list">
+                                    {% if posts %}
+                                        {% for post in posts%}
+                                            {% if post.isElite == False %}
+                                                 <div class="feed-element" style="cursor: pointer">
+                                        <div class="media-body">
+                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
+                                                <div style="margin: 0 auto">
+                                                    <small class="pull-right">{{ post.pub_date }}</small>
+                                                </div>
+                                                <div style="margin: 0 auto">
+                                                    <a href="{{ post.author.ge }}" class="pull-right">
+                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
+                                                        <i style="font-size: xx-small">{{ post.author }}</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
+                                                {{ post.title }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                            {% else %}
+                                                <div class="feed-element" style="cursor: pointer">
+                                        <div class="media-body">
+                                            <div class="pull-left" style="margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px">
+                                                <a class="btn btn-xs btn-success">
+                                                    <i class="fa fa-star"></i> 精
+                                                </a>
+                                            </div>
+                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
+                                                <div style="margin: 0 auto">
+                                                    <small class="pull-right">{{ post.pub_date }}</small>
+                                                </div>
+                                                <div style="margin: 0 auto">
+                                                    <a href="{{ post.author.get_url}}" class="pull-right">
+                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
+                                                        <i style="font-size: xx-small">{{ post.author.username }}</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
+                                                {{ post.title }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="btn-group" id = "btn_list">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane" id="tab-2">
+                                <div class="feed-activity-list" id="elite_posts_display_list">
+                                    {%if posts %}
+                                        {% for post in posts %}
+                                            {% if post.isElite == True %}
+
+                                                <div class="feed-element" style="cursor: pointer">
+                                        <div class="media-body">
+                                            <div class="pull-left" style="margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px">
+                                                <a class="btn btn-xs btn-success">
+                                                    <i class="fa fa-star"></i> 精
+                                                </a>
+                                            </div>
+                                            <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
+                                                <div style="margin: 0 auto">
+                                                    <small class="pull-right">{{ post.pub_date }}</small>
+                                                </div>
+                                                <div style="margin: 0 auto">
+                                                    <a href="{{ post.author.get_url }}" class="pull-right">
+                                                        <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
+                                                        <i style="font-size: xx-small">{{ post.author.username }}</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
+                                                {{ post.title }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="btn-group" id="elite_btn_list">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="showDiv" style="position: absolute; background-color: white; border: 1px solid black;">
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 全局js -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<!-- 自定义js -->
+<script src="{% static 'js/content.js' %}"></script>
+
+    <script>
+    $(document).ready(function(){
+        $("#posts_list").click(function () {
+            $.ajax({
+                type:"get",
+                url:"{% url 'open_posts_list' %}",
+                data:{
+                    sec_slug:"{{ section.slug }}",
+                    isElite:"0",
+                    isDecPage:"0",
+                    isIncPage:"0",
+                    page:"1"
+                },
+                data_type:"json",
+                success:function (ret) {
+                    $("#btn_list").empty();
+                    $("#posts_display_list").empty();
+                    var btn_html = "<button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-left\"></i>上一页</button>";
+                    $.each(ret.pages_to_show,function (i,btn)
+                    {
+                        if(btn === ret.page_active){btn_html = btn_html + "<button class=\"btn btn-white active\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                        else {btn_html = btn_html + "<button class=\"btn btn-white\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                    });
+                    btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
+                    $("#btn_list").append(btn_html);
+
+                    $.each(ret.post_list, function (i,post) {
+                        if(post.isElite === "True")
+                        {
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div class=\"pull-left\" style=\"margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px\">\n" +
+                            "                                                <a class=\"btn btn-xs btn-success\">\n" +
+                            "                                                    <i class=\"fa fa-star\"></i> 精\n" +
+                            "                                                </a>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                        }
+                        else{
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                        }
+                        $("#posts_display_list").append(post_html);
+                    })
+
+                }
+            })
+        });
+
+        $("#btn_list").on("click", "button.btn.btn-white", function () {
+            var btn_val = $(this).text();
+            var page_up,page_down;
+            var page_now = $("#btn_list>button.btn.btn-white.active").text();
+            if(btn_val === "上一页"){
+                page_up = "0";
+                page_down = "1";
+            }
+            else if(btn_val === "下一页"){
+                page_up = "1";
+                page_down = "0";
+            }
+            else{
+                page_up = "0";
+                page_down = "0";
+                page_now = btn_val;
+            }
+
+            $.ajax({
+                type:"get",
+                url:"{% url 'open_posts_list' %}",
+                data:{
+                    sec_slug:"{{ section.slug }}",
+                    isElite:"0",
+                    isDecPage:page_down,
+                    isIncPage:page_up,
+                    page:page_now
+                },
+                data_type:"json",
+                success:function (ret) {
+                    $("#btn_list").empty();
+                    $("#posts_display_list").empty();
+                    var btn_html = "<button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-left\"></i>上一页</button>";
+                    $.each(ret.pages_to_show,function (i,btn)
+                    {
+                        if(btn === ret.page_active){btn_html = btn_html + "<button class=\"btn btn-white active\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                        else {btn_html = btn_html + "<button class=\"btn btn-white\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                    });
+                    btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
+                    $("#btn_list").append(btn_html);
+
+                    $.each(ret.post_list, function (i,post) {
+                        if(post.isElite === "True")
+                        {
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div class=\"pull-left\" style=\"margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px\">\n" +
+                            "                                                <a class=\"btn btn-xs btn-success\">\n" +
+                            "                                                    <i class=\"fa fa-star\"></i> 精\n" +
+                            "                                                </a>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                        }
+                        else{
+                            var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                        }
+                            $("#posts_display_list").append(post_html);
+                    })
+
+                }
+            })
+
+        });
+
+        $("#elite_posts_list").click(function () {
+            $.ajax({
+                type:"get",
+                url:"{% url 'open_posts_list' %}",
+                data:{
+                    sec_slug:"{{ section.slug }}",
+                    isElite:"1",
+                    isDecPage:"0",
+                    isIncPage:"0",
+                    page:"1"
+                },
+                data_type:"json",
+                success:function (ret) {
+                    $("#elite_btn_list").empty();
+                    $("#elite_posts_display_list").empty();
+                    var btn_html = "<button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-left\"></i>上一页</button>";
+                    $.each(ret.pages_to_show,function (i,btn)
+                    {
+                        if(btn === ret.page_active){btn_html = btn_html + "<button class=\"btn btn-white active\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                        else {btn_html = btn_html + "<button class=\"btn btn-white\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                    });
+                    btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
+                    $("#elite_btn_list").append(btn_html);
+
+                    $.each(ret.post_list, function (i,post) {
+                        var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div class=\"pull-left\" style=\"margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px\">\n" +
+                            "                                                <a class=\"btn btn-xs btn-success\">\n" +
+                            "                                                    <i class=\"fa fa-star\"></i> 精\n" +
+                            "                                                </a>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                            $("#elite_posts_display_list").append(post_html);
+                    })
+
+                }
+            })
+        });
+
+        $("#elite_btn_list").on("click", "button.btn.btn-white",function () {
+            var btn_val = $(this).text();
+            var page_up,page_down;
+            var page_now = $("#elite_btn_list>button.btn.btn-white.active").text();
+            if(btn_val === "上一页"){
+                page_up = "0";
+                page_down = "1";
+            }
+            else if(btn_val === "下一页"){
+                page_up = "1";
+                page_down = "0";
+            }
+            else{
+                page_up = "0";
+                page_down = "0";
+                page_now = btn_val;
+            }
+
+            $.ajax({
+                type:"get",
+                url:"{% url 'open_posts_list' %}",
+                data:{
+                    sec_slug:"{{ section.slug }}",
+                    isElite:"1",
+                    isDecPage:page_down,
+                    isIncPage:page_up,
+                    page:page_now
+                },
+                data_type:"json",
+                success:function (ret) {
+                    $("#elite_btn_list").empty();
+                    $("#elite_posts_display_list").empty();
+                    var btn_html = "<button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-left\"></i>上一页</button>";
+                    $.each(ret.pages_to_show,function (i,btn)
+                    {
+                        if(btn === ret.page_active){btn_html = btn_html + "<button class=\"btn btn-white active\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                        else {btn_html = btn_html + "<button class=\"btn btn-white\" style=\"color: #0a6aa1\">"+btn+"</button>";}
+                    });
+                    btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
+                    $("#elite_btn_list").append(btn_html);
+
+                    $.each(ret.post_list, function (i,post) {
+                        var post_html ="<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
+                            "                                        <div class=\"media-body\">\n" +
+                            "                                            <div class=\"pull-left\" style=\"margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px\">\n" +
+                            "                                                <a class=\"btn btn-xs btn-success\">\n" +
+                            "                                                    <i class=\"fa fa-star\"></i> 精\n" +
+                            "                                                </a>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div style=\"margin: 1px auto;float: right;position: relative;left: -10px;\">\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <small class=\"pull-right\">"+post.pub_date+"</small>\n" +
+                            "                                                </div>\n" +
+                            "                                                <div style=\"margin: 0 auto\">\n" +
+                            "                                                    <a href=\""+post.author_url+"\" class=\"pull-right\">\n" +
+                            "                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
+                            "                                                        <i style=\"font-size: xx-small\">"+post.author.username+"</i>\n" +
+                            "                                                    </a>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                                "+post.title+"\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                            $("#elite_posts_display_list").append(post_html);
+                    })
+
+                }
+            })
+        });
+
+        $("#follow_sec_btn").click(function () {
+            $.ajax({
+                type:'get',
+                url:'{% url 'section_follow' %}',
+                data:{section_slug:"{{ section.slug }}"},
+                data_type:'json',
+                success:function (ret) {
+                    alert(ret);
+                }
+            })
+        })
+    });
+    </script>
+
+</body>
+
+</html>
