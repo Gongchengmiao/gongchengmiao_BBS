@@ -12,7 +12,7 @@ from django.urls import reverse
 from DjangoUeditor.models import UEditorField
 
 #from django.template.defaultfilters import slugify
-from uuslug import slugify
+#from uuslug import slugify
 
 # # 一般帖子信息
 # class forum_post(models.Model):

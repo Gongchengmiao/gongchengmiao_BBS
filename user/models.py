@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from .validators import BbsUsernameValidator
-from uuslug import slugify
+from slugify import slugify
 from datetime import date
 from django.urls import reverse
 from django.utils.timezone import now

@@ -9,6 +9,5 @@ Pillow==5.1.0
 pytz==2018.4
 redis==2.10.6
 vine==1.1.4
-django-uuslug==1.1.8
 awesome-slugify==1.6.5
 

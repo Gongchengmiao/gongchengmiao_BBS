@@ -1,6 +1,6 @@
 from django.db import models
 from gongchengmiao_BBS import settings
-from uuslug import slugify
+from slugify import slugify
 from django.urls import reverse
 # Create your models here.
 
