@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title> 聊天窗口 </title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="img/ustc.png">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <script type="text/javascript" src="js/origional.js"></script>
+</head>
+<body onload="Recieve()" class="sky-bg">
+<div class="talk_con">
+    <div class="talk_show" id="words">
+        <div class="metalk">
+            <div class="author-name">
+                <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb"><strong>我</strong></a>
+                <small class="chat-date">10:02</small>
+            </div>
+            <span>
+                你说你🐎呢？
+            </span>
+        </div>
+
+        <div class="othertalk">
+            <div class="author-name">
+                <a href="x_personal_page_show_demo.html" target="_blank" style="color: #0d8ddb"><strong>产品经理</strong></a>
+                <small class="chat-date">10:02</small>
+            </div>
+            <span>
+                  我也说我🐎呢。
+              </span>
+        </div>
+    </div>
+    <div class="talk_input">
+        <input type="text" class="talk_word" placeholder="输入消息内容，点击发送按钮或回车发送" id="talkwords">
+        <input onclick="talk()" type="button" value="发送" class="pull-right talk_sub btn-info btn" id="talksub">
+    </div>
+</div>
+
+<div class="small-chat-box fadeInRight animated" onload="Recieve()">
+
+    <div class="heading" draggable="true">
+        <p>与 Beau-zihan 聊天中</p>
+    </div>
+
+    <div class="content" id = "chatshow">
+
+        <div class="left">
+            <div class="author-name">
+                Beau-zihan <small class="chat-date">
+                10:02
+            </small>
+            </div>
+            <div class="chat-message active">
+                你好
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="author-name">
+                游客
+                <small class="chat-date">
+                    11:24
+                </small>
+            </div>
+            <div class="chat-message">
+                你好，请问H+有帮助文档吗？
+            </div>
+        </div>
+        <div class="left">
+            <div class="author-name">
+                Beau-zihan
+                <small class="chat-date">
+                    08:45
+                </small>
+            </div>
+            <div class="chat-message active">
+                有，购买的H+源码包中有帮助文档，位于docs文件夹下
+            </div>
+        </div>
+        <div class="right">
+            <div class="author-name">
+                游客
+                <small class="chat-date">
+                    11:24
+                </small>
+            </div>
+            <div class="chat-message">
+                那除了帮助文档还提供什么样的服务？
+            </div>
+        </div>
+        <div class="left">
+            <div class="author-name">
+                Beau-zihan
+                <small class="chat-date">
+                    08:45
+                </small>
+            </div>
+            <div class="chat-message active">
+                1.所有源码(未压缩、带注释版本)；
+                <br> 2.说明文档；
+                <br> 3.终身免费升级服务；
+                <br> 4.必要的技术支持；
+                <br> 5.付费二次开发服务；
+                <br> 6.授权许可；
+                <br> ……
+                <br>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-chat">
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control" id="chatinput">
+            <span class="input-group-btn">
+                <button class="btn btn-info" type="button" onclick="talk()" id="chatsub">发送
+                </button>
+            </span>
+        </div>
+    </div>
+
+</div>
+
+<div class="friendlist animated fadeInLeft" >
+    <div class="heading">
+        <h4 >好友列表</h4>
+    </div>
+    <div class="content">
+                <ul class="sortable-list connectList agile-list" style="height: 275px;overflow: auto;">
+                    <li   class="info-element">
+                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                    </li>
+                    <li   class="info-element">
+                    <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                    <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                </li>
+                    <li   class="info-element">
+                    <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                    <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                </li>
+                    <li   class="info-element">
+                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                    </li>
+                    <li   class="info-element">
+                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                    </li>
+                    <li   class="info-element">
+                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                    </li>
+                    <li   class="info-element">
+                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                    </li>
+                    <li   class="info-element">
+                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                    </li>
+                    <li   class="info-element">
+                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
+                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
+                    </li>
+                </ul>
+    </div>
+</div>
+
+<div id="small-chat">
+    <span class="badge badge-danger pull-right">...</span>
+    <a class="open-small-chat">
+        <i class="fa fa-comments"></i>
+
+    </a>
+</div>
+
+</body>
+
+<script language= "JavaScript">
+    function keyEnter(){
+        if (event.keyCode == 13) {
+            talk();
+        }
+    }
+    document.onkeydown = keyEnter;
+</script>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+
+<!-- 自定义js -->
+<script src="js/hplus.js?v=4.1.0"></script>
+<script type="text/javascript" src="js/contabs.js"></script>
+
+<!-- 第三方插件 -->
+<script src="js/plugins/pace/pace.min.js"></script>
+</html>
