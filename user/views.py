@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 
 from django.contrib import auth
 from django.contrib.auth import password_validation
@@ -54,10 +55,10 @@ def login(request):
 
                     response = redirect(reverse('index'))
                     # response.set_cookie('username', username,
-                    #                     expires=datetime.datetime.now()+datetime.timedelta(days=10))
+                    #                     expires=timezone.now()+datetime.timedelta(days=10))
                     # passwd = common_member.objects.get(username=username).password
                     # response.set_cookie('password', passwd,
-                    #                     expires=datetime.datetime.now() + datetime.timedelta(days=10))
+                    #                     expires=timezone.now() + datetime.timedelta(days=10))
 
                     auth.login(request, user)
                     return response
@@ -194,8 +195,10 @@ def email_active(request, uidb64, token):
             try:
                 email_record = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
                 email_record = email_record[0]
-                # print(str(email_record.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
-                if str(email_record.last_send_time) < str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+                # print(str(email_record.last_send_time), str(timezone.now() + datetime.timedelta(hours=-3)))
+                if str(email_record.last_send_time) < str(timezone.now() + datetime.timedelta(hours=-3)):
+                    # print(email_record.last_send_time)
+                    # print(datetime.datetime.now())
                     user.delete()
                     return render(request, "active_email.html", {"title": u"翰海星云用户验证", "time_more": True, })  # 超过验证时间
             except IndexError:
@@ -236,8 +239,8 @@ def jump_to_wait(request, username):
             email_status = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
             # print(email_status)
             email_status = email_status[0]
-            if str(email_status.last_send_time) > str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
-                # print(str(email_status.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+            if str(email_status.last_send_time) > str(timezone.now() + datetime.timedelta(hours=-3)):
+                # print(str(email_status.last_send_time), str(timezone.now() + datetime.timedelta(hours=-3)))
 
                 # 间隔时间小于三小时, 返回'请等待三小时'
                 return render(request, "wait_email.html", {"title": u"瀚海星云注册邮件认证", "time_less": True, })
@@ -336,8 +339,8 @@ def pswdgetback_jump(request, username):
             email_status = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
             # print(email_status)
             email_status = email_status[0]
-            if str(email_status.last_send_time) > str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
-                # print(str(email_status.last_send_time), str(datetime.datetime.now() + datetime.timedelta(hours=-3)))
+            if str(email_status.last_send_time) > str(timezone.now() + datetime.timedelta(hours=-3)):
+                # print(str(email_status.last_send_time), str(timezone.now() + datetime.timedelta(hours=-3)))
 
                 # 间隔时间小于三小时, 返回'请等待三小时'
                 return render(request, "pswd_get_back_jump.html", {"title": u"瀚海星云找回密码邮件认证",
@@ -395,7 +398,7 @@ def pswd_get_back_view(request, uidb64, token):
                 email_record = common_member_email_send_time.objects.filter(user=user).order_by('-last_send_time')
                 email_record = email_record[0]
 
-                if str(email_record.last_send_time) < str(datetime.datetime.now() + datetime.timedelta(hours=-3)):
+                if str(email_record.last_send_time) < str(timezone.now() + datetime.timedelta(hours=-3)):
 
                     return render(request, "error_messages.html", {"title": u"翰海星云错误消息", "time_more": True, })  # 超过验证时间
             except IndexError:
