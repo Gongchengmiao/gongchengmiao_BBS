@@ -47,13 +47,13 @@
     </div>
 </div>
 
-<div class="small-chat-box fadeInRight animated">
+<div class="small-chat-box fadeInRight animated" onload="Recieve()">
 
     <div class="heading" draggable="true">
         <p>与 Beau-zihan 聊天中</p>
     </div>
 
-    <div class="content">
+    <div class="content" id = "chatshow">
 
         <div class="left">
             <div class="author-name">
@@ -118,15 +118,16 @@
             </div>
         </div>
 
-
     </div>
 
 
     <div class="form-chat">
         <div class="input-group input-group-sm">
-            <input type="text" class="form-control"> <span class="input-group-btn"> <button
-                class="btn btn-info" type="button">发送
-                </button> </span>
+            <input type="text" class="form-control" id="chatinput">
+            <span class="input-group-btn">
+                <button class="btn btn-info" type="button" onclick="talk()" id="chatsub">发送
+                </button>
+            </span>
         </div>
     </div>
 
@@ -136,41 +137,29 @@
     <div class="heading">
         <h4 >好友列表</h4>
     </div>
-    <div class="content">
+    <div class="content" onload="IsRecieve()">
                 <ul class="sortable-list connectList agile-list" style="height: 275px;overflow: auto;">
-                    <li   class="warning-element">
+                    <li  id="friend1" class="info-element" onclick="Justice1();Alljustice();Justice1();">
                         <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
                         <h5 class="pull-right" style="text-align: center;">ZH</h5>
                     </li>
-                    <li   class="success-element">
-                    <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
-                    <h5 class="pull-right" style="text-align: center;">ZH</h5>
-                </li>
-                    <li   class="info-element">
-                    <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
-                    <h5 class="pull-right" style="text-align: center;">ZH</h5>
-                </li>
-                    <li   class="danger-element">
+                    <li  id="friend2" class="info-element" onclick="Justice2();Alljustice();Justice2()">
                         <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
                         <h5 class="pull-right" style="text-align: center;">ZH</h5>
                     </li>
-                    <li   class="warning-element">
+                    <li  id="friend3" class="info-element" onclick="Justice3();Alljustice();Justice3()">
                         <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
                         <h5 class="pull-right" style="text-align: center;">ZH</h5>
                     </li>
-                    <li   class="info-element">
+                    <li  id="friend4" class="info-element" onclick="Justice1();Alljustice();Justice4()">
                         <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
                         <h5 class="pull-right" style="text-align: center;">ZH</h5>
                     </li>
-                    <li   class="success-element">
+                    <li  id="friend5" class="info-element" onclick="Justice1();Alljustice();Justice5()">
                         <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
                         <h5 class="pull-right" style="text-align: center;">ZH</h5>
                     </li>
-                    <li   class="danger-element">
-                        <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
-                        <h5 class="pull-right" style="text-align: center;">ZH</h5>
-                    </li>
-                    <li   class="info-element">
+                    <li  id="friend6" class="info-element" onclick="Justice1();Alljustice();Justice6()">
                         <img class="img-circle" src='img/boy_sport.jpg' style="width: 30px">
                         <h5 class="pull-right" style="text-align: center;">ZH</h5>
                     </li>
@@ -179,7 +168,7 @@
 </div>
 
 <div id="small-chat">
-    <span class="badge badge-warning pull-right">5</span>
+    <span class="badge badge-danger pull-right">...</span>
     <a class="open-small-chat">
         <i class="fa fa-comments"></i>
 

@@ -59,7 +59,6 @@ def view_self_info(request):
         'user_self': request.user,
         'portrait': portrait,
         'percentage': request.user.points/100,
-        'birth': request.user.birthday.strftime('%d/%m/%y'),
         'my_actions': enumerate(my_actions),
         'followings': enumerate(my_followings),
         'following_actions': enumerate(following_actions),
@@ -167,6 +166,7 @@ def edit_info(request):
             print(myform.errors)
         return render(request, "x_edit_person_demo.html", {"form": myform, "portrait": request.user.portrait})
 
+
 @login_required(login_url='/login/')
 def show_info_ajax_follow(request):
     #print(request.GET.get("user_slug"))
@@ -232,10 +232,6 @@ def edit_info_ajax_save_portrait(request):
         user.portrait.name = 'portraits/'+user.temp_portrait.name
         user.save()
     elif alt != 'image':
-        path = os.path.join(settings.MEDIA_ROOT + '\\portraits', request.user.temp_portrait.name)
-        if os.path.exists(path):
-            # 删除文件，可使用以下两种方法。
-            os.remove(path)
         image_dir = {
             'default_img1': "portraits/default_img/boy_glasses.jpg",
             'default_img2': "portraits/default_img/boy_hat.jpg",
@@ -279,11 +275,11 @@ def edit_info_ajax_get_temp(request):
 
     return JsonResponse(context)
 
+
 def delete_temp(request):
     user = common_member.objects.filter(id=request.user.id).first()
     if ('portraits/' + user.temp_portrait.name) != user.portrait.name:
         path = os.path.join(settings.MEDIA_ROOT + '\\portraits', user.temp_portrait.name)
-        if os.path.exists(path):
-            # 删除文件，可使用以下两种方法。
+        if os.path.exists(path) and user.temp_portrait.name != '':
             os.remove(path)
     return HttpResponse('deleted')

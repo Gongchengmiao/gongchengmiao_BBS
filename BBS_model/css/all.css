@@ -1771,7 +1771,7 @@
   font-family: 'font-for-page-favorite';
   src: url("../font/favorite/iconfont.eot");
   /* IE9*/
-  src: url("../font/favorite/iconfont.eot?#iefix") format("embedded-opentype"), url("../font/favorite/iconfont.woff") format("woff"), url("../font/favorite/iconfont.ttf") format("truetype"), url("../font/favorite/iconfont.svg#iconfont") format("svg");
+  src: url("../font/favorite/iconfont.eot") format("embedded-opentype"), url("../font/favorite/iconfont.woff") format("woff"), url("../font/favorite/iconfont.ttf") format("truetype"), url("../font/favorite/iconfont.svg#iconfont") format("svg");
   /* iOS 4.1- */ }
 
 #page-favorite, #page-favorite-collection {
@@ -9534,7 +9534,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], i
   font-family: 'font-for-page-vote';
   src: url("../font/vote/iconfont.eot");
   /* IE9*/
-  src: url("../font/vote/iconfont.eot?#iefix") format("embedded-opentype"), url("../font/vote/iconfont.woff") format("woff"), url("../font/vote/iconfont.ttf") format("truetype"), url("../font/vote/iconfont.svg#iconfont") format("svg");
+  src: url("../font/vote/iconfont.eot") format("embedded-opentype"), url("../font/vote/iconfont.woff") format("woff"), url("../font/vote/iconfont.ttf") format("truetype"), url("../font/vote/iconfont.svg#iconfont") format("svg");
   /* iOS 4.1- */ }
 
 #page-thread #vote, #page-thread #vote-opt {

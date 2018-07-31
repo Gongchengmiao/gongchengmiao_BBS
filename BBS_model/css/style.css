@@ -3582,10 +3582,6 @@ video {
     padding: 20px;
 }
 
-.wrapper-content1 {
-    padding: 2vmin;
-}
-
 #page-wrapper {
     padding: 0 15px;
     position: inherit;
@@ -4054,13 +4050,6 @@ code {
     width: 70px;
     margin: 10px;
     padding: 5px;
-}
-
-.ibox1 {
-    clear: both;
-    margin-bottom: 2.5vmin;
-    margin-top: 0;
-    padding: 0;
 }
 
 .ibox {
@@ -4851,10 +4840,6 @@ a.close-canvas-menu:hover {
     margin: 25px 0;
 }
 
-.space-25_ {
-    margin: 2.5vmin 0;
-}
-
 .space-30 {
     margin: 30px 0;
 }
@@ -5243,10 +5228,6 @@ ul.notes li div {
     margin-top: 20px;
 }
 
-.tag-title1 {
-    margin-top: 2vmin;
-}
-
 .tag-list li {
     float: left;
 }
@@ -5327,10 +5308,6 @@ ul.notes li div {
 
 a.compose-mail {
     padding: 8px 10px;
-}
-
-.compose-mail1 {
-    padding: 0.8vmin 1vmin;
 }
 
 .mail-search {
@@ -5419,14 +5396,6 @@ a.compose-mail {
     margin-bottom: 20px;
 }
 
-.mail-box1 {
-    background-color: #ffffff;
-    border: 1px solid #e7eaec;
-    border-top: 0;
-    padding: 0px;
-    margin-bottom: 2vmin;
-}
-
 .mail-box-header {
     background-color: #ffffff;
     border: 1px solid #e7eaec;
@@ -5435,17 +5404,6 @@ a.compose-mail {
 }
 
 .mail-box-header h2 {
-    margin-top: 0px;
-}
-
-.mail-box-header1 {
-    background-color: #ffffff;
-    border: 1px solid #e7eaec;
-    border-bottom: 0;
-    padding: 3vmin 2vmin 2vmin 2vmin;
-}
-
-.mail-box-header1 h2 {
     margin-top: 0px;
 }
 
@@ -5484,12 +5442,6 @@ a.compose-mail {
     background: none;
     border: none;
     padding: 10px;
-}
-
-.mailbox-content1 {
-    background: none;
-    border: none;
-    padding: 1vmin;
 }
 
 .mail-ontact {
@@ -5875,7 +5827,7 @@ table.issue-tracker tbody tr td {
 .agile-list li {
     background: #FAFAFB;
     border: 1px solid #e7eaec;
-    margin: 0px 0 10px 0;
+    margin: 0px 0 0px 0;
     padding: 10px;
     border-radius: 2px;
 }
@@ -5899,6 +5851,10 @@ table.issue-tracker tbody tr td {
 
 .agile-list li.success-element {
     border-left: 3px solid #1ab394;
+}
+
+.agile-list li.white-element {
+    border-left: 3px solid #ffffff;
 }
 
 .agile-detail {
@@ -5958,6 +5914,22 @@ del {
     border-radius: 4px;
 }
 
+.friendlist {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 380px;
+    background: #fff;
+    border: 1px solid #e7eaec;
+    width: 100px;
+    height: 320px;
+    border-radius: 4px;
+}
+
+.friendlist.active{
+    display: block;
+}
+
 .small-chat-box.ng-small-chat {
     display: block;
 }
@@ -5974,6 +5946,13 @@ del {
 .small-chat-box .heading {
     background: royalblue;
     padding: 8px 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.friendlist .heading{
+    background: royalblue;
+    padding: 7px 15px;
     font-weight: bold;
     color: #fff;
 }
@@ -7435,7 +7414,7 @@ navbar-static-top {
     padding: 30px 15px;
 }
 
- #page-wrapper {
+#page-wrapper {
     background: #f4f6fa;
 }
 

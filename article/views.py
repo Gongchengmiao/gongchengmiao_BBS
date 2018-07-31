@@ -12,6 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import ArticlePostForm, CommentForm
 from .models import ArticleColumn, ArticlePost, Comment
+from user.models import common_member_action_log
 import redis
 from django.conf import settings
 
@@ -32,6 +33,14 @@ def article_post(request):
             new_article.title = cd.get('title')
             new_article.ueditor_body = cd.get('content')
             new_article.save()
+
+            # 更新用户动态
+            new_action = common_member_action_log()
+            new_action.uid = request.user
+            new_action.pid = new_article
+            new_action.action = 'post'
+            new_action.save()
+
             #url = reverse('')
             url = reverse('article_detail', kwargs={'pid':new_article.pid,'slug':new_article.slug})
             #print(url)
