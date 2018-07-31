@@ -99,7 +99,7 @@ def register(request):
             password = form.cleaned_data['password']
             password_confirm = form.cleaned_data['password_confirm']
             email = form.cleaned_data['email']
-            confirm_message = form.cleaned_data['confirm_message']
+            confirm_message = True
 
             if common_member.objects.filter(username=username):
                 return render(request, "register_demo_v2.html", {
