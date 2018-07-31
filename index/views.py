@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from article.models import ArticlePost
+from section.models import SectionForum
 from user.models import common_member_star, common_member, commom_member_watch
 from django.urls import reverse
 import redis
@@ -42,6 +43,23 @@ def index(request):
 
     user_watch = commom_member_watch.objects.filter(uid=user).order_by('watch_time')
 
+    block = {}
+
+    for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
+        sections = SectionForum.objects.filter(block=i)
+        result = []
+        temp = []
+        for ii, section in enumerate(sections):
+            if (ii + 1) % 4:
+                temp.append(section)
+            else:
+                temp.append(section)
+                result.append(temp)
+                temp = []
+            if ii == len(sections) - 1 and temp:
+                result.append(temp)
+        block[i] = result
+
     user_star = common_member_star.objects.filter(uid=user).order_by('-star_time')[0: 10]
 
     watch_result = []
@@ -64,6 +82,7 @@ def index(request):
         'user_star': enumerate(user_star),
         'user_watches': watch_result,
         'user': user,
+        'block': block,
     }
 
     response = render(request, 'x_BBS_index_demo.html', context)

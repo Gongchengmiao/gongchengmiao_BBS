@@ -28,13 +28,20 @@ class SectionForum(models.Model):
     todayposts = models.IntegerField(default=0)
     lastpostid = models.ForeignKey('article.ArticlePost', null=True, default=None, on_delete=models.CASCADE)
     follower_num = models.IntegerField(default=0)
-    # allowEmoijs = models.BooleanField(default=True)
-    # allowHtml = models.BooleanField(default=True)
-    # allowImgcode = models.BooleanField(default=True)
-    # allowMediacode = models.BooleanField(default=True)
-    # allowAnonymous = models.BooleanField(default=False)
-    # allowEditRules = models.BooleanField(default=True)
-    # checkPosts = models.BooleanField(default=False)
+    block_choices = (
+        ('a', u'A区－－部门组织'),
+        ('b', u'B区－－信息论坛'),
+        ('c', u'C区－－我们的家'),
+        ('d', u'D区－－出国留学'),
+        ('e', u'E区－－学术科学'),
+        ('f', u'F区－－文化艺术'),
+        ('g', u'G区－－休闲感性'),
+        ('h', u'H区－－体育健身'),
+        ('i', u'I区－－瀚海特区'),
+        ('j', u'J区－－本站系统'),
+    )
+    block = models.CharField(max_length=1, choices=block_choices)
+
 
     class Meta:
         verbose_name = 'forum'
