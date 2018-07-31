@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import sys
-from secrets_zh import mail_passwd
+#from secrets_zh import mail_passwd
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'user',
     'zone',
     'DjangoUeditor',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,7 @@ TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False  # changed by mrc
 
 USE_TZ = True
 
@@ -146,7 +147,7 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.ustc.edu.cn'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'paulzh@mail.ustc.edu.cn'
-EMAIL_HOST_PASSWORD = mail_passwd
+#EMAIL_HOST_PASSWORD = mail_passwd
 # EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -173,3 +174,24 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 0
+
+SESSION_COOKIE_AGE = 60*180  # session 有效期 单位 秒
+
+
+DATE_FORMAT = 'Y-m-d'                           # 时间显示格式
+DATETIME_FORMAT = 'Y-m-d H:i:s'
+
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE':  'article.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+
+
+
+
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

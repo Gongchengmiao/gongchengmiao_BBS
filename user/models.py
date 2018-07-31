@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from .validators import BbsUsernameValidator
@@ -16,6 +17,7 @@ class common_member(AbstractUser):
     # email = models.EmailField()
     username = models.CharField(max_length=30, unique=True)
     stu_num = models.CharField(max_length=10, null=True)
+    login_times = models.IntegerField(default=0)
     dept_choices = (
         ('000', '少年班学院'),
         ('001', '数学科学院'),

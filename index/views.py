@@ -22,6 +22,7 @@ def index_shell(request):
 
 
 def index(request):
+
     user = request.user
     if not user.is_authenticated:
         return redirect(reverse('login'))
