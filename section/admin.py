@@ -5,9 +5,9 @@ from .models import SectionForum
 
 
 class SectionForumAdmin(admin.ModelAdmin):
-    list_display = ('section_id', 'name', 'brief', 'types', 'status', 'display_order', 'posts')
+    list_display = ('name', 'brief', 'types', 'status', 'display_order', 'posts')
     fieldsets = (
-        (None, {'fields': ('section_id', 'name', 'brief', 'types', 'status', 'display_order', 'posts')}),
+        (None, {'fields': ('name', 'brief', 'types', 'status', 'display_order', 'posts')}),
     )
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from article.models import ArticlePost
-from user.models import common_member_star, common_member
+from user.models import common_member_star, common_member, commom_member_watch
 from django.urls import reverse
 import redis
 from django.conf import settings
@@ -21,29 +21,49 @@ def index_shell(request):
 
 
 def index(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect(reverse('login'))
+
     r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
-    articles = ArticlePost.objects.filter(pub_date__range=(timezone.now()+datetime.timedelta(days=-2), timezone.now()))
+    articles = ArticlePost.objects.filter(
+        pub_date__range=(timezone.now() + datetime.timedelta(days=-1), timezone.now()),
+        is_school_info=False,
+    )
     total_views = {}
     for article in articles:
         total_views[article] = r.get("article:{}:views".format(article.pid))
     top_ten = sorted(total_views.items(), key=lambda item: item[1], reverse=True)[0:10]
-
     top_ten_list = functools.reduce(lambda x, y: x.append(y) or x, map(lambda x: x[0], top_ten), [])
 
-    popular_posts = ArticlePost.objects.order_by('-pub_date')[0:10]
+    latest_posts = ArticlePost.objects.order_by('-pub_date')[0:10]
 
-    user = request.user
+    school_info = ArticlePost.objects.filter(is_school_info=True).order_by('-pub_date')[0:10]
 
-    if not user.is_authenticated:
-        return redirect(reverse('login'))
-    else:
-        user_star = common_member_star.objects.filter(uid=user).order_by('-star_time')[0: 10]
+    user_watch = commom_member_watch.objects.filter(uid=user).order_by('watch_time')
+
+    user_star = common_member_star.objects.filter(uid=user).order_by('-star_time')[0: 10]
+
+    watch_result = []
+    temp = []
+    for i, watch in enumerate(user_watch):
+        if (i+1) % 4:
+            temp.append(watch)
+        else:
+            temp.append(watch)
+            watch_result.append(temp)
+            temp = []
+        if i == len(user_watch)-1 and temp:
+            watch_result.append(temp)
+
+    # print(watch_result[0][0].section)
 
     context = {
-        'latest_posts': enumerate(popular_posts),
-        'school_info': enumerate(popular_posts),
+        'popular_posts': enumerate(top_ten_list),
+        'school_info': enumerate(school_info),
         'user_star': enumerate(user_star),
-        'user': user
+        'user_watches': watch_result,
+        'user': user,
     }
 
     response = render(request, 'x_BBS_index_demo.html', context)

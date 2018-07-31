@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
-from .models import common_member, common_member_star, follower_pair, common_member_action_log ,section_follow_pair
+from .models import common_member, common_member_star, follower_pair, common_member_action_log, section_follow_pair, commom_member_watch
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm,\
     UserCreationForm as BaseUserCreationForm
@@ -74,10 +74,17 @@ class followers_Adim(admin.ModelAdmin):
     list_display=('followed','by')
 
 class User_action_log_Admin(admin.ModelAdmin):
-    list_display = ('id', 'uid', 'action','dateline')
+    list_display = ('id', 'uid', 'action', 'dateline')
     fieldsets = (
-        (None, {'fields': ('id', 'uid', 'action','is_school_info', 'pid')}),
+        (None, {'fields': ('id', 'uid', 'action', 'is_school_info', 'pid')}),
     )
+
+class Common_member_watchAdmin(admin.ModelAdmin):
+    list_display = ('uid', 'section')
+    fieldsets = (
+        (None, {'fields': ('uid', 'section')}),
+    )
+
 
 admin.site.register(common_member, Common_memberAdmin)
 
@@ -88,3 +95,5 @@ admin.site.register(follower_pair,followers_Adim)
 admin.site.register(section_follow_pair)
 
 admin.site.register(common_member_action_log, User_action_log_Admin)
+
+admin.site.register(commom_member_watch, Common_member_watchAdmin)
