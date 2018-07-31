@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% with total_likers=article.users_like.count users_like=article.users_like.all %}
 <!DOCTYPE html>
 <html>
 
@@ -32,6 +33,16 @@
 
 <body id="nv_forum" class="pg_viewthread" onkeydown="if(event.keyCode==27) return false;" style="background-position-y: 41px;">
 <div id="append_parent"></div><div id="ajaxwaitid"></div>
+
+
+
+<form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+  <input type="search" name="q" placeholder="搜索" required>
+  <button type="submit"><span class="ion-ios-search-strong"></span></button>
+</form>
+
+
+
 
 <div id="wp" class="wp">
     <script type="text/javascript">var fid = parseInt('1345'), tid = parseInt('46338365');</script>
@@ -173,9 +184,17 @@
                         <tr>
                         <td class="plc plm" valign="top" style="height:1px;">
                     <div id="p_btn" class="mtw mbm cl">
-                        <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=46338365" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'"><i><img src="http://att.bbs.duowan.com/static/image/common/fav.gif" alt="收藏">收藏<span id="favoritenumber">6</span></i></a>
-                        <a id="recommend_add" class="subject-recommend-add" data-href="forum.php?mod=misc&amp;action=recommend&amp;do=add&amp;tid=46338365&amp;formhash=24d3bf46"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add">66</span></i></a>
+                        <a id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'"><i><img src="http://att.bbs.duowan.com/static/image/common/fav.gif" alt="收藏">收藏<span id="favoritenumber">6</span></i></a>
+                        <a id="recommend_add" onclick="like_article({{ article.pid }}, 'like')" href="#" class="subject-recommend-add"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add">{{ total_likes }}</span></i></a>
+                        <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">{{ total_likes }}3like{{ total_likes | pluralize }}</span>
+        <span style="margin-left: 20px">{{ total_views }}view{{ total_views | pluralize }}</span>
                         <!--<a id="recommend_subtract" href="forum.php?mod=misc&amp;action=recommend&amp;do=subtract&amp;tid=46338365&amp;formhash=24d3bf46"  onclick="showWindow('login', this.href)" onmouseover="this.title = $('recommendv_subtract').innerHTML + ' 人反对'"><i><img src="http://att.bbs.duowan.com/static/image/common/rec_subtract.gif" alt="反对" />反对<span id="recommendv_subtract">0</span></i></a>-->
+                    </div>
+                    <div>
+                        <p class="text-center">
+                            <a onclick="like_article({{article.pid}}, 'like')" href="#"><span class="glyphicon glyphicon-thumbs-up">like</span></a>
+                            <a onclick="like_article({{article.pid}}, 'unlike')" href="#"><span style="margin-left: 15px;" class="glyphicon glyphicon-thumbs-down">unlike</span></a>
+                        </p>
                     </div>
                     <!--新版广告系统帖内广告C3-->
                     <div style="width:0px;"><script src=""></script><div style="width:0px;margin:0 auto;"><a class="da-block-wrapper" locid="121" pid="1200" href="" target="_blank" style="display:inline-block;position:relative;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528516956332&di=52f1a1073e5e98d2ab540b7ee8f2ccfe&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F44%2F53%2F13v58PIC5pc_1024.png" width="200" height="30" style="vertical-align:top;"></a></div></div>
@@ -1022,6 +1041,35 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript">
+    $(function(){
+	editormd.markdownToHTML("editormd-view", {
+        htmlDecode      : "style,script,iframe",  // you can filter tags decode
+        emoji           : true,
+        taskList        : true,
+        tex             : true,  // 默认不解析
+        flowChart       : true,  // 默认不解析
+        sequenceDiagram : true,  // 默认不解析
+    });
+    });
+    function like_article(pid,action){
+    $.ajax({
+        url: "{% url 'like_article' %}",
+        type: "POST",
+        data: {"pid":pid, "action":action},
+        success: function(e){
+            if(e=="1"){
+                layer.msg("感谢点赞");
+                window.location.reload();
+            }else{
+                layer.msg("我会继续努力");
+                window.location.reload();
+            }
+        },
+    });
+}</script>
+
 <!-- 百度统计 end-->
 <script src="http://pub.dwstatic.com/common/js/dastat.js" type="text/javascript"></script>
 <script src="http://pub.dwstatic.com/common/dwUDBBind/dwUDBBind.js" type="text/javascript"></script><style>.ui-dialog {
@@ -1760,3 +1808,4 @@
 <div id="udbsdk_login_normal" class="udbsdk_login"><iframe id="udbsdk_frm_normal" class="udbsdk_frm" src="about:blank" frameborder="0" scrolling="no" allowtransparency="true"></iframe></div><div id="udbsdk_cookieFrm" style="width:0px;height:0px;"><iframe id="udbsdk_writeCookieFrm_normal" src="about:blank" frameborder="0" scrolling="no" style="width:0px;height:0px;"></iframe><iframe id="udbsdk_deleteCookieFrm_normal" src="about:blank" frameborder="0" scrolling="no" style="width:0px;height:0px;"></iframe></div><div id="KC_DIV_F" style="display: none; left: 577.5px; top: 200px; position: fixed; background: transparent; z-index: 9999;"><div id="KC_CLOSE_DIV" title="关闭" style="position: absolute; top: 0px; right: 0px; width: 42px; height: 33px; cursor: pointer; z-index: 9999;"></div><div id="KC_YOUHAO_DIV" style="position: absolute; top: 0px; left: 0px; width: 553px; height: 390px; background-color: transparent; z-index: 99999;"><div style="margin:0 auto;margin-top:150px;color:red;width:250px;font-size:20px;position: relative;"><img src="http://img.kuai.xunlei.com/img/v2/loading2.gif"><div style="width:250px;height:50px;position: absolute;top:4px;left:40px;font-size: 17px;">正在努力加载...</div></div></div><div id="KC_TUO_DIV" style="position: absolute; top: 0px; left: 80px; width: 427px; height: 33px; cursor: move; z-index: 9999;"></div><iframe frameborder="0" scrolling="no" width="553" height="390" src=""></iframe></div><div style="position: static; display: none; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;"><div id="trans-tooltip"><div id="tip-left-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-top.png&quot;);"></div><div id="tip-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-top.png&quot;) repeat-x;"></div><div id="tip-right-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-top.png&quot;);"></div><div id="tip-right" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right.png&quot;) repeat-y;"></div><div id="tip-right-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-bottom.png&quot;);"></div><div id="tip-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-bottom.png&quot;) repeat-x;"></div><div id="tip-left-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-bottom.png&quot;);"></div><div id="tip-left" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left.png&quot;);"></div><div id="trans-content"></div></div><div id="tip-arrow-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-bottom.png&quot;);"></div><div id="tip-arrow-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-top.png&quot;);"></div></div></body>
 
 </html>
+{% endwith %}

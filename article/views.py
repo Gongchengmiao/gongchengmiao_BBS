@@ -96,3 +96,22 @@ def article_detail(request, pid, slug):
     else:
         comment_form = CommentForm()
     return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments, "page":current_page, "total_views":total_views})
+
+
+@csrf_exempt
+@require_POST
+@login_required(login_url='/login/')
+def like_article(request):
+    article_pid = request.POST.get("pid")    #①
+    action = request.POST.get("action")    #②
+    if article_pid and action:
+        try:
+            article = ArticlePost.objects.get(pid=article_pid)
+            if action=="like":
+                article.users_like.add(request.user)    #③
+                return HttpResponse("1")
+            else:
+                article.users_like.remove(request.user)    #④
+                return HttpResponse("2")
+        except:
+            return HttpResponse("no")

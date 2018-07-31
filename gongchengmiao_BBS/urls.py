@@ -38,6 +38,12 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('article/article-detail/<int:pid>/<slug:slug>/', article_views.article_detail, name='article_detail'),
     path('article/article-post/', article_views.article_post, name='article_post'),
+    path('article/', article_views.article_post, name="article_post"),
+    path('article/like-article/', article_views.like_article, name="like_article"),
+
+    path('search/', include('haystack.urls')),
+
+
     path('index_core/', index_views.index, name='index_core'),
     path('pswdgetback', user_views.pswdgetback, name='pswd_get_back'),
     path('waitemailback/<username>/', user_views.pswdgetback_jump, name='wait_email_back'),
@@ -55,7 +61,7 @@ urlpatterns = [
     path('homepage/ajax_get_temp', homepage_views.edit_info_ajax_get_temp, name='edit_info_ajax_get_temp'),
     path('homepage/ajax_delete_temp', homepage_views.delete_temp, name='edit_info_ajax_delete_temp'),
 
-    path('article/', article_views.article_post, name="article_post"),
+
 
     path('section/sec=<section_slug>', section_views.section_all, name='section_all'),
     path('section/open_posts_list', section_views.section_open_posts_list, name='open_posts_list'),

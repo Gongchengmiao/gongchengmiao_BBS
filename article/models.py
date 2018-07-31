@@ -54,6 +54,9 @@ class ArticlePost(models.Model):
     section_belong_fk = models.ForeignKey('section.SectionForum', on_delete=models.CASCADE, null=True)
     slug = models.SlugField(max_length=500, default=slugify(str(title)), allow_unicode=True)
     comment_counter = models.IntegerField(default=0)
+
+    users_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="articles_like", blank=True)
+
     def __str__(self):
         return self.title
 
