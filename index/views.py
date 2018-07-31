@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from article.models import ArticlePost
 from user.models import common_member_star, common_member
 from django.urls import reverse
+import redis
+from django.conf import settings
+from django.utils import timezone
 import datetime
-import hashlib
+import functools
 
 
 # Create your views here.
@@ -18,6 +21,14 @@ def index_shell(request):
 
 
 def index(request):
+    r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+    articles = ArticlePost.objects.filter(pub_date__range=(timezone.now()+datetime.timedelta(days=-2), timezone.now()))
+    total_views = {}
+    for article in articles:
+        total_views[article] = r.get("article:{}:views".format(article.pid))
+    top_ten = sorted(total_views.items(), key=lambda item: item[1], reverse=True)[0:10]
+
+    top_ten_list = functools.reduce(lambda x, y: x.append(y) or x, map(lambda x: x[0], top_ten), [])
 
     popular_posts = ArticlePost.objects.order_by('-pub_date')[0:10]
 

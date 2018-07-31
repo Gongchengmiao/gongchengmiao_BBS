@@ -49,11 +49,12 @@ class ArticlePost(models.Model):
                                 upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='内容')
 
     isElite = models.BooleanField(default=False)
-    pub_date = models.DateTimeField(auto_now_add=True, editable=True)
+    pub_date = models.DateTimeField(auto_now_add=True, editable=True, db_index=True)
 
     section_belong_fk = models.ForeignKey('section.SectionForum', on_delete=models.CASCADE, null=True)
     slug = models.SlugField(max_length=500, default=slugify(str(title)), allow_unicode=True)
     comment_counter = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
 
