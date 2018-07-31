@@ -21,7 +21,9 @@ from gongchengmiao_BBS import settings
 from user import views as user_views
 from homepage import views as homepage_views
 from article import views as article_views
+from article import search_views
 from section import views as section_views
+from haystack.views import SearchView
 from django.views.generic import TemplateView
 # from django.conf.urls import url
 # from django.views.static import serve as static_serve
@@ -40,8 +42,8 @@ urlpatterns = [
     path('article/article-post/', article_views.article_post, name='article_post'),
     path('article/', article_views.article_post, name="article_post"),
     path('article/like-article/', article_views.like_article, name="like_article"),
+    path('search/', search_views.MySearchView(), name='haystack_search'),
 
-    path('search/', include('haystack.urls')),
 
 
     path('index_core/', index_views.index, name='index_core'),
