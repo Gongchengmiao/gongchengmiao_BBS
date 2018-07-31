@@ -49,7 +49,7 @@
                                 <dl class="dl-horizontal">
 
                                     <dt>学院：</dt>
-                                    <dd>{{ user_self.department }}</dd>
+                                    <dd>{{ user_self.get_department_display }}</dd>
                                     <dt>性别：</dt>
                                     <dd>
                                         {% if user_self.gender == 'm' %}
@@ -59,9 +59,7 @@
                                         {% endif %}
                                     </dd>
                                     <dt>生日：</dt>
-                                    <dd>{{ birth }}</dd>
-                                    <dt>上站次数:</dt>
-                                    <dd>66</dd>
+                                    <dd>{{ user_self.birthday }}</dd>
                                     <dt>发帖数：</dt>
                                     <dd>{{ user_self.posts }}</dd>
                                     <dt>积分：</dt>
@@ -72,13 +70,11 @@
                                 <dl class="dl-horizontal">
 
                                     <dt>最近登录时间：</dt>
-                                    <dd>2018年 5月31日 18:03</dd>
-                                    <dt>最近离站时间：</dt>
-                                    <dd>2018年 5月31日 18:08</dd>
+                                    <dd>{{ user_self.last_login }}</dd>
                                     <dt>创建于：</dt>
-                                    <dd>2018年 3月16日 03:01</dd>
-                                    <dt>在线总时长：</dt>
-                                    <dd>6小时6分钟6秒</dd>
+                                    <dd>{{ user_self.date_joined }}</dd>
+                                    <dt>上站次数:</dt>
+                                    <dd>{{ user_self.login_times }}</dd>
                                     <dt>关注用户：</dt>
                                     <dd class="project-people">
                                         {% if followings %}
@@ -213,7 +209,7 @@
                                                             </div>
                                                             <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
                                                                 <div style="margin: 0 auto">
-                                                                    <small class="pull-right">2018-7-12</small>
+                                                                    <small class="pull-right">{{ po.pub_date }}</small>
                                                                 </div>
                                                                 <div style="margin: 0 auto">
                                                                     <a href="{{ po.get_url }}" class="pull-right">
@@ -234,7 +230,7 @@
                                                         <div class="media-body">
                                                             <div style="margin: 1px auto;float: right;position: relative;left: -10px;">
                                                                 <div style="margin: 0 auto">
-                                                                    <small class="pull-right">2018-6-17</small>
+                                                                    <small class="pull-right">{{ po.pub_date }}</small>
                                                                 </div>
                                                                 <div style="margin: 0 auto">
                                                                     <a href="{% url 'show_info' po.author.slug %}" class="pull-right">

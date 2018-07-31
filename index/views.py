@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from article.models import ArticlePost
 from user.models import common_member_star, common_member
 from django.urls import reverse
+from django.utils.timezone import now
+from django.contrib.sessions.models import Session
 import datetime
 import hashlib
 
@@ -18,7 +20,6 @@ def index_shell(request):
 
 
 def index(request):
-
     popular_posts = ArticlePost.objects.order_by('-pub_date')[0:10]
 
     user = request.user

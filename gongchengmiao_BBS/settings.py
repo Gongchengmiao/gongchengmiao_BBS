@@ -126,7 +126,7 @@ TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False  # changed by mrc
 
 USE_TZ = True
 
@@ -173,3 +173,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 0
+
+SESSION_COOKIE_AGE = 60*180  # session 有效期 单位 秒
+
+
+DATE_FORMAT = 'Y-m-d'                           # 时间显示格式
+DATETIME_FORMAT = 'Y-m-d H:i:s'
