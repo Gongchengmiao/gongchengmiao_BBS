@@ -495,3 +495,28 @@ $('#Aqu').on('click', fenquRefreshA);
 $('#Bqu').on('click', fenquRefreshB);
 $('#Cqu').on('click', fenquRefreshC);
 $('#Dqu').on('click', fenquRefreshD);
+
+//通过遍历给菜单项加上data-index属性
+
+$(".atest").each(function (index) {
+    if (!$(this).attr('data-index')) {
+        $(this).attr('data-index', index);
+    }
+});
+
+function aItem() {
+    // 获取标识数据
+    var dataUrl = $(this).attr('href'),
+        dataIndex = $(this).data('index'),
+        menuName = $.trim($(this).text());
+    if(menuName.length>7){
+        menuName = menuName.substr(0,7)+'...';
+    }
+
+    parent.window.aplus(dataUrl,dataIndex,menuName);
+    return false;
+}
+
+$('.atest').on('click', aItem);
+
+
