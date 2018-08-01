@@ -11,15 +11,18 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link rel="shortcut icon" href="img/ustc.png">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
+    <script type="text/javascript" src="js/origional.js"></script>
+
 </head>
 
-<body class="gray-bg">
+<body id="update" class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-3">
@@ -63,14 +66,13 @@
                     收件箱 (16)
                 </h2>
                 <div class="mail-tools tooltip-demo m-t-md">
-                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="刷新邮件列表"><i class="fa fa-refresh"></i> 刷新</button>
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="刷新邮件列表" onclick="loadData()"><i class="fa fa-refresh"></i> 刷新</button>
                     <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="标为已读"><i class="fa fa-eye"></i>
                     </button>
                     <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="标为重要"><i class="fa fa-exclamation"></i>
                     </button>
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="标为垃圾邮件"><i class="fa fa-trash-o"></i>
                     </button>
-
                 </div>
             </div>
             <div class="mail-box">

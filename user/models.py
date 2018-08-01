@@ -1,9 +1,12 @@
 from django.db import models
-from article.models import forum_post, forum_school_info
-from section.models import Forum_forum
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from .validators import BbsUsernameValidator
+from slugify import slugify
+from datetime import date
+from django.urls import reverse
+from section.models import SectionForum
 from django.utils.timezone import now
 
 
@@ -12,10 +15,28 @@ class common_member(AbstractUser):
 
     # uid = models.IntegerField(max_length=12, primary_key=True)
     # email = models.EmailField()
-    # username = models.CharField(max_length=20, unique=True)
+    username = models.CharField(max_length=30, unique=True)
+    stu_num = models.CharField(max_length=10, null=True)
+    login_times = models.IntegerField(default=0)
+    dept_choices = (
+        ('000', '少年班学院'),
+        ('001', '数学科学院'),
+        ('203', '物理学院'),
+        ('204', '管理学院'),
+        ('206', '化学学院'),
+        ('210', '信息科学技术学院'),
+        ('215', '计算机科学与技术学院'),
+        ('jwc', '教务处'),
+
+    )
+    department = models.CharField(max_length=30, null=True, choices=dept_choices)
+    birthday = models.DateField(default=date.today)
     # password = models.CharField(max_length=20)
     # status = models.BooleanField(default=True)   # 判断用户是否已经删除 1=未删除 0=删除
-    portrait = models.ImageField(upload_to='portraits', null=True,blank=True)
+    slug = models.SlugField(max_length=100, default=slugify(str(username)), allow_unicode=True)
+    portrait = models.ImageField(upload_to='portraits', null=True, blank=True)
+    temp_portrait = models.ImageField(upload_to='portraits', null=True, blank=True)  # 临时预览头像
+    points = models.IntegerField(default=0)  # 积分
     gender_choices = (('m', '男'), ('f', '女'))
     gender = models.CharField(max_length=1, default='m', choices=gender_choices)    # 性别 true为男
     show_gender = models.BooleanField(default=True)  # 是否显示
@@ -26,6 +47,7 @@ class common_member(AbstractUser):
     following = models.IntegerField(default=0)  # 关注者数
     followed = models.IntegerField(default=0)  # 被关注数
     followers = models.ManyToManyField('common_member', symmetrical=False, through='follower_pair')
+    section_followed = models.ManyToManyField('section.SectionForum', symmetrical=False, through='section_follow_pair')
 
     def follow_list(self):
         return ','.join([i.username for i in self.followers.all()])
@@ -34,7 +56,6 @@ class common_member(AbstractUser):
     # accessmasks = models.BooleanField(default=True)  # 访问权限
     # allowadmincp = models.BooleanField(default=False)  # 管理权限
     # freeze = models.BooleanField(default=False)  # 是否被冻结
-    pass
     # adminid = models.IntegerField(null=True)  # 管理组id 1=管理员 2=超级版主 3=版主
     # regdate = models.DateField()  # 注册时间
     # newpm = models.IntegerField()  # 新短消息数量
@@ -42,12 +63,27 @@ class common_member(AbstractUser):
     def __str__(self):
         return self.username
 
+    def save(self, *args, **kargs):  # ④
+        self.slug = slugify(self.username)  # ⑤
+        super(common_member, self).save(*args, **kargs)
+
+    def get_url(self):  # ⑥
+        return reverse("show_info", args={self.slug})
+
+
+
 class follower_pair(models.Model):
     followed = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_followed')
     by = models.ForeignKey(common_member, on_delete=models.CASCADE, related_name='%(class)s_by')
-
-    #其他属性
+    # 其他属性
     follow_time = models.DateTimeField(auto_now=True)
+
+
+class section_follow_pair(models.Model):
+    section = models.ForeignKey('section.SectionForum', on_delete=models.CASCADE)
+    user = models.ForeignKey(common_member, on_delete=models.CASCADE)
+
+    follower_time = models.DateTimeField(auto_now=True)
 
 # 用户邮件验证发送次数表
 class common_member_email_send_time(models.Model):
@@ -61,21 +97,19 @@ class common_member_email_send_time(models.Model):
 
 # 用户操作日志表
 class common_member_action_log(models.Model):
-    id = models.IntegerField(primary_key=True)
     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
-    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
+    pid = models.ForeignKey('article.ArticlePost', null=True, blank=True, on_delete=models.CASCADE)
     action_choices = (
-        ('post', '发帖'),
+        ('post', '发表'),
         ('star', '收藏'),
-        ('upload', '上传文件')
+        ('upload', '上传')
     )
     action = models.CharField(max_length=10, choices=action_choices)  # 操作类型
     dateline = models.DateTimeField(auto_now=True)  # 操作时间
 
     def __str__(self):
-        return '{} {} {} {}'.format(self.uid, self.action, self.pid, self.dateline)
+        return '{} {} {} {}'.format(self.uid, self.action, self.pid.title, self.dateline)
 
 
 # 用户统计表
@@ -107,7 +141,7 @@ class member_crime(models.Model):
     action = models.ForeignKey(common_member_action_log, on_delete=models.CASCADE,
                                db_constraint=True)  # 惩罚行为
     reason = models.TextField()  # 惩罚理由
-    dateline = models.DateTimeField(auto_now=True)  # 惩罚操作时间
+    dateline = models.DateTimeField(auto_now_add=True)  # 惩罚操作时间
 
     def __str__(self):
         return '{} {}'.format(self.uid, self.action)
@@ -130,25 +164,31 @@ class common_member_field_forum(models.Model):
         return "{} {}".format(self.uid, self.get_groupterms_display())
 
 
-# 用户家园字段表
-class common_member_field_home(models.Model):
-    uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    spacename = models.CharField(max_length=256)
-    domain = models.CharField(max_length=15)  # 空间绑定二级域名 home
+# # 用户家园字段表
+# class common_member_field_home(models.Model):
+#     uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     spacename = models.CharField(max_length=256)
+#     domain = models.CharField(max_length=15)  # 空间绑定二级域名 home
 
 
 # 用户收藏表
 class common_member_star(models.Model):
-    uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_index=True)
     is_school_info = models.BooleanField(default=False)
-    pid = models.ForeignKey(forum_post, null=True, blank=True, on_delete=models.CASCADE)
-    spid = models.ForeignKey(forum_school_info, null=True, blank=True, on_delete=models.CASCADE)
-    star_time = models.DateTimeField(auto_now=True)
+    pid = models.ForeignKey('article.ArticlePost', null=True, blank=True, on_delete=models.CASCADE)
+    star_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        if self.is_school_info:
-            return "{}, {}".format(self.uid, self.spid.pk)
-        else:
-            return "{}, {}".format(self.uid, self.pid.pk)
+        return "{}, {}".format(self.uid, self.pid)
+
+
+# 用户关注版块表
+class commom_member_watch(models.Model):
+    uid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_index=True)
+    section = models.ForeignKey(SectionForum, on_delete=models.CASCADE)
+    watch_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{}, {}".format(self.uid, self.section)
 
 

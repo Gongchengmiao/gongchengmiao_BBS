@@ -1,46 +1,89 @@
 from django.shortcuts import render, redirect
-from article.models import forum_post, forum_school_info
-from user.models import common_member_star, common_member
+from article.models import ArticlePost
+from section.models import SectionForum
+from user.models import common_member_star, common_member, commom_member_watch
 from django.urls import reverse
+import redis
+from django.conf import settings
+from django.utils import timezone
 import datetime
-import hashlib
+import functools
+
 
 # Create your views here.
 def index_shell(request):
-    return render(request, "x_whole_demo.html", {})
+    user = request.user
+
+    context = {
+        'user': user,
+
+    }
+    return render(request, "x_whole_demo.html", context)
 
 
 def index(request):
 
-    popular_posts = forum_post.objects.order_by('-pub_date')[0:10]
-    school_info = forum_school_info.objects.order_by('-pub_date')[0:10]
-    # try:
-    #     # 验证cookie
-    #     cookie_usrnm = request.COOKIES['username']
-    #     cookie_pswd = request.COOKIES['password']
-    #     user = common_member.objects.get(username=cookie_usrnm)
-    #     pswd_user = user.password
-    #
-    #     # print(pswd_user)
-    #
-    #     if cookie_pswd == pswd_user:
-    #         user_star = common_member_star.objects.filter(uid__username=cookie_usrnm).order_by('-star_time')[0: 10]
-    #     else:
-    #         user_star = []
-    # except KeyError:
-    #     user_star = []
-
     user = request.user
-
     if not user.is_authenticated:
         return redirect(reverse('login'))
-    else:
-        user_star = common_member_star.objects.filter(uid=user).order_by('-star_time')[0: 10]
+
+    r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+    articles = ArticlePost.objects.filter(
+        pub_date__range=(timezone.now() + datetime.timedelta(days=-1), timezone.now()),
+        is_school_info=False,
+    )
+    total_views = {}
+    for article in articles:
+        total_views[article] = r.get("article:{}:views".format(article.pid))
+    top_ten = sorted(total_views.items(), key=lambda item: item[1], reverse=True)[0:10]
+    top_ten_list = functools.reduce(lambda x, y: x.append(y) or x, map(lambda x: x[0], top_ten), [])
+
+    latest_posts = ArticlePost.objects.order_by('-pub_date')[0:10]
+
+    school_info = ArticlePost.objects.filter(is_school_info=True).order_by('-pub_date')[0:10]
+
+    user_watch = commom_member_watch.objects.filter(uid=user).order_by('watch_time')
+
+    block = {}
+
+    for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
+        sections = SectionForum.objects.filter(block=i)
+        result = []
+        temp = []
+        for ii, section in enumerate(sections):
+            if (ii + 1) % 4:
+                temp.append(section)
+            else:
+                temp.append(section)
+                result.append(temp)
+                temp = []
+            if ii == len(sections) - 1 and temp:
+                result.append(temp)
+        block[i] = result
+
+    user_star = common_member_star.objects.filter(uid=user).order_by('-star_time')[0: 10]
+
+    watch_result = []
+    temp = []
+    for i, watch in enumerate(user_watch):
+        if (i+1) % 4:
+            temp.append(watch)
+        else:
+            temp.append(watch)
+            watch_result.append(temp)
+            temp = []
+        if i == len(user_watch)-1 and temp:
+            watch_result.append(temp)
+
+    # print(watch_result[0][0].section)
 
     context = {
-        'latest_posts': enumerate(popular_posts),
+        'popular_posts': enumerate(top_ten_list),
         'school_info': enumerate(school_info),
         'user_star': enumerate(user_star),
+        'user_watches': watch_result,
+        'user': user,
+        'block': block,
     }
 
     response = render(request, 'x_BBS_index_demo.html', context)

@@ -63,8 +63,8 @@
                                     </tr>
                                 </thead>
                             <tbody>
-                            {% if latest_posts %}
-                                {% for i, post in latest_posts %}
+                            {% if popular_posts %}
+                                {% for i, post in popular_posts %}
                                     <tr>
                                     <td>{{ i|add:'1' }}</td>
                                     <td>{{ post.post_title }}</td>
@@ -125,7 +125,7 @@
                 <div class="col-sm-6">
                     <div class="ibox float-e-margins collapsed">
                         <div class="ibox-title" style="border-color: #c766c0;background:#fff9fe">
-                            <h5>个人收藏</h5>
+                            <h5>我的收藏</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -134,7 +134,50 @@
                         </div>
                         <div class="ibox-content" style="border-color: #c766c0;">
 
-                            <table class="table">
+{#                            <table class="table">#}
+{#                                <thead>#}
+{#                                    <tr>#}
+{#                                        <th>板块</th>#}
+{#                                        <th>帖子</th>#}
+{#                                        <th>发帖者</th>#}
+{#                                        <th>发帖日期</th>#}
+{#                                    </tr>#}
+{#                                </thead>#}
+{#                                <tbody>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>#}
+{#                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>#}
+{#                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>#}
+{#                                    <td>2018.07.13</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>#}
+{#                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>#}
+{#                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>#}
+{#                                    <td>2018.07.13</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>#}
+{#                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>#}
+{#                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>#}
+{#                                    <td>2018.07.13</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>#}
+{#                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>#}
+{#                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>#}
+{#                                    <td>2018.07.13</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>#}
+{#                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>#}
+{#                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>#}
+{#                                    <td>2018.07.13</td>#}
+{#                                </tr>#}
+{##}
+{#                                </tbody>#}
+{#                            </table>#}
+                            <table class="table" >
                                 <thead>
                                     <tr>
                                         <th>板块</th>
@@ -144,102 +187,75 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>
-                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>
-                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>
-                                    <td>2018.07.13</td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>
-                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>
-                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>
-                                    <td>2018.07.13</td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>
-                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>
-                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>
-                                    <td>2018.07.13</td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>
-                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>
-                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>
-                                    <td>2018.07.13</td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html">前端版</a></td>
-                                    <td><a  href="x_huitie_demo.html">闭着眼睛加页面改风格真的好吗？</a></td>
-                                    <td><a  href="x_personal_page_show_demo.html">ZYR</a></td>
-                                    <td>2018.07.13</td>
-                                </tr>
-
-                                </tbody>
+                            {% if user_star %}
+                                {% for i, post in user_star %}
+                                    <tr>
+                                    <td>{{ i|add:'1' }}</td>
+                                    <td>{{ post.post_title }}</td>
+                                    <td>{{ post.author_name }}</td>
+                                    <td>{{ post.pub_date }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
                             </table>
 
                         </div>
                     </div>
                 </div><!--个人收藏-->
 
-                <div class="col-sm-6">
-                    <div class="ibox float-e-margins collapsed">
-                        <div class="ibox-title" style="border-color: #ffc429;background: #fffcf3">
-                            <h5>你关心的</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content" style="border-color: #ffc429;">
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>板块</th>
-                                        <th>帖子</th>
-                                        <th>发帖者</th>
-                                        <th>发帖日期</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% if user_star %}
-                                    {% for i, post in user_star %}
-                                        {% if post.is_school_info %}
-                                        <tr>
-                                        <td>{{ i|add:'1' }}</td>
-                                        <td>{{ post.spid.post_title }}</td>
-                                        <td>{{ post.spid.author_name }}</td>
-                                        <td>{{ post.spid.pub_date }}</td>
-                                        </tr>
-                                        {% else %}
-                                        <tr>
-                                        <td>{{ i|add:'1' }}</td>
-                                        <td>{{ post.pid.post_title }}</td>
-                                        <td>{{ post.pid.author_name }}</td>
-                                        <td>{{ post.pid.pub_date }}</td>
-                                        </tr>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div><!--我的关注-->
-            </div>
-        </div><!--mid-->
-
-        <div class="row">
-            <div class="middle-box-list">
-
-                <div class="col-sm-6">
+{#                <div class="col-sm-6">#}
+{#                    <div class="ibox float-e-margins collapsed">#}
+{#                        <div class="ibox-title" style="border-color: #ffc429;background: #fffcf3">#}
+{#                            <h5>我的关注版块</h5>#}
+{#                            <div class="ibox-tools">#}
+{#                                <a class="collapse-link">#}
+{#                                    <i class="fa fa-chevron-up"></i>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="ibox-content" style="border-color: #ffc429;">#}
+{##}
+{#                            <table class="table">#}
+{#                                <thead>#}
+{#                                    <tr>#}
+{#                                        <th>板块</th>#}
+{#                                        <th>帖子</th>#}
+{#                                        <th>发帖者</th>#}
+{#                                        <th>发帖日期</th>#}
+{#                                    </tr>#}
+{#                                </thead>#}
+{#                                <tbody>#}
+{#                                {% if user_star %}#}
+{#                                    {% for i, post in user_star %}#}
+{#                                        {% if post.is_school_info %}#}
+{#                                        <tr>#}
+{#                                        <td>{{ i|add:'1' }}</td>#}
+{#                                        <td>{{ post.spid.post_title }}</td>#}
+{#                                        <td>{{ post.spid.author_name }}</td>#}
+{#                                        <td>{{ post.spid.pub_date }}</td>#}
+{#                                        </tr>#}
+{#                                        {% else %}#}
+{#                                        <tr>#}
+{#                                        <td>{{ i|add:'1' }}</td>#}
+{#                                        <td>{{ post.pid.post_title }}</td>#}
+{#                                        <td>{{ post.pid.author_name }}</td>#}
+{#                                        <td>{{ post.pid.pub_date }}</td>#}
+{#                                        </tr>#}
+{#                                        {% endif %}#}
+{#                                    {% endfor %}#}
+{#                                {% endif %}#}
+{#                                </tbody>#}
+{#                            </table>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div><!--我的关注-->#}
+            <div class="col-sm-6">
                 <div class="ibox float-e-margins collapsed">
                     <div class="ibox-title" style="border-color:#00C1B3;background: #f1fff5 ">
                         <a name="A区"></a>
-                        <h5>A区：蜗壳的星空</h5>
+                        <h5>我的关注</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link" >
                                 <i class="fa fa-chevron-up"></i>
@@ -250,208 +266,258 @@
                     <div class="ibox-content" style="border-color:#00C1B3;">
 
                         <table class="table">
-                            <!--<thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>姓名</th>
-                                    <th>性别</th>
-                                    <th>年龄</th>
-                                </tr>
-                            </thead>-->
                             <tbody>
-                            <tr>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                            </tr>
-                            <tr>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                            </tr>
-                            <tr>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                            </tr>
-                            <tr>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                                <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">板块名称</button></a></td>
-                            </tr>
+                            {% if user_watches %}
+                                {% for watch_block in user_watches %}
+                                    <tr>
+                                        {% for watch in watch_block %}
+                                            <td><a  href="{% url "section_all" section_slug=watch.section.slug %}" target="_parent"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">{{ watch.section.name }}</button></a></td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
                             </tbody>
                         </table>
 
                     </div>
                 </div>
             </div><!--基本表格-->
-                <div class="col-sm-6">
-                    <div class="ibox float-e-margins collapsed">
-                        <div class="ibox-title" style="border-color:#d9d188;background: #fff4ed ">
-                            <a name="B区"></a>
-                            <h5>B区：校园大小事</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link" >
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content" style="border-color:#d9d188;">
-
-                            <table class="table">
-                                <!--<thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>姓名</th>
-                                        <th>性别</th>
-                                        <th>年龄</th>
-                                    </tr>
-                                </thead>-->
-                                <tbody>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div><!--基本表格-->
-                <div class="col-sm-6">
-                    <div class="ibox float-e-margins collapsed">
-                        <div class="ibox-title" style="border-color: #ffee4b;background: #fffce8">
-                            <a name="C区"></a>
-                            <h5>C区：学校管理</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link" >
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content" style="border-color: #ffee4b;">
-
-                            <table class="table">
-                                <!--<thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>姓名</th>
-                                        <th>性别</th>
-                                        <th>年龄</th>
-                                    </tr>
-                                </thead>-->
-                                <tbody>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div><!--基本表格-->
-                <div class="col-sm-6">
-                    <div class="ibox float-e-margins collapsed">
-                        <div class="ibox-title" style="border-color: pink;background: #fff3f7">
-                            <a name="D区"></a>
-                            <h5>D区：非诚勿扰-专供ZH</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link" >
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content" style="border-color: pink">
-
-                            <table class="table">
-                                <!--<thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>姓名</th>
-                                        <th>性别</th>
-                                        <th>年龄</th>
-                                    </tr>
-                                </thead>-->
-                                <tbody>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div><!--基本表格-->
-
             </div>
-        </div><!--bottom-->
-    </div>
+        </div><!--mid-->
+
+        <div class="row">
+            <div class="middle-box-list">
+
+                {% if block %}
+                    {% for name, sections in block.items %}
+                        <div class="col-sm-6">
+                            <div class="ibox float-e-margins collapsed">
+                                <div class="ibox-title" style="border-color:#00C1B3;background: #f1fff5 ">
+                                    <a name={{ name }}></a>
+                                    <h5>{{ sections.0.0.get_block_display }}</h5>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link" >
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="ibox-content" style="border-color:#00C1B3;">
+
+                                    <table class="table">
+                                        <tbody>
+                                            {% if sections %}
+                                            {% for section_block in sections %}
+                                                <tr>
+                                                    {% for section in section_block %}
+                                                        <td><a  href="{% url "section_all" section_slug=section.slug %}" target="_parent"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">{{ section.name }}</button></a></td>
+                                                    {% endfor %}
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+{#                <div class="col-sm-6">#}
+{#                <div class="ibox float-e-margins collapsed">#}
+{#                    <div class="ibox-title" style="border-color:#00C1B3;background: #f1fff5 ">#}
+{#                        <a name="A区"></a>#}
+{#                        <h5>A区：蜗壳的星空</h5>#}
+{#                        <div class="ibox-tools">#}
+{#                            <a class="collapse-link" >#}
+{#                                <i class="fa fa-chevron-up"></i>#}
+{#                            </a>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="ibox-content" style="border-color:#00C1B3;">#}
+{##}
+{#                        <table class="table">#}
+{#                            <tbody>#}
+{#                                {% if user_watches %}#}
+{#                                {% for watch_block in user_watches %}#}
+{#                                    <tr>#}
+{#                                        {% for watch in watch_block %}#}
+{#                                            <td><a  href="{% url "section_all" section_slug=watch.section.slug %}" target="_parent"><button type="button" class="btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">{{ watch.section.name }}</button></a></td>#}
+{#                                        {% endfor %}#}
+{#                                    </tr>#}
+{#                                {% endfor %}#}
+{#                            {% endif %}#}
+{#                            </tbody>#}
+{#                        </table>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            </div><!--基本表格-->#}
+{#                <div class="col-sm-6">#}
+{#                    <div class="ibox float-e-margins collapsed">#}
+{#                        <div class="ibox-title" style="border-color:#d9d188;background: #fff4ed ">#}
+{#                            <a name="B区"></a>#}
+{#                            <h5>B区：校园大小事</h5>#}
+{#                            <div class="ibox-tools">#}
+{#                                <a class="collapse-link" >#}
+{#                                    <i class="fa fa-chevron-up"></i>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="ibox-content" style="border-color:#d9d188;">#}
+{##}
+{#                            <table class="table">#}
+{#                                <!--<thead>#}
+{#                                    <tr>#}
+{#                                        <th>#</th>#}
+{#                                        <th>姓名</th>#}
+{#                                        <th>性别</th>#}
+{#                                        <th>年龄</th>#}
+{#                                    </tr>#}
+{#                                </thead>-->#}
+{#                                <tbody>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                </tbody>#}
+{#                            </table>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div><!--基本表格-->#}
+{#                <div class="col-sm-6">#}
+{#                    <div class="ibox float-e-margins collapsed">#}
+{#                        <div class="ibox-title" style="border-color: #ffee4b;background: #fffce8">#}
+{#                            <a name="C区"></a>#}
+{#                            <h5>C区：学校管理</h5>#}
+{#                            <div class="ibox-tools">#}
+{#                                <a class="collapse-link" >#}
+{#                                    <i class="fa fa-chevron-up"></i>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="ibox-content" style="border-color: #ffee4b;">#}
+{##}
+{#                            <table class="table">#}
+{#                                <!--<thead>#}
+{#                                    <tr>#}
+{#                                        <th>#</th>#}
+{#                                        <th>姓名</th>#}
+{#                                        <th>性别</th>#}
+{#                                        <th>年龄</th>#}
+{#                                    </tr>#}
+{#                                </thead>-->#}
+{#                                <tbody>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-warning btn-warning1" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                </tbody>#}
+{#                            </table>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div><!--基本表格-->#}
+{#                <div class="col-sm-6">#}
+{#                    <div class="ibox float-e-margins collapsed">#}
+{#                        <div class="ibox-title" style="border-color: pink;background: #fff3f7">#}
+{#                            <a name="D区"></a>#}
+{#                            <h5>D区：非诚勿扰-专供ZH</h5>#}
+{#                            <div class="ibox-tools">#}
+{#                                <a class="collapse-link" >#}
+{#                                    <i class="fa fa-chevron-up"></i>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="ibox-content" style="border-color: pink">#}
+{##}
+{#                            <table class="table">#}
+{#                                <!--<thead>#}
+{#                                    <tr>#}
+{#                                        <th>#</th>#}
+{#                                        <th>姓名</th>#}
+{#                                        <th>性别</th>#}
+{#                                        <th>年龄</th>#}
+{#                                    </tr>#}
+{#                                </thead>-->#}
+{#                                <tbody>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                    <td><a  href="x_bankuai_demo.html"><button type="button" class="btn btn-block btn-outline btn-danger" style="border-color: transparent">板块名称</button></a></td>#}
+{#                                </tr>#}
+{#                                </tbody>#}
+{#                            </table>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div><!--基本表格-->#}
+{##}
+{#            </div>#}
+{#        </div><!--bottom-->#}
+{#    </div>#}
 
     <!-- 全局js -->
     <script src="{% static "js/jquery.min.js" %}"></script>

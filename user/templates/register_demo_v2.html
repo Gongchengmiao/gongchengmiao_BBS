@@ -67,14 +67,14 @@
 {#                    <input type="password" class="form-control" placeholder="请再次输入密码" required="">#}
                     {{ form.email }}
                 </div>
-                <div class="form-group text-left">
-                    <div class="checkbox i-checks">
-                        <label class="no-padding">
+{#                <div class="form-group text-left">#}
+{#                    <div class="checkbox i-checks">#}
+{#                        <label class="no-padding">#}
 {#                            <input type="checkbox"><i></i> 我同意注册协议#}
-                            {{ form.confirm_message }}<i></i>我同意注册协议
-                        </label>
-                    </div>
-                </div>
+{#                            {{ form.confirm_message }}<i></i>我同意注册协议#}
+{#                        </label>#}
+{#                    </div>#}
+{#                </div>#}
                 <button type="submit" class="btn btn-info block full-width m-b">注 册</button>
                 <strong>已经有账号了？ <a href="{% url "login" %}">立即登陆&raquo;</a></strong>
             </form>

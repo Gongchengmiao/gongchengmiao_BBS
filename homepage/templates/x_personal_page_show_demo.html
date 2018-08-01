@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>个人资料-瀚海星云BBS</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    {% load static %}
+    <link rel="shortcut icon" href="{% static "img/ustc.png"%}">
+    <link href="{% static "css/style_35_common.css" %}" rel="stylesheet">
+    <link href="{% static "css/style_35_forum_viewthread.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
+    <link href="{% static "css/font-awesome.css"%}" rel="stylesheet">
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+</head>
+
+<body class="sky-bg">
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title" style="border-color: lightskyblue">
+                    <h5>个人资料</h5>
+                </div>
+                <div>
+                    <div class="ibox-content no-padding border-left-right">
+                        {% load staticfiles %}
+                        <img alt="image" class="img-responsive" src="{% get_media_prefix %}{{ user.portrait }}">
+                    </div>
+                    <div class="ibox-content profile-content">
+                        <h4><strong>{{ user.username }}</strong></h4>
+
+                        <h5>
+                            说明档
+                        </h5>
+                        <p>
+                            {{ user.profile }}
+                        </p>
+                        <div class="row m-t-lg">
+                            <div class="col-sm-4">
+                                <i class="fa fa-anchor"></i><!--换成帖子图标ICON-->
+                                <h5><strong>{{ user.posts }}</strong> 帖子</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <i class="fa fa-bell-o"></i>
+                                <h5><strong>{{ user.following }}</strong> 关注</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <i class="fa fa-heartbeat"></i>
+                                <h5><strong>{{ user.followed }}</strong> 关注者</h5>
+                            </div>
+                        </div>
+                        <div class="user-button">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-info btn-sm btn-block" id="send_msg_btn"><i class="fa fa-envelope"></i> 发送消息</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-danger btn-sm btn-block" id="follow_btn"><i class="fa fa-heart-o"></i> 关注</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title" style="border-color: lightskyblue">
+                    <h5>最新动态</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="profile.html#">选项1</a>
+                            </li>
+                            <li><a href="profile.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <div>
+                        <div class="feed-activity-list" id = "display_list">
+
+                            {% if actions %}
+                                {% for i,action in actions %}
+                                     <div class="feed-element">
+                                <a href="{% url 'show_info' user.slug %}" class="pull-left">
+                                    {% load staticfiles %}
+                                    <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ user.portrait }}">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">{{ action.dateline }}</small>
+                                    {% if action.action == 'post' %}
+                                        <strong>{{ user.username }}</strong> 发布了一篇心得
+                                    {% elif action.action == 'star' %}
+                                        <strong>{{ user.username }}</strong> 收藏了一篇心得
+                                    {% elif action.action == 'upload' %}
+                                        <strong>{{ user.username }}</strong> 上传了文件
+                                    {% endif %}
+                                    <br>
+                                    <small class="text-muted">{{ action.dateline }} 来自 土豪金 iPhoneX</small>
+                                    <div class="text-muted1 well well0" style="cursor: pointer;"
+                                         onclick="location.href='{{ action.pid.get_url }}'"
+                                    >
+                                        <p >{{ action.pid.title }}</p>
+                                    </div>
+                                        <div class="pull-right">
+                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
+                                            <button  name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
+                                            <a class="btn btn-xs btn-primary" onclick="location.href='{{ action.pid.get_url }}'"><i class="fa fa-pencil"></i> 评论</a>
+                                        </div>
+                                </div>
+                            </div>
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+
+                        <button class="btn btn-info btn-block m" id="show_more_btn"><i class="fa fa-arrow-down"></i> 显示更多</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+
+
+
+<!-- 自定义js -->
+<script src="{% static "js/content.js" %}"></script>
+
+
+<!-- Peity -->
+<script src="{% static "js/plugins/peity/jquery.peity.min.js" %}"></script>
+
+<!-- Peity -->
+<script src="{% static "js/demo/peity-demo.js" %}"></script>
+
+
+
+    <script>
+    $(document).ready(function(){
+        $("#follow_btn").click(function () {
+            $.ajax({
+                type:"get",
+                url:"{% url 'show_info_ajax_follow' %}",
+                data:{'user_slug':"{{ user.slug }}"},
+                data_type:"json",
+                success:function (ret) {
+                    alert(ret)
+                }
+                }
+            )
+        });
+
+        $("#show_more_btn").click(function () {
+            $.ajax({
+                type:"get",
+                url:"{% url 'show_info_ajax_more' %}",
+                data:{
+                    'user_slug':"{{ user.slug }}",
+                    'action_num':$("div.feed-element").size()
+                },
+                data_type:"json",
+                success:function (ret) {
+                    if(ret.isFull==='1')
+                    {
+                        alert('已显示全部动态');
+                        return
+                    }
+                    $.each(ret.list,function (i,ac) {
+                        var html = "<div class=\"feed-element\">\n" +
+                            "                                <a href=\""+ret.user_url+"\" class=\"pull-left\">\n" +
+                            "                                    <img alt=\"image\" class=\"img-circle\" src=\""+ret.portrait+"\">\n" +
+                            "                                </a>\n" +
+                            "                                <div class=\"media-body \">\n" +
+                            "                                    <small class=\"pull-right\">{{ action.dateline }}</small>\n" +
+                                "                                        <strong>"+ret.user+"</strong> "+ac.type+"了一篇心得\n"+
+                            "                                    <br>\n" +
+                            "                                    <small class=\"text-muted\">"+ac.time+" 来自 土豪金 iPhoneX</small>\n" +
+                            "                                    <div class=\"text-muted1 well well0\" style=\"cursor: pointer;\"\n" +
+                            "                                         onclick=\"location.href='"+ac.post_url+"'\"\n" +
+                            "                                    >\n" +
+                            "                                        <p>"+ac.title+"</p>\n" +
+                            "                                    </div>\n" +
+                            "                                        <div class=\"pull-right\">\n" +
+                            "                                            <a class=\"btn btn-xs btn-white\"><i class=\"fa fa-thumbs-up\"></i> 赞 </a>\n" +
+                            "                                            <button  name=\"star_btn\" value=\""+ac.pid+"\" type=\"submit\" class=\"btn btn-xs btn-white\"><i class=\"fa fa-heart\"></i> 收藏</button>\n" +
+                            "                                            <a class=\"btn btn-xs btn-primary\" onclick=\"location.href='"+ac.post_url+"'\"><i class=\"fa fa-pencil\"\"></i> 评论</a>\n" +
+                            "                                        </div>\n" +
+                            "                                </div>\n" +
+                            "                            </div>";
+
+                    $("#display_list").append(html)
+                    })
+                }
+            })
+
+        });
+
+    $( document ).on( "click", "button[name='star_btn']", function () {
+                $.ajax({
+                    type:"get",
+                    url:"{% url "show_info_ajax_star" %}",
+                    data:{pid:$(this).val()},
+                    data_type:"json",
+                    success:function (ret,status) {
+                        alert(ret)
+                    }
+                })
+            })
+    } );
+
+
+
+    </script>
+
+</body>
+
+
+</html>
