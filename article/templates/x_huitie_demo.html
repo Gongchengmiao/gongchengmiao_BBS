@@ -36,11 +36,47 @@
 
 
 
-<form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-  <input type="search" name="q" placeholder="搜索" required>
-  <button type="submit"><span class="ion-ios-search-strong"></span></button>
-</form>
+<form action="/search" method="get">
 
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="search-form">
+                                <table>
+                                    <div class="input-group">
+                                    <input name="q" type="text" placeholder="搜索您感兴趣的内容" class="form-control input-lg">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-lg btn-primary" type="submit">
+                                            搜索
+                                        </button>
+                                    </div>
+                                </div>
+                                </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+
+
+    <!-- 自定义js -->
+    <script src="{% static "js/content.js" %}"></script>
+
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <!--统计代码，可删除-->
+
+</form>
 
 
 
