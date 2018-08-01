@@ -172,14 +172,14 @@
 
         </div>
 
-        <div class="friendlist animated fadeInLeft" >
+        <div id="friendlist" class="friendlist animated fadeInLeft" >
             <div class="heading">
                 <h4 >好友列表</h4>
             </div>
-            <div class="content" onload="IsRecieve()" onclick="Update_i(event)">
+            <div class="content" onclick="Update_i(event);Clear_tab(event);">
                 <ul class="sortable-list connectList agile-list" style="height: 275px;overflow: auto;">
                     {% for friend in friend_list %}
-                        <li  id="friend1" class="info-element" >
+                        <li  id="friend" class="info-element" >
                             <img class="img-circle" src="{% get_media_prefix %}{{ friend.portrait }}" style="width: 30px">
                             <h5 class="pull-right" style="text-align: center;">{{ friend.username }}</h5>
                         </li>
@@ -187,22 +187,25 @@
 
                 </ul>
             </div>
-        </div>
-{#        <script>#}
-{#            function changeid() {#}
-{#                var i=1;#}
-{#                for(i=1;i<={{ friend_list | length }};i++){#}
-{#                    $("#friend").attr("id","friend"+i);#}
-{#                }#}
-{#            }#}
-{#        </script>#}
+        </divid>
+        <script>
+                    function changeid() {
+                    var i;
+                    for(i=1;i<={{ friend_list | length }};i++){
+                        document.getElementById("friend").id = "friend" + i;
+                    }
+                }
 
-        <div id="small-chat">
+                    changeid();
+        </script>
+
+        <div id="small-chat" onclick="firstactive2()">
             <span class="badge badge-danger pull-right">...</span>
-            <a class="open-small-chat">
-                <i class="fa fa-comments"></i>
+            <a class="open-small-chat" onclick="firstactive2()">
+                <i class="fa fa-comments" onclick="firstactive2()"></i>
             </a>
         </div>
+
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
 
@@ -393,7 +396,6 @@
             };
 
             function Update_i(ev) {
-                alert(ev.target.tagName.toUpperCase());
                 if(ev.target.tagName.toUpperCase() !== "LI") {
                     i = ev.target.parentNode.id;
                 }
@@ -401,6 +403,10 @@
                     i = ev.target.id;
                 }
                 console.log(i)
+            }
+
+            function Clear_tab(ev) {
+                document.getElementById("chatshow").innerHTML = "";
             }
 
             document.querySelector('#chatinput').focus();
