@@ -179,7 +179,7 @@
             <div class="content" onload="IsRecieve()">
                 <ul class="sortable-list connectList agile-list" style="height: 275px;overflow: auto;">
                     {% for friend in friend_list %}
-                        <li  id="friend1" class="info-element" onclick="Justice1();Alljustice();Justice1();">
+                        <li  id="friend4" class="info-element" >
                             <img class="img-circle" src="{% get_media_prefix %}{{ friend.portrait }}" style="width: 30px">
                             <h5 class="pull-right" style="text-align: center;">{{ friend.username }}</h5>
                         </li>
@@ -359,6 +359,7 @@
                     document.querySelector('#chatsub').click();
                 }
             };
+
 
             document.querySelector('#chatsub').onclick = function(e) {
                 var messageInputDom = document.querySelector('#chatinput');
