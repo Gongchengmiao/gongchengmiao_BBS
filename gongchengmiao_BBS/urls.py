@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls import url
 from index import views as index_views
 from django.conf.urls.static import static
 from gongchengmiao_BBS import settings
@@ -43,7 +44,7 @@ urlpatterns = [
     path('article/', article_views.article_post, name="article_post"),
     path('article/like-article/', article_views.like_article, name="like_article"),
     path('search/', search_views.MySearchView(), name='haystack_search'),
-
+    path('like/', article_views.like, name='like'),
 
 
     path('index_core/', index_views.index, name='index_core'),

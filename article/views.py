@@ -16,6 +16,17 @@ from user.models import common_member_action_log
 import redis
 from django.conf import settings
 
+from django.http import HttpResponse
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+
+from article.models import ArticlePost
+
 import json
 # Create your views here.
 r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
@@ -115,3 +126,27 @@ def like_article(request):
                 return HttpResponse("2")
         except:
             return HttpResponse("no")
+
+
+
+@login_required
+@require_POST
+def like(request):
+    if request.method == 'POST':
+        user = request.user
+        slug = request.POST.get('slug', None)
+        article = get_object_or_404(ArticlePost, slug=slug)
+
+        if article.likes.filter(id=user.id).exists():
+            # user has already liked this company
+            # remove like/user
+            article.likes.remove(user)
+            message = 'You disliked this'
+        else:
+            # add a new like for a company
+            article.likes.add(user)
+            message = 'You liked this'
+
+    ctx = {'likes_count': article.total_likes, 'message': message}
+    # use mimetype instead of content_type if django < 5
+    return HttpResponse(json.dumps(ctx), content_type='application/json')
