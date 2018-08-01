@@ -77,27 +77,20 @@ function loadData()
 
 
 function firstactive2() {
-    var Friend1 = document.getElementById("friend1");
-    var Friend2 = document.getElementById("friend2");
-    var Friend3 = document.getElementById("friend3");
-    var Friend4 = document.getElementById("friend4");
-    var Friend5 = document.getElementById("friend5");
-    var Friend6 = document.getElementById("friend6");
+    var Friends = {};
+    for(i=1; document.getElementById("friend"+i) !== null; i++){
+        Friends[i] = document.getElementById("friend"+i);
+    }
     var Friendlist = document.getElementById("friendlist");
-   if(Friendlist.classList.contains("active")) {
-       Friend1.classList.remove("info-element");
-       Friend1.classList.add("white-element");
-       Friend2.classList.remove("white-element");
-       Friend2.classList.add("info-element");
-       Friend3.classList.remove("white-element");
-       Friend3.classList.add("info-element");
-       Friend4.classList.remove("white-element");
-       Friend4.classList.add("info-element");
-       Friend5.classList.remove("white-element");
-       Friend5.classList.add("info-element");
-       Friend6.classList.remove("white-element");
-       Friend6.classList.add("info-element");
-   }
+        if(Friends && Friendlist.classList.contains("active")) {
+            Friends[1].classList.remove("info-element");
+            Friends[1].classList.add("white-element");
+            for(i=2;document.getElementById("friend"+i) !== null;i++){
+                Friends[i].classList.remove("white-element");
+                Friends[i].classList.add("info-element");
+            }
+
+        }
 }
 
 function firstactive() {
@@ -245,231 +238,267 @@ function Getid(event) {
 }
 
 function Justice() {
-    var Friend1 = document.getElementById("friend1");
-    var Friend2 = document.getElementById("friend2");
-    var Friend3 = document.getElementById("friend3");
-    var Friend4 = document.getElementById("friend4");
-    var Friend5 = document.getElementById("friend5");
-    var Friend6 = document.getElementById("friend6");
-    var color1 = Friend1.classList.contains("info-element");
-    var color2 = Friend2.classList.contains("info-element");
-    var color3 = Friend3.classList.contains("info-element");
-    var color4 = Friend4.classList.contains("info-element");
-    var color5 = Friend5.classList.contains("info-element");
-    var color6 = Friend6.classList.contains("info-element");
+    var Friends = {};
+    var colors = {};
     var friendid = Getid(event).id;
-    if (friendid === "friend1") {
-        if (color1 == true) {
-            Friend1.classList.remove("info-element");
-            Friend1.classList.add("white-element");
-        }
-        else {
-            Friend1.classList.remove("danger-element");
-            Friend1.classList.add("white-element");
-        }
-    }
-
-    if (friendid === "friend2") {
-        if (color2 == true) {
-            Friend2.classList.remove("info-element");
-            Friend2.classList.add("white-element");
-        }
-        else {
-            Friend2.classList.remove("danger-element");
-            Friend2.classList.add("white-element");
+    for(i=1; document.getElementById("friend"+i) !== null; i++){
+        Friends[i] = document.getElementById("friend"+i);
+        colors[i] = Friends[i].classList.contains("info-element")
+        if(Friends[i].id === friendid){
+            if (colors[i] == true) {
+                Friends[i].classList.remove("info-element");
+                Friends[i].classList.add("white-element");
+            }
+            else {
+                Friends[i].classList.remove("danger-element");
+                Friends[i].classList.add("white-element");
+            }
         }
     }
 
-    if (friendid === "friend3") {
-        if (color3 == true) {
-            Friend3.classList.remove("info-element");
-            Friend3.classList.add("white-element");
-        }
-        else {
-            Friend3.classList.remove("danger-element");
-            Friend3.classList.add("white-element");
-        }
-    }
 
-    if(friendid === "friend4") {
-        if (color4 == true) {
-            Friend4.classList.remove("info-element");
-            Friend4.classList.add("white-element");
-        }
-        else {
-            Friend4.classList.remove("danger-element");
-            Friend4.classList.add("white-element");
-        }
-    }
+    // var Friend1 = document.getElementById("friend1");
+    // var Friend2 = document.getElementById("friend2");
+    // var Friend3 = document.getElementById("friend3");
+    // var Friend4 = document.getElementById("friend4");
+    // var Friend5 = document.getElementById("friend5");
+    // var Friend6 = document.getElementById("friend6");
+    // var color1 = Friend1.classList.contains("info-element");
+    // var color2 = Friend2.classList.contains("info-element");
+    // var color3 = Friend3.classList.contains("info-element");
+    // var color4 = Friend4.classList.contains("info-element");
+    // var color5 = Friend5.classList.contains("info-element");
+    // var color6 = Friend6.classList.contains("info-element");
 
-    if (friendid === "friend5") {
-        if (color5 == true) {
-            Friend5.classList.remove("info-element");
-            Friend5.classList.add("white-element");
-        }
-        else {
-            Friend5.classList.remove("danger-element");
-            Friend5.classList.add("white-element");
-        }
-    }
-
-    if (friendid === "friend6") {
-        if (color6 == true) {
-            Friend6.classList.remove("info-element");
-            Friend6.classList.add("white-element");
-        }
-        else {
-            Friend6.classList.remove("danger-element");
-            Friend6.classList.add("white-element");
-        }
-    }
+    // if (friendid === "friend1") {
+    //
+    //
+    // }
+    //
+    // if (friendid === "friend2") {
+    //     if (color2 == true) {
+    //         Friend2.classList.remove("info-element");
+    //         Friend2.classList.add("white-element");
+    //     }
+    //     else {
+    //         Friend2.classList.remove("danger-element");
+    //         Friend2.classList.add("white-element");
+    //     }
+    // }
+    //
+    // if (friendid === "friend3") {
+    //     if (color3 == true) {
+    //         Friend3.classList.remove("info-element");
+    //         Friend3.classList.add("white-element");
+    //     }
+    //     else {
+    //         Friend3.classList.remove("danger-element");
+    //         Friend3.classList.add("white-element");
+    //     }
+    // }
+    //
+    // if(friendid === "friend4") {
+    //     if (color4 == true) {
+    //         Friend4.classList.remove("info-element");
+    //         Friend4.classList.add("white-element");
+    //     }
+    //     else {
+    //         Friend4.classList.remove("danger-element");
+    //         Friend4.classList.add("white-element");
+    //     }
+    // }
+    //
+    // if (friendid === "friend5") {
+    //     if (color5 == true) {
+    //         Friend5.classList.remove("info-element");
+    //         Friend5.classList.add("white-element");
+    //     }
+    //     else {
+    //         Friend5.classList.remove("danger-element");
+    //         Friend5.classList.add("white-element");
+    //     }
+    // }
+    //
+    // if (friendid === "friend6") {
+    //     if (color6 == true) {
+    //         Friend6.classList.remove("info-element");
+    //         Friend6.classList.add("white-element");
+    //     }
+    //     else {
+    //         Friend6.classList.remove("danger-element");
+    //         Friend6.classList.add("white-element");
+    //     }
+    // }
 }
 
 function Alljustice() {
-    var Friend1 = document.getElementById("friend1");
-    var Friend2 = document.getElementById("friend2");
-    var Friend3 = document.getElementById("friend3");
-    var Friend4 = document.getElementById("friend4");
-    var Friend5 = document.getElementById("friend5");
-    var Friend6 = document.getElementById("friend6");
-    var color1 = Friend1.classList.contains("white-element");
-    var color2 = Friend2.classList.contains("white-element");
-    var color3 = Friend3.classList.contains("white-element");
-    var color4 = Friend4.classList.contains("white-element");
-    var color5 = Friend5.classList.contains("white-element");
-    var color6 = Friend6.classList.contains("white-element");
-    if(color1 == true){
-        if(color2 == true){
-            Friend2.classList.remove("white-element");
-            Friend2.classList.add("info-element");
-        }
-        if(color3 == true){
-            Friend3.classList.remove("white-element");
-            Friend3.classList.add("info-element");
-        }
-        if(color4 == true){
-            Friend4.classList.remove("white-element");room_name
-            Friend4.classList.add("info-element");
-        }
-        if(color5 == true){
-            Friend5.classList.remove("white-element");
-            Friend5.classList.add("info-element");
-        }
-        if(color6 == true){
-            Friend6.classList.remove("white-element");
-            Friend6.classList.add("info-element");
+    var Friends = {};
+    var colors = {};
+    for(i=1; document.getElementById("friend"+i) !== null; i++){
+        Friends[i] = document.getElementById("friend"+i);
+        colors[i] = Friends[i].classList.contains("white-element")
+    }
+    i -= 1;
+    // alert("i="+i);
+    for(m=1; m<=i; m++){
+        if(colors[m] == true){
+            for(j=1;j<=i;j++){
+                if(j !== m && colors[j] == true){
+                    Friends[j].classList.remove("white-element");
+                    Friends[j].classList.add("info-element");
+                }
+            }
         }
     }
-    if(color2 == true){room_name
-        if(color1 == true){
-            Friend1.classList.remove("white-element");
-            Friend1.classList.add("info-element");
-        }
-        if(color3 == true){
-            Friend3.classList.remove("white-element");
-            Friend3.classList.add("info-element");
-        }id="zhmsgtest"
-        if(color4 == true){
-            Friend4.classList.remove("white-element");
-            Friend4.classList.add("info-element");
-        }
-        if(color5 == true){
-            Friend5.classList.remove("white-element");
-            Friend5.classList.add("info-element");
-        }
-        if(color6 == true){
-            Friend6.classList.remove("white-element");room_name
-            Friend6.classList.add("info-element");
-        }
-    }
-    if(color3 == true){
-        if(color1 == true){id="zhmsgtest"
-            Friend1.classList.remove("white-element");
-            Friend1.classList.add("info-element");
-        }
-        if(color2 == true){
-            Friend2.classList.remove("white-element");
-            Friend2.classList.add("info-element");
-        }
-        if(color4 == true){
-            Friend4.classList.remove("white-element");
-            Friend4.classList.add("info-element");
-        }
-        if(color5 == true){
-            Friend5.classList.remove("white-element");
-            Friend5.classList.add("info-element");
-        }
-        if(color6 == true){
-            Friend6.classList.remove("white-element");
-            Friend6.classList.add("info-element");
-        }room_name
-    }
-    if(color4 == true){
-        if(color1 == true){
-            Friend1.classList.remove("white-element");
-            Friend1.classList.add("info-element");
-        }
-        if(color2 == true){
-            Friend2.classList.remove("white-element");
-            Friend2.classList.add("info-element");
-        }
-        if(color3 == true){
-            Friend3.classList.remove("white-element");
-            Friend3.classList.add("info-element");
-        }
-        if(color5 == true){
-            Friend5.classList.remove("white-element");
-            Friend5.classList.add("info-element");
-        }
-        if(color6 == true){
-            Friend6.classList.remove("white-element");
-            Friend6.classList.add("info-element");
-        }
-    }
-    if(color5 == true){
-        if(color1 == true){
-            Friend1.classList.remove("white-element");
-            Friend1.classList.add("info-element");
-        }
-        if(color2 == true){
-            Friend2.classList.remove("white-element");
-            Friend2.classList.add("info-element");
-        }
-        if(color3 == true){
-            Friend3.classList.remove("white-element");
-            Friend3.classList.add("info-element");
-        }
-        if(color4 == true){
-            Friend4.classList.remove("white-element");
-            Friend4.classList.add("info-element");
-        }
-        if(color6 == true){
-            Friend6.classList.remove("white-element");
-            Friend6.classList.add("info-element");
-        }
-    }
-    if(color6 == true){
-        if(color1 == true){
-            Friend1.classList.remove("white-element");
-            Friend1.classList.add("info-element");
-        }
-        if(color2 == true){
-            Friend2.classList.remove("white-element");
-            Friend2.classList.add("info-element");
-        }
-        if(color3 == true){
-            Friend3.classList.remove("white-element");
-            Friend3.classList.add("info-element");
-        }
-        if(color4 == true){
-            Friend4.classList.remove("white-element");
-            Friend4.classList.add("info-element");
-        }
-        if(color5 == true){
-            Friend5.classList.remove("white-element");
-            Friend5.classList.add("info-element");
-        }
-    }
+
+
+
+
+
+    // var Friend1 = document.getElementById("friend1");
+    // var Friend2 = document.getElementById("friend2");
+    // var Friend3 = document.getElementById("friend3");
+    // var Friend4 = document.getElementById("friend4");
+    // var Friend5 = document.getElementById("friend5");
+    // var Friend6 = document.getElementById("friend6");
+    // var color1 = Friend1.classList.contains("white-element");
+    // var color2 = Friend2.classList.contains("white-element");
+    // var color3 = Friend3.classList.contains("white-element");
+    // var color4 = Friend4.classList.contains("white-element");
+    // var color5 = Friend5.classList.contains("white-element");
+    // var color6 = Friend6.classList.contains("white-element");
+    // if(color1 == true){
+    //     if(color2 == true){
+    //         Friend2.classList.remove("white-element");
+    //         Friend2.classList.add("info-element");
+    //     }
+    //     if(color3 == true){
+    //         Friend3.classList.remove("white-element");
+    //         Friend3.classList.add("info-element");
+    //     }
+    //     if(color4 == true){
+    //         Friend4.classList.remove("white-element");
+    //         Friend4.classList.add("info-element");
+    //     }
+    //     if(color5 == true){
+    //         Friend5.classList.remove("white-element");
+    //         Friend5.classList.add("info-element");
+    //     }
+    //     if(color6 == true){
+    //         Friend6.classList.remove("white-element");
+    //         Friend6.classList.add("info-element");
+    //     }room_name
+    // }
+    // if(color2 == true){
+    //     if(color1 == true){
+    //         Friend1.classList.remove("white-element");
+    //         Friend1.classList.add("info-element");
+    //     }
+    //     if(color3 == true){
+    //         Friend3.classList.remove("white-element");
+    //         Friend3.classList.add("info-element");
+    //     }id="zhmsgtest"
+    //     if(color4 == true){
+    //         Friend4.classList.remove("white-element");
+    //         Friend4.classList.add("info-element");
+    //     }
+    //     if(color5 == true){
+    //         Friend5.classList.remove("white-element");
+    //         Friend5.classList.add("info-element");
+    //     }
+    //     if(color6 == true){
+    //         Friend6.classList.remove("white-element");
+    //         Friend6.classList.add("info-element");
+    //     }
+    // }
+    // if(color3 == true){
+    //     if(color1 == true){id="zhmsgtest"
+    //         Friend1.classList.remove("white-element");
+    //         Friend1.classList.add("info-element");
+    //     }
+    //     if(color2 == true){
+    //         Friend2.classList.remove("white-element");
+    //         Friend2.classList.add("info-element");
+    //     }
+    //     if(color4 == true){
+    //         Friend4.classList.remove("white-element");
+    //         Friend4.classList.add("info-element");
+    //     }
+    //     if(color5 == true){
+    //         Friend5.classList.remove("white-element");
+    //         Friend5.classList.add("info-element");
+    //     }
+    //     if(color6 == true){
+    //         Friend6.classList.remove("white-element");
+    //         Friend6.classList.add("info-element");
+    //     }room_name
+    // }
+    // if(color4 == true){
+    //     if(color1 == true){
+    //         Friend1.classList.remove("white-element");
+    //         Friend1.classList.add("info-element");
+    //     }
+    //     if(color2 == true){
+    //         Friend2.classList.remove("white-element");
+    //         Friend2.classList.add("info-element");
+    //     }
+    //     if(color3 == true){
+    //         Friend3.classList.remove("white-element");
+    //         Friend3.classList.add("info-element");
+    //     }
+    //     if(color5 == true){
+    //         Friend5.classList.remove("white-element");
+    //         Friend5.classList.add("info-element");
+    //     }
+    //     if(color6 == true){
+    //         Friend6.classList.remove("white-element");
+    //         Friend6.classList.add("info-element");
+    //     }
+    // }
+    // if(color5 == true){
+    //     if(color1 == true){
+    //         Friend1.classList.remove("white-element");
+    //         Friend1.classList.add("info-element");
+    //     }
+    //     if(color2 == true){
+    //         Friend2.classList.remove("white-element");
+    //         Friend2.classList.add("info-element");
+    //     }
+    //     if(color3 == true){
+    //         Friend3.classList.remove("white-element");
+    //         Friend3.classList.add("info-element");
+    //     }
+    //     if(color4 == true){
+    //         Friend4.classList.remove("white-element");
+    //         Friend4.classList.add("info-element");
+    //     }
+    //     if(color6 == true){
+    //         Friend6.classList.remove("white-element");
+    //         Friend6.classList.add("info-element");
+    //     }
+    // }
+    // if(color6 == true){
+    //     if(color1 == true){
+    //         Friend1.classList.remove("white-element");
+    //         Friend1.classList.add("info-element");
+    //     }
+    //     if(color2 == true){
+    //         Friend2.classList.remove("white-element");
+    //         Friend2.classList.add("info-element");
+    //     }
+    //     if(color3 == true){
+    //         Friend3.classList.remove("white-element");
+    //         Friend3.classList.add("info-element");
+    //     }
+    //     if(color4 == true){
+    //         Friend4.classList.remove("white-element");
+    //         Friend4.classList.add("info-element");
+    //     }
+    //     if(color5 == true){
+    //         Friend5.classList.remove("white-element");
+    //         Friend5.classList.add("info-element");
+    //     }
+    // }
 }
 
 
