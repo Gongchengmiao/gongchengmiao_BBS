@@ -147,88 +147,90 @@ function Recieve() {
     setTimeout("Recieve()",1000);
 }
 
-function Justice1() {
-    var Friend = document.getElementById("friend1");
-    var color = Friend.classList.contains("info-element");
-    if (color == true){
-        Friend.classList.remove("info-element");
-        Friend.classList.add("white-element");
-    }
-    else {
-        Friend.classList.remove("danger-element");
-        Friend.classList.add("white-element");
-    }
-    return true;
+function Getid(event) {
+    var Fid = event.target;
+    return Fid;
 }
 
-function Justice2() {
-    var Friend = document.getElementById("friend2");
-    var color = Friend.classList.contains("info-element");
-    if (color == true){
-        Friend.classList.remove("info-element");
-        Friend.classList.add("white-element");
+function Justice() {
+    var Friend1 = document.getElementById("friend1");
+    var Friend2 = document.getElementById("friend2");
+    var Friend3 = document.getElementById("friend3");
+    var Friend4 = document.getElementById("friend4");
+    var Friend5 = document.getElementById("friend5");
+    var Friend6 = document.getElementById("friend6");
+    var color1 = Friend1.classList.contains("info-element");
+    var color2 = Friend2.classList.contains("info-element");
+    var color3 = Friend3.classList.contains("info-element");
+    var color4 = Friend4.classList.contains("info-element");
+    var color5 = Friend5.classList.contains("info-element");
+    var color6 = Friend6.classList.contains("info-element");
+    var friendid = Getid(event).id;
+    if (friendid === "friend1") {
+        if (color1 == true) {
+            Friend1.classList.remove("info-element");
+            Friend1.classList.add("white-element");
+        }
+        else {
+            Friend1.classList.remove("danger-element");
+            Friend1.classList.add("white-element");
+        }
     }
-    else {
-        Friend.classList.remove("danger-element");
-        Friend.classList.add("white-element");
-    }
-    return true;
-}
 
-function Justice3() {
-    var Friend = document.getElementById("friend3");
-    var color = Friend.classList.contains("info-element");
-    if (color == true){
-        Friend.classList.remove("info-element");
-        Friend.classList.add("white-element");
+    if (friendid === "friend2") {
+        if (color2 == true) {
+            Friend2.classList.remove("info-element");
+            Friend2.classList.add("white-element");
+        }
+        else {
+            Friend2.classList.remove("danger-element");
+            Friend2.classList.add("white-element");
+        }
     }
-    else {
-        Friend.classList.remove("danger-element");
-        Friend.classList.add("white-element");
-    }
-    return true;
-}
 
-function Justice4() {
-    var Friend = document.getElementById("friend4");
-    var color = Friend.classList.contains("info-element");
-    if (color == true){
-        Friend.classList.remove("info-element");
-        Friend.classList.add("white-element");
+    if (friendid === "friend3") {
+        if (color3 == true) {
+            Friend3.classList.remove("info-element");
+            Friend3.classList.add("white-element");
+        }
+        else {
+            Friend3.classList.remove("danger-element");
+            Friend3.classList.add("white-element");
+        }
     }
-    else {
-        Friend.classList.remove("danger-element");
-        Friend.classList.add("white-element");
-    }
-    return true;
-}
 
-function Justice5() {
-    var Friend = document.getElementById("friend5");
-    var color = Friend.classList.contains("info-element");
-    if (color == true){
-        Friend.classList.remove("info-element");
-        Friend.classList.add("white-element");
+    if(friendid === "friend4") {
+        if (color4 == true) {
+            Friend4.classList.remove("info-element");
+            Friend4.classList.add("white-element");
+        }
+        else {
+            Friend4.classList.remove("danger-element");
+            Friend4.classList.add("white-element");
+        }
     }
-    else {
-        Friend.classList.remove("danger-element");
-        Friend.classList.add("white-element");
-    }
-    return true;
-}
 
-function Justice6() {
-    var Friend = document.getElementById("friend6");
-    var color = Friend.classList.contains("info-element");
-    if (color == true){
-        Friend.classList.remove("info-element");
-        Friend.classList.add("white-element");
+    if (friendid === "friend5") {
+        if (color5 == true) {
+            Friend5.classList.remove("info-element");
+            Friend5.classList.add("white-element");
+        }
+        else {
+            Friend5.classList.remove("danger-element");
+            Friend5.classList.add("white-element");
+        }
     }
-    else {
-        Friend.classList.remove("danger-element");
-        Friend.classList.add("white-element");
+
+    if (friendid === "friend6") {
+        if (color6 == true) {
+            Friend6.classList.remove("info-element");
+            Friend6.classList.add("white-element");
+        }
+        else {
+            Friend6.classList.remove("danger-element");
+            Friend6.classList.add("white-element");
+        }
     }
-    return true;
 }
 
 function Alljustice() {
