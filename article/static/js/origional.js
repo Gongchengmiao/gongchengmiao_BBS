@@ -231,16 +231,19 @@ function Recieve() {
     setTimeout("Recieve()",1000);
 }
 
-
 function Getid(event) {
-    var Fid = event.target;
-    return Fid;
+    var Fiid = event.target;
+    var i = event.target.id;
+    if(event.target.tagName.toUpperCase() !== "LI") {
+        i = event.target.parentNode.id;
+    }
+    return i;
 }
 
 function Justice() {
     var Friends = {};
     var colors = {};
-    var friendid = Getid(event).id;
+    var friendid = Getid(event);
     for(i=1; document.getElementById("friend"+i) !== null; i++){
         Friends[i] = document.getElementById("friend"+i);
         colors[i] = Friends[i].classList.contains("info-element")
