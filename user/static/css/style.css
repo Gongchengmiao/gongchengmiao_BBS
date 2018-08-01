@@ -1,7 +1,7 @@
 /*
  *
  *   H+ - 后台主题UI框架
- *   version 4.9
+ *   version user
  *
 */
 
@@ -836,8 +836,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info:active,
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
-    background-color: darkblue;
-    border-color:darkblue ;
+    background-color: #0000d1;
+    border-color:#0000d1 ;
     color: #FFFFFF;
 }
 
@@ -5827,7 +5827,7 @@ table.issue-tracker tbody tr td {
 .agile-list li {
     background: #FAFAFB;
     border: 1px solid #e7eaec;
-    margin: 0px 0 10px 0;
+    margin: 0px 0 0px 0;
     padding: 10px;
     border-radius: 2px;
 }
@@ -5851,6 +5851,10 @@ table.issue-tracker tbody tr td {
 
 .agile-list li.success-element {
     border-left: 3px solid #1ab394;
+}
+
+.agile-list li.white-element {
+    border-left: 3px solid #ffffff;
 }
 
 .agile-detail {
@@ -5886,7 +5890,7 @@ del {
     height: 38px;
     width: 38px;
     display: block;
-    background: #1ab394;
+    background: dodgerblue;
     padding: 9px 8px;
     text-align: center;
     color: #fff;
@@ -5895,7 +5899,7 @@ del {
 
 .open-small-chat:hover {
     color: white;
-    background: #1ab394;
+    background: #0000ff;
 }
 
 .small-chat-box {
@@ -5905,9 +5909,25 @@ del {
     right: 80px;
     background: #fff;
     border: 1px solid #e7eaec;
-    width: 230px;
+    width: 300px;
     height: 320px;
     border-radius: 4px;
+}
+
+.friendlist {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 380px;
+    background: #fff;
+    border: 1px solid #e7eaec;
+    width: 100px;
+    height: 320px;
+    border-radius: 4px;
+}
+
+.friendlist.active{
+    display: block;
 }
 
 .small-chat-box.ng-small-chat {
@@ -5924,8 +5944,15 @@ del {
 }
 
 .small-chat-box .heading {
-    background: #2f4050;
+    background: royalblue;
     padding: 8px 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.friendlist .heading{
+    background: royalblue;
+    padding: 7px 15px;
     font-weight: bold;
     color: #fff;
 }
@@ -5961,7 +5988,7 @@ del {
 }
 
 .small-chat-box .content .chat-message.active {
-    background: #1ab394;
+    background: #83bdfa;
     color: #fff;
 }
 
@@ -7387,7 +7414,7 @@ navbar-static-top {
     padding: 30px 15px;
 }
 
- #page-wrapper {
+#page-wrapper {
     background: #f4f6fa;
 }
 
@@ -8148,6 +8175,66 @@ body.skin-3 {
         font-size: 12px
     }
 }
+
+
+
+.talk_con{
+    width:400px;
+    height:400px;
+    border:1px solid #666;
+    margin:50px auto 0;
+    background:#f9f9f9;
+}
+.talk_show{
+    width:380px;
+    height:320px;
+    border:1px solid #666;
+    background:#fff;
+    margin:10px auto 0;
+    overflow:auto;
+}
+.talk_input{
+    width:320px;
+    margin:10px auto 0;
+}
+.talk_word{
+    width:300px;
+    height:30px;
+    padding:0px;
+    float: left;
+    margin-left:-30px;
+    outline:none;
+    text-indent:10px;
+}
+.talk_sub{
+    height:30px;
+    margin-right: -20px;
+    float:right;
+}
+.othertalk{
+    margin:10px;
+}
+.othertalk span{
+    display:inline-block;
+    background: #83bdfa;
+    border-radius:10px;
+    color: #fff;
+    padding:5px 10px;
+    border-color: #0e9aef;
+}
+.metalk{
+    margin:10px;
+    text-align:right;
+}
+.metalk span{
+    display:inline-block;
+    background: #f3f3f4;
+    border-radius:10px;
+    color: dimgrey;
+    padding:5px 10px;
+    border-color: #f3f3f4;
+}
+
 
 .contentwidth {
     width: 340px;

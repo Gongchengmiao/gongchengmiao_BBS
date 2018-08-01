@@ -151,6 +151,59 @@
         </nav>
         <!--左侧导航结束-->
         <!--右侧部分开始-->
+        <div class="small-chat-box fadeInRight animated" onload="Recieve()">
+
+            <div class="heading" draggable="true">
+                <p>与 Beau-zihan 聊天中</p>
+            </div>
+
+            <div class="content" id = "chatshow"></div>
+
+
+            <div class="form-chat">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" id="chatinput">
+                    <span class="input-group-btn">
+                <button class="btn btn-info" type="button" onclick="talk()" id="chatsub">发送
+                </button>
+            </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="friendlist animated fadeInLeft" >
+            <div class="heading">
+                <h4 >好友列表</h4>
+            </div>
+            <div class="content" onload="IsRecieve()">
+                <ul class="sortable-list connectList agile-list" style="height: 275px;overflow: auto;">
+                    {% for friend in friend_list %}
+                        <li  id="friend1" class="info-element" onclick="Justice1();Alljustice();Justice1();">
+                            <img class="img-circle" src="{% get_media_prefix %}{{ friend.portrait }}" style="width: 30px">
+                            <h5 class="pull-right" style="text-align: center;">{{ friend.username }}</h5>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+{#        <script>#}
+{#            function changeid() {#}
+{#                var i=1;#}
+{#                for(i=1;i<={{ friend_list | length }};i++){#}
+{#                    $("#friend").attr("id","friend"+i);#}
+{#                }#}
+{#            }#}
+{#        </script>#}
+
+        <div id="small-chat">
+            <span class="badge badge-danger pull-right">...</span>
+            <a class="open-small-chat">
+                <i class="fa fa-comments"></i>
+            </a>
+        </div>
+
         <div id="page-wrapper" class="gray-bg dashbard-1">
 
             <div class="row border-bottom">
@@ -262,7 +315,66 @@
 {#    <!-- 第三方插件 -->#}
 {#    <script src="js/plugins/pace/pace.min.js"></script>#}
 {% include "js_use.html" %}
+    <script language= "JavaScript">
+        function keyEnter(){
+            if (event.keyCode == 13) {
+                talk();
+            }
+        }
+        document.onkeydown = keyEnter;
+    </script>
 
+    <script>
+        var roomName = {{ room_name_json }};
+
+        var room_name_list = {{ room_name_list }};
+
+        var i;
+
+        var chatSocket = {};
+
+        for( i in room_name_list) {
+
+                chatSocket[i] = new WebSocket(
+                'ws://' + window.location.host +
+                '/ws/chat/' + room_name_list[i] + '/');
+
+            chatSocket.onmessage = function(e) {
+                var data = JSON.parse(e.data);
+                var message = data['message'];
+                var user = data['user'];
+                console.log(message);
+                document.querySelector('#zhmsgtest').innerHTML = message;
+            };
+
+            chatSocket.onclose = function(e) {
+                console.error('Chat socket closed unexpectedly');
+            };
+
+
+
+            document.querySelector('#chatinput').focus();
+            document.querySelector('#chatinput').onkeyup = function(e) {
+                if (e.keyCode === 13) {  // enter, return
+                    document.querySelector('#chatsub').click();
+                }
+            };
+
+            document.querySelector('#chatsub').onclick = function(e) {
+                var messageInputDom = document.querySelector('#chatinput');
+                var message = messageInputDom.value;
+                chatSocket[i].send(JSON.stringify({
+                    'message': message
+                }));
+
+                messageInputDom.value = '';
+            };
+        }
+
+
+
+
+    </script>
 </body>
 
 </html>

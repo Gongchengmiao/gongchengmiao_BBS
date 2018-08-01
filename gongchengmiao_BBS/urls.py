@@ -42,39 +42,28 @@ urlpatterns = [
     path('logout/', user_views.logout, name='logout'),
     path('verify/<uidb64>/<token>/', user_views.email_active, name='verify_user'),
     path('waitemail/<username>/', user_views.jump_to_wait, name='wait_email'),
-<<<<<<< HEAD
-
-    path('article/', include('article.urls', namespace='article')),
-
-
-    path('homepage/self', homepage_views.view_self_info, name='view_self_info'),
-    path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
-    path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
-
     path('waitemailback/<username>/', user_views.pswdgetback_jump, name='wait_email_back'),
     path('pswdgetback', user_views.pswdgetback, name='pswd_get_back'),
     path('pswdgetback/<uidb64>/<token>/', user_views.pswd_get_back_view, name='pswd_get_beck_2'),
     path('pswdgetbackjmp/<username>/', user_views.pswdgetback_jump, name='pswdgetback_jump'),
 
-    path('chat/', chat_views.index, name='chat_index'),
-    path('chat/<room_name>/', chat_views.room, name='room')
-
-=======
-    path('admin/', admin.site.urls, name='admin'),
+    path('article/', include('article.urls', namespace='article')),
     path('article/article-detail/<int:pid>/<slug:slug>/', article_views.article_detail, name='article_detail'),
     path('article/article-post/', article_views.article_post, name='article_post'),
     path('article/', article_views.article_post, name="article_post"),
     path('article/like-article/', article_views.like_article, name="like_article"),
     path('search/', search_views.MySearchView(), name='haystack_search'),
 
+    path('homepage/self', homepage_views.view_self_info, name='view_self_info'),
+    path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
+    path('homepage/uid=<username>', homepage_views.show_info, name='show_info'),
 
 
-    path('index_core/', index_views.index, name='index_core'),
-    path('pswdgetback', user_views.pswdgetback, name='pswd_get_back'),
-    path('waitemailback/<username>/', user_views.pswdgetback_jump, name='wait_email_back'),
+
+    path('chat/', chat_views.index, name='chat_index'),
+    path('chat/<room_name>/', chat_views.room, name='room'),
 
     path('homepage/self/', homepage_views.view_self_info, name='view_self_info'),
-    # path('self/', homepageViews.view_self_info, name='view_self_info'),
     path('homepage/edit/', homepage_views.edit_info, name='edit_info'),
     path('homepage/uid=<slug>/', homepage_views.show_info, name='show_info'),
     path('homepage/ajax_follow', homepage_views.show_info_ajax_follow, name='show_info_ajax_follow'),
@@ -92,10 +81,6 @@ urlpatterns = [
     path('section/open_posts_list', section_views.section_open_posts_list, name='open_posts_list'),
     path('section/follow_sec', section_views.section_follow, name='section_follow'),
 
-    path('pswdgetback/<uidb64>/<token>/', user_views.pswd_get_back_view, name='pswd_get_beck_2'),
-    path('pswdgetbackjmp/<username>/', user_views.pswdgetback_jump, name='pswdgetback_jump'),
-
     path('ueditor/', include('DjangoUeditor.urls'))
->>>>>>> zh_dev
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

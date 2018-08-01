@@ -254,7 +254,7 @@ function Alljustice() {
             Friend3.classList.add("info-element");
         }
         if(color4 == true){
-            Friend4.classList.remove("white-element");
+            Friend4.classList.remove("white-element");room_name
             Friend4.classList.add("info-element");
         }
         if(color5 == true){
@@ -266,7 +266,7 @@ function Alljustice() {
             Friend6.classList.add("info-element");
         }
     }
-    if(color2 == true){
+    if(color2 == true){room_name
         if(color1 == true){
             Friend1.classList.remove("white-element");
             Friend1.classList.add("info-element");
@@ -274,7 +274,7 @@ function Alljustice() {
         if(color3 == true){
             Friend3.classList.remove("white-element");
             Friend3.classList.add("info-element");
-        }
+        }id="zhmsgtest"
         if(color4 == true){
             Friend4.classList.remove("white-element");
             Friend4.classList.add("info-element");
@@ -284,12 +284,12 @@ function Alljustice() {
             Friend5.classList.add("info-element");
         }
         if(color6 == true){
-            Friend6.classList.remove("white-element");
+            Friend6.classList.remove("white-element");room_name
             Friend6.classList.add("info-element");
         }
     }
     if(color3 == true){
-        if(color1 == true){
+        if(color1 == true){id="zhmsgtest"
             Friend1.classList.remove("white-element");
             Friend1.classList.add("info-element");
         }
@@ -308,7 +308,7 @@ function Alljustice() {
         if(color6 == true){
             Friend6.classList.remove("white-element");
             Friend6.classList.add("info-element");
-        }
+        }room_name
     }
     if(color4 == true){
         if(color1 == true){

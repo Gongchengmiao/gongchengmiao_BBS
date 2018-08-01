@@ -8,15 +8,30 @@ from django.conf import settings
 from django.utils import timezone
 import datetime
 import functools
+from django.utils.safestring import mark_safe
+import json
 
 
 # Create your views here.
 def index_shell(request):
     user = request.user
+    room_name = 'abc'
+    # friends_list = user.followers.all()
+    friends_list = common_member.objects.all()
+
+    def new_room_name(user1, user2):
+        if user1.username < user2.username:
+            return user1.username + user2.username
+        else:
+            return user2.username + user1.username
+
+    room_name_list = list(map(lambda item: new_room_name(user, item), friends_list))
 
     context = {
         'user': user,
-
+        'friend_list': friends_list,
+        'room_name_json': mark_safe(json.dumps(room_name)),
+        'room_name_list': mark_safe(json.dumps(room_name_list)),
     }
     return render(request, "x_whole_demo.html", context)
 

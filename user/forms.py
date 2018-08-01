@@ -118,10 +118,10 @@ class UserRegisterForm(forms.Form):
         ),
     )
 
-    confirm_message = forms.BooleanField(
-        required=True,
-        widget=forms.CheckboxInput(),
-    )
+    # confirm_message = forms.BooleanField(
+    #     required=True,
+    #     widget=forms.CheckboxInput(),
+    # )
 
 
 # 用户找回密码表单
