@@ -57,6 +57,8 @@ class ArticlePost(models.Model):
 
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="articles_like", blank=True)
 
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes')
+
     def __str__(self):
         return self.title
 
@@ -66,6 +68,15 @@ class ArticlePost(models.Model):
 
     def get_url(self):  # ⑥
         return reverse("article_detail", args=[self.pid, self.slug])
+
+    @property
+    def total_likes(self):
+        """
+        Likes for the company
+        :return: Integer: Likes for the company
+        """
+        return self.likes.count()
+        #return int(3)
 
 
 # 帖子浏览量信息

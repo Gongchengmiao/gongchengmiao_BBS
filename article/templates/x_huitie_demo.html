@@ -1,5 +1,4 @@
 {% load staticfiles %}
-{% with total_likers=article.users_like.count users_like=article.users_like.all %}
 <!DOCTYPE html>
 <html>
 
@@ -36,11 +35,47 @@
 
 
 
-<form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-  <input type="search" name="q" placeholder="搜索" required>
-  <button type="submit"><span class="ion-ios-search-strong"></span></button>
-</form>
+<form action="/search" method="get">
 
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="search-form">
+                                <table>
+                                    <div class="input-group">
+                                    <input name="q" type="text" placeholder="搜索您感兴趣的内容" class="form-control input-lg">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-lg btn-primary" type="submit">
+                                            搜索
+                                        </button>
+                                    </div>
+                                </div>
+                                </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+
+
+    <!-- 自定义js -->
+    <script src="{% static "js/content.js" %}"></script>
+
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <!--统计代码，可删除-->
+
+</form>
 
 
 
@@ -79,7 +114,7 @@
                             </div>
                         </td>
                       <!--  <p>
-                            <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">{{ total_likes }}like{{ total_likes|pluralize }}</span>
+                            <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">like</span>
                             <span style="margin-left:20px">{{ total_views }}view{{ total_views | pluralize }}</span>
                         </p>
                         -->
@@ -185,8 +220,28 @@
                         <td class="plc plm" valign="top" style="height:1px;">
                     <div id="p_btn" class="mtw mbm cl">
                         <a id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'"><i><img src="http://att.bbs.duowan.com/static/image/common/fav.gif" alt="收藏">收藏<span id="favoritenumber">6</span></i></a>
-                        <a id="recommend_add" onclick="like_article({{ article.pid }}, 'like')" href="#" class="subject-recommend-add"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add">{{ total_likes }}</span></i></a>
-                        <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">{{ total_likes }}3like{{ total_likes | pluralize }}</span>
+                        <a id="recommend_add" onclick="like_article({{ article.pid }}, 'like')" href="#" class="subject-recommend-add"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add"></span></i></a>
+                        <input type="button" id="like" name="{{ article.slug }}" value="Like" />
+                        <p>{{ article.total_likes }}</p>
+
+<script>
+$('#like').click(function(){
+      $.ajax({
+               type: "POST",
+               url: "{% url 'like' %}",
+               data: {'slug': $(this).attr('2'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+               success: function(response) {
+                      {#alert(response.message);#}
+                      {#alert('Company likes count is now ' + response.likes_count);#}
+                },
+                error: function(rs, e) {
+                       {#alert(rs.responseText);#}
+                }
+          });
+    })
+</script>
+                     <!--   <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">3like</span>-->
         <span style="margin-left: 20px">{{ total_views }}view{{ total_views | pluralize }}</span>
                         <!--<a id="recommend_subtract" href="forum.php?mod=misc&amp;action=recommend&amp;do=subtract&amp;tid=46338365&amp;formhash=24d3bf46"  onclick="showWindow('login', this.href)" onmouseover="this.title = $('recommendv_subtract').innerHTML + ' 人反对'"><i><img src="http://att.bbs.duowan.com/static/image/common/rec_subtract.gif" alt="反对" />反对<span id="recommendv_subtract">0</span></i></a>-->
                     </div>
@@ -1808,4 +1863,3 @@
 <div id="udbsdk_login_normal" class="udbsdk_login"><iframe id="udbsdk_frm_normal" class="udbsdk_frm" src="about:blank" frameborder="0" scrolling="no" allowtransparency="true"></iframe></div><div id="udbsdk_cookieFrm" style="width:0px;height:0px;"><iframe id="udbsdk_writeCookieFrm_normal" src="about:blank" frameborder="0" scrolling="no" style="width:0px;height:0px;"></iframe><iframe id="udbsdk_deleteCookieFrm_normal" src="about:blank" frameborder="0" scrolling="no" style="width:0px;height:0px;"></iframe></div><div id="KC_DIV_F" style="display: none; left: 577.5px; top: 200px; position: fixed; background: transparent; z-index: 9999;"><div id="KC_CLOSE_DIV" title="关闭" style="position: absolute; top: 0px; right: 0px; width: 42px; height: 33px; cursor: pointer; z-index: 9999;"></div><div id="KC_YOUHAO_DIV" style="position: absolute; top: 0px; left: 0px; width: 553px; height: 390px; background-color: transparent; z-index: 99999;"><div style="margin:0 auto;margin-top:150px;color:red;width:250px;font-size:20px;position: relative;"><img src="http://img.kuai.xunlei.com/img/v2/loading2.gif"><div style="width:250px;height:50px;position: absolute;top:4px;left:40px;font-size: 17px;">正在努力加载...</div></div></div><div id="KC_TUO_DIV" style="position: absolute; top: 0px; left: 80px; width: 427px; height: 33px; cursor: move; z-index: 9999;"></div><iframe frameborder="0" scrolling="no" width="553" height="390" src=""></iframe></div><div style="position: static; display: none; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;"><div id="trans-tooltip"><div id="tip-left-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-top.png&quot;);"></div><div id="tip-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-top.png&quot;) repeat-x;"></div><div id="tip-right-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-top.png&quot;);"></div><div id="tip-right" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right.png&quot;) repeat-y;"></div><div id="tip-right-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-bottom.png&quot;);"></div><div id="tip-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-bottom.png&quot;) repeat-x;"></div><div id="tip-left-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-bottom.png&quot;);"></div><div id="tip-left" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left.png&quot;);"></div><div id="trans-content"></div></div><div id="tip-arrow-bottom" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-bottom.png&quot;);"></div><div id="tip-arrow-top" style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-top.png&quot;);"></div></div></body>
 
 </html>
-{% endwith %}
