@@ -393,7 +393,7 @@
             };
 
             chatSocket.onclose = function(e) {
-                console.error('Chat socket closed unexpectedly');
+                {#console.error('Chat socket closed unexpectedly');#}
             };
 
             function Update_i(ev) {
@@ -408,6 +408,8 @@
 
             function Clear_tab(ev) {
                 document.getElementById("chatshow").innerHTML = "";
+                chatSocket[i[6]-1].send("/plaese/send/me/the/log")
+
             }
 
             document.querySelector('#chatinput').focus();

@@ -52,22 +52,34 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     # Receive message from WebSocket
     async def receive(self, text_data=None, bytes_data=None):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-        text = self.user.username + ': ' + message
+        try:
+            text_data_json = json.loads(text_data)
+            message = text_data_json['message']
+            text = self.user.username + ': ' + message
 
-        await self.add_chatlog(self.group, self.user, message)
+            await self.add_chatlog(self.group, self.user, message)
 
-        # Send message to room group
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'chat_message',
-                'message': message,
-                'user': self.user.username,
-                'time': timezone.now().strftime("%Y-%m-%d %H:%M:%S"),
-            }
-        )
+            # Send message to room group
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'message': message,
+                    'user': self.user.username,
+                    'time': timezone.now().strftime("%Y-%m-%d %H:%M:%S"),
+                }
+            )
+        except json.JSONDecodeError:
+            if(text_data == '/plaese/send/me/the/log'):
+                chatlog_list = await self.get_chatlogs(self.group)
+
+                for chatlog_ in reversed(chatlog_list):
+                    await self.send(text_data=json.dumps({
+                        'message': chatlog_.chat_text,
+                        'user': chatlog_.chat_speaker.username,
+                        'time': chatlog_.chat_time.strftime("%Y-%m-%d %H:%M:%S"),
+                        'is_user': self.user.username == chatlog_.chat_speaker.username,
+                    }))
 
     # Receive message from room group
     async def chat_message(self, event):
