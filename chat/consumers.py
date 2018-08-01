@@ -2,7 +2,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 from .models import ChatGroup, ChatLog
 from channels.db import database_sync_to_async
-
+from django.utils import timezone
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
@@ -37,6 +37,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             await self.send(text_data=json.dumps({
                 'message': chatlog_.chat_text,
                 'user': chatlog_.chat_speaker.username,
+                'time': chatlog_.chat_time.strftime("%Y-%m-%d %H:%M:%S"),
+                'is_user': self.user.username == chatlog_.chat_speaker.username,
             }))
 
 
@@ -63,6 +65,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'type': 'chat_message',
                 'message': message,
                 'user': self.user.username,
+                'time': timezone.now().strftime("%Y-%m-%d %H:%M:%S"),
             }
         )
 
@@ -70,11 +73,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def chat_message(self, event):
         message = event['message']
         user = event['user']
+        time = event['time']
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'message': message,
             'user': user,
+            'time': time,
+            'is_user': self.user.username == user,
         }))
 
     @database_sync_to_async

@@ -176,10 +176,10 @@
             <div class="heading">
                 <h4 >好友列表</h4>
             </div>
-            <div class="content" onload="IsRecieve()">
+            <div class="content" onload="IsRecieve()" onclick="Update_i(event)">
                 <ul class="sortable-list connectList agile-list" style="height: 275px;overflow: auto;">
                     {% for friend in friend_list %}
-                        <li  id="friend4" class="info-element" >
+                        <li  id="friend1" class="info-element" >
                             <img class="img-circle" src="{% get_media_prefix %}{{ friend.portrait }}" style="width: 30px">
                             <h5 class="pull-right" style="text-align: center;">{{ friend.username }}</h5>
                         </li>
@@ -339,19 +339,69 @@
                 'ws://' + window.location.host +
                 '/ws/chat/' + room_name_list[i] + '/');
 
-            chatSocket.onmessage = function(e) {
+            chatSocket[i].onmessage = function(e) {
                 var data = JSON.parse(e.data);
                 var message = data['message'];
                 var user = data['user'];
+                var time = data['time'];
+                var is_user = data['is_user'];
+                console.log(message + user + time + is_user);
+                var Words = document.getElementById("chatshow");
+                var str = "";
                 console.log(message);
-                document.querySelector('#zhmsgtest').innerHTML = message;
+                {#document.querySelector('#zhmsgtest').innerHTML = message;#}
+
+                if(is_user == false){
+                    str =   '<div class="left">' +
+                        '<div class="author-name">' +
+                        '<strong>'+user+'</strong>' +
+                        '<small class="chat-date">' +
+                        time +
+                        '</small>' +
+                        '</div>' +
+                        '<div class="chat-message active">' +
+                        message +
+                        '</div>' +
+                        '</div>'
+                        +'<br>';
+                }
+                else{
+                    str =   '<div class="right">' +
+                        '<div class="author-name">' +
+                        '<strong>'+'我'+'</strong>' +
+                        '<small class="chat-date">' +
+                        time +
+                        '</small>' +
+                        '</div>' +
+                        '<div class="chat-message active">' +
+                        message +
+                        '</div>' +
+                        '</div>'
+                        +'<br>';
+                }
+
+
+                if (str != "") {
+                    Words.innerHTML = Words.innerHTML + str;
+                    Words.scrollTop = Words.scrollHeight;
+                }
+
             };
 
             chatSocket.onclose = function(e) {
                 console.error('Chat socket closed unexpectedly');
             };
 
-
+            function Update_i(ev) {
+                alert(ev.target.tagName.toUpperCase());
+                if(ev.target.tagName.toUpperCase() !== "LI") {
+                    i = ev.target.parentNode.id;
+                }
+                else {
+                    i = ev.target.id;
+                }
+                console.log(i)
+            }
 
             document.querySelector('#chatinput').focus();
             document.querySelector('#chatinput').onkeyup = function(e) {
@@ -364,7 +414,9 @@
             document.querySelector('#chatsub').onclick = function(e) {
                 var messageInputDom = document.querySelector('#chatinput');
                 var message = messageInputDom.value;
-                chatSocket[i].send(JSON.stringify({
+                var j = i[6];
+                console.log(chatSocket[j-1]);
+                chatSocket[j-1].send(JSON.stringify({
                     'message': message
                 }));
 
