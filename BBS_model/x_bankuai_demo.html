@@ -19,6 +19,9 @@
     <link href="css/style_35_forum_viewthread.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
     <script type="text/javascript" src="js/origional.js"></script>
 
@@ -231,6 +234,39 @@
                             </div>
 
                             <div class="hr-line-dashed"></div>
+                            <!--以下是文本编辑器，用于回帖-->
+
+                            <div class="row">
+                                <h2 style="color: grey;margin-left: 18px">快速发帖</h2><a href="x_fatie_demo.html" class="atest pull-right" style="margin-right: 12px"><button class="btn btn-success">详细发帖界面</button></a>
+                            </div>
+                            <div class="mail-body">
+
+                                <form class="form-horizontal " method="get">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">帖子标题：</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" value="" maxlength="60" required placeholder="标题长度在1~60字...">
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="mail-text h-200" style="min-height: 28vmin">
+                                <div class="summernote">
+                                    <h2>这里可以快速fa帖</h2>
+                                    <p>采用了summernote文本编辑插件</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="mail-body text-right tooltip-demo" style="padding: 2.8vmin">
+                                <a href="" class="btn btn-sm btn-primary atest" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> 发表</a>
+                                <a href="" class="btn btn-white btn-sm atest" data-toggle="tooltip" data-placement="top" title="Discard"><i class="fa fa-times"></i> 放弃</a>
+                            </div>
+                            <div class="clearfix"></div>
+
                         </div>
 
                     </div>
@@ -245,6 +281,37 @@
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 <script src="js/origional.js"></script>
+
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- SUMMERNOTE -->
+<script src="js/plugins/summernote/summernote.min.js"></script>
+<script src="js/plugins/summernote/summernote-zh-CN.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+
+        $('.summernote').summernote({
+            lang: 'zh-CN',
+            height: 200
+        });
+
+    });
+    var edit = function () {
+        $('.click2edit').summernote({
+            focus: true
+        });
+    };
+    var save = function () {
+        var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+        $('.click2edit').destroy();
+    };
+</script>
 
 <!-- 自定义js -->
 <script src="js/content.js?v=1.0.0"></script>
