@@ -8255,3 +8255,7 @@ body.skin-3 {
 .atest{
 
 }
+
+.collapse-link{
+    cursor: pointer;
+}
