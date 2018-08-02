@@ -61,7 +61,12 @@ def index(request):
     )
     total_views = {}
     for article in articles:
-        total_views[article] = r.get("article:{}:views".format(article.pid))
+        temp = r.get("article:{}:views".format(article.pid))
+        if temp is None:
+            temp = 0
+        else:
+            temp = int.from_bytes(temp, byteorder='big') - 48
+        total_views[article] = temp
     top_ten = sorted(total_views.items(), key=lambda item: item[1], reverse=True)[0:10]
     top_ten_list = functools.reduce(lambda x, y: x.append(y) or x, map(lambda x: x[0], top_ten), [])
 
