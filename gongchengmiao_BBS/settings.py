@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import sys
-from secrets_zh import mail_passwd
+#from secrets_zh import mail_passwd
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -183,7 +183,7 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.ustc.edu.cn'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'paulzh@mail.ustc.edu.cn'
-EMAIL_HOST_PASSWORD = mail_passwd
+#EMAIL_HOST_PASSWORD = mail_passwd
 # EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -231,3 +231,5 @@ HAYSTACK_CONNECTIONS = {
 
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+APPEND_SLASH = False

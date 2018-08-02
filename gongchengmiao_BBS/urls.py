@@ -55,7 +55,7 @@ urlpatterns = [
     path('article/like-article/', article_views.like_article, name="like_article"),
     path('search/', search_views.MySearchView(), name='haystack_search'),
 
-    path('like/', article_views.like, name='like'),
+    #path('article/like/', article_views.like, name='like'),
 
     path('chat/', chat_views.index, name='chat_index'),
     path('chat/<room_name>/', chat_views.room, name='room'),
