@@ -91,7 +91,9 @@
 
     <div id="pt" class="bm cl">
         <div class="z">
-            <a href="{% url 'index' %}" class="nvhm" title="首页">USTCBBS</a> <em>›</em> <a href="x_BBS_index_demo.html">首页</a> <em>›</em> <a href="x_bankuai_demo.html">板块名称</a> <em>›</em> <a href="x_huitie_demo.html">帖子标题</a>
+            <a href="{% url 'index' %}" class="atest    " title="首页">USTCBBS</a> <em>›</em> <a href="{% url 'index_core' %}" class="atest">首页</a>
+{#            <em>›</em> <a href="x_bankuai_demo.html">板块名称</a> #}
+            <em>›</em> <a >帖子标题</a>
         </div>
     </div><!--左上角导航路径-->
 
@@ -162,7 +164,7 @@
                         <tr>
                         <td class="pls" rowspan="2">
                         <a name="newpost"></a> <div class="pi clearfix">
-                        <div class="authi" id="authi_708605202"><a href="" target="_blank" class="xw1">{{ article.author }}</a>
+                        <div class="authi" id="authi_708605202"><a href="{% url "show_info" author.slug %}" target="_blank" class="xw1">{{ article.author }}</a>
                         </div>
                     </div>
                         <!-- 名片开始 -->
@@ -174,17 +176,17 @@
                         </div>
                         <!-- 名片结束-->
                         <div>
-                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605202')"><a href="" target="_blank">{% load static %}<img class="img-circle" src="{% get_media_prefix %}{{ article.author.portrait }}"></a></div>
+                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605202')"><a href="{% url "view_self_info" %}" target="_blank">{% load static %}<img class="img-circle" src="{% get_media_prefix %}{{ article.author.portrait }}"></a></div>
                         <!--<div class="rank-value"><span class="prank-backimg" style="background:url(http://att.bbs.duowan.com/forum/201511/30/175221nn5wz25xgzxfz2wx.png) no-repeat;"></span><div class="rank-value-tip tip"><i></i><div><em>本版排名：<span class="user-prank" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em>本版声望：<span class="user-pvalue" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em style="color:#888;">荣誉黄鸡</em><span class="user-pinfo-uid" style="display:none;">61898532</span><a href="plugin.php?id=prestige:prestige_intro&amp;fid=1345" title="">[声望说明]</a></div></div></div>-->
                         <div id="g_up708605202_menu" class="tip tip_4" style="display: none;">
                             <div class="tip_horn"></div>
                         </div>
-                        <ul class="xl xl2 o cl">
+{#                      <ul class="xl xl2 o cl">#}
                             <!--<li class="callon"><a href="space-uid-61898532.html" target="_blank" title="串个门" class="xi2">串个门</a></li>-->
-                            <li class="pm2"><a href="home.php?mod=space&amp;do=pm&amp;action=send&amp;handlekey=showmsg_61898532&amp;uid=61898532&amp;pid=708605202&amp;tid=46338365" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
-                            <li class="buddy"><a href="home.php?mod=spacecp&amp;ac=friend&amp;op=add&amp;uid=61898532&amp;handlekey=addfriendhk_61898532" id="a_friend_li_708605202" onclick="showWindow(this.id, this.href, 'get', 1, {'ctrlid':this.id,'pos':'00'});" title="加好友" class="xi2">加好友</a></li>
+{#                            <li class="pm2"><a href="home.php?mod=space&amp;do=pm&amp;action=send&amp;handlekey=showmsg_61898532&amp;uid=61898532&amp;pid=708605202&amp;tid=46338365" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>#}
+{#                            <li class="buddy"><a href="home.php?mod=spacecp&amp;ac=friend&amp;op=add&amp;uid=61898532&amp;handlekey=addfriendhk_61898532" id="a_friend_li_708605202" onclick="showWindow(this.id, this.href, 'get', 1, {'ctrlid':this.id,'pos':'00'});" title="加好友" class="xi2">加好友</a></li>#}
                             <!--<li class="poke2"><a href="home.php?mod=spacecp&amp;ac=poke&amp;op=send&amp;uid=61898532" id="a_poke_li_708605202" onclick="showWindow(this.id, this.href, 'get', 0);" title="打招呼" class="xi2">打招呼</a></li>-->
-                        </ul>
+{#                        </ul>#}
                         </div>
                     </td>
 
@@ -268,7 +270,7 @@ $('#like').click(function(){
 
                                 <p>
                                     <!--<a href="javascript:;" id="mgc_post_708605202" onmouseover="showMenu(this.id)" class="showmenu">使用道具</a>-->
-                                    <a href="javascript:;" onclick="showWindow('miscreport708605202', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605202&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>
+{#                                    <a href="javascript:;" onclick="showWindow('miscreport708605202', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605202&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>#}
                                 </p>
 
 
@@ -312,7 +314,7 @@ $('#like').click(function(){
                             <tr>
                                 <td class="pls" rowspan="2">
                         <div class="pi clearfix">
-                            <div class="authi" id="authi_708605421"><a href="" target="_blank" class="xw1">{{ comment.commentator }}</a>
+                            <div class="authi" id="authi_708605421"><a href="{% url 'show_info' comment.commentator.slug %}" target="_blank" class="xw1">{{ comment.commentator }}</a>
 
                             </div>
                         </div>
@@ -323,8 +325,7 @@ $('#like').click(function(){
                             </div>
                             <div class="i y">
                                 <div>
-                                    <strong><a href="space-uid-58928499.html" target="_blank" class="xi2">{{ comment.commentator }}</a></strong>
-                                    <em>当前离线</em>
+                                    <strong><a href="{% url 'show_info' comment.commentator.slug %}" target="_blank" class="xi2">{{ comment.commentator }}</a></strong>
                                 </div>
 
 
@@ -334,17 +335,17 @@ $('#like').click(function(){
                         </div>
                         <!-- 名片结束-->
                         <div>
-                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605421')"><a href="" target="_blank"><img src="{% get_media_prefix %}{{ comment.commentator.portrait }}" class="img-circle" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_big.jpg'"></a></div>
+                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605421')"><a href="{% url 'show_info' comment.commentator.slug %}" target="_blank"><img src="{% get_media_prefix %}{{ comment.commentator.portrait }}" class="img-circle" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_big.jpg'"></a></div>
                         <div id="g_up708605421_menu" class="tip tip_4" style="display: none;">
                             <div class="tip_horn"></div>
                         </div>
                         <dl class="pil clearfix">
-                        <ul class="xl xl2 o cl">
-                            <!--<li class="callon"><a href="space-uid-61898532.html" target="_blank" title="串个门" class="xi2">串个门</a></li>-->
-                            <li class="pm2"><a href="home.php?mod=space&amp;do=pm&amp;action=send&amp;handlekey=showmsg_61898532&amp;uid=61898532&amp;pid=708605202&amp;tid=46338365" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
-                            <li class="buddy"><a href="home.php?mod=spacecp&amp;ac=friend&amp;op=add&amp;uid=61898532&amp;handlekey=addfriendhk_61898532" id="a_friend_li_708605202" onclick="showWindow(this.id, this.href, 'get', 1, {'ctrlid':this.id,'pos':'00'});" title="加好友" class="xi2">加好友</a></li>
-                            <!--<li class="poke2"><a href="home.php?mod=spacecp&amp;ac=poke&amp;op=send&amp;uid=61898532" id="a_poke_li_708605202" onclick="showWindow(this.id, this.href, 'get', 0);" title="打招呼" class="xi2">打招呼</a></li>-->
-                        </ul>
+{#                        <ul class="xl xl2 o cl">#}
+{#                            <!--<li class="callon"><a href="space-uid-61898532.html" target="_blank" title="串个门" class="xi2">串个门</a></li>-->#}
+{#                            <li class="pm2"><a href="home.php?mod=space&amp;do=pm&amp;action=send&amp;handlekey=showmsg_61898532&amp;uid=61898532&amp;pid=708605202&amp;tid=46338365" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>#}
+{#                            <li class="buddy"><a href="home.php?mod=spacecp&amp;ac=friend&amp;op=add&amp;uid=61898532&amp;handlekey=addfriendhk_61898532" id="a_friend_li_708605202" onclick="showWindow(this.id, this.href, 'get', 1, {'ctrlid':this.id,'pos':'00'});" title="加好友" class="xi2">加好友</a></li>#}
+{#                            <!--<li class="poke2"><a href="home.php?mod=spacecp&amp;ac=poke&amp;op=send&amp;uid=61898532" id="a_poke_li_708605202" onclick="showWindow(this.id, this.href, 'get', 0);" title="打招呼" class="xi2">打招呼</a></li>-->#}
+{#                        </ul>#}
                         </dl>
                     </td>
                                 <td class="plc">
@@ -396,7 +397,7 @@ $('#like').click(function(){
                                         <div class="pob cl">
                                         <em></em>
                                             <p>
-                                                <a href="javascript:;" onclick="showWindow('miscreport708605421', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605421&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>
+{#                                                <a class="atest"   href="javascript:;" onclick="showWindow('miscreport708605421', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605421&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>#}
                                             </p>
                                             <script type="text/javascript" reload="1">checkmgcmn('post_708605421')</script>
                                         </div>
@@ -415,38 +416,11 @@ $('#like').click(function(){
                 {% endfor %}
             {% endif %}
             <!-- 分页模块-->
-            <div class="pagination">
-                <span class="step-link">
-                    {% if page.has_previous %}
-                    <a href="?page={{ page.previous_page_number }}">Previous</a>
-                    {% endif %}
-                    <span class="current">
-
-                        Page {{ page.number }} of {{ page.paginator.num_pages }}
-                    </span>
-                    {% if page.has_next %}
-                    <a href="?page={{ page.next_page_number }}">Next</a>
-                    {% endif %}
-                </span>
-            </div>
 
 
 
             <!--分页模块结束-->
-            <!--  最热文章  -->
-            <div class="col-md-3">
-                <p class="text-center"><h3>最受欢迎的文章</h3></p>
-                <ol>
-                    {% for article_rank in most_viewed %}
-                    <li>
-                        <a href="{{ article_rank.geturl_path }}">{{ article_rank.title }}</a>
-                    </li>
-                    {% endfor %}
-                </ol>
-            </div>
 
-
-            <!--  最热文章结束  -->
 
                 <div id="postlistreply" class="pl">
                     <div id="post_new" class="viewthread_table" style="display: none">
@@ -465,7 +439,7 @@ $('#like').click(function(){
             <div class="text-center">
                 <div class="btn-group">
                     {% if page.has_previous %}
-                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"><a href="?page={{ page.previous_page_number }}">Previous</a></i>
+                        <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"><a class="atest" href="?page={{ page.previous_page_number }}">Previous</a></i>
                     </button>
                     {% endif %}
                     {% if page.count <= 5 %}
@@ -475,7 +449,7 @@ $('#like').click(function(){
                             Page {{ page.number }} of {{ page.paginator.num_pages }}
                             </span></button>
                             {% else %}
-                                <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"><a href="?page={{ foo }}">{{ foo }}</a></i>
+                                <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-left"><a class="atest" href="?page={{ foo }}">{{ foo }}</a></i>
                     </button>
                             {% endif %}
                         {% endfor %}
@@ -483,7 +457,7 @@ $('#like').click(function(){
                           {% if page.number == i %}
                             <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
                           {% else %}
-                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                            <li><a class="atest" href="?page={{ i }}">{{ i }}</a></li>
                           {% endif %}
                         {% endfor %}
                     {% else %}
@@ -497,7 +471,7 @@ $('#like').click(function(){
                     </span></button>
 
                     {% if page.has_next %}
-                    <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"><a href="?page={{ page.next_page_number }}">Next</a></i>
+                    <button class="btn btn-white" type="button"  style="color: #0a6aa1"><i class="fa fa-chevron-right"><a class="atest" href="?page={{ page.next_page_number }}">Next</a></i>
                     </button>
                     {% endif %}
                 </div>
@@ -854,14 +828,14 @@ $('#like').click(function(){
 
 
 <!-- 浮动导航条 -->
-<div id="mbbs-qrcode" style="width: 140px; cursor: pointer; position: fixed; display: none;">
-    <div id="mbbs_js_close" style="position: absolute;top: -5px;right: 12px;font-size: 14px;color: white;background-color: black;width: 15px;height: 15px;line-height: 15px;text-align: center;">X</div>
-    <a href="http://bbs.duowan.com/mobiapp/" target="_blank"><img src=""></a>
-</div>
-
-<div class="qrcode-download-bar" id="qrcodeDownloadBar" style="display:none;">
-    <a href="javascript:void(0)" onclick="closeQrcode();" class="close">关闭</a>
-</div>
+{#<div id="mbbs-qrcode" style="width: 140px; cursor: pointer; position: fixed; display: none;">#}
+{#    <div id="mbbs_js_close" style="position: absolute;top: -5px;right: 12px;font-size: 14px;color: white;background-color: black;width: 15px;height: 15px;line-height: 15px;text-align: center;">X</div>#}
+{#    <a href="http://bbs.duowan.com/mobiapp/" target="_blank"><img src=""></a>#}
+{#</div>#}
+{##}
+{#<div class="qrcode-download-bar" id="qrcodeDownloadBar" style="display:none;">#}
+{#    <a href="javascript:void(0)" onclick="closeQrcode();" class="close">关闭</a>#}
+{#</div>#}
 <script type="text/javascript">
     if(!getnoneprecookie('hideQrcode_db')) {
         //jQuery('#qrcodeDownloadBar').show();
