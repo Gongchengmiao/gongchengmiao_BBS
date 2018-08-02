@@ -77,9 +77,9 @@ def section_open_posts_list(request):
 def section_follow(request):
     sec_slug = request.GET.get('section_slug')
     section = SectionForum.objects.filter(slug=sec_slug).first()
-    test= section_follow_pair.objects.filter(section=section, user=request.user).all()
+    test = section_follow_pair.objects.filter(section=section, user=request.user).all()
     if test:
-        return HttpResponse('已经关注')
+        return JsonResponse({'info': '已经关注', 'num': ''})
     new_pair = section_follow_pair()
     new_pair.user = request.user
     new_pair.section = section
@@ -90,4 +90,4 @@ def section_follow(request):
     new_pair.save()
     new_pair_zh_def.save()
     section.save()
-    return HttpResponse('关注成功~')
+    return JsonResponse({'info': '关注成功', 'num': str(section.follower_num)})

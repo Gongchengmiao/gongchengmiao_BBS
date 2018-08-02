@@ -171,14 +171,18 @@ def edit_info(request):
 def show_info_ajax_follow(request):
     #print(request.GET.get("user_slug"))
     target_slug = request.GET.get("user_slug")
-    if target_slug != request.user.slug:
+    if target_slug == request.user.slug:
+        return JsonResponse({'info': '不能关注本人', 'num': ''})
+    else:
         target_user = common_member.objects.filter(slug=target_slug).first()
+        is_exist = follower_pair.objects.filter(followed=target_user, by=request.user).first()
+        if is_exist:
+            return JsonResponse({'info': '已经关注', 'num': ''})
         common_member.objects.filter(slug=target_slug).update(followed=target_user.followed + 1)
         common_member.objects.filter(username=request.user.username).update(following=request.user.following + 1)
         follower_pair.objects.create(followed=target_user, by=request.user)
-        return HttpResponse('关注成功')
-    else:
-        return HttpResponse('不能关注本人')
+        target_user = common_member.objects.filter(slug=target_slug).first()
+        return JsonResponse({'info': '关注成功', 'num': str(target_user.followed)})
 
 
 @login_required(login_url='/login/')
@@ -283,3 +287,5 @@ def delete_temp(request):
         if os.path.exists(path) and user.temp_portrait.name != '':
             os.remove(path)
     return HttpResponse('deleted')
+
+
