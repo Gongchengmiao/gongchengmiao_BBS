@@ -49,6 +49,9 @@
                             <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></h3>
                             <p>
                                 {{ result.object.ueditor_body }}
+                                {#striptags用于过滤正文中所有的HTML标签#}
+                                {#truncatechars用于截取正文前300个字符#}
+                                {{ result.object.ueditor_body|striptags|truncatechars:300 }}
                             </p>
                         </div>
             {% empty %}

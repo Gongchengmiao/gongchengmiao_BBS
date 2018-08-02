@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db import models
 from django import forms
 from .models import ArticleColumn, ArticlePost, Comment
+from django_summernote.admin import SummernoteModelAdmin
 
 
 class ArticleAdmin(admin.ModelAdmin):
