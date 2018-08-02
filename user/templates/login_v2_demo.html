@@ -45,7 +45,7 @@
 
                     {{ form.pasword.errors }}
                     {{ form.password }}
-                    <a href="{% url "pswd_get_back" %}">忘记密码了？</a>
+                    <p><a href="{% url "pswd_get_back" %}">忘记密码了？</a> | &nbsp; <a href={% url 'register' %}>注册一个新账号</a></p>
                     <button class="btn btn-success btn-block" type="submit">登录</button>
                 </form>
             </div>

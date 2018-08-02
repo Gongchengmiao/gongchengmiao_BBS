@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import SectionForum
 from article.models import ArticlePost
-from user.models import section_follow_pair
+from user.models import section_follow_pair, commom_member_watch
 from django.http import HttpResponse, JsonResponse
 import math
 # Create your views here.
@@ -83,7 +83,11 @@ def section_follow(request):
     new_pair = section_follow_pair()
     new_pair.user = request.user
     new_pair.section = section
+    new_pair_zh_def = commom_member_watch()
+    new_pair_zh_def.uid = request.user
+    new_pair_zh_def.section = section
     section.follower_num += 1
     new_pair.save()
+    new_pair_zh_def.save()
     section.save()
     return HttpResponse('关注成功~')

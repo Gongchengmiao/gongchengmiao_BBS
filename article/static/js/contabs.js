@@ -5,7 +5,6 @@
  *
 */
 
-$(function () {
     //计算元素集合的总宽度
     function calSumWidth(elements) {
         var width = 0;
@@ -165,6 +164,55 @@ $(function () {
 
     $('.J_menuItem').on('click', menuItem);
 
+    function aplus(dataUrl,dataIndex,menuName) {
+    // 获取标识数据
+    var flag = true;
+    if (dataUrl == "x_personal_page_show_demo.html")
+        menuName = "个人页面展示";
+    if (dataUrl == undefined || $.trim(dataUrl).length == 0)return false;
+
+    // 选项卡菜单已存在
+    $('.J_menuTab').each(function () {
+        if ($(this).data('id') == dataUrl) {
+            if (!$(this).hasClass('active')) {
+                $(this).addClass('active').siblings('.J_menuTab').removeClass('active');
+                scrollToTab(this);
+                // 显示tab对应的内容区
+                $('.J_mainContent .J_iframe').each(function () {
+                    if ($(this).data('id') == dataUrl) {
+                        $(this).show().siblings('.J_iframe').hide();
+                        return false;
+                    }
+                });
+            }
+            flag = false;
+            return false;
+        }
+    });
+
+    // 选项卡菜单不存在
+    if (flag) {
+        var str = '<a href="javascript:;" class="active J_menuTab" data-id="' + dataUrl + '">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
+        $('.J_menuTab').removeClass('active');
+
+        // 添加选项卡对应的iframe
+        var str1 = '<iframe class="J_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
+        $('.J_mainContent').find('iframe.J_iframe').hide().parents('.J_mainContent').append(str1);
+
+        //显示loading提示
+//            var loading = layer.load();
+//
+//            $('.J_mainContent iframe:visible').load(function () {
+//                //iframe加载完成后隐藏loading提示
+//                layer.close(loading);
+//            });
+        // 添加选项卡
+        $('.J_menuTabs .page-tabs-content').append(str);
+        scrollToTab($('.J_menuTab.active'));
+    }
+    return false;
+}
+
 
 
     // 关闭选项卡菜单
@@ -317,4 +365,3 @@ $(function () {
         $('.page-tabs-content').css("margin-left", "0");
     });
 
-});
