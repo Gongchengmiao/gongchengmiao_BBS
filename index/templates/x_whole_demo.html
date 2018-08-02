@@ -33,7 +33,7 @@
                 <ul class="nav" id="side-menu" >
                     <li class="nav-header" style="background: #0e9aef;background: url('/static/css/patterns/header-profile-skin-1.png');">
                         <div class="dropdown profile-element">
-                            <a href="{% url "view_self_info" %}">
+                            <a href="{% url "view_self_info" %}" class="atest">
                                 <span class="boxT"><img alt="image" class="img-circle" src="{% get_media_prefix %}{{ user.portrait }}" /></span>
                             </a>
 
@@ -43,7 +43,7 @@
                                 <span class="text-muted text-xs block" style="color:black;">{{ user.username }}<b class="caret"></b></span>
                                 </span>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs " style="color:black;">
-                                <li><a class="J_menuItem" href="{% url "view_self_info" %}" style="color:black;">个人页面</a>
+                                <li><a class="J_menuItem" href="{% url "view_self_info" %}" style="color:black;">我的主页</a>
                                 </li>
 {#                                <li><a class="J_menuItem" href="x_mailbox_demo.html" style="color:black;">信箱</a>#}
 {#                                </li>#}
