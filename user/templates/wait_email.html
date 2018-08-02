@@ -3,26 +3,38 @@
 {% include "head.html" %}
 <body>
 {% if success %}
-    <div class="alert alert-success">
+    <div class="alert alert-success" id="jump">
         邮件发送成功！
     </div>
 {% elif head_wrong %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" >
     邮件头错误, 请重新注册！
     </div>
 {% elif time_less %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" >
     请不要重复提交！
     </div>
 {% elif method_wrong %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" >
     请求错误, 请从新登入界面！
     </div>
 {% elif identified %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" >
     您已经通过邮箱验证了，请不要重复验证！
     </div>
 {% endif %}
 {% include "js_use.html" %}
+<script>
+    function countDown(secs){
+        if(--secs>0){
+            document.getElementById("jump").innerHTML = "邮件发送成功！ 等待"+ secs + "秒跳转回主界面" ;
+            setTimeout("countDown("+secs+")",1000);
+        }
+        else {
+            window.location.href="{% url "main" %}";
+        }
+    }
+    countDown(3);
+</script>
 </body>
 </html>
