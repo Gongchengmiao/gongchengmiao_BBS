@@ -24,7 +24,7 @@ class SectionForum(models.Model):
         ('tit', 'title')
     )
     display_order = models.CharField(max_length=3, choices=display_order_choices)
-    posts = models.IntegerField(default=0) # 帖子数量
+    posts = models.IntegerField(default=0)  # 帖子数量
     todayposts = models.IntegerField(default=0)
     lastpostid = models.ForeignKey('article.ArticlePost', null=True, default=None, on_delete=models.CASCADE)
     follower_num = models.IntegerField(default=0)
