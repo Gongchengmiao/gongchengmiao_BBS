@@ -11,7 +11,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="{% static "img/IMG_0466.jpg" %}">
+    <link rel="shortcut icon" href="img/ustc.png">
     <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
@@ -19,187 +19,280 @@
     <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
 </head>
 
 <body class="gray-bg">
-    <div class="wrapper wrapper-content" style="padding: 4vmin 2vmin 2vmin 2vmin">
-        <div class="row" style="margin-right: -1.5vmin;margin-left: -1.5vmin">
-            <div class="col-sm-3" >
-                <div class="ibox float-e-margins" style="margin-bottom: 2.5vmin">
-                    <div class="ibox-content mailbox-content" style="display: block;padding: 1vmin;font-size: 1.8vmin">
-                        <div class="file-manager">
-                            <a class="btn btn-block btn-info compose-mail" href="x_bankuai_demo.html" style="padding: 0.8vmin 1vmin">发帖</a>
-                            <div class="space-25" style="margin: 2.5vmin 0"></div>
-                            <ul class="folder-list m-b-md" style="padding: 0;margin-bottom: 2vmin">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-3 animated fadeInLeft">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content mailbox-content" style="display: block">
+                    <div class="file-manager">
+                        <a class="btn btn-block btn-info compose-mail" href="x_bankuai_demo.html">发帖</a>
+                        <div class="space-25"></div>
 
-                                <li>
-                                    <a href="x_caogao_demo.html"> <i class="fa fa-file-text-o"></i> 草稿 <span class="label label-info pull-right">2</span>
-                                    </a>
+                        <h5>分区</h5>
+                        <div class="btn-group btn-block">
+                            <button data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-block" id="qushow">A区:XXXX <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a id="Aqu">A区:XXXX</a>
                                 </li>
-
+                                <li><a id="Bqu">B区:XXXXX</a>
+                                </li>
+                                <li><a id="Cqu">C区:XXXXX</a>
+                                </li>
+                                <li><a id="Dqu">D区:XXXX</a>
+                                </li>
                             </ul>
-
-                            <h3 class="font-bold">分区</h3>
-                            <div class="btn-group">
-                                <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">A区<span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" style="left: 0;right: auto">
-                                    <li><a href="buttons.html#">1</a>
-                                    </li>
-                                    <li><a href="buttons.html#">2</a>
-                                    </li>
-                                    <li><a href="buttons.html#">3</a>
-                                    </li>
-                                    <li><a href="buttons.html#">4</a>
-                                    </li>
-                                </ul>
-                            </div>
-                                <div class="btn-group">
-                                    <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">B区<span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" style="left: 0;right: auto">
-                                        <li><a href="buttons.html#">1</a>
-                                        </li>
-                                        <li><a href="buttons.html#">2</a>
-                                        </li>
-                                        <li><a href="buttons.html#">3</a>
-                                        </li>
-                                        <li><a href="buttons.html#">4</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            <div class="btn-group">
-                                <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">C区 <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="buttons.html#">1</a>
-                                    </li>
-                                    <li><a href="buttons.html#">2</a>
-                                    </li>
-                                    <li><a href="buttons.html#">3</a>
-                                    </li>
-                                    <li><a href="buttons.html#">4</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="btn-group">
-                                <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">D区 <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="buttons.html#">1</a>
-                                    </li>
-                                    <li><a href="buttons.html#">2</a>
-                                    </li>
-                                    <li><a href="buttons.html#">3</a>
-                                    </li>
-                                    <li><a href="buttons.html#">4</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="btn-group">
-                                <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">E区 <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="buttons.html#">1</a>
-                                    </li>
-                                    <li><a href="buttons.html#" >2</a>
-                                    </li>
-                                    <li><a href="buttons.html#">3</a>
-                                    </li>
-                                    <li><a href="buttons.html#">4</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-9 animated fadeInRight" style="height: 100%">
-                <div class="mail-box-header" style="padding: 3vmin 2vmin 2vmin 2vmin">
-                    <h2>
-                    发帖
-                </h2>
-                </div>
-                <div class="mail-box" style="margin-bottom: 2vmin">
+                        <h5>板块</h5>
+                        <ul class="folder-list" style="padding: 0;display: block;" id="Alist">
+                            <li class="radio radio-warning">
+                                <input type="radio" name="bankuai" id="Abankuai1" value="Aoption1" >
+                                <label for="Abankuai1">
+                                    A区的板块1
+                                </label>
+                            </li>
+                            <li class="radio radio-danger">
+                                <input type="radio" name="bankuai" id="Abankuai2" value="Aoption2">
+                                <label for="Abankuai2">
+                                    A区的板块2
+                                </label>
+                            </li>
+                            <li class="radio radio-success">
+                                <input type="radio" name="bankuai" id="Abankuai3" value="Aoption3">
+                                <label for="Abankuai3">
+                                    A区的板块3
+                                </label>
+                            </li>
+                            <li class="radio radio-primary">
+                                <input type="radio" name="bankuai" id="Abankuai4" value="Aoption4">
+                                <label for="Abankuai4">
+                                    A区的板块4
+                                </label>
+                            </li>
+                            <li class="radio radio-info">
+                                <input type="radio" name="bankuai" id="Abankuai5" value="Aoption5">
+                                <label for="Abankuai5">
+                                    A区的板块5
+                                </label>
+                            </li>
+                            <li class="radio">
+                                <input type="radio" name="bankuai" id="Abankuai6" value="Aoption6">
+                                <label for="Abankuai6">
+                                    A区的板块6
+                                </label>
+                            </li>
 
+                        </ul>
+                        <ul class="folder-list" style="padding: 0;display: none" id="Blist">
+                            <li class="radio radio-warning">
+                                <input type="radio" name="bankuai" id="Bbankuai1" value="Boption1">
+                                <label for="Bbankuai1">
+                                    B区的板块1
+                                </label>
+                            </li>
+                            <li class="radio radio-danger">
+                                <input type="radio" name="bankuai" id="Bbankuai2" value="Boption2">
+                                <label for="Bbankuai2">
+                                    B区的板块2
+                                </label>
+                            </li>
+                            <li class="radio radio-success">
+                                <input type="radio" name="bankuai" id="Bbankuai3" value="Boption3">
+                                <label for="Bbankuai3">
+                                    B区的板块3
+                                </label>
+                            </li>
+                            <li class="radio radio-primary">
+                                <input type="radio" name="bankuai" id="Bbankuai4" value="Boption4">
+                                <label for="Bbankuai4">
+                                    B区的板块4
+                                </label>
+                            </li>
+                            <li class="radio radio-info">
+                                <input type="radio" name="bankuai" id="Bbankuai5" value="Boption5">
+                                <label for="Bbankuai5">
+                                    B区的板块5
+                                </label>
+                            </li>
+                            <li class="radio">
+                                <input type="radio" name="bankuai" id="Bbankuai6" value="Boption6">
+                                <label for="Bbankuai6">
+                                    B区的板块6
+                                </label>
+                            </li>
 
-                    <div class="mail-body"  style="margin-bottom: 0.5vmin;padding: 2vmin">
+                        </ul>
+                        <ul class="folder-list" style="padding: 0;display: none" id="Clist">
+                            <li class="radio radio-warning">
+                                <input type="radio" name="bankuai" id="Cbankuai1" value="Coption1">
+                                <label for="Cbankuai1">
+                                    C区的板块1
+                                </label>
+                            </li>
+                            <li class="radio radio-danger">
+                                <input type="radio" name="bankuai" id="Cbankuai2" value="Coption2">
+                                <label for="Cbankuai2">
+                                    C区的板块2
+                                </label>
+                            </li>
+                            <li class="radio radio-success">
+                                <input type="radio" name="bankuai" id="Cbankuai3" value="Coption3">
+                                <label for="Cbankuai3">
+                                    C区的板块3
+                                </label>
+                            </li>
+                            <li class="radio radio-primary">
+                                <input type="radio" name="bankuai" id="Cbankuai4" value="Coption4">
+                                <label for="Cbankuai4">
+                                    C区的板块4
+                                </label>
+                            </li>
+                            <li class="radio radio-info">
+                                <input type="radio" name="bankuai" id="Cbankuai5" value="Coption5">
+                                <label for="Cbankuai5">
+                                    C区的板块5
+                                </label>
+                            </li>
+                            <li class="radio">
+                                <input type="radio" name="bankuai" id="Cbankuai6" value="Coption6">
+                                <label for="Cbankuai6">
+                                    C区的板块6
+                                </label>
+                            </li>
 
-                        <form class="form-horizontal" method="get">
+                        </ul>
+                        <ul class="folder-list" style="padding: 0;display: none" id="Dlist">
+                            <li class="radio radio-warning">
+                                <input type="radio" name="bankuai" id="Dbankuai1" value="Doption1">
+                                <label for="Dbankuai1">
+                                    D区的板块1
+                                </label>
+                            </li>
+                            <li class="radio radio-danger">
+                                <input type="radio" name="bankuai" id="Dbankuai2" value="Doption2">
+                                <label for="Dbankuai2">
+                                    D区的板块2
+                                </label>
+                            </li>
+                            <li class="radio radio-success">
+                                <input type="radio" name="bankuai" id="Dbankuai3" value="Doption3">
+                                <label for="Dbankuai3">
+                                    D区的板块3
+                                </label>
+                            </li>
+                            <li class="radio radio-primary">
+                                <input type="radio" name="bankuai" id="Dbankuai4" value="Doption4">
+                                <label for="Dbankuai4">
+                                    D区的板块4
+                                </label>
+                            </li>
+                            <li class="radio radio-info">
+                                <input type="radio" name="bankuai" id="Dbankuai5" value="Doption5">
+                                <label for="Dbankuai5">
+                                    D区的板块5
+                                </label>
+                            </li>
+                            <li class="radio">
+                                <input type="radio" name="bankuai" id="Dbankuai6" value="Doption6">
+                                <label for="Dbankuai6">
+                                    D区的板块6
+                                </label>
+                            </li>
 
-                            <div class="form-group" style="margin-bottom: 0.5vmin">
-                                <label class="col-sm-2 control-label">主题：</label>
+                        </ul>
 
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" value="">
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-
-                    <div class="mail-text h-200">
-
-                        <div class="summernote">
-
-                        </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="mail-body text-right tooltip-demo" style="padding: 2vmin">
-                        <a href="x_mailbox_demo.html" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> 发表</a>
-                        <a href="x_mailbox_demo.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> 放弃</a>
-                        <a href="x_mailbox_demo.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> 存为草稿</a>
-                    </div>
-                    <div class="clearfix"></div>
-
-
-
                 </div>
             </div>
         </div>
+        <div class="col-sm-9 animated fadeInRight" style="height: 100%">
+            <div class="mail-box-header" >
+                <h2>
+                    发帖
+                </h2>
+            </div>
+            <div class="mail-box">
+
+
+                <div class="mail-body">
+
+                    <form class="form-horizontal " method="get">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">帖子标题：</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" value="" maxlength="60" required placeholder="标题长度在1~60字...">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="mail-text h-200">
+
+                    <div class="summernote">
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a href="x_mailbox_demo.html" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> 发表</a>
+                    <a href="x_mailbox_demo.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard"><i class="fa fa-times"></i> 放弃</a>
+                    </div>
+                <div class="clearfix"></div>
+
+
+
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-    <!-- 自定义js -->
-    <script src="js/content.js?v=1.0.0"></script>
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/origional.js"></script>
 
 
-    <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
 
-    <!-- SUMMERNOTE -->
-    <script src="js/plugins/summernote/summernote.min.js"></script>
-    <script src="js/plugins/summernote/summernote-zh-CN.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
 
 
-            $('.summernote').summernote({
-                lang: 'zh-CN'
-            });
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
 
+<!-- SUMMERNOTE -->
+<script src="js/plugins/summernote/summernote.min.js"></script>
+<script src="js/plugins/summernote/summernote-zh-CN.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
         });
-        var edit = function () {
-            $('.click2edit').summernote({
-                focus: true
-            });
-        };
-        var save = function () {
-            var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
-            $('.click2edit').destroy();
-        };
-    </script>
+        $('.summernote').summernote({
+            lang: 'zh-CN',
+            height:200
+        });
+    });
+    var edit = function () {
+        $('.click2edit').summernote({
+            focus: true
+        });
+    };
+    var save = function () {
+        var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+        $('.click2edit').destroy();
+    };
+</script>
 
 </body>
 
