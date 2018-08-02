@@ -27,12 +27,20 @@ def index_shell(request):
 
     room_name_list = list(map(lambda item: new_room_name(user, item), friends_list))
 
+    sections = {}
+
+    for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
+        sections[i] = SectionForum.objects.filter(block=i)
+
+
     context = {
         'user': user,
         'friend_list': friends_list,
         'room_name_json': mark_safe(json.dumps(room_name)),
         'room_name_list': mark_safe(json.dumps(room_name_list)),
+        'sections_list': list(sections.items()),
     }
+    print(list(sections.items()))
     return render(request, "x_whole_demo.html", context)
 
 

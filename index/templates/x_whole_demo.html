@@ -56,29 +56,61 @@
                         <div class="logo-element">瀚海
                         </div>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-bookmark"></i>
-                            <span class="nav-label" style="color:black;">版面收藏栏</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level" style="background: #FFFFFF">
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html" data-index="0" >A区</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html">B区</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html">C区</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html">D区</a>
-                            </li>
+{#                    <li>#}
+{#                        <a href="#">#}
+{#                            <i class="fa fa-bookmark"></i>#}
+{#                            <span class="nav-label" style="color:black;">版面收藏栏</span>#}
+{#                            <span class="fa arrow"></span>#}
+{#                        </a>#}
+{#                        <ul class="nav nav-second-level" style="background: #FFFFFF">#}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">A区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">B区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">C区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">D区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
 
-                        </ul>
+{#                        </ul>#}
 
-                    </li>
+{#                    </li>#}
 
                     <li>
                         <a href="#">
@@ -87,20 +119,79 @@
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level" style="background: #FFFFFF">
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html" data-index="0">A区</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html">B区</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html">C区</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" style="color:black;" href="x_bankuai_demo.html">D区</a>
-                            </li>
+                            {% for i, sections in sections_list %}
+                                {% if sections %}
+                                    <li>
+                                        <a href="#" style="color: black">{{ sections.0.get_block_display }} <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level" style="background: #FFFFFF">
+                                            {% for section in sections %}
+                                                <li><a class="J_menuItem" style="color: black;" href="{% url "section_all" section_slug=section.slug %}">{{ section.name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">A区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">B区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">C区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#" style="color: black">D区 <span class="fa arrow"></span></a>#}
+{#                                <ul class="nav nav-third-level" style="background: #FFFFFF">#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块1</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块2</a>#}
+{#                                    </li>#}
+{#                                    <li><a class="J_menuItem" style="color: black;" href="x_bankuai_demo.html">板块3</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </li>#}
                         </ul>
                     </li>
+
+{#                    <li>#}
+{#                        <a href="x_mailbox_demo.html">#}
+{#                            <i class="fa fa-envelope"></i>#}
+{#                            <span class="nav-label" style="color:black;">信箱</span>#}
+{#                            <span class="fa arrow"></span>#}
+{#                        </a>#}
+{#                        <ul class="nav nav-second-level" style="background: #FFFFFF">#}
+{#                            <li><a class="J_menuItem" href="x_mailbox_demo.html" style="color:black;" >收件箱<span class="label label-warning pull-right">16</span></a>#}
+{#                            </li>#}
+{#                            <li><a class="J_menuItem" href="x_mail_send_demo.html" style="color:black;">发信息</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </li>#}
 
 {#                    <li>#}
 {#                        <a href="x_mailbox_demo.html">#}
