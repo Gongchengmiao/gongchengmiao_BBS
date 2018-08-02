@@ -47,7 +47,6 @@ class ArticlePost(models.Model):
     body = models.TextField()
     ueditor_body = UEditorField(width=600, height=300, null=True, toolbars="full", imagePath="images/", filePath="files/",
                                 upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='内容')
-
     isElite = models.BooleanField(default=False)
     pub_date = models.DateTimeField(auto_now_add=True, editable=True, db_index=True)
 

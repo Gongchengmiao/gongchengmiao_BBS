@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'chat',
     'DjangoUeditor',
     'haystack',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -203,6 +204,7 @@ CELERY_TIMEZONE = TIME_ZONE
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))

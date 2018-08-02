@@ -27,6 +27,10 @@ from article import search_views
 from section import views as section_views
 from haystack.views import SearchView
 from django.views.generic import TemplateView
+from django.conf.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
+
 # from django.conf.urls import url
 # from django.views.static import serve as static_serve
 # from gongchengmiao_BBS.settings import STATIC_ROOT
@@ -78,6 +82,7 @@ urlpatterns = [
     path('section/open_posts_list', section_views.section_open_posts_list, name='open_posts_list'),
     path('section/follow_sec', section_views.section_follow, name='section_follow'),
 
-    path('ueditor/', include('DjangoUeditor.urls'))
+    path('ueditor/', include('DjangoUeditor.urls')),
+    path('summernote/', include('django_summernote.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
