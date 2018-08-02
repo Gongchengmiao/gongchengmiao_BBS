@@ -15,6 +15,9 @@ import json
 # Create your views here.
 def index_shell(request):
     user = request.user
+    if not user.is_authenticated:
+        return redirect(reverse('login'))
+
     room_name = 'abc'
     # friends_list = user.followers.all()
     friends_list = user.followers.all()
@@ -41,7 +44,7 @@ def index_shell(request):
         'room_name_list': mark_safe(json.dumps(room_name_list)),
         'sections_list': list(sections.items()),
     }
-    print(list(sections.items()))
+    # print(list(sections.items()))
     return render(request, "x_whole_demo.html", context)
 
 
