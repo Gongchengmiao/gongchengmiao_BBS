@@ -1,7 +1,7 @@
 /*
  *
  *   H+ - 后台主题UI框架
- *   version article
+ *   version 4.9
  *
 */
 
@@ -5926,7 +5926,7 @@ del {
     border-radius: 4px;
 }
 
-.friendlist.active {
+.friendlist.active{
     display: block;
 }
 
@@ -8250,4 +8250,8 @@ body.skin-3 {
     word-break: keep-all;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.atest{
+
 }

@@ -66,11 +66,12 @@
                             {% if popular_posts %}
                                 {% for i, post in popular_posts %}
                                     <tr>
-                                    <td><a href="{% url "article_detail" pid=post.pid slug=post.slug %}" class="atest">{{ i|add:'1' }}</a></td>
-                                    <td>{{ post.title }}</td>
-                                    <td>{{ post.author.username }}</td>
-                                    <td>{{ post.pub_date }}</td>
+                                        <td>{{ i|add:'1' }}</td>
+                                        <td><a href="{% url "article_detail" pid=post.pid slug=post.slug %}" class="atest">{{ post.title }}</a></td>
+                                        <td><a href="{% url "show_info" slug=post.author.slug %}" class="atest">{{ post.author.username }}</a></td>
+                                        <td>{{ post.pub_date }}</td>
                                     </tr>
+
                                 {% endfor %}
                             {% endif %}
                             </tbody>
@@ -109,8 +110,8 @@
                                 {% for i, post in school_info %}
                                     <tr>
                                     <td>{{ i|add:'1' }}</td>
-                                    <td>{{ post.title }}</td>
-                                    <td>{{ post.author.username }}</td>
+                                    <td><a href="{% url "article_detail" pid=post.pid slug=post.slug %}" class="atest">{{ post.title }}</a></td>
+                                        <td><a href="{% url "show_info" slug=post.author.slug %}" class="atest">{{ post.author.username }}</a></td>
                                     <td>{{ post.pub_date }}</td>
                                     </tr>
                                 {% endfor %}
@@ -194,9 +195,9 @@
                             {% if user_star %}
                                 {% for i, post in user_star %}
                                     <tr>
-                                        <td><a href="{% url "article_detail" pid=post.pid slug=post.slug %}">{{ i|add:'1' }}</a></td>
-                                        <td>{{ post.title }}</td>
-                                        <td>{{ post.author.username }}</td>
+                                        <td>{{ i|add:'1' }}</td>
+                                        <td><a href="{% url "article_detail" pid=post.pid slug=post.slug %}" class="atest">{{ post.title }}</a></td>
+                                        <td><a href="{% url "show_info" slug=post.author.slug %}" class="atest">{{ post.author.username }}</a></td>
                                         <td>{{ post.pub_date }}</td>
                                     </tr>
                                 {% endfor %}

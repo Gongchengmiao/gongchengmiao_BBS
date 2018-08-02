@@ -245,7 +245,7 @@
         <div class="small-chat-box fadeInRight animated" onload="Recieve()">
 
             <div class="heading" draggable="true">
-                <p>与 Beau-zihan 聊天中</p>
+                <p id="chat_user_name"></p>
             </div>
 
             <div class="content" id = "chatshow"></div>
@@ -310,50 +310,6 @@
                         </form>
                     </div><!--搜索-->
 
-{#                    <ul class="nav navbar-top-links navbar-right">#}
-{#                        <li class="dropdown">#}
-{#                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">#}
-{#                                <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>#}
-{#                            </a>#}
-{#                            <ul class="dropdown-menu dropdown-messages">#}
-{#                                <li class="m-t-xs">#}
-{#                                    <div class="dropdown-messages-box">#}
-{#                                        <a href="x_personal_page_show_demo.html" class="pull-left">#}
-{#                                            <img alt="image" class="img-circle" src="{% static "img/a7.jpg" %}">#}
-{#                                        </a>#}
-{#                                        <div class="media-body">#}
-{#                                            <small class="pull-right">46小时前</small>#}
-{#                                            <strong>用户二</strong> 读书笔记到底要交几篇？#}
-{#                                            <br>#}
-{#                                            <small class="text-muted">3天前 2016.11.8</small>#}
-{#                                 var Words = document.getElementById("chatshow");#}
-{#           </div>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                                <li class="divider"></li>#}
-{#                                <li>#}
-{#                                    <div class="dropdown-messages-box">#}
-{#                                        <a href="x_personal_page_show_demo.html" class="pull-left">#}
-{#                                            <img alt="image" class="img-circle" src="{% static "img/a4.jpg" %}">#}
-{#                                        </a>#}
-{#                                        <div class="media-body ">#}
-{#                                            <small class="pull-right text-navy">25小时前</small>#}
-{#                                            <strong>用户一</strong> 软工ddl延期#}
-{#                                            <br>#}
-{#                                            <small class="text-muted">昨天</small>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                                <li class="divider"></li>#}
-{#                                <li>#}
-{#                                    <div class="text-center link-block">#}
-{#                                        <a class="J_menuItem" href="x_mailbox_demo.html">#}
-{#                                            <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>#}
-{#                                        </a>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                            </ul>#}
-{#                        </li>#}
                     </ul><!--右侧组件-->
                 </nav>
             </div><!--顶部搜索导航栏-->
@@ -396,19 +352,7 @@
         <!--右侧部分结束-->
     </div>
 
-    <!-- 全局js -->
-{#    <script src="js/jquery.min.js?v=2.1.4"></script>#}
-{#    <script src="js/bootstrap.min.js?v=3.3.6"></script>#}
-{#    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>#}
-{#    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>#}
-{#    <script src="js/plugins/layer/layer.min.js"></script>#}
-{##}
-{#    <!-- 自定义js -->#}
-{#    <script src="js/hplus.js?v=4.1.0"></script>#}
-{#    <script type="text/javascript" src="js/contabs.js"></script>#}
-{##}
-{#    <!-- 第三方插件 -->#}
-{#    <script src="js/plugins/pace/pace.min.js"></script>#}
+
 {% include "js_use.html" %}
     <script language= "JavaScript">
         function keyEnter(){
@@ -499,8 +443,9 @@
 
             function Clear_tab(ev) {
                 document.getElementById("chatshow").innerHTML = "";
-                chatSocket[i[6]-1].send("/plaese/send/me/the/log")
-
+                var text = document.getElementById(i).children[1].innerHTML;
+                document.getElementById("chat_user_name").innerHTML="与 "+text+" 聊天中";
+                chatSocket[i[6]-1].send("/plaese/send/me/the/log");
             }
 
             document.querySelector('#chatinput').focus();
