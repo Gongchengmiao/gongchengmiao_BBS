@@ -17,7 +17,8 @@ def index_shell(request):
     user = request.user
     room_name = 'abc'
     # friends_list = user.followers.all()
-    friends_list = common_member.objects.all()
+    friends_list = user.followers.all()
+    # friends_list = common_member.objects.all()
 
     def new_room_name(user1, user2):
         if user1.username < user2.username:

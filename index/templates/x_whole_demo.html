@@ -215,22 +215,11 @@
                         </a>
                         <ul class="nav nav-second-level" style="background: #FFFFFF">
                             <ui class="project-people">
-                                <a class="J_menuItem" href="x_personal_page_show_demo.html" title="ZH" >
-                                    <img alt="image" class="img-circle" src="{% static "img/a3.jpg" %}">
-                                </a>
-                                <a class="J_menuItem" href="x_personal_page_show_demo.html" title="MRC">
-                                    <img alt="image" class="img-circle" src="{% static "img/a1.jpg" %}">
-                                </a>
-                                <a class="J_menuItem" href="x_personal_page_show_demo.html" title="ZR">
-                                    <img alt="image" class="img-circle" src="{% static "img/a2.jpg" %}">
-                                </a>
-                                <a class="J_menuItem" href="x_personal_page_show_demo.html" title="HZ">
-                                    <img alt="image" class="img-circle" src="{% static "img/a4.jpg" %}">
-                                </a>
-                                <a class="J_menuItem" href="x_personal_page_show_demo.html" title="CRM">
-                                    <img alt="image" class="img-circle" src="{% static "img/a5.jpg" %}">
-                                </a>
-
+                                {% for friend in friend_list %}
+                                    <a class="J_menuItem" href="{% url "show_info" slug=friend.slug %}" title="{{ friend.username }}" >
+                                        <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ friend.portrait }}">
+                                    </a>
+                                {% endfor %}
                             </ui>
                         </ul>
                     </li>

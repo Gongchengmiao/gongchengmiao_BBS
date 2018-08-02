@@ -141,7 +141,7 @@ def register(request):
             new_account.username = username
             new_account.password = make_password(password)
             new_account.email = email
-            new_account.portrait = "portraits/default_img/boy_glasses.jpg"  # 新加 待测试
+            new_account.portrait.name = "portraits/default_img/boy_glasses.jpg"  # 新加 待测试
             new_account.save()
 
             # token = account_activation_token.make_token(new_account)
