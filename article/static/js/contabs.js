@@ -116,7 +116,7 @@
             dataIndex = $(this).data('index'),
             menuName = $.trim($(this).text()),
             flag = true;
-        if (dataUrl == "x_personal_page_show_demo.html")
+        if (menuName=="")
             menuName = "个人页面展示";
         if (dataUrl == undefined || $.trim(dataUrl).length == 0)return false;
 
@@ -167,7 +167,7 @@
     function aplus(dataUrl,dataIndex,menuName) {
     // 获取标识数据
     var flag = true;
-    if (dataUrl == "x_personal_page_show_demo.html")
+    if (menuName=="")
         menuName = "个人页面展示";
     if (dataUrl == undefined || $.trim(dataUrl).length == 0)return false;
 
