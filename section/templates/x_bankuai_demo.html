@@ -510,7 +510,11 @@
                 data:{section_slug:"{{ section.slug }}"},
                 data_type:'json',
                 success:function (ret) {
-                    alert(ret);
+                    alert(ret.info);
+                    if(ret.num === ''){return}
+                    $("#follow_num").empty();
+                    var html = "<strong style=\"color: black;\">关注:</strong> "+ret.num;
+                    $("#follow_num").append(html);
                 }
             })
         })
