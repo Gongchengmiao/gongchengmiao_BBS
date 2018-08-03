@@ -7,12 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>欢迎来到豪哥板块</title>
+    <title>{{ section.name }}</title>
     <meta name="keywords" content="喵">
     <meta name="description" content="喵">
 
-
-    {% load static %}
+        {% load static %}
     <link rel="shortcut icon" href="{% static "img/IMG_0466.jpg" %}">
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/font-awesome.css"%}" rel="stylesheet">
@@ -21,9 +20,6 @@
     <link href="{% static "css/style_35_forum_viewthread.css" %}" rel="stylesheet">
     <link href="{% static "css/animate.css" %}" rel="stylesheet">
     <link href="{% static "css/style.css" %}" rel="stylesheet">
-    <link href="{% static "css/plugins/iCheck/custom.css" %}" rel="stylesheet">
-    <link href="{% static "css/plugins/summernote/summernote.css" %}" rel="stylesheet">
-    <link href="{% static "css/plugins/summernote/summernote-bs3.css" %}" rel="stylesheet">
 
 
     <script type="text/javascript" src="{% static 'js/origional.js' %}"></script>
@@ -50,12 +46,12 @@
                                     </h5>
                                 </div>
                                 <div class="col-sm-4">
-                                    <h5 style="color: black"class="text-center" id="follow_num">
-                                        <strong style="color: black;">关注:</strong>  {{ section.follower_num }}
+                                    <h5 style="color: black" class="text-center" id="follow_num">
+                                        <strong style="color: black;">关注:</strong> {{ section.follower_num }}
                                     </h5>
                                 </div>
                                 <div class="col-sm-4">
-                                   <h5 style="color: black"class="text-right">
+                                    <h5 style="color: black"class="text-right">
                                         <button type="button" class="btn btn-info btn-xs btn-blue" id="follow_sec_btn"><i class="fa fa-heartbeat"></i> 关注板块</button>
                                     </h5>
                                 </div>
@@ -81,7 +77,6 @@
                             <div class="tab-pane active" id="tab-1">
 
                                 <div class="feed-activity-list" id="posts_display_list">
-
                                     {% if posts %}
                                         {% for post in posts%}
                                             {% if post.isElite == False %}
@@ -98,8 +93,8 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0 atest" href="{{ post.get_url }}" style="left: auto;margin: 0 auto;font-size: medium">
-                                                <p class="contentwidth" onmouseover="overShow(this,event)" onmouseout="outHide()">{{ post.title }}</p>
+                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium" href="{{ post.get_url }}">
+                                                {{ post.title }}
                                             </div>
                                         </div>
                                     </div>
@@ -122,19 +117,19 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0 atest" href="{{ post.get_url }}" style="left: auto;margin: 0 auto;font-size: medium">
-                                                <p class="contentwidth" onmouseover="overShow(this,event)" onmouseout="outHide()">{{ post.title }}</p>
+                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium" href="{{ post.get_url }}">
+                                                {{ post.title }}
                                             </div>
                                         </div>
                                     </div>
                                             {% endif %}
                                         {% endfor %}
                                     {% endif %}
+
                                 </div>
 
                                 <div class="text-center">
                                     <div class="btn-group" id = "btn_list">
-
                                     </div>
                                 </div>
                             </div>
@@ -164,15 +159,14 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0 atest" href="{{ post.get_url }}" style="left: auto;margin: 0 auto;font-size: medium">
-                                                <p class="contentwidth" onmouseover="overShow(this,event)" onmouseout="outHide()">{{ post.title }}</p>
+                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium" href="{{ post.get_url }}">
+                                                {{ post.title }}
                                             </div>
                                         </div>
                                     </div>
                                             {% endif %}
                                         {% endfor %}
                                     {% endif %}
-
                                 </div>
 
                                 <div class="text-center">
@@ -186,39 +180,9 @@
                             </div>
 
                             <div class="hr-line-dashed"></div>
-                            <!--以下是文本编辑器，用于回帖-->
-
-                            <div class="row">
-                                <h2 style="color: grey;margin-left: 18px">快速发帖</h2><a href="x_fatie_demo.html" class="atest pull-right" style="margin-right: 12px"><button class="btn btn-success">详细发帖界面</button></a>
+                        <div class="row">
+                                <h2 style="color: grey;margin-left: 18px">快速发帖</h2><a href="{% url 'article_post' %}" class="atest pull-right atest" style="margin-right: 12px"><button class="btn btn-success">详细发帖界面</button></a>
                             </div>
-                            <div class="mail-body">
-
-                                <form class="form-horizontal " method="get">
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">帖子标题：</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" value="" maxlength="60" required placeholder="标题长度在1~60字...">
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </div>
-
-                            <div class="mail-text h-200" style="min-height: 28vmin">
-                                <div class="summernote">
-                                    <h2>这里可以快速fa帖</h2>
-                                    <p>采用了summernote文本编辑插件</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mail-body text-right tooltip-demo" style="padding: 2.8vmin">
-                                <a href="" class="btn btn-sm btn-primary atest" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> 发表</a>
-                                <a href="" class="btn btn-white btn-sm atest" data-toggle="tooltip" data-placement="top" title="Discard"><i class="fa fa-times"></i> 放弃</a>
-                            </div>
-                            <div class="clearfix"></div>
-
                         </div>
 
                     </div>
@@ -228,6 +192,7 @@
     </div>
 </div>
 
+
 <!-- 全局js -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -236,26 +201,8 @@
 <script src="{% static 'js/content.js' %}"></script>
 <script src="{% static 'js/origional.js' %}"></script>
 
-<!-- iCheck -->
-<script src="{% static "js/plugins/iCheck/icheck.min.js" %}"></script>
-
-<!-- SUMMERNOTE -->
-<script src="{% static "js/plugins/summernote/summernote.min.js" %}"></script>
-<script src="{% static "js/plugins/summernote/summernote-zh-CN.js" %}"></script>
-
-<script>
-    $(document).ready(function () {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-
-
-        $('.summernote').summernote({
-            lang: 'zh-CN',
-            height: 200
-        });
-
+    <script>
+    $(document).ready(function(){
         $("#posts_list").click(function () {
             $.ajax({
                 type:"get",
@@ -573,17 +520,7 @@
             })
         })
     });
-    var edit = function () {
-        $('.click2edit').summernote({
-            focus: true
-        });
-    };
-    var save = function () {
-        var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
-        $('.click2edit').destroy();
-    };
-</script>
-
+    </script>
 
 </body>
 
