@@ -364,7 +364,7 @@
 
         for( i in room_name_list) {
 
-                chatSocket[i] = new ReconnectingWebSocket(
+                chatSocket[i] = new WebSocket(
                 'ws://' + window.location.host +
                 '/ws/chat/' + room_name_list[i] + '/');
                 {#http://{{ domain }}{% url 'ws_chat_room' room_name=room_name_list.i %}#}
@@ -418,8 +418,11 @@
 
             };
 
-            {#chatSocket.onclose = function(e) {#}
-            {##}
+            chatSocket[i].onclose = function(e) {
+                chatSocket[i] = new WebSocket(
+                'ws://' + window.location.host +
+                '/ws/chat/' + room_name_list[i] + '/');
+            };
 
             function Update_i(ev) {
                 if(ev.target.tagName.toUpperCase() !== "LI") {
