@@ -222,10 +222,10 @@
                         <tr>
                         <td class="plc plm" valign="top" style="height:1px;">
                     <div id="p_btn" class="mtw mbm cl">
-                        <a id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'"><i><img src="http://att.bbs.duowan.com/static/image/common/fav.gif" alt="收藏">收藏<span id="favoritenumber">6</span></i></a>
-                        <a id="recommend_add" onclick="like_article({{ article.pid }}, 'like')" href="#" class="atest"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add"></span></i></a>
-                        <input type="button" id="like" name="{{ article.slug }}" value="Like" />
-                        <p>{{ article.total_likes }}</p>
+{#                        <a id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'"><i><img src="http://att.bbs.duowan.com/static/image/common/fav.gif" alt="收藏">收藏<span id="favoritenumber">6</span></i></a>#}
+{#                        <a id="recommend_add" onclick="like_article({{ article.pid }}, 'like')" href="#" class="atest"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add"></span></i></a>#}
+{#                        <input type="button" id="like" name="{{ article.slug }}" value="Like" />#}
+{#                        <p>{{ article.total_likes }}</p>#}
 
 <script>
 $('#like').click(function(){
@@ -245,13 +245,13 @@ $('#like').click(function(){
     })
 </script>
                      <!--   <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">3like</span>-->
-        <span style="margin-left: 20px">{{ total_views }}view{{ total_views | pluralize }}</span>
+{#        <span style="margin-left: 20px">{{ total_views }}view{{ total_views | pluralize }}</span>#}
                         <!--<a id="recommend_subtract" href="forum.php?mod=misc&amp;action=recommend&amp;do=subtract&amp;tid=46338365&amp;formhash=24d3bf46"  onclick="showWindow('login', this.href)" onmouseover="this.title = $('recommendv_subtract').innerHTML + ' 人反对'"><i><img src="http://att.bbs.duowan.com/static/image/common/rec_subtract.gif" alt="反对" />反对<span id="recommendv_subtract">0</span></i></a>-->
                     </div>
                     <div>
                         <p class="text-center">
-                            <a onclick="like_article({{article.pid}}, 'like')" href="#" class="atest"><span class="glyphicon glyphicon-thumbs-up">like</span></a>
-                            <a onclick="like_article({{article.pid}}, 'unlike')" href="#" class="atest"><span style="margin-left: 15px;" class="glyphicon glyphicon-thumbs-down">unlike</span></a>
+{#                            <a onclick="like_article({{article.pid}}, 'like')" href="#" class="atest"><span class="glyphicon glyphicon-thumbs-up">like</span></a>#}
+{#                            <a onclick="like_article({{article.pid}}, 'unlike')" href="#" class="atest"><span style="margin-left: 15px;" class="glyphicon glyphicon-thumbs-down">unlike</span></a>#}
                         </p>
                     </div>
                     <!--新版广告系统帖内广告C3-->
@@ -497,7 +497,7 @@ $('#like').click(function(){
             </div>
 
             <div class="mail-body text-right tooltip-demo">
-                        <input type="submit" class="btn btn-primary btn-lg" value="发布">
+                        <input type="submit" class="btn btn-primary btn-lg" value="回帖">
                     </div>
             <div class="clearfix"></div>
             </form>
