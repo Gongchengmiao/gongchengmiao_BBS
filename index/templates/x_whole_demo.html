@@ -364,9 +364,10 @@
 
         for( i in room_name_list) {
 
-                chatSocket[i] = new WebSocket(
+                chatSocket[i] = new ReconnectingWebSocket(
                 'ws://' + window.location.host +
                 '/ws/chat/' + room_name_list[i] + '/');
+                {#http://{{ domain }}{% url 'ws_chat_room' room_name=room_name_list.i %}#}
 
             chatSocket[i].onmessage = function(e) {
                 var data = JSON.parse(e.data);
@@ -417,9 +418,8 @@
 
             };
 
-            chatSocket.onclose = function(e) {
-                {#console.error('Chat socket closed unexpectedly');#}
-            };
+            {#chatSocket.onclose = function(e) {#}
+            {##}
 
             function Update_i(ev) {
                 if(ev.target.tagName.toUpperCase() !== "LI") {
