@@ -52,7 +52,7 @@
                                 <i class="fa fa-bell-o"></i>
                                 <h5><strong>{{ user.following }}</strong> 关注</h5>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" id="followed_num">
                                 <i class="fa fa-heartbeat"></i>
                                 <h5><strong>{{ user.followed }}</strong> 关注者</h5>
                             </div>
@@ -79,13 +79,13 @@
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">
                             <i class="fa fa-wrench"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="profile.html#">选项1</a>
+                            <li><a href="">选项1</a>
                             </li>
-                            <li><a href="profile.html#">选项2</a>
+                            <li><a href="">选项2</a>
                             </li>
                         </ul>
                         <a class="close-link">
@@ -171,7 +171,12 @@
                 data:{'user_slug':"{{ user.slug }}"},
                 data_type:"json",
                 success:function (ret) {
-                    alert(ret)
+                    alert(ret.info);
+                    if(ret.num === ''){return}
+                    var html = "<i class=\"fa fa-heartbeat\"></i>\n" +
+                        "                                <h5><strong>"+ret.num+"</strong> 关注者</h5>";
+                    $("#followed_num").empty();
+                    $("#followed_num").append(html);
                 }
                 }
             )
