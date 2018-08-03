@@ -46,18 +46,18 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content mailbox-content" style="display: block">
                         <div class="file-manager">
-                            <a class="btn btn-block btn-info compose-mail" href="mail_compose.html">发帖</a>
+{#                            <a class="btn btn-block btn-info compose-mail" href="mail_compose.html">发帖</a>#}
                             <div class="space-25"></div>
                             <ul class="folder-list m-b-md" style="padding: 0">
 
                                 <li>
-                                    <a href="mailbox.html"> <i class="fa fa-file-text-o"></i> 草稿 <span class="label label-info pull-right">2</span>
-                                    </a>
+{#                                    <a href="mailbox.html"> <i class="fa fa-file-text-o"></i> 草稿 <span class="label label-info pull-right">2</span>#}
+{#                                    </a>#}
                                 </li>
 
 
                             </ul>
-                            <h5>分类</h5>
+{#                            <h5>分类</h5>#}
                         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 {#                            <ul class="category-list" style="padding: 0">#}
@@ -80,57 +80,37 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="btn-group btn-block">
+{#                            <button data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-block" id="qushow">A区:XXXX <span class="caret"></span>#}
+{#                            </button>#}
+{#                            <ul class="dropdown-menu">#}
+{#                                <li><a id="Aqu">A区:XXXX</a>#}
+{#                                </li>#}
+{#                                <li><a id="Bqu">B区:XXXXX</a>#}
+{#                                </li>#}
+{#                                <li><a id="Cqu">C区:XXXXX</a>#}
+{#                                </li>#}
+{#                                <li><a id="Dqu">D区:XXXX</a>#}
+{#                                </li>#}
+{#                            </ul>#}
+                        </div>
+
+
+                        <div class="clearfix"></div>
 
 
 
 
-                                <li>
-                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-navy"></i> 表白</a>
-                                </li>
-                                <li>
-                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-danger"></i> 求助</a>
-                                </li>
-                                <li>
-                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-primary"></i> 通知</a>
-                                </li>
-                                <li>
-                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-info"></i> 招聘</a>
-                                </li>
-                                <li>
-                                    <a href="mail_compose.html#"> <i class="fa fa-circle text-warning"></i> 交友</a>
-                                </li>
-                            </ul>
 
 
-                            <h5 class="tag-title">分区</h5>
-                            <ul class="tag-list" style="padding: 0">
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> A</a>
-                                </li>
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> B</a>
-                                </li>
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> C</a>
-                                </li>
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> D</a>
-                                </li>
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> E</a>
-                                </li>
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> F</a>
-                                </li>
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> G</a>
-                                </li>
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> H</a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
+
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-9 animated fadeInRight" style="height: 100%">
                 <div class="mail-box-header" >
-                    <h2>
-                    发帖
-                </h2>
+
                 </div>
 
                     {% csrf_token %}
