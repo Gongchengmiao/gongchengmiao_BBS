@@ -12,7 +12,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="{% static "img/IMG_0466.jpg" %}">
+    <link rel="shortcut icon"  href="{% static "img/IMG_0466.jpg" %}">
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/font-awesome.css" %}" rel="stylesheet">
 
@@ -164,7 +164,7 @@
                         <tr>
                         <td class="pls" rowspan="2">
                         <a name="newpost"></a> <div class="pi clearfix">
-                        <div class="authi" id="authi_708605202"><a href="{% url "show_info" author.slug %}" target="_blank" class="xw1">{{ article.author }}</a>
+                        <div class="authi" id="authi_708605202"><a class="atest" href="{% url "show_info" author.slug %}" target="_blank" class="xw1">{{ article.author }}</a>
                         </div>
                     </div>
                         <!-- 名片开始 -->
@@ -172,11 +172,11 @@
                             <div class="m z">
                                 <div id="userinfo708605202_ma"></div>
                             </div>
-                            <a href="javascript:;" class="btn-follow" touid="61898532" type="on" formhash="24d3bf46" onclick="javascript:udblogin();">关注</a>
+                            <a href="javascript:;" class="atest" touid="61898532" type="on" formhash="24d3bf46" onclick="javascript:udblogin();">关注</a>
                         </div>
                         <!-- 名片结束-->
                         <div>
-                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605202')"><a href="{% url "view_self_info" %}" target="_blank">{% load static %}<img class="img-circle" src="{% get_media_prefix %}{{ article.author.portrait }}"></a></div>
+                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605202')"><a href="{% url "view_self_info" %}" class="atest" target="_blank">{% load static %}<img class="img-circle" src="{% get_media_prefix %}{{ article.author.portrait }}"></a></div>
                         <!--<div class="rank-value"><span class="prank-backimg" style="background:url(http://att.bbs.duowan.com/forum/201511/30/175221nn5wz25xgzxfz2wx.png) no-repeat;"></span><div class="rank-value-tip tip"><i></i><div><em>本版排名：<span class="user-prank" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em>本版声望：<span class="user-pvalue" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em style="color:#888;">荣誉黄鸡</em><span class="user-pinfo-uid" style="display:none;">61898532</span><a href="plugin.php?id=prestige:prestige_intro&amp;fid=1345" title="">[声望说明]</a></div></div></div>-->
                         <div id="g_up708605202_menu" class="tip tip_4" style="display: none;">
                             <div class="tip_horn"></div>
@@ -223,7 +223,7 @@
                         <td class="plc plm" valign="top" style="height:1px;">
                     <div id="p_btn" class="mtw mbm cl">
                         <a id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'"><i><img src="http://att.bbs.duowan.com/static/image/common/fav.gif" alt="收藏">收藏<span id="favoritenumber">6</span></i></a>
-                        <a id="recommend_add" onclick="like_article({{ article.pid }}, 'like')" href="#" class="subject-recommend-add"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add"></span></i></a>
+                        <a id="recommend_add" onclick="like_article({{ article.pid }}, 'like')" href="#" class="atest"><i><img src="http://att.bbs.duowan.com/static/image/common/icon-heart-gray.png" alt="点赞">点赞<span id="recommendv_add"></span></i></a>
                         <input type="button" id="like" name="{{ article.slug }}" value="Like" />
                         <p>{{ article.total_likes }}</p>
 
@@ -250,12 +250,12 @@ $('#like').click(function(){
                     </div>
                     <div>
                         <p class="text-center">
-                            <a onclick="like_article({{article.pid}}, 'like')" href="#"><span class="glyphicon glyphicon-thumbs-up">like</span></a>
-                            <a onclick="like_article({{article.pid}}, 'unlike')" href="#"><span style="margin-left: 15px;" class="glyphicon glyphicon-thumbs-down">unlike</span></a>
+                            <a onclick="like_article({{article.pid}}, 'like')" href="#" class="atest"><span class="glyphicon glyphicon-thumbs-up">like</span></a>
+                            <a onclick="like_article({{article.pid}}, 'unlike')" href="#" class="atest"><span style="margin-left: 15px;" class="glyphicon glyphicon-thumbs-down">unlike</span></a>
                         </p>
                     </div>
                     <!--新版广告系统帖内广告C3-->
-                    <div style="width:0px;"><script src=""></script><div style="width:0px;margin:0 auto;"><a class="da-block-wrapper" locid="121" pid="1200" href="" target="_blank" style="display:inline-block;position:relative;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528516956332&di=52f1a1073e5e98d2ab540b7ee8f2ccfe&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F44%2F53%2F13v58PIC5pc_1024.png" width="200" height="30" style="vertical-align:top;"></a></div></div>
+                    <div style="width:0px;"><script src=""></script><div style="width:0px;margin:0 auto;"><a class="atest" locid="121" pid="1200" href="" target="_blank" style="display:inline-block;position:relative;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528516956332&di=52f1a1073e5e98d2ab540b7ee8f2ccfe&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F44%2F53%2F13v58PIC5pc_1024.png" width="200" height="30" style="vertical-align:top;"></a></div></div>
                     <!--新版广告系统帖内广告C3--></td>
                     </tr>
 
@@ -314,7 +314,7 @@ $('#like').click(function(){
                             <tr>
                                 <td class="pls" rowspan="2">
                         <div class="pi clearfix">
-                            <div class="authi" id="authi_708605421"><a href="{% url 'show_info' comment.commentator.slug %}" target="_blank" class="xw1">{{ comment.commentator }}</a>
+                            <div class="authi" id="authi_708605421"><a class="atest" href="{% url 'show_info' comment.commentator.slug %}" target="_blank">{{ comment.commentator }}</a>
 
                             </div>
                         </div>
@@ -325,17 +325,17 @@ $('#like').click(function(){
                             </div>
                             <div class="i y">
                                 <div>
-                                    <strong><a href="{% url 'show_info' comment.commentator.slug %}" target="_blank" class="xi2">{{ comment.commentator }}</a></strong>
+                                    <strong><a class="atest" href="{% url 'show_info' comment.commentator.slug %}" target="_blank" class="xi2">{{ comment.commentator }}</a></strong>
                                 </div>
 
 
 
                             </div>
-                            <a href="javascript:;" class="btn-follow" touid="58928499" type="on" formhash="24d3bf46" onclick="javascript:udblogin();">关注</a>
+                            <a href="javascript:;" class="atest" touid="58928499" type="on" formhash="24d3bf46" onclick="javascript:udblogin();">关注</a>
                         </div>
                         <!-- 名片结束-->
                         <div>
-                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605421')"><a href="{% url 'show_info' comment.commentator.slug %}" target="_blank"><img src="{% get_media_prefix %}{{ comment.commentator.portrait }}" class="img-circle" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_big.jpg'"></a></div>
+                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605421')"><a href="{% url 'show_info' comment.commentator.slug %}" class="atest" target="_blank"><img src="{% get_media_prefix %}{{ comment.commentator.portrait }}" class="img-circle" onerror="this.onerror=null;this.src='http://att.bbs.duowan.com/avatar/noavatar_big.jpg'"></a></div>
                         <div id="g_up708605421_menu" class="tip tip_4" style="display: none;">
                             <div class="tip_horn"></div>
                         </div>
@@ -387,7 +387,7 @@ $('#like').click(function(){
                             <tr>
                                 <td class="plc plm" valign="top" style="height:1px;">
                     <!--新版广告系统帖内广告C3-->
-                                    <div style="width:0px;"><script src=""></script><div style="width:0px;margin:0 auto;"><a class="da-block-wrapper" locid="121" pid="1200" href="" target="_blank" style="display:inline-block;position:relative;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528516956332&di=52f1a1073e5e98d2ab540b7ee8f2ccfe&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F44%2F53%2F13v58PIC5pc_1024.png" width="200" height="30" style="vertical-align:top;"></a></div></div>
+                                    <div style="width:0px;"><script src=""></script><div style="width:0px;margin:0 auto;"><a class="atest" locid="121" pid="1200" href="" target="_blank" style="display:inline-block;position:relative;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528516956332&di=52f1a1073e5e98d2ab540b7ee8f2ccfe&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F44%2F53%2F13v58PIC5pc_1024.png" width="200" height="30" style="vertical-align:top;"></a></div></div>
                    <!--新版广告系统帖内广告C3--></td>
                             </tr>
                             <tr>
@@ -597,7 +597,7 @@ $('#like').click(function(){
                 if(e.pageX > document.body.clientWidth/2) arrow = 'right';
                 else arrow = 'left';
                 tipsContent = "<div class='mod-tips-s1 contribute'><div class='mod-tips-bg'><div class='mod-tips-content'>"
-                    +"<p class='mbs'><a class='fsl' href='#'>"+item['name']+"</a></p>"
+                    +"<p class='mbs'><a class='atest' href='#'>"+item['name']+"</a></p>"
                     +"<p>"+item['description']+"</p></div>";
                 if(arrow=='left'){
                     tipsContent +="</div><i class='arrow l'></i></div>"
@@ -652,7 +652,7 @@ $('#like').click(function(){
                 if(e.pageX > document.body.clientWidth/2) arrow = 'right';
                 else arrow = 'left';
                 tipsContent = "<div class='mod-tips-s1 contribute'><div class='mod-tips-bg'><div class='mod-tips-content'>"
-                    +"<p class='mbs'><a class='fsl' href='#'>"+item['name']+"</a></p>"
+                    +"<p class='mbs'><a class='atest' href='#'>"+item['name']+"</a></p>"
                     +"<p class='c9'>价格："+item['price']+"</p>"
                     +"<p>"+item['description']+"</p></div>";
                 if(arrow=='left'){
@@ -707,7 +707,7 @@ $('#like').click(function(){
                 if(e.pageX > document.body.clientWidth/2) arrow = 'right';
                 else arrow = 'left';
                 tipsContent = "<div class='mod-tips-s1 contribute'><div class='mod-tips-bg'><div class='mod-tips-content'>"
-                    +"<p class='mbs'><a class='fsl' href='#'>"+hero['name']+"</a></p>"
+                    +"<p class='mbs'><a class='atest' href='#'>"+hero['name']+"</a></p>"
                     +"<p class='c9'>"+hero['title']+"</p>"
                     +"<p>"+hero['cntag']+"</p>"
                     +"<p>"+hero['description']+"</p></div>";

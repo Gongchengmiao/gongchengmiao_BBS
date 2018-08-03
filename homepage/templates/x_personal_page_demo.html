@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="m-b-md">
-                                    <a href="{% url 'edit_info' %}" class="btn btn-blue pull-right">修改资料</a>
+                                    <a href="{% url 'edit_info' %}" class="btn btn-blue pull-right atest">修改资料</a>
 
                                     <div class="boxT">
                                         <img alt="image" src="{% get_media_prefix %}{{ user_self.portrait }}">
@@ -79,7 +79,7 @@
                                     <dd class="project-people">
                                         {% if followings %}
                                             {% for i,following in followings %}
-                                        <a href="{% url 'show_info' following.slug %}">
+                                        <a href="{% url 'show_info' following.slug %}" class="atest">
                                             <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ following.portrait }}">
                                         </a>
                                             {% endfor %}
@@ -140,7 +140,7 @@
                                                     {% if following_actions %}
                                                         {% for i,ac in following_actions %}
                                                             <div class="feed-element">
-                                                        <a href="{% url 'show_info' ac.uid.slug %}" class="pull-left">
+                                                        <a href="{% url 'show_info' ac.uid.slug %}" class="pull-left atest" >
                                                             <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ ac.uid.portrait }}">
                                                         </a>
                                                         <div class="media-body ">
@@ -153,7 +153,7 @@
                                                                 <strong>{{ ac.uid.username }}</strong> 上传了
                                                             {% endif %}
                                                             <br>
-                                                            <div class="text-muted1 well well0" style="cursor: pointer;"
+                                                            <div class="text-muted1 well well0 atest" style="cursor: pointer;"
                                                                  onclick="location.href='{{ ac.pid.get_url }}'"
                                                             >
                                                                 <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ ac.pid.title }}</p>
@@ -171,7 +171,7 @@
                                                      {% if my_actions %}
                                                         {% for i,ac in my_actions %}
                                                             <div class="feed-element">
-                                                        <a href="{% url 'show_info' user_self.slug %}" class="pull-left">
+                                                        <a href="{% url 'show_info' user_self.slug %}" class="pull-left atest">
                                                             <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ user_self.portrait }}">
                                                         </a>
                                                         <div class="media-body ">
@@ -184,7 +184,7 @@
                                                                 <strong>你</strong> 上传了
                                                             {% endif %}
                                                             <br>
-                                                            <div class="text-muted1 well well0" style="cursor: pointer;"
+                                                            <div class="text-muted1 well well0 atest" style="cursor: pointer;"
                                                                  onclick="location.href='{{ ac.pid.get_url }}'"
                                                             >
                                                                 <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ ac.pid.title }}</p>
@@ -212,13 +212,13 @@
                                                                     <small class="pull-right">{{ po.pub_date }}</small>
                                                                 </div>
                                                                 <div style="margin: 0 auto">
-                                                                    <a href="{{ po.get_url }}" class="pull-right">
+                                                                    <a href="{{ po.get_url }}" class="pull-right atest">
                                                                         <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
                                                                         <i style="font-size: xx-small">{{ po.author.username }}</i>
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium;"
+                                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium;"
                                                                  onclick="location.href='{{ po.get_url }}'"
                                                             >
                                                                 <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ po.title }}</p>
@@ -233,13 +233,13 @@
                                                                     <small class="pull-right">{{ po.pub_date }}</small>
                                                                 </div>
                                                                 <div style="margin: 0 auto">
-                                                                    <a href="{% url 'show_info' po.author.slug %}" class="pull-right">
+                                                                    <a href="{% url 'show_info' po.author.slug %}" class="pull-right atest">
                                                                         <span class="glyphicon glyphicon-user" style="font-size: xx-small"></span>
                                                                         <i style="font-size: xx-small">{{ po.author.username }}</i>
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium;"
+                                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium;"
                                                                  onclick="location.href='{{ po.get_url }}'"
                                                             >
                                                                 <p class="contentwidth"  onmouseover="overShow(this,event)" onmouseout="outHide()">{{ po.title }}</p>
@@ -257,13 +257,13 @@
                                                     {% if comments %}
                                                         {% for i, co in comments %}
                                                             <div class="feed-element">
-                                                        <a href="{% url 'show_info' co.commentator.slug %}" class="pull-left">
+                                                        <a href="{% url 'show_info' co.commentator.slug %}" class="pull-left atest">
                                                             <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ co.commentator.portrait }}">
                                                         </a>
                                                         <div class="media-body ">
                                                             <strong>{{ co.commentator.username }}</strong> 回复了你的帖子 {{ co.article.title }}
                                                             <br>
-                                                            <div class="text-muted1 well well0" style="cursor: pointer;"
+                                                            <div class="text-muted1 well well0 atest" style="cursor: pointer;"
                                                                  onclick="location.href='{{ co.article.get_url }}'"
                                                             >
                                                                 {% autoescape off %}
@@ -373,13 +373,13 @@
                                             "                                                                    <small class=\"pull-right\">2018-7-12</small>\n" +
                                             "                                                                </div>\n" +
                                             "                                                                <div style=\"margin: 0 auto\">\n" +
-                                            "                                                                    <a href=\""+item.author_url+"\" class=\"pull-right\">\n" +
+                                            "                                                                    <a href=\""+item.author_url+"\" class=\"pull-right atest\">\n" +
                                             "                                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
                                             "                                                                        <i style=\"font-size: xx-small\">"+item.author+"</i>\n" +
                                             "                                                                    </a>\n" +
                                             "                                                                </div>\n" +
                                             "                                                            </div>\n" +
-                                            "                                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium;\"\n" +
+                                            "                                                            <div class=\"text-muted1 well well0 atest\" style=\"left: auto;margin: 0 auto;font-size: medium;\"\n" +
                                             "                                                                 onclick=\"location.href='"+item.post_url+"'\"\n" +
                                             "                                                            >\n" +
                                             "                                                                <p class=\"contentwidth\"  onmouseover=\"overShow(this,event)\" onmouseout=\"outHide()\">"+item.title+"</p>\n" +
@@ -395,13 +395,13 @@
                                             "                                                                    <small class=\"pull-right\">2018-6-17</small>\n" +
                                             "                                                                </div>\n" +
                                             "                                                                <div style=\"margin: 0 auto\">\n" +
-                                            "                                                                    <a href=\""+item.author_url+"\" class=\"pull-right\">\n" +
+                                            "                                                                    <a href=\""+item.author_url+"\" class=\"pull-right atest\">\n" +
                                             "                                                                        <span class=\"glyphicon glyphicon-user\" style=\"font-size: xx-small\"></span>\n" +
                                             "                                                                        <i style=\"font-size: xx-small\">"+item.author+"</i>\n" +
                                             "                                                                    </a>\n" +
                                             "                                                                </div>\n" +
                                             "                                                            </div>\n" +
-                                            "                                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium;\"\n" +
+                                            "                                                            <div class=\"text-muted1 well well0 atest\" style=\"left: auto;margin: 0 auto;font-size: medium;\"\n" +
                                             "                                                                 onclick=\"location.href='"+item.post_url+"'\"\n" +
                                             "                                                            >\n" +
                                             "                                                                <p class=\"contentwidth\"  onmouseover=\"overShow(this,event)\" onmouseout=\"outHide()\">"+item.title+"</p>\n" +
@@ -415,13 +415,13 @@
                             else if(tab === "4"){
                                 $.each(ret.item_list, function (i, item) {
                                     html = "<div class=\"feed-element\">\n" +
-                                        "                                                        <a href=\""+item.commentator_url+"\" class=\"pull-left\">\n" +
+                                        "                                                        <a href=\""+item.commentator_url+"\" class=\"pull-left atest\">\n" +
                                         "                                                            <img alt=\"image\" class=\"img-circle\" src=\""+item.portrait+"\">\n" +
                                         "                                                        </a>\n" +
                                         "                                                        <div class=\"media-body \">\n" +
                                         "                                                            <strong>"+item.commentator_name+"</strong> 回复了你的帖子 "+item.article_title+"\n" +
                                         "                                                            <br>\n" +
-                                        "                                                            <div class=\"text-muted1 well well0\" style=\"cursor: pointer;\"\n" +
+                                        "                                                            <div class=\"text-muted1 well well0 atest\" style=\"cursor: pointer;\"\n" +
                                         "                                                                 onclick=\"location.href='"+item.article_url+"'\"\n" +
                                         "                                                            >\n" +
                                                                                                                 item.comment_body+"\n"+
@@ -434,14 +434,14 @@
                             else{
                                 $.each(ret.item_list, function (i, item) {
                                     html = "<div class=\"feed-element\">\n" +
-                                        "                                                        <a href=\""+item.user_url+"\" class=\"pull-left\">\n" +
+                                        "                                                        <a href=\""+item.user_url+"\" class=\"pull-left atest\">\n" +
                                         "                                                            <img alt=\"image\" class=\"img-circle\" src=\""+item.portrait+"\">\n" +
                                         "                                                        </a>\n" +
                                         "                                                        <div class=\"media-body \">\n" +
                                         "                                                            <small class=\"pull-right\">"+item.date_time+"</small>\n" +
                                         "                                                                <strong>"+item.username+"</strong> 上传了\n" +
                                         "                                                            <br>\n" +
-                                        "                                                            <div class=\"text-muted1 well well0\" style=\"cursor: pointer;\"\n" +
+                                        "                                                            <div class=\"text-muted1 well well0 atest\" style=\"cursor: pointer;\"\n" +
                                         "                                                                 onclick=\"location.href='"+item.post_url+"'\"\n" +
                                         "                                                            >\n" +
                                         "                                                                <p class=\"contentwidth\"  onmouseover=\"overShow(this,event)\" onmouseout=\"outHide()\">"+item.post_title+"</p>\n" +
