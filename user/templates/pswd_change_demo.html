@@ -53,9 +53,21 @@
                         未知错误！
                     </div>
                 {% elif success %}
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" id="jump">
                     修改成功！
                     </div>
+                    <script>
+                        function countDown(secs){
+                            if(--secs>0){
+                                document.getElementById("jump").innerHTML = "修改成功！ 等待"+ secs + "秒跳转回主界面" ;
+                                setTimeout("countDown("+secs+")",1000);
+                            }
+                            else {
+                                window.location.href="{% url "main" %}";
+                            }
+                        }
+                        countDown(3);
+                    </script>
                 {% endif %}
                 <h3 class="no-margins">找回密码：</h3>
                 <div class="form-group">
@@ -65,7 +77,7 @@
                     {{ form.new_pswd_confirm }}
                 </div>
                 <button type="submit" class="btn btn-info block full-width m-b">确认</button>
-                <strong>还没有账号？ <a href="register.html">立即注册&raquo;</a></strong>
+                <strong>还没有账号？ <a href="{% url "login" %}">立即登入&raquo;</a></strong>
             </form>
         </div>
     </div>
