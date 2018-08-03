@@ -230,7 +230,7 @@
                                 {% for watch_block in user_watches %}
                                     <tr>
                                         {% for watch in watch_block %}
-                                            <td><a  href="{% url "section_all" section_slug=watch.section.slug %}" target="_parent"><button type="button" class="atest btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">{{ watch.section.name }}</button></a></td>
+                                            <td><a  href="{% url "section_all" section_slug=watch.section.slug %}" target="_parent" class="atest"><button type="button" class="atest btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">{{ watch.section.name }}</button></a></td>
                                         {% endfor %}
                                     </tr>
                                 {% endfor %}
@@ -270,7 +270,7 @@
                                                 {% if section_block %}
                                                 <tr>
                                                     {% for section in section_block %}
-                                                        <td><a  href="{% url "section_all" section_slug=section.slug %}" target="_parent"><button type="button" class="atest btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">{{ section.name }}</button></a></td>
+                                                        <td><a  href="{% url "section_all" section_slug=section.slug %}" target="_parent" class="atest"><button type="button" class=" btn btn-block btn-outline btn-primary btn-primary1" style="border-color: transparent">{{ section.name }}</button></a></td>
                                                     {% endfor %}
                                                 </tr>
                                                 {% endif %}
