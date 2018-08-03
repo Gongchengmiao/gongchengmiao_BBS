@@ -101,7 +101,7 @@
                             {% if actions %}
                                 {% for i,action in actions %}
                                      <div class="feed-element">
-                                <a href="{% url 'show_info' user.slug %}" class="pull-left">
+                                <a href="{% url 'show_info' user.slug %}" class="pull-left atest">
                                     {% load staticfiles %}
                                     <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ user.portrait }}">
                                 </a>
@@ -116,7 +116,7 @@
                                     {% endif %}
                                     <br>
                                     <small class="text-muted">{{ action.dateline }} 来自 土豪金 iPhoneX</small>
-                                    <div class="text-muted1 well well0" style="cursor: pointer;"
+                                    <div class="text-muted1 well well0 atest"  style="cursor: pointer;"
                                          onclick="location.href='{{ action.pid.get_url }}'"
                                     >
                                         <p >{{ action.pid.title }}</p>
@@ -124,7 +124,7 @@
                                         <div class="pull-right">
                                             <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
                                             <button  name="star_btn" value="{{ action.pid.pid }}" type="submit" class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</button>
-                                            <a class="btn btn-xs btn-primary" onclick="location.href='{{ action.pid.get_url }}'"><i class="fa fa-pencil"></i> 评论</a>
+                                            <a class="btn btn-xs btn-primary atest" onclick="location.href='{{ action.pid.get_url }}'"><i class="fa fa-pencil"></i> 评论</a>
                                         </div>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                     }
                     $.each(ret.list,function (i,ac) {
                         var html = "<div class=\"feed-element\">\n" +
-                            "                                <a href=\""+ret.user_url+"\" class=\"pull-left\">\n" +
+                            "                                <a href=\""+ret.user_url+"\" class=\"pull-left atest\">\n" +
                             "                                    <img alt=\"image\" class=\"img-circle\" src=\""+ret.portrait+"\">\n" +
                             "                                </a>\n" +
                             "                                <div class=\"media-body \">\n" +
@@ -202,7 +202,7 @@
                                 "                                        <strong>"+ret.user+"</strong> "+ac.type+"了一篇心得\n"+
                             "                                    <br>\n" +
                             "                                    <small class=\"text-muted\">"+ac.time+" 来自 土豪金 iPhoneX</small>\n" +
-                            "                                    <div class=\"text-muted1 well well0\" style=\"cursor: pointer;\"\n" +
+                            "                                    <div class=\"text-muted1 well well0 atest\" style=\"cursor: pointer;\"\n" +
                             "                                         onclick=\"location.href='"+ac.post_url+"'\"\n" +
                             "                                    >\n" +
                             "                                        <p>"+ac.title+"</p>\n" +
@@ -210,7 +210,7 @@
                             "                                        <div class=\"pull-right\">\n" +
                             "                                            <a class=\"btn btn-xs btn-white\"><i class=\"fa fa-thumbs-up\"></i> 赞 </a>\n" +
                             "                                            <button  name=\"star_btn\" value=\""+ac.pid+"\" type=\"submit\" class=\"btn btn-xs btn-white\"><i class=\"fa fa-heart\"></i> 收藏</button>\n" +
-                            "                                            <a class=\"btn btn-xs btn-primary\" onclick=\"location.href='"+ac.post_url+"'\"><i class=\"fa fa-pencil\"\"></i> 评论</a>\n" +
+                            "                                            <a class=\"btn btn-xs btn-primary atest\" onclick=\"location.href='"+ac.post_url+"'\"><i class=\"fa fa-pencil\"\"></i> 评论</a>\n" +
                             "                                        </div>\n" +
                             "                                </div>\n" +
                             "                            </div>";
