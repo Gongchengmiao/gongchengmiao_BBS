@@ -93,14 +93,14 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
+                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium" href="{{ post.get_url }}">
                                                 {{ post.title }}
                                             </div>
                                         </div>
                                     </div>
                                             {% else %}
                                                 <div class="feed-element" style="cursor: pointer">
-                                        <div class="media-body">
+                                        <div class="media-body"><script src="{% static 'js/content.js' %}"></script>
                                             <div class="pull-left" style="margin: 7px auto;float: left;position: relative;margin-left: 10px;margin-right: 10px">
                                                 <a class="btn btn-xs btn-success">
                                                     <i class="fa fa-star"></i> 精
@@ -117,7 +117,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
+                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium" href="{{ post.get_url }}">
                                                 {{ post.title }}
                                             </div>
                                         </div>
@@ -139,7 +139,7 @@
                                 <div class="feed-activity-list" id="elite_posts_display_list">
                                     {%if posts %}
                                         {% for post in posts %}
-                                            {% if post.isElite == True %}
+                                            {% if post.isElite == True %}<script src="{% static 'js/content.js' %}"></script>
 
                                                 <div class="feed-element" style="cursor: pointer">
                                         <div class="media-body">
@@ -159,7 +159,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-muted1 well well0" style="left: auto;margin: 0 auto;font-size: medium" onclick="window.open('{{ post.get_url }}')">
+                                            <div class="text-muted1 well well0 atest" style="left: auto;margin: 0 auto;font-size: medium" href="{{ post.get_url }}">
                                                 {{ post.title }}
                                             </div>
                                         </div>
@@ -199,6 +199,7 @@
 
 <!-- 自定义js -->
 <script src="{% static 'js/content.js' %}"></script>
+<script src="{% static 'js/origional.js' %}"></script>
 
     <script>
     $(document).ready(function(){
@@ -247,7 +248,7 @@
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0 atest\" href=\""+post.url+"\"  style=\"left: auto;margin: 0 auto;font-size: medium\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
@@ -267,7 +268,7 @@
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0 atest\" href=\""+post.url+"\"  style=\"left: auto;margin: 0 auto;font-size: medium\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
@@ -342,7 +343,7 @@
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0 atest\" href=\""+post.url+"\"  style=\"left: auto;margin: 0 auto;font-size: medium\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
@@ -362,7 +363,7 @@
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0 atest\" href=\""+post.url+"\"  style=\"left: auto;margin: 0 auto;font-size: medium\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
@@ -419,7 +420,7 @@
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0 atest\" href=\""+post.url+"\"  style=\"left: auto;margin: 0 auto;font-size: medium\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
@@ -491,7 +492,7 @@
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"text-muted1 well well0\" style=\"left: auto;margin: 0 auto;font-size: medium\" onclick=\"window.open('"+post.url+"')\">\n" +
+                            "                                            <div class=\"text-muted1 well well0 atest\" href=\""+post.url+"\"  style=\"left: auto;margin: 0 auto;font-size: medium\">\n" +
                             "                                                "+post.title+"\n" +
                             "                                            </div>\n" +
                             "                                        </div>\n" +
