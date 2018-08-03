@@ -26,6 +26,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 from article.models import ArticlePost
+from section.models import SectionForum
 
 import json
 # Create your views here.
@@ -34,6 +35,7 @@ r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=set
 @login_required(login_url='/login')
 @csrf_exempt
 def article_post(request):
+    sections = SectionForum.objects.all()
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
@@ -43,6 +45,7 @@ def article_post(request):
             new_article.author = request.user
             new_article.title = cd.get('title')
             new_article.ueditor_body = cd.get('content')
+            new_article.section_belong_fk = SectionForum.objects.get(name=request.POST.get('secsb'))
             new_article.save()
 
             # 更新用户动态
@@ -63,7 +66,8 @@ def article_post(request):
             return HttpResponse("3")
     else:
         article_post_form = ArticlePostForm()
-        return render(request, "x_fatie_demo.html", {"article_post_form":article_post_form})
+        context = {'sections': sections}
+        return render(request, "x_fatie_demo.html", {"article_post_form":article_post_form, "sections":sections})
 
 @login_required(login_url='/login')
 @csrf_exempt

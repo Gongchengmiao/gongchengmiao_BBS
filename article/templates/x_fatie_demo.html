@@ -39,6 +39,8 @@
 
 <body class="gray-bg">
     <div class="wrapper wrapper-content">
+                                <form action="{% url 'article_post' %}" method="post">{% csrf_token %}
+
         <div class="row">
             <div class="col-sm-3" >
                 <div class="ibox float-e-margins">
@@ -56,7 +58,32 @@
 
                             </ul>
                             <h5>分类</h5>
-                            <ul class="category-list" style="padding: 0">
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{#                            <ul class="category-list" style="padding: 0">#}
+{#                                    #}
+{#                                {% for section in sections   %}#}
+{#                                     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ section.name }}" />#}
+{#                                        <label for="choice{{ forloop.counter }}">{{ section.name }}</label><br />#}
+{#                                {% endfor %}#}
+
+
+{#                            <p><label for="id_field">Field:</label> <select name="field" id="id_field">\n<option value="Option 1">Option 1</option>\n<option value="Option 2">Option 2</option>\n</select></p>#}
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-md-2 text-right"><span>section:</span></div>
+                                <div class="col-md-10 text-left">
+                                    <select id = "which_section" name="secsb">
+                                        {% for section in sections %}
+                                        <option value="{{ section.name }}">
+                                            {{ section.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+
                                 <li>
                                     <a href="mail_compose.html#"> <i class="fa fa-circle text-navy"></i> 表白</a>
                                 </li>
@@ -73,6 +100,7 @@
                                     <a href="mail_compose.html#"> <i class="fa fa-circle text-warning"></i> 交友</a>
                                 </li>
                             </ul>
+
 
                             <h5 class="tag-title">分区</h5>
                             <ul class="tag-list" style="padding: 0">
@@ -104,14 +132,13 @@
                     发帖
                 </h2>
                 </div>
-                <form class="form-horizontal" aciton="." method="post">
+
                     {% csrf_token %}
                     <div class="mail-box">
 
 
                     <div class="mail-body">
 
-                        <form class="form-horizontal" method="get">
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">主题：</label>
@@ -120,8 +147,6 @@
                                     {{article_post_form.title}}
                                 </div>
                             </div>
-                        </form>
-
                     </div>
 
                     <div class="mail-text h-200">
