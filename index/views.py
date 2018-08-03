@@ -10,7 +10,7 @@ import datetime
 import functools
 from django.utils.safestring import mark_safe
 import json
-
+from django.contrib.sites.shortcuts import get_current_site
 
 # Create your views here.
 def index_shell(request):
@@ -33,13 +33,16 @@ def index_shell(request):
 
     sections = {}
 
+    current_site = get_current_site(request)
+
     for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
         sections[i] = SectionForum.objects.filter(block=i)
 
-
+    print(current_site.domain)
     context = {
         'user': user,
         'friend_list': friends_list,
+        'domain': current_site.domain,
         'room_name_json': mark_safe(json.dumps(room_name)),
         'room_name_list': mark_safe(json.dumps(room_name_list)),
         'sections_list': list(sections.items()),
