@@ -91,9 +91,9 @@
 
     <div id="pt" class="bm cl">
         <div class="z">
-            <a href="{% url 'index' %}" class="atest    " title="首页">USTCBBS</a> <em>›</em> <a href="{% url 'index_core' %}" class="atest">首页</a>
+            <a href="{% url 'index_core' %}" class="atest    " title="首页">瀚海星云</a> <em>›</em> <a href="{% url 'section_all' section_slug=article.section_belong_fk.slug %}" class="atest">{{ article.section_belong_fk.name }}</a>
 {#            <em>›</em> <a href="x_bankuai_demo.html">板块名称</a> #}
-            <em>›</em> <a >帖子标题</a>
+            <em>›</em> <a >{{ article.title }}</a>
         </div>
     </div><!--左上角导航路径-->
 
