@@ -27,6 +27,7 @@
 
 
     <script type="text/javascript" src="{% static 'js/origional.js' %}"></script>
+    {{ form.media }}
 
 </head>
 
@@ -191,33 +192,27 @@
                             <div class="row">
                                 <h2 style="color: grey;margin-left: 18px">快速发帖</h2><a href="{% url 'article_post' %}" class="atest pull-right" style="margin-right: 12px"><button class="btn btn-success">详细发帖界面</button></a>
                             </div>
+                            <form action="{% url 'section_all' section.slug %}" class="form-horizontal " method="POST">
+                                {% csrf_token %}
                             <div class="mail-body">
-
-                                <form class="form-horizontal " method="get">
-
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">帖子标题：</label>
-
+                                        <label class="col-sm-2 control-label">标题：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" value="" maxlength="60" required placeholder="标题长度在1~60字...">
+                                            {{ form.title }}
                                         </div>
                                     </div>
-                                </form>
 
                             </div>
 
                             <div class="mail-text h-200" style="min-height: 28vmin">
-                                <div class="summernote">
-                                    <h2>这里可以快速fa帖</h2>
-                                    <p>采用了summernote文本编辑插件</p>
-                                </div>
+                                    {{ form.content }}
                                 <div class="clearfix"></div>
                             </div>
                             <div class="mail-body text-right tooltip-demo" style="padding: 2.8vmin">
-                                <a href="" class="btn btn-sm btn-primary atest" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> 发表</a>
-                                <a href="" class="btn btn-white btn-sm atest" data-toggle="tooltip" data-placement="top" title="Discard"><i class="fa fa-times"></i> 放弃</a>
+                                <input type="submit" class="btn btn-primary btn-lg" class="btn btn-sm btn-primary atest" data-toggle="tooltip" data-placement="top" title="Send" value="发布">
                             </div>
                             <div class="clearfix"></div>
+                            </form>
 
                         </div>
 
@@ -249,13 +244,10 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
-
-
         $('.summernote').summernote({
             lang: 'zh-CN',
             height: 200
         });
-
         $("#posts_list").click(function () {
             $.ajax({
                 type:"get",
@@ -279,7 +271,6 @@
                     });
                     btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
                     $("#btn_list").append(btn_html);
-
                     $.each(ret.post_list, function (i,post) {
                         if(post.isElite === "True")
                         {
@@ -329,11 +320,9 @@
                         }
                         $("#posts_display_list").append(post_html);
                     })
-
                 }
             })
         });
-
         $("#btn_list").on("click", "button.btn.btn-white", function () {
             var btn_val = $(this).text();
             var page_up,page_down;
@@ -351,7 +340,6 @@
                 page_down = "0";
                 page_now = btn_val;
             }
-
             $.ajax({
                 type:"get",
                 url:"{% url 'open_posts_list' %}",
@@ -374,7 +362,6 @@
                     });
                     btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
                     $("#btn_list").append(btn_html);
-
                     $.each(ret.post_list, function (i,post) {
                         if(post.isElite === "True")
                         {
@@ -424,12 +411,9 @@
                         }
                             $("#posts_display_list").append(post_html);
                     })
-
                 }
             })
-
         });
-
         $("#elite_posts_list").click(function () {
             $.ajax({
                 type:"get",
@@ -453,7 +437,6 @@
                     });
                     btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
                     $("#elite_btn_list").append(btn_html);
-
                     $.each(ret.post_list, function (i,post) {
                         var post_html = "<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
                             "                                        <div class=\"media-body\">\n" +
@@ -480,11 +463,9 @@
                             "                                    </div>";
                             $("#elite_posts_display_list").append(post_html);
                     })
-
                 }
             })
         });
-
         $("#elite_btn_list").on("click", "button.btn.btn-white",function () {
             var btn_val = $(this).text();
             var page_up,page_down;
@@ -502,7 +483,6 @@
                 page_down = "0";
                 page_now = btn_val;
             }
-
             $.ajax({
                 type:"get",
                 url:"{% url 'open_posts_list' %}",
@@ -525,7 +505,6 @@
                     });
                     btn_html = btn_html +" <button class=\"btn btn-white\" type=\"button\"  style=\"color: #0a6aa1\"><i class=\"fa fa-chevron-right\"></i>下一页</button>";
                     $("#elite_btn_list").append(btn_html);
-
                     $.each(ret.post_list, function (i,post) {
                         var post_html ="<div class=\"feed-element\" style=\"cursor: pointer\">\n" +
                             "                                        <div class=\"media-body\">\n" +
@@ -552,11 +531,9 @@
                             "                                    </div>";
                             $("#elite_posts_display_list").append(post_html);
                     })
-
                 }
             })
         });
-
         $("#follow_sec_btn").click(function () {
             $.ajax({
                 type:'get',

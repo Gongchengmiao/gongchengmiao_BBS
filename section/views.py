@@ -1,24 +1,49 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from .models import SectionForum
+from .forms import FastPostForm
 from article.models import ArticlePost
-from user.models import section_follow_pair, commom_member_watch
+from user.models import section_follow_pair, commom_member_watch, common_member_action_log
 from django.http import HttpResponse, JsonResponse
 import math
 # Create your views here.
 
-Num_per_page = 5
+Num_per_page = 5  # 每页帖子数
 
 
 @login_required(login_url='/login/')
+@csrf_exempt
 def section_all(request, section_slug):
     section = SectionForum.objects.filter(slug=section_slug).first()
     posts = ArticlePost.objects.filter(section_belong_fk=section).order_by('-pub_date')[0:2*Num_per_page]
     post_num = ArticlePost.objects.filter(section_belong_fk=section).count()
+
+    if request.method == "POST":
+        post_form = FastPostForm(data=request.POST)
+        if post_form.is_valid():
+            cd = post_form.cleaned_data
+            #try:
+            new_article = ArticlePost()
+            new_article.author = request.user
+            new_article.title = cd.get('title')
+            new_article.ueditor_body = cd.get('content')
+            new_article.section_belong_fk = section
+            new_article.save()
+
+            # 更新用户动态
+            new_action = common_member_action_log()
+            new_action.uid = request.user
+            new_action.pid = new_article
+            new_action.action = 'post'
+            new_action.save()
+    form = FastPostForm()
+
     context = {
         'section': section,
         'post_num': post_num,
         'posts': posts,
+        'form': form,
     }
     return render(request, 'x_bankuai_demo.html', context)
 
