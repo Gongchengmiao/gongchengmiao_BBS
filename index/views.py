@@ -20,8 +20,12 @@ def index_shell(request):
 
     room_name = 'abc'
     # friends_list = user.followers.all()
-    friends_list = user.followers.all()
-    # friends_list = common_member.objects.all()
+    # friends_list = user.followers.all()
+    watch_list = common_member.objects.filter(followers=user)
+    friends_list=[]
+    for user_i_watch in watch_list:
+        if user_i_watch in user.followers.all():
+            friends_list.append(user_i_watch)
 
     def new_room_name(user1, user2):
         if user1.username < user2.username:
@@ -41,6 +45,7 @@ def index_shell(request):
     print(current_site.domain)
     context = {
         'user': user,
+        'watch_list': watch_list,
         'friend_list': friends_list,
         'domain': current_site.domain,
         'room_name_json': mark_safe(json.dumps(room_name)),

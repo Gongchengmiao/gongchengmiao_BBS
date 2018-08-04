@@ -215,7 +215,7 @@
                         </a>
                         <ul class="nav nav-second-level" style="background: #FFFFFF">
                             <ui class="project-people">
-                                {% for friend in friend_list %}
+                                {% for friend in watch_list %}
                                     <a class="J_menuItem" href="{% url "show_info" slug=friend.slug %}" title="{{ friend.username }}" >
                                         <img alt="image" class="img-circle" src="{% get_media_prefix %}{{ friend.portrait }}">
                                     </a>
