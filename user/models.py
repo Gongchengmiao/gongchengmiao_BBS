@@ -12,7 +12,6 @@ from django.utils.timezone import now
 
 # 用户主表
 class common_member(AbstractUser):
-
     # uid = models.IntegerField(max_length=12, primary_key=True)
     # email = models.EmailField()
     username = models.CharField(max_length=30, unique=True)

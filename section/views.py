@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import SectionForum
 from .forms import FastPostForm
 from article.models import ArticlePost
-from user.models import section_follow_pair, commom_member_watch, common_member_action_log
+from user.models import section_follow_pair, commom_member_watch, common_member_action_log, common_member
 from django.http import HttpResponse, JsonResponse
 import math
 # Create your views here.
@@ -37,6 +37,9 @@ def section_all(request, section_slug):
             new_action.pid = new_article
             new_action.action = 'post'
             new_action.save()
+
+            common_member.objects.filter(id=request.user.id).update(posts=request.user.posts + 1)
+
     form = FastPostForm()
 
     context = {
