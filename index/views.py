@@ -102,6 +102,8 @@ def index(request):
         block[i] = result
 
     user_star = common_member_star.objects.filter(uid=user).order_by('-star_time')[0: 10]
+    user_star_post = map(lambda x: x.pid, user_star)
+
 
     watch_result = []
     temp = []
@@ -120,7 +122,7 @@ def index(request):
     context = {
         'popular_posts': enumerate(top_ten_list),
         'school_info': enumerate(school_info),
-        'user_star': enumerate(user_star),
+        'user_star': user_star_post,
         'user_watches': watch_result,
         'user': user,
         'block': block,

@@ -193,10 +193,12 @@
                                 </thead>
                                 <tbody>
                             {% if user_star %}
-                                {% for i, post in user_star %}
+                                {% for post in user_star %}
                                     <tr>
-                                        <td>{{ i|add:'1' }}</td>
+                                        <td>{{ post.section_belong_fk }}</td>
                                         <td><a href="{% url "article_detail" pid=post.pid slug=post.slug %}" class="atest">{{ post.title }}</a></td>
+                                        <script>
+                                        </script>
                                         <td><a href="{% url "show_info" slug=post.author.slug %}" class="atest">{{ post.author.username }}</a></td>
                                         <td>{{ post.pub_date }}</td>
                                     </tr>
