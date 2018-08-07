@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import ArticlePostForm, CommentForm
 from .models import ArticleColumn, ArticlePost, Comment
-from user.models import common_member_action_log
+from user.models import common_member_action_log, common_member
 import redis
 from django.conf import settings
 
@@ -54,6 +54,8 @@ def article_post(request):
             new_action.pid = new_article
             new_action.action = 'post'
             new_action.save()
+
+            common_member.objects.filter(id=request.user.id).update(posts=request.user.posts+1)
 
             #url = reverse('')
             url = reverse('article_detail', kwargs={'pid':new_article.pid,'slug':new_article.slug})
