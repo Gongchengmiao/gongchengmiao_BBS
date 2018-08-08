@@ -59,11 +59,13 @@
                         </div>
                         <div class="user-button">
                             <div class="row">
+                                <!--
                                 <div class="col-sm-6">
                                     <button type="button" class="btn btn-info btn-sm btn-block" id="send_msg_btn"><i class="fa fa-envelope"></i> 发送消息</button>
                                 </div>
+                                -->
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-danger btn-sm btn-block" id="follow_btn"><i class="fa fa-heart-o"></i> 关注</button>
+                                    <button type="button" class="btn btn-danger btn-sm btn-block" id="follow_btn"><i class="fa fa-heart-o"></i>{{ addOrCancel }}</button>
                                 </div>
                             </div>
                         </div>
@@ -165,13 +167,19 @@
     <script>
     $(document).ready(function(){
         $("#follow_btn").click(function () {
+            //alert($("#follow_btn").text());
             $.ajax({
                 type:"get",
                 url:"{% url 'show_info_ajax_follow' %}",
-                data:{'user_slug':"{{ user.slug }}"},
+                data:{'user_slug':"{{ user.slug }}",
+                    "btn_text":$("#follow_btn").text()
+                },
                 data_type:"json",
                 success:function (ret) {
                     alert(ret.info);
+                    if(ret.new_text !== ""){
+                        $("#follow_btn").text(ret.new_text);
+                    }
                     if(ret.num === ''){return}
                     var html = "<i class=\"fa fa-heartbeat\"></i>\n" +
                         "                                <h5><strong>"+ret.num+"</strong> 关注者</h5>";
