@@ -267,10 +267,10 @@ $('#like').click(function(){
                             <div class="pob cl">
                                 <em>
                                 </em>
-                        {% if article.author == author %}
+                        {% if article.author == user %}
                                 <p>
                                     <!--<a href="javascript:;" id="mgc_post_708605202" onmouseover="showMenu(this.id)" class="showmenu">使用道具</a>-->
-                                    <a href="javascript:;" onclick="showWindow('miscreport708605202', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605202&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>
+                                    <a nane="delete" href="javascript:" onclick="del_article(this, {{ article.pid }})"><span class="glyphicon glyphicon-trash" style="margin-left:20px;"><span></span></a>
                                 </p>
                         {% endif %}
 
@@ -281,7 +281,37 @@ $('#like').click(function(){
 
                     </td>
                 </tr>
+<script type="text/javascript" src='{% static "js/jquery.js" %}'></script>
+<script type="text/javascript" src="{% static 'js/layer.js'%}"></script>
+<script type="text/javascript">
+	function del_article(the, article_pid){
+		var article_name = $(the).parents("tr").children("td").eq(1).text();
+		layer.open({
+			type: 1,
+			skin: "layui-layer-rim",
+			area: ["400px", "200px"],
+			title: "删除文章",
+			content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除《'+article_name+'》</p></div>',
+			btn:['确定', '取消'],
+			yes: function(){
+				$.ajax({
+					url: '{% url "del_article" %}',
+					type:"POST",
+					data: {"article_pid":article_pid},
+					success: function(e){
+						if(e=="1"){
+							parent.location.reload();
+							layer.msg("has been deleted.");
+						}else{
+							layer.msg("删除失败");
+						}
 
+					},
+				})
+			},
+		});
+	}
+</script>
                         <!--页间间隔-->
                         <tr class="ad">
                     <td class="pls"></td>
