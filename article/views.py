@@ -77,9 +77,8 @@ def article_detail(request, pid, slug):
     article = get_object_or_404(ArticlePost, pid=pid, slug=slug)
     total_views = r.incr("article:{}:views".format(article.pid))
     author = article.author
-
     all_comments = Comment.objects.filter(article=article).all()
-
+    user = request.user
     paginator = Paginator(all_comments, 10)
     page = request.GET.get('page')
     try:
@@ -95,6 +94,7 @@ def article_detail(request, pid, slug):
 
 
     if request.method == "POST":
+
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             cd = comment_form.cleaned_data
@@ -111,8 +111,9 @@ def article_detail(request, pid, slug):
 
             return HttpResponseRedirect(url)
     else:
+
         comment_form = CommentForm()
-    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "comments":comments, "page":current_page, "total_views":total_views})
+    return render(request, "x_huitie_demo.html", {"article":article, "comment_form":comment_form, "author":author, "user":user, "comments":comments, "page":current_page, "total_views":total_views})
 
 
 @csrf_exempt
@@ -156,3 +157,17 @@ def like(request):
     ctx = {'likes_count': article.total_likes, 'message': message}
     # use mimetype instead of content_type if django < 5
     return HttpResponse(json.dumps(ctx), content_type='application/json')
+
+
+
+@login_required(login_url='/account/login')
+@require_POST
+@csrf_exempt
+def del_article(request):
+    article_pid = request.POST['article_pid']
+    try:
+        article = ArticlePost.objects.get(pid=article_pid)
+        article.delete()
+        return HttpResponse("1")
+    except:
+        return HttpResponse("2")
