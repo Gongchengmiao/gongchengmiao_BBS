@@ -91,9 +91,9 @@
 
     <div id="pt" class="bm cl">
         <div class="z">
-            <a href="{% url 'index_core' %}" class="atest    " title="首页">瀚海星云</a> <em>›</em> <a href="{% url 'section_all' section_slug=article.section_belong_fk.slug %}" class="atest">{{ article.section_belong_fk.name }}</a>
+            <a href="{% url 'index_core' %}" class="atest    " title="首页">瀚海星云</a> <em>›</em> <a href="{% url 'section_all' section_slug=article.section_belong_fk.slug %}" class="atest">{{ article.section_belong_fk }}</a>
 {#            <em>›</em> <a href="x_bankuai_demo.html">板块名称</a> #}
-            <em>›</em> <a >{{ article.title }}</a>
+            <em>›</em> <a href >{{ article.title }}</a>
         </div>
     </div><!--左上角导航路径-->
 
@@ -123,7 +123,7 @@
                         -->
                         <td class="plc ptm pbn">
                             <h1 class="ts z">
-                                <a>[{{ article.section_belong_fk }}]</a>
+                                <a class="atest" href="{% url "section_all" section_slug=article.section_belong_fk.slug %}">[{{ article.section_belong_fk }}]</a>
                                 <a id="thread_subject">{{ article.title }}</a>
 
                                 <div id="div_div" style="margin-top:10px; padding:10px 5px 5px 5px; position: absolute; z-index: 301; width:170px;height: 170px;background-color: #fff; display:none"></div>
@@ -176,7 +176,7 @@
                         </div>
                         <!-- 名片结束-->
                         <div>
-                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605202')"><a href="{% url "view_self_info" %}" class="atest" target="_blank">{% load static %}<img class="img-circle" src="{% get_media_prefix %}{{ article.author.portrait }}"></a></div>
+                            <div class="avatar" onmouseover="showauthor(this, 'userinfo708605202')"><a href="{% url 'show_info' article.author.slug %}" class="atest" target="_blank">{% load static %}<img class="img-circle" src="{% get_media_prefix %}{{ article.author.portrait }}"></a></div>
                         <!--<div class="rank-value"><span class="prank-backimg" style="background:url(http://att.bbs.duowan.com/forum/201511/30/175221nn5wz25xgzxfz2wx.png) no-repeat;"></span><div class="rank-value-tip tip"><i></i><div><em>本版排名：<span class="user-prank" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em>本版声望：<span class="user-pvalue" style="display:inline;"><img src="static/prestige/img/ajax-loader.gif"></span></em><em style="color:#888;">荣誉黄鸡</em><span class="user-pinfo-uid" style="display:none;">61898532</span><a href="plugin.php?id=prestige:prestige_intro&amp;fid=1345" title="">[声望说明]</a></div></div></div>-->
                         <div id="g_up708605202_menu" class="tip tip_4" style="display: none;">
                             <div class="tip_horn"></div>
@@ -267,12 +267,12 @@ $('#like').click(function(){
                             <div class="pob cl">
                                 <em>
                                 </em>
-
+                        {% if article.author == author %}
                                 <p>
                                     <!--<a href="javascript:;" id="mgc_post_708605202" onmouseover="showMenu(this.id)" class="showmenu">使用道具</a>-->
-{#                                    <a href="javascript:;" onclick="showWindow('miscreport708605202', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605202&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>#}
+                                    <a href="javascript:;" onclick="showWindow('miscreport708605202', 'misc.php?mod=report&amp;rtype=post&amp;rid=708605202&amp;tid=46338365&amp;fid=1345', 'get', -1);return false;">举报</a>
                                 </p>
-
+                        {% endif %}
 
 
                                 <script type="text/javascript" reload="1">checkmgcmn('post_708605202')</script>
