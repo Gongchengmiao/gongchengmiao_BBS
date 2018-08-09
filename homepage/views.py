@@ -156,7 +156,6 @@ def view_self_ajax_scroll(request):
 
 @login_required(login_url='/login/')
 def edit_info(request):
-
     instance_user = common_member.objects.filter(username=request.user.username).first()
     if request.method == 'GET':
         myform = UserInfoChangeForm(instance=instance_user)
@@ -166,10 +165,11 @@ def edit_info(request):
         if myform.is_valid():
             # print('valid')
             myform.save()
-            print(myform.errors)
+            # print(myform.errors)
+            return redirect(reverse("view_self_info"))
         else:
             print(myform.errors)
-        return render(request, "x_edit_person_demo.html", {"form": myform, "portrait": request.user.portrait})
+            return render(request, "x_edit_person_demo.html", {"form": myform, "portrait": request.user.portrait})
 
 
 @login_required(login_url='/login/')
@@ -245,6 +245,12 @@ def edit_info_ajax_save_portrait(request):
     alt = request.POST.get('portrait_alt')
     if alt == 'image_upload':
         user = common_member.objects.filter(id=request.user.id).first()
+        if user.portrait.name.count('/') == 1:
+            name = user.portrait.name
+            name = name.replace('/', '\\')
+            path = os.path.join(settings.MEDIA_ROOT, name)
+            if os.path.exists(path):
+                os.remove(path)
         user.portrait.name = 'portraits/'+user.temp_portrait.name
         user.save()
     elif alt != 'image':
