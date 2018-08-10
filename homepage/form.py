@@ -77,7 +77,18 @@ class UserInfoChangeForm(forms.ModelForm):
             ),
         }
         required = {
-            'portrait': False
+            'portrait': False,
+            'profile': False
+        }
+        min_length = {
+            'username': 6
+        }
+        error_messages = {
+            'username': {
+                'min_length': u'最少6字符',
+                'required': u"请填写本字段"
+            }
+
         }
 
 

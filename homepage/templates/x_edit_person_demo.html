@@ -54,7 +54,7 @@
 <div style="margin:0 auto;width:0px;height:0px;overflow:hidden;"><img src="{% static "img/icons.png" %}"></div> <!-- for wechat thumb -->
 
 
-    <div id="login-info" style="display: none">
+    <div id="login-info" style="display: none" >
         <div data-role="login-info-username" data-value="UserID"></div>
         <div data-role="login-info-nickname" data-value="UserName"></div>
         <div data-role="login-info-rankname" data-value="UserRank"></div>
@@ -73,6 +73,15 @@
 
         <form class="main-block" method="post" data-ajaxsubmit data-actiontext="修改" >
             {% csrf_token %}
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
             <div class="form-row">
                 <h2>基本信息</h2>
                 <div class="boxT pull-right">
@@ -120,7 +129,6 @@
             <div class="form-row">
                 <label>昵称</label>
                 {{ form.username }}
-                <span class="warning" >昵称长度应＜15 个汉字，或＜30 个字符</span>
             </div>
             <div class="form-row birth">
                 <label>生日</label>
@@ -145,7 +153,6 @@
             <div class="form-row">
                 <label>学号/工号</label>
                 {{ form.stu_num }}
-                <span class="warning" >学号/工号应在0~10字符</span>
             </div>
 
             <div class="form-row">
@@ -249,13 +256,37 @@
                     document.getElementById('imgshow').setAttribute("alt","image_upload");
                     document.getElementById('imgnow').setAttribute("src",ret.temp_src);
                     document.getElementById('imgnow').setAttribute("alt","image_upload");
+                    $.ajax({
+            type:"post",
+            url:"{% url 'edit_info_save_portrait' %}",
+            data:{
+                portrait_alt:document.getElementById('imgnow').alt
+            },
+            data_type:"json",
+            success:function (ret) {
+                //alert(ret.info);
+            }
+        })
                 }
             });
                     document.getElementById('temp_portrait').value = "";
                 }
             });
-        }
 
+        }
+        else{
+        $.ajax({
+            type:"post",
+            url:"{% url 'edit_info_save_portrait' %}",
+            data:{
+                portrait_alt:document.getElementById('imgnow').alt
+            },
+            data_type:"json",
+            success:function (ret) {
+                //alert(ret.info);
+            }
+        });
+        }
     }
 
     function showFitNow() {
@@ -275,14 +306,23 @@
             },
             data_type:"json",
             success:function (ret) {
-                alert("信息保存成功");
+                //alert(ret.info);
                 $.ajax({
                     type:'get',
                     url:"{% url 'edit_info_ajax_delete_temp' %}"
                 });
-                window.location.href="{% url 'view_self_info' %}";
+                $.ajax({
+                    type:'get',
+                    url:"{% url 'edit_info' %}",
+                    data:{'href':"1"},
+                    datatype:"json",
+                    success:function (ret) {
+
+                    }
+                })
+
             }
-        });
+        })
 
     }
 
@@ -295,24 +335,23 @@
     $('#girlsi').on('click', imgRefresh6);
     $('#imgsave').on('click', nowFitShow);
     $('#changeimg').on('click', showFitNow);
-    $('#save_btn').on('click', saveImgNow);
 
-     window.onbeforeunload = function() {
-         $.ajax({
-            type:"post",
-            url:"{% url 'edit_info_save_portrait' %}",
-            data:{
-                portrait_alt:document.getElementById('imgnow').alt
-            },
-            data_type:"json",
-            success:function (ret) {
-                $.ajax({
-                    type:'get',
-                    url:"{% url 'edit_info_ajax_delete_temp' %}"
-                });
-            }
-        });
-     };
+     {#window.onbeforeunload = function() {#}
+     {#    $.ajax({#}
+     {#       type:"post",#}
+     {#       url:"{% url 'edit_info_save_portrait' %}",#}
+     {#       data:{#}
+     {#           portrait_alt:document.getElementById('imgnow').alt#}
+     {#       },#}
+     {#       data_type:"json",#}
+     {#       success:function (ret) {#}
+     {#           $.ajax({#}
+     {#               type:'get',#}
+     {#               url:"{% url 'edit_info_ajax_delete_temp' %}"#}
+     {#           });#}
+     {#       }#}
+     {#   });#}
+     {#};#}
 
     function loadData()
     {
