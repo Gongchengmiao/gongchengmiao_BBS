@@ -546,4 +546,4 @@ function aItem() {
 
 $('.atest').on('click', aItem);
 
-
+$('.feed-activity-list').on('click',".atest",aItem);

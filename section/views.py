@@ -57,7 +57,12 @@ def section_open_posts_list(request):
     sec_slug = request.GET.get("sec_slug")
     section = SectionForum.objects.filter(slug=sec_slug).first()
     page = request.GET.get("page")  # present active page button
-    post_num = ArticlePost.objects.filter(section_belong_fk=section).count()
+    if request.GET.get("isElite") == '0':
+        posts = ArticlePost.objects.filter(section_belong_fk=section).order_by('-pub_date')[Num_per_page*(page-1): Num_per_page*page]
+        post_num = ArticlePost.objects.filter(section_belong_fk=section).count()
+    else:
+        posts = ArticlePost.objects.filter(section_belong_fk=section, isElite=True).order_by('-pub_date')[Num_per_page*(page-1): Num_per_page*page]
+        post_num = ArticlePost.objects.filter(section_belong_fk=section, isElite=True).count()
     page_num = math.ceil(post_num/Num_per_page)
     if page == '':
         page = '1'
@@ -67,11 +72,6 @@ def section_open_posts_list(request):
         page = max(page-1, 1)
     elif request.GET.get('isIncPage') == '1':
         page = min(page+1,page_num)
-
-    if request.GET.get("isElite") == '0':
-        posts = ArticlePost.objects.filter(section_belong_fk=section).order_by('-pub_date')[Num_per_page*(page-1): Num_per_page*page]
-    else:
-        posts = ArticlePost.objects.filter(section_belong_fk=section, isElite=True).order_by('-pub_date')[Num_per_page*(page-1): Num_per_page*page]
 
     # find the pages to display
     pages_to_show = []
